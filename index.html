@@ -185,11 +185,11 @@
         </div>
         <div class="chat-messages" id="chat-messages">
             <div class="message bot-msg">
-                Hello! I am the Madzinu Web3 AI Customer Support assistant. How can I clear any doubts regarding our website or services today?
+                Hello! I am the official AI assistant for Madzinu Web3 Technologies. How can I clear any doubts regarding our website or services today?
             </div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="user-input" placeholder="Ask a question..." onkeypress="if(event.key==='Enter') sendAIMessage()">
+            <input type="text" id="user-input" placeholder="Ask anything..." onkeypress="if(event.key==='Enter') sendAIMessage()">
             <button onclick="sendAIMessage()">Send</button>
         </div>
     </div>
@@ -200,34 +200,43 @@
             box.style.display = box.style.display === 'none' || box.style.display === '' ? 'flex' : 'none';
         }
 
-        function sendAIMessage() {
+        async function sendAIMessage() {
             const input = document.getElementById('user-input');
             const msg = input.value.trim();
             if (!msg) return;
 
             const chat = document.getElementById('chat-messages');
 
-            // Append User Message
+            // 1. Append User Message
             chat.innerHTML += `<div class="message user-msg">${msg}</div>`;
             input.value = '';
             chat.scrollTop = chat.scrollHeight;
 
-            // Simulated AI Responses
-            setTimeout(() => {
-                let response = "Thank you for reaching out! For detailed business inquiries, feel free to contact team@madzinuweb3technologies.com.";
-                const lower = msg.toLowerCase();
+            // 2. Append Loading Placeholder
+            const loadingId = 'loading-' + Date.now();
+            chat.innerHTML += `<div id="${loadingId}" class="message bot-msg"><i>Thinking...</i></div>`;
+            chat.scrollTop = chat.scrollHeight;
 
-                if (lower.includes('hello') || lower.includes('hi')) {
-                    response = "Hello! How can I assist you with Madzinu Web3 Technologies today?";
-                } else if (lower.includes('service') || lower.includes('web3') || lower.includes('what do you do')) {
-                    response = "Madzinu Web3 Technologies specializes in decentralized applications, smart contract integrations, and enterprise Web3 solutions.";
-                } else if (lower.includes('contact') || lower.includes('email') || lower.includes('support')) {
-                    response = "You can reach our official support team at support@madzinuweb3technologies.com.";
-                }
+            try {
+                // System Instruction to set persona
+                const systemPrompt = "You are the official Customer Support AI for Madzinu Web3 Technologies, a Govt. of India recognized startup based in Chennai, Tamil Nadu. Answer queries politely, professionally, and accurately regarding Web3 development, smart contracts, custom web applications, and company services. Keep answers concise and helpful.";
 
-                chat.innerHTML += `<div class="message bot-msg">${response}</div>`;
-                chat.scrollTop = chat.scrollHeight;
-            }, 600);
+                // Live fetch call to Gemini endpoint
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: msg, system: systemPrompt })
+                });
+
+                const data = await response.json();
+                const botReply = data.reply || "Thank you for reaching out! For official inquiries, feel free to contact support@madzinuweb3technologies.com.";
+
+                document.getElementById(loadingId).innerText = botReply;
+            } catch (err) {
+                document.getElementById(loadingId).innerText = "Madzinu Web3 Technologies is dedicated to building next-gen decentralized applications. Feel free to ask about our ecosystem!";
+            }
+
+            chat.scrollTop = chat.scrollHeight;
         }
     </script>
 
