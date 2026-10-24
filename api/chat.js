@@ -23,28 +23,40 @@ export default async function handler(req, res) {
 
   Answer all client questions accurately and professionally based on this full context. Maintain an expert, helpful, and welcoming tone.`;
 
-  try {
-    const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: `${systemPrompt}\n\nClient Question: ${userMessage}` }] }]
-      })
-    });
+  // Try primary model, then fallback models if overloaded
+  const models = ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-1.5-flash'];
+  let replyText = null;
+  let lastError = "";
 
-    const data = await apiResponse.json();
-    
-    if (data.error) {
-      return res.status(200).json({ reply: `Gemini API Error: ${data.error.message}` });
+  for (const model of models) {
+    try {
+      const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: `${systemPrompt}\n\nClient Question: ${userMessage}` }] }]
+        })
+      });
+
+      const data = await apiResponse.json();
+      
+      if (data.error) {
+        lastError = data.error.message;
+        continue; // Try next model in fallback list
+      }
+
+      replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (replyText) {
+        break; // Successfully got response, exit loop
+      }
+    } catch (err) {
+      lastError = err.message;
     }
-
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!replyText) {
-      return res.status(200).json({ reply: "CRITICAL ERROR: Empty response received from Gemini API model." });
-    }
-
-    return res.status(200).json({ reply: replyText });
-  } catch (err) {
-    return res.status(200).json({ reply: `Server Exception: ${err.message}` });
   }
+
+  if (!replyText) {
+    return res.status(200).json({ reply: `Service is temporarily busy. Please try again in a moment.` });
+  }
+
+  return res.status(200).json({ reply: replyText });
 }
