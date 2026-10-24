@@ -14,14 +14,20 @@ export default async function handler(req, res) {
   }
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 6000);
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+  const systemPrompt = `You are the expert AI assistant for Madzinu Web3 Technologies and Cosmogems, owned and operated by Sampath Madhan in Chennai, Tamil Nadu. 
+  - Services: Web3 and blockchain development, smart contracts, dApps, custom web/terminal applications, and digital automation.
+  - Products: Eco-friendly solar-dried vegetable and botanical powders, and MADZINU private-label skincare.
+  - Support: support@madzinuweb3technologies.com
+  Answer the client's question accurately, professionally, and in detail based on this context.`;
 
   try {
     const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: `You are the AI assistant for Madzinu Web3 Technologies, owned by Sampath Madhan in Chennai. Answer: ${userMessage}` }] }]
+        contents: [{ role: "user", parts: [{ text: `${systemPrompt}\n\nClient Question: ${userMessage}` }] }]
       }),
       signal: controller.signal
     });
