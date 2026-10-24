@@ -1,0 +1,43 @@
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madzinu Web3 Technologies - Sovereign Cloud & Enterprise Platform</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+@keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; }
+.marquee-container { overflow: hidden; width: 100%; position: relative; }
+</style>
+</head>
+<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col font-sans m-0 p-0 overflow-x-hidden w-full">
+<header class="border-b border-slate-800/85 bg-[#0b101d]/95 backdrop-blur sticky top-0 z-50 w-full px-3 py-2">
+<div class="w-full flex justify-between items-center gap-2">
+<div class="flex items-center space-x-2 overflow-hidden flex-grow">
+<div class="bg-indigo-600 p-1.5 rounded-lg text-white font-bold shadow-lg shadow-indigo-500/35 shrink-0">
+<i class="fa-solid fa-cube text-[10px]"></i>
+</div>
+<div class="overflow-hidden flex-grow">
+<span class="text-[11px] sm:text-xs font-extrabold tracking-wider bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent block truncate">MADZINU WEB3 TECHNOLOGIES</span>
+<div class="marquee-container">
+<span class="text-[7.5px] sm:text-[9px] text-emerald-400 font-medium animate-marquee block"><i class="fa-solid fa-check-circle"></i> Govt. of India Recognized Startup (MeitY) | IndiaAI Portal Approved (Reg No: ST20260926506)</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="p-6 text-center space-y-4">
+  <h2 class="text-xl font-bold text-white">Madzinu Web3 Technologies Platform Active</h2>
+  <p class="text-xs text-slate-300">Free Tier, Task Execution, and WhatsApp 5-Member Share Verification Tracker Ready.</p>
+</div>
+</body>
+</html>"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("index.html successfully updated with full platform code!")
