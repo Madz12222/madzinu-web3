@@ -1,38 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Madzinu Web3 Technologies - Sovereign Cloud & Enterprise Platform</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
-@keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-.animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; }
-.marquee-container { overflow: hidden; width: 100%; position: relative; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madzinu Web3 Technologies</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --accent-blue: #2563eb;
+            --accent-cyan: #06b6d4;
+            --text-color: #f3f4f6;
+            --muted-text: #9ca3af;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1f2937;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--muted-text);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Floating AI Support Widget */
+        #ai-widget-bubble {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            z-index: 1000;
+        }
+
+        #ai-chat-box {
+            display: none;
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 340px;
+            height: 460px;
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #1f2937;
+            padding: 14px 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #374151;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-width: 85%;
+            line-height: 1.4;
+        }
+
+        .bot-msg {
+            background: #1f2937;
+            color: #e5e7eb;
+            align-self: flex-start;
+        }
+
+        .user-msg {
+            background: var(--accent-blue);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-input-area {
+            padding: 10px;
+            background: #1f2937;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid #374151;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #374151;
+            background: #0b0f19;
+            color: white;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col font-sans m-0 p-0 overflow-x-hidden w-full">
-<header class="border-b border-slate-800/85 bg-[#0b101d]/95 backdrop-blur sticky top-0 z-50 w-full px-3 py-2">
-<div class="w-full flex justify-between items-center gap-2">
-<div class="flex items-center space-x-2 overflow-hidden flex-grow">
-<div class="bg-indigo-600 p-1.5 rounded-lg text-white font-bold shadow-lg shadow-indigo-500/35 shrink-0">
-<i class="fa-solid fa-cube text-[10px]"></i>
-</div>
-<div class="overflow-hidden flex-grow">
-<span class="text-[11px] sm:text-xs font-extrabold tracking-wider bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent block truncate">MADZINU WEB3 TECHNOLOGIES</span>
-<div class="marquee-container">
-<span class="text-[7.5px] sm:text-[9px] text-emerald-400 font-medium animate-marquee block"><i class="fa-solid fa-check-circle"></i> Govt. of India Recognized Startup (MeitY) | IndiaAI Portal Approved (Reg No: ST20260926506)</span>
-</div>
-</div>
-</div>
-</div>
-</header>
-<div class="p-6 text-center space-y-4">
-  <h2 class="text-xl font-bold text-white">Madzinu Web3 Technologies Platform Active</h2>
-  <p class="text-xs text-slate-300">Free Tier, Task Execution, and WhatsApp 5-Member Share Verification Tracker Ready.</p>
-</div>
+<body>
+
+    <header>
+        <div class="logo">Madzinu Web3 Technologies</div>
+    </header>
+
+    <div class="hero">
+        <h1>Welcome to Madzinu Web3</h1>
+        <p>Govt. of India Recognized Startup driving next-generation decentralized solutions, custom applications, and automated Web3 workflows.</p>
+    </div>
+
+    <!-- AI Floating Chatbot Widget -->
+    <div id="ai-widget-bubble" onclick="toggleAIChat()">🤖</div>
+
+    <div id="ai-chat-box">
+        <div class="chat-header">
+            <span>Madzinu AI Support</span>
+            <span onclick="toggleAIChat()" style="cursor:pointer;">✖</span>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-msg">
+                Hello! I am the Madzinu Web3 AI Customer Support assistant. How can I clear any doubts regarding our website or services today?
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="user-input" placeholder="Ask a question..." onkeypress="if(event.key==='Enter') sendAIMessage()">
+            <button onclick="sendAIMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleAIChat() {
+            const box = document.getElementById('ai-chat-box');
+            box.style.display = box.style.display === 'none' || box.style.display === '' ? 'flex' : 'none';
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('user-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const chat = document.getElementById('chat-messages');
+
+            // Append User Message
+            chat.innerHTML += `<div class="message user-msg">${msg}</div>`;
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+
+            // Simulated AI Responses
+            setTimeout(() => {
+                let response = "Thank you for reaching out! For detailed business inquiries, feel free to contact team@madzinuweb3technologies.com.";
+                const lower = msg.toLowerCase();
+
+                if (lower.includes('hello') || lower.includes('hi')) {
+                    response = "Hello! How can I assist you with Madzinu Web3 Technologies today?";
+                } else if (lower.includes('service') || lower.includes('web3') || lower.includes('what do you do')) {
+                    response = "Madzinu Web3 Technologies specializes in decentralized applications, smart contract integrations, and enterprise Web3 solutions.";
+                } else if (lower.includes('contact') || lower.includes('email') || lower.includes('support')) {
+                    response = "You can reach our official support team at support@madzinuweb3technologies.com.";
+                }
+
+                chat.innerHTML += `<div class="message bot-msg">${response}</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 600);
+        }
+    </script>
+
 </body>
 </html>
