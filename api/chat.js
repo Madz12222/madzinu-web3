@@ -13,50 +13,37 @@ export default async function handler(req, res) {
     return res.status(200).json({ reply: "CRITICAL ERROR: GEMINI_API_KEY is not set in Vercel environment variables." });
   }
 
-  const systemPrompt = `You are the official, expert AI Customer Support Assistant for Madzinu Web3 Technologies (madzinuweb3technologies.in), registered and operating out of Chennai, Tamil Nadu. 
+  const systemPrompt = `You are the official AI Customer Support Assistant for Madzinu Web3 Technologies and Cosmogems, owned and operated by Sampath Madhan in Chennai, Tamil Nadu. 
   
-  Complete Business & Operational Context:
-  - Enterprises: Madzinu Web3 Technologies and Cosmogems, operating in Chennai, Tamil Nadu.
-  - Core Focus & Services: Web3 development, blockchain solutions, custom web and terminal applications, digital automation, and secure decentralized integrations.
-  - E-commerce & Product Lines: High-quality solar-dried vegetable and botanical powders, eco-friendly distribution, and private-label skincare lines under the brand MADZINU.
-  - Support Email: support@madzinuweb3technologies.com
+  Core Services & Products:
+  - Web3 development, blockchain solutions, custom web/terminal applications, and digital automation.
+  - Eco-friendly solar-dried vegetable/botanical powders and MADZINU private-label skincare.
+  - Support: support@madzinuweb3technologies.com
 
-  Answer all client questions accurately and professionally based on this full context. Maintain an expert, helpful, and welcoming tone.`;
+  Keep answers professional, direct, and accurate.`;
 
-  // Try primary model, then fallback models if overloaded
-  const models = ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-1.5-flash'];
-  let replyText = null;
-  let lastError = "";
+  try {
+    const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [{ text: `${systemPrompt}\n\nClient Question: ${userMessage}` }] }]
+      })
+    });
 
-  for (const model of models) {
-    try {
-      const apiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ text: `${systemPrompt}\n\nClient Question: ${userMessage}` }] }]
-        })
-      });
-
-      const data = await apiResponse.json();
-      
-      if (data.error) {
-        lastError = data.error.message;
-        continue; // Try next model in fallback list
-      }
-
-      replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (replyText) {
-        break; // Successfully got response, exit loop
-      }
-    } catch (err) {
-      lastError = err.message;
+    const data = await apiResponse.json();
+    
+    if (data.error) {
+      return res.status(200).json({ reply: `Gemini API Error: ${data.error.message}` });
     }
-  }
 
-  if (!replyText) {
-    return res.status(200).json({ reply: `Service is temporarily busy. Please try again in a moment.` });
-  }
+    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!replyText) {
+      return res.status(200).json({ reply: "Service is temporarily busy. Please try again." });
+    }
 
-  return res.status(200).json({ reply: replyText });
+    return res.status(200).json({ reply: replyText });
+  } catch (err) {
+    return res.status(200).json({ reply: `Server Exception: ${err.message}` });
+  }
 }
