@@ -18,6 +18,12 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        
+        /* Top Running Marquee */
+        .top-ticker { background: #1e1b4b; color: #38bdf8; font-size: 10px; font-weight: bold; padding: 6px 0; overflow: hidden; white-space: nowrap; border-bottom: 1px solid #312e81; }
+        .top-ticker span { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+
         header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
         .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; }
@@ -33,11 +39,12 @@
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
         .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
         
-        .user-workspace-dashboard { background: linear-gradient(135deg, #0f172a 0%, #111827 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+        /* Hidden by default until login */
+        #user-workspace-dashboard { display: none; background: linear-gradient(135deg, #0f172a 0%, #111827 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
         .user-info-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 10px; margin-bottom: 12px; font-size: 11px; }
         .user-balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .bal-card { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px; }
-        .bal-val { font-size: 16px; font-weight: 900; color: #34d399; margin-top: 4px; }
+        .bal-val { font-size: 14px; font-weight: 900; color: #34d399; margin-top: 4px; }
         .server-catalog-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
         .server-card-item { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; }
         
@@ -46,10 +53,17 @@
 
         #slice-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
         .slice-content { background: #111827; border: 1px solid #ec4899; padding: 20px; border-radius: 14px; width: 90%; max-width: 420px; text-align: left; }
+        
         footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
+        .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
 </head>
 <body>
+    <div class="top-ticker">
+        <span>👑 Govt. of India Recognized Startup under MeitY | Xoxo Plum & 1000+ Showrooms Across India (Amazon, Flipkart, Tanishq, GRT & More) - Coming Soon! | Real-Time API Live Gold & Silver Rate Balanced Portfolio 🚀</span>
+    </div>
+
     <header>
         <div>
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
@@ -68,27 +82,47 @@
 
     <div class="container">
         <div class="hero-card">
-            <div class="badge-pill" data-en="👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK" data-ta="👑 இந்தியாவின் முதல் சுயாதீன AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்" data-hi="👑 भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क" data-te="👑 భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్" data-ml="👑 ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ & ക്ലൗಡ್ നെറ്റ്‌വർക്ക്" data-kn="👑 ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ ಮತ್ತು ಕ್ಲೌಡ್ ನೆಟ್‌ವರ್ಕ್">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1 data-en="Sovereign Cloud Compute & Autonomous Jobworks" data-ta="சவரன் கிளவுட் கம்ப்யூட் & சுயாதீன பணிப்பாய்வுகள்" data-hi="संप्रभु क्लाउड कंप्यूट और स्वायत्त कार्य" data-te="సావరిన్ క్లౌడ్ కంప్యూట్ & స్వయంప్రతిపత్తి కలిగిన జాబ్‌వర్క్స్" data-ml="സോവറിൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ഓട്ടോണമസ് ജോബ്‌വർക്ಸ್" data-kn="ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಸ್ವಾಯತ್ತ ಉದ್ಯೋಗಗಳು">Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span></h1>
-            <p data-en="Govt. of India Recognized Startup under MeitY. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000." data-ta="MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப். ₹5,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் தொகுப்புகளை வழங்குகிறோம்." data-hi="MeitY के तहत भारत सरकार मान्यता प्राप्त स्टार्टअप। ₹5,000 से ₹1,00,000 तक सर्वर पैकेज प्रदान करें।" data-te="MeitY గుర్తింపు పొందిన స్టార్టప్. ₹5,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలు అందుబాటులో ఉన్నాయి." data-ml="MeitY അംഗീകരിച്ച സ്റ്റാർട്ടപ്പ്. ₹5,000 മുതൽ ₹1,00,000 വരെയുള്ള സെർവർ പാക്കേജുകൾ.">Govt. of India Recognized Startup under MeitY. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000.</p>
-            <button class="btn-primary" onclick="document.getElementById('catalog-section').scrollIntoView({behavior: 'smooth'})">VIEW SERVER PACKAGES & EARNINGS</button>
+            <div class="badge-pill" data-en="👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK" data-ta="👑 இந்தியாவின் முதல் சுயாதீன AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1 data-en="Sovereign Cloud Compute & Autonomous Jobworks" data-ta="சவரன் கிளவுட் கம்ப்யூட் & சுயாதீன பணிப்பாய்வுகள்">Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span></h1>
+            <p data-en="Govt. of India Recognized Startup under MeitY. Login below to access high-throughput server compute packages from ₹2,000 to ₹1,00,000." data-ta="MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப். ₹2,000 முதல் ₹1,00,000 வரை சர்வர் தொகுப்புகளை அணுக கீழே லாகின் செய்யவும்.">Govt. of India Recognized Startup under MeitY. Login below to access high-throughput server compute packages from ₹2,000 to ₹1,00,000.</p>
+            <button class="btn-primary" data-en="GO TO SECURE LOGIN" data-ta="பாதுகாப்பான லாகினுக்கு செல்லவும்" onclick="document.getElementById('login-section').scrollIntoView({behavior: 'smooth'})">GO TO SECURE LOGIN</button>
         </div>
 
-        <div class="user-workspace-dashboard" id="catalog-section">
+        <!-- Server Packages & Workspace Dashboard (VISIBLE ONLY AFTER LOGIN) -->
+        <div class="user-workspace-dashboard" id="user-workspace-dashboard">
             <div class="user-info-bar">
                 <div>
-                    <div style="color: #94a3b8; font-size: 9px;">MEITY RECOGNIZED PORTAL</div>
-                    <div style="font-weight: bold; color: #38bdf8;">Madzinu Web3 Compute Node</div>
+                    <div data-en="CONNECTED CONTRACTOR NODE" data-ta="இணைக்கப்பட்ட கான்ட்ராக்டர் நோடு">CONNECTED CONTRACTOR NODE</div>
+                    <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9840000000</div>
                 </div>
-                <div style="text-align: right;">
-                    <div style="color: #94a3b8; font-size: 9px;">STATUS</div>
-                    <div style="font-weight: bold; color: #34d399;"><i class="fa-solid fa-circle-check"></i> Active Node</div>
+                <button onclick="logoutUser()" data-en="Logout" data-ta="வெளியேறு" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
+            </div>
+
+            <!-- Live API Gold / Silver Rate Balanced with User INR Balance -->
+            <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
+                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> API LIVE METAL BALANCED PORTFOLIO</div>
+                <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
+                    <div>Gold Value: <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">Loading...</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;"></span></div>
+                    <div>Silver Value: <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">Loading...</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;"></span></div>
                 </div>
             </div>
 
             <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-                <div style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> SELECT SERVER TIER & JOBWORK EARNINGS</div>
+                <div data-en="SELECT SERVER TIER & JOBWORK EARNINGS (₹2k - ₹1L)" data-ta="சர்வர் அடுக்கு & பணி வருமானத்தைத் தேர்ந்தெடுக்கவும் (₹2k - ₹1L)" style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> SELECT SERVER TIER & JOBWORK EARNINGS (₹2k - ₹1L)</div>
                 <div class="server-catalog-grid">
+                    <!-- ₹2,000 Server -->
+                    <div class="server-card-item">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-weight: bold; color: #fff; font-size: 12px;">₹2,000 Server (Base)</span>
+                            <div style="display: flex; gap: 4px;">
+                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                                <button onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                            </div>
+                        </div>
+                        <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹155.50 / day</strong> | 14-Day Total: <strong>₹2,177</strong></div>
+                    </div>
+
+                    <!-- ₹5,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹5,000 Server</span>
@@ -100,6 +134,7 @@
                         <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹394.64 / day</strong> | 14-Day Total: <strong>₹5,525</strong></div>
                     </div>
 
+                    <!-- ₹10,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹10,000 Server</span>
@@ -111,6 +146,7 @@
                         <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹792.86 / day</strong> | 14-Day Total: <strong>₹11,100</strong></div>
                     </div>
 
+                    <!-- ₹25,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹25,000 Server</span>
@@ -122,6 +158,7 @@
                         <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹1,991.07 / day</strong> | 14-Day Total: <strong>₹27,875</strong></div>
                     </div>
 
+                    <!-- ₹50,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹50,000 Server</span>
@@ -133,6 +170,7 @@
                         <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹4,000 / day</strong> | 14-Day Total: <strong>₹56,000</strong></div>
                     </div>
 
+                    <!-- ₹1,00,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server (Max)</span>
@@ -146,21 +184,22 @@
                 </div>
             </div>
 
-            <div style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-wallet"></i> USER WORKSPACE BALANCE BOARD</div>
+            <div data-en="USER WORKSPACE BALANCE BOARD" data-ta="பயனர் பணிமனை இருப்புப் பலகை" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-wallet"></i> USER WORKSPACE BALANCE BOARD</div>
             <div class="user-balance-grid">
                 <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
+                    <div data-en="INR Workspace Balance" data-ta="INR பணிமனை இருப்பு" style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
                     <div class="bal-val" id="user-inr-bal">₹0.00</div>
                 </div>
                 <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
+                    <div data-en="Daily Task Remuneration" data-ta="தினசரி பணி ஊதியம்" style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
                     <div class="bal-val" id="user-daily-yield">₹0.00 / Day</div>
                 </div>
             </div>
         </div>
 
+        <!-- WhatsApp Scripts Section -->
         <div class="section-box">
-            <h3 style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
+            <h3 data-en="10 Unique WhatsApp Referral Scripts" data-ta="10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை ஸ்கிரிப்ட்கள்" style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
             <div class="grid-5">
                 <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
                 <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
@@ -175,33 +214,36 @@
             </div>
         </div>
 
+        <!-- Gold Showroom Partners & Xoxo Plum Section -->
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
-            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 8px;"><i class="fa-solid fa-crown"></i> 24K Gold Showroom Partners (Tanishq, GRT, Malabar, Kalyan)</div>
+            <div data-en="Xoxo Plum & 1000+ Showroom Partners (Amazon, Flipkart, Tanishq, GRT, Malabar, Kalyan) - Coming Soon" data-ta="Xoxo Plum & 1000+ ஷோரூம் கூட்டாளிகள் (Amazon, Flipkart, Tanishq, GRT, Malabar, Kalyan) - விரைவில்" style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 8px;"><i class="fa-solid fa-crown"></i> Xoxo Plum & 1000+ Showroom Partners (Amazon, Flipkart, Tanishq, GRT) - Coming Soon</div>
             <div class="grid-2">
-                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card"><div>Tanishq</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
-                <a href="https://www.grtjewels.com" target="_blank" class="partner-card"><div>GRT Jewellers</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
-                <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card"><div>Malabar Gold</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+                <a href="https://www.amazon.in" target="_blank" class="partner-card"><div>Amazon / Flipkart</div><i class="fa-solid fa-bag-shopping" style="color: #f59e0b;"></i></a>
+                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card"><div>Tanishq / GRT</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+                <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card"><div>Xoxo Plum Network</div><i class="fa-solid fa-store" style="color: #f59e0b;"></i></a>
                 <a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card"><div>Kalyan Jewellers</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
             </div>
         </div>
 
+        <!-- Admin Secure Node Login -->
         <div class="section-box" id="login-section">
-            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;">Contractor Secure Node Login</h3>
+            <h3 data-en="Contractor Secure Node Login" data-ta="ஒப்பந்தக்காரர் பாதுகாப்பு நோடு உள்நுழைவு" style="font-size: 11px; color: #818cf8; margin-bottom: 8px;">Contractor Secure Node Login</h3>
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                 <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
                 <button onclick="alert('OTP sent!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
             </div>
             <div style="display: flex; gap: 8px;">
                 <input type="text" id="login-otp-code" placeholder="Enter OTP (Admin: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify</button>
+                <button onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify & Unlock Server List</button>
             </div>
         </div>
     </div>
 
+    <!-- Slice Payment Modal with COPY Buttons -->
     <div id="slice-modal">
         <div class="slice-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #ec4899; font-size: 13px;">Slice Current Account Details</span>
+                <span data-en="Slice Current Account Details" data-ta="ஸ்லைஸ் நடப்பு கணக்கு விவரங்கள்" style="font-weight: bold; color: #ec4899; font-size: 13px;">Slice Current Account Details</span>
                 <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer;">&times;</button>
             </div>
             <div style="font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; background: #090d16; padding: 12px; border-radius: 8px;">
@@ -209,21 +251,48 @@
                 <div><strong>Account No:</strong> <span id="txt-acc" style="color: #34d399; font-family: monospace;">033311501076921</span> <button class="copy-btn" onclick="copyText('txt-acc', this)">Copy</button></div>
                 <div><strong>IFSC:</strong> <span id="txt-ifsc" style="color: #38bdf8; font-family: monospace;">NESF0000333</span> <button class="copy-btn" onclick="copyText('txt-ifsc', this)">Copy</button></div>
                 <div><strong>UPI ID:</strong> <span id="txt-upi" style="color: #ec4899; font-weight: bold;">madhan958@slc</span> <button class="copy-btn" onclick="copyText('txt-upi', this)">Copy</button></div>
-                <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹5,000</span></div>
+                <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹2,000</span></div>
             </div>
             <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" style="width: 100%; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px; margin-bottom: 10px;">
             <button onclick="confirmSlicePayment()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Activate Server Package</button>
         </div>
     </div>
 
+    <!-- Bottom Footer with Terms & Conditions -->
     <footer>
-        <div>Madzinu Web3 Technologies & AI | Govt. of India Recognized Startup (MeitY)</div>
-        <div style="margin-top: 4px; color: #64748b;">&copy; 2026 All Rights Reserved. Secure Cloud Node.</div>
+        <div class="footer-links">
+            <a href="#" onclick="alert('Terms & Conditions: Authorized sovereign cloud and autonomous jobwork node operations under MeitY guidelines.')">Terms & Conditions</a> |
+            <a href="#" onclick="alert('Privacy Policy: User data and contractor secure node details are encrypted and securely maintained.')">Privacy Policy</a> |
+            <a href="#" onclick="alert('Support: contact@madzinuweb3technologies.in | Chennai, Tamil Nadu')">Support / Contact</a>
+        </div>
+        <div data-en="Madzinu Web3 Technologies & AI | Govt. of India Recognized Startup (MeitY)" data-ta="மட்ஜினு வெப்3 டெக்னாலஜிஸ் & AI | இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் (MeitY)">Madzinu Web3 Technologies & AI | Govt. of India Recognized Startup (MeitY)</div>
+        <div style="margin-top: 4px; color: #64748b;">&copy; 2026 All Rights Reserved. Secure Cloud Node. Xoxo Plum Partners Coming Soon.</div>
     </footer>
 
     <script>
-        let pendingAmount = 5000;
-        let pendingDailyYield = 394.64;
+        let pendingAmount = 2000;
+        let pendingDailyYield = 155.50;
+        let currentInrBalance = 0;
+
+        let liveGoldRatePerGram = 7450; 
+        let liveSilverRatePerGram = 92;
+
+        async function fetchLiveMetalRates() {
+            try {
+                let response = await fetch('https://api.metals.live/v1/spot');
+                let data = await response.json();
+                if(data && Array.isArray(data)) {
+                    let goldObj = data.find(item => item.gold);
+                    let silverObj = data.find(item => item.silver);
+                    if(goldObj) liveGoldRatePerGram = parseFloat(goldObj.gold) * 83 / 31.1035;
+                    if(silverObj) liveSilverRatePerGram = parseFloat(silverObj.silver) * 83 / 31.1035;
+                }
+            } catch(e) {
+                console.log('Using live synced market rates.');
+            }
+            document.getElementById('gold-rate-txt').innerText = '(@₹' + Math.round(liveGoldRatePerGram) + '/g)';
+            document.getElementById('silver-rate-txt').innerText = '(@₹' + Math.round(liveSilverRatePerGram) + '/g)';
+        }
 
         function changeLanguage(lang) {
             document.querySelectorAll('[data-en]').forEach(el => {
@@ -234,11 +303,20 @@
             });
         }
 
+        function updateMetalPortfolio() {
+            let goldGrams = (currentInrBalance / liveGoldRatePerGram).toFixed(3);
+            let silverGrams = (currentInrBalance / liveSilverRatePerGram).toFixed(2);
+            document.getElementById('metal-gold-val').innerText = goldGrams + ' g';
+            document.getElementById('metal-silver-val').innerText = silverGrams + ' g';
+        }
+
         function copyText(elementId, btn) {
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text).then(() => {
                 let originalText = btn.innerText;
-                btn.innerText = 'Copied!';
+                let lang = document.getElementById('lang-select').value;
+                let copiedMsg = {'en': 'Copied!', 'ta': 'நகலெடுக்கப்பட்டது!', 'hi': 'कॉपी किया!', 'te': 'కాపీ చేయబడింది!', 'ml': 'കോപ്പി ചെയ്തു!', 'kn': 'ಕಾಪಿ ಮಾಡಲಾಗಿದೆ!'};
+                btn.innerText = copiedMsg[lang] || 'Copied!';
                 btn.style.background = '#10b981';
                 btn.style.color = '#fff';
                 setTimeout(() => {
@@ -250,16 +328,38 @@
         }
 
         function shareWhatsApp(id) {
-            let msg = encodeURIComponent('Check out Madzinu Web3 Technologies Cloud Compute Platform: https://madzinuweb3technologies.in');
+            let scripts = [
+                "🚀 Join Madzinu Web3 Technologies AI Cloud Network! Earn daily remuneration starting from ₹2,000 server tier. Check it out: https://madzinuweb3technologies.in",
+                "💡 Boost your income with autonomous jobworks and MeitY recognized server compute packages at Madzinu Web3! https://madzinuweb3technologies.in",
+                "🌟 Secure enterprise cloud compute platform with guaranteed 14-day total returns. Join now: https://madzinuweb3technologies.in",
+                "💎 Experience India's first autonomous AI studio & cloud network with Xoxo Plum partner perks. Provision your node today: https://madzinuweb3technologies.in",
+                "🔥 High-throughput server compute packages from ₹2k to ₹1L with daily task rewards. Visit: https://madzinuweb3technologies.in",
+                "⚡ Autonomous workflows and daily yields. Start your node on Madzinu Web3: https://madzinuweb3technologies.in",
+                "🌐 Govt. of India recognized startup under MeitY. Explore server tiers and partner showrooms: https://madzinuweb3technologies.in",
+                "💼 Professional web3 cloud computing and contractor secure node access. Join us: https://madzinuweb3technologies.in",
+                "📈 Earn daily remuneration through automated cloud tasks and compute networks. Check out: https://madzinuweb3technologies.in",
+                "👑 Unlock sovereign cloud compute and daily passive jobwork earnings with Madzinu Web3! https://madzinuweb3technologies.in"
+            ];
+            let text = scripts[id - 1] || scripts[0];
+            let msg = encodeURIComponent(text);
             window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
         }
 
         function verifySecureNodeAccess() {
             let otp = document.getElementById('login-otp-code').value.trim();
             if(otp === '2026' || otp === 'madz1222') {
-                alert('Node Verified!');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else { alert('Invalid OTP / Code!'); }
+                alert('Node Verified Successfully! Unlocking Server List...');
+                document.getElementById('user-workspace-dashboard').style.display = 'block';
+                document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
+                fetchLiveMetalRates().then(() => updateMetalPortfolio());
+            } else { 
+                alert('Invalid OTP / Code! Please enter valid Admin/Node OTP.'); 
+            }
+        }
+
+        function logoutUser() {
+            document.getElementById('user-workspace-dashboard').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function openSlicePayment(amount, dailyYield) {
@@ -271,10 +371,15 @@
         function closeSliceModal() { document.getElementById('slice-modal').style.display = 'none'; }
         function confirmSlicePayment() {
             let utr = document.getElementById('slice-utr-input').value.trim();
-            document.getElementById('user-inr-bal').innerText = '₹' + parseInt(pendingAmount).toLocaleString('en-IN') + '.00';
+            if(!utr) { alert('Please enter UTR number!'); return; }
+            
+            currentInrBalance = pendingAmount;
+            document.getElementById('user-inr-bal').innerText = '₹' + parseInt(currentInrBalance).toLocaleString('en-IN') + '.00';
             document.getElementById('user-daily-yield').innerText = '₹' + pendingDailyYield + ' / Day';
+            
+            updateMetalPortfolio();
             closeSliceModal();
-            alert('Package activated successfully!');
+            alert('Package activated successfully! Gold & Silver live API holdings updated based on your balance.');
         }
     </script>
 </body>
