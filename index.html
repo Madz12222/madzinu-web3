@@ -20,583 +20,208 @@
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
         header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
-        .marquee-container { overflow: hidden; width: 100%; position: relative; margin-top: 2px; }
-        .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; font-size: 8px; color: #34d399; }
-        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; }
         .hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .badge-pill { display: inline-block; background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 10px; }
         h1 { font-size: 18px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; color: #fff; }
         h1 span { background: linear-gradient(90deg, #818cf8, #38bdf8, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         p { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
-        .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
+        .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; }
         .section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
-        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
-        .wa-btn { background: #166534; color: white; border: none; padding: 6px 2px; border-radius: 6px; font-size: 8.5px; font-weight: bold; cursor: pointer; text-align: center; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
-        .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
-        footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
-        
-        /* User Workspace Dashboard */
         #user-workspace-dashboard { display: none; background: linear-gradient(135deg, #0f172a 0%, #111827 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
         .user-info-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 10px; margin-bottom: 12px; font-size: 11px; }
         .user-balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .bal-card { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px; }
         .bal-val { font-size: 16px; font-weight: 900; color: #34d399; margin-top: 4px; }
-
-        /* Server & Jobwork Catalog Cards */
         .server-catalog-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
         .server-card-item { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; }
+        
+        /* Copy button style */
+        .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
+        .copy-btn:active { background: #10b981; color: #fff; }
 
-        /* Slice Payment Modal */
         #slice-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
         .slice-content { background: #111827; border: 1px solid #ec4899; padding: 20px; border-radius: 14px; width: 90%; max-width: 420px; text-align: left; }
-
-        /* Admin Modal Styling */
-        #admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; justify-content: center; align-items: center; }
-        .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
     </style>
 </head>
 <body>
     <header>
         <div>
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
-            <div class="marquee-container">
-                <span class="animate-marquee"><i class="fa-solid fa-check-circle"></i> <span id="marquee-txt">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</span></span>
-            </div>
-        </div>
-        <div style="display: flex; gap: 6px; align-items: center;">
-            <select id="langSelector" onchange="changeLanguage()" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 4px; border-radius: 4px; font-size: 10px;">
-                <option value="EN" selected>EN</option>
-                <option value="TA">தமிழ்</option>
-                <option value="TE">తెలుగు</option>
-                <option value="KN">ಕನ್ನಡ</option>
-                <option value="ML">മലയാളം</option>
-                <option value="HI">हिन्दी</option>
-                <option value="MR">मराठी</option>
-            </select>
-            <button onclick="openAdminPanel()" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer; z-index: 1000;"><i class="fa-solid fa-user-shield"></i> <span id="admin-btn-txt">Admin</span></button>
         </div>
     </header>
 
     <div class="container">
-        <!-- Hero Section -->
         <div class="hero-card">
-            <div class="badge-pill" id="hero-badge">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1 id="hero-title">Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span></h1>
-            <p id="hero-desc">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000.</p>
-            <button class="btn-primary" id="launch-term-btn" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
+            <div class="badge-pill">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1>Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span></h1>
+            <p>Govt. of India Recognized Startup under MeitY. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000.</p>
+            <button class="btn-primary" onclick="document.getElementById('login-section').scrollIntoView({behavior: 'smooth'})">LAUNCH SECURE ENTERPRISE TERMINAL</button>
         </div>
 
-        <!-- User Workspace & Balance Board (Visible after login) -->
         <div id="user-workspace-dashboard">
             <div class="user-info-bar">
                 <div>
-                    <div style="color: #94a3b8; font-size: 9px;" id="ws-node-lbl">CONNECTED CONTRACTOR NODE</div>
+                    <div style="color: #94a3b8; font-size: 9px;">CONNECTED CONTRACTOR NODE</div>
                     <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9840000000</div>
                 </div>
-                <div style="display: flex; gap: 6px; align-items: center;">
-                    <div style="text-align: right;">
-                        <div style="color: #94a3b8; font-size: 9px;" id="ws-status-lbl">NODE LICENSE STATUS</div>
-                        <div style="font-weight: bold; color: #34d399;"><i class="fa-solid fa-circle-check"></i> <span id="ws-active-txt">14-Day Active Node</span></div>
-                    </div>
-                    <button id="ws-logout-btn" onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-                </div>
+                <button onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
             </div>
 
-            <!-- Server Packages & Jobwork Daily Earnings List -->
             <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span id="catalog-title" style="font-size: 11px; font-weight: bold; color: #ec4899;"><i class="fa-solid fa-server"></i> SELECT SERVER TIER & JOBWORK EARNINGS</span>
-                    <span style="font-size: 9px; color: #34d399;">MeitY Portal Approved</span>
-                </div>
-                <p id="catalog-desc" style="font-size: 10px; color: #94a3b8; margin-bottom: 10px;">Review daily task remuneration and pay via GPay / Slice Account to update balance instantly:</p>
-                
+                <div style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> SELECT SERVER TIER & JOBWORK EARNINGS</div>
                 <div class="server-catalog-grid">
-                    <!-- Tier 1: ₹5,000 Server -->
+                    <!-- ₹5,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹5,000 Server</span>
                             <div style="display: flex; gap: 4px;">
-                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=5000&cu=INR&tn=Server%20Tier%205000" target="_blank" style="background: #2563eb; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-mobile-screen"></i> GPay / UPI</a>
-                                <button onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-qrcode"></i> Slice Details</button>
+                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=5000&cu=INR&tn=Server%205000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                                <button onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8; display: flex; flex-direction: column; gap: 2px;">
-                            <div><i class="fa-solid fa-list-check" style="color: #6366f1;"></i> Daily Tasks: <strong>5 Tasks / day</strong></div>
-                            <div><i class="fa-solid fa-bolt" style="color: #34d399;"></i> Daily Remuneration: <strong style="color: #34d399;">₹394.64 / day</strong></div>
-                            <div><i class="fa-solid fa-calendar-days" style="color: #f59e0b;"></i> 14-Day Total: <strong style="color: #f59e0b;">₹5,525</strong></div>
-                        </div>
+                        <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹394.64 / day</strong> | 14-Day Total: <strong>₹5,525</strong></div>
                     </div>
 
-                    <!-- Tier 2: ₹10,000 Server -->
+                    <!-- ₹10,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹10,000 Server</span>
                             <div style="display: flex; gap: 4px;">
-                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%20Tier%2010000" target="_blank" style="background: #2563eb; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-mobile-screen"></i> GPay / UPI</a>
-                                <button onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-qrcode"></i> Slice Details</button>
+                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%2010000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                                <button onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8; display: flex; flex-direction: column; gap: 2px;">
-                            <div><i class="fa-solid fa-list-check" style="color: #6366f1;"></i> Daily Tasks: <strong>10 Tasks / day</strong></div>
-                            <div><i class="fa-solid fa-bolt" style="color: #34d399;"></i> Daily Remuneration: <strong style="color: #34d399;">₹792.86 / day</strong></div>
-                            <div><i class="fa-solid fa-calendar-days" style="color: #f59e0b;"></i> 14-Day Total: <strong style="color: #f59e0b;">₹11,100</strong></div>
-                        </div>
+                        <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹792.86 / day</strong> | 14-Day Total: <strong>₹11,100</strong></div>
                     </div>
 
-                    <!-- Tier 3: ₹25,000 Server -->
+                    <!-- ₹25,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹25,000 Server</span>
                             <div style="display: flex; gap: 4px;">
-                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=25000&cu=INR&tn=Server%20Tier%2025000" target="_blank" style="background: #2563eb; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-mobile-screen"></i> GPay / UPI</a>
-                                <button onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-qrcode"></i> Slice Details</button>
+                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=25000&cu=INR&tn=Server%2025000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                                <button onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8; display: flex; flex-direction: column; gap: 2px;">
-                            <div><i class="fa-solid fa-list-check" style="color: #6366f1;"></i> Daily Tasks: <strong>25 Tasks / day</strong></div>
-                            <div><i class="fa-solid fa-bolt" style="color: #34d399;"></i> Daily Remuneration: <strong style="color: #34d399;">₹1,991.07 / day</strong></div>
-                            <div><i class="fa-solid fa-calendar-days" style="color: #f59e0b;"></i> 14-Day Total: <strong style="color: #f59e0b;">₹27,875</strong></div>
-                        </div>
+                        <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹1,991.07 / day</strong> | 14-Day Total: <strong>₹27,875</strong></div>
                     </div>
 
-                    <!-- Tier 4: ₹50,000 Server -->
+                    <!-- ₹50,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹50,000 Server</span>
                             <div style="display: flex; gap: 4px;">
-                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=50000&cu=INR&tn=Server%20Tier%2050000" target="_blank" style="background: #2563eb; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-mobile-screen"></i> GPay / UPI</a>
-                                <button onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-qrcode"></i> Slice Details</button>
+                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=50000&cu=INR&tn=Server%2050000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                                <button onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8; display: flex; flex-direction: column; gap: 2px;">
-                            <div><i class="fa-solid fa-list-check" style="color: #6366f1;"></i> Daily Tasks: <strong>50 Tasks / day</strong></div>
-                            <div><i class="fa-solid fa-bolt" style="color: #34d399;"></i> Daily Remuneration: <strong style="color: #34d399;">₹4,000 / day</strong></div>
-                            <div><i class="fa-solid fa-calendar-days" style="color: #f59e0b;"></i> 14-Day Total: <strong style="color: #f59e0b;">₹56,000</strong></div>
-                        </div>
+                        <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹4,000 / day</strong> | 14-Day Total: <strong>₹56,000</strong></div>
                     </div>
 
-                    <!-- Tier 5: ₹1,00,000 Server -->
+                    <!-- ₹1,00,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                            <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server <span style="background: rgba(245, 158, 11, 0.2); padding: 2px 6px; border-radius: 4px; font-size: 8px;">Max</span></span>
+                            <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server (Max)</span>
                             <div style="display: flex; gap: 4px;">
-                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20Tier%20100000" target="_blank" style="background: #2563eb; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;"><i class="fa-solid fa-mobile-screen"></i> GPay / UPI</a>
-                                <button onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-qrcode"></i> Slice Details</button>
+                                <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20100000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                                <button onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8; display: flex; flex-direction: column; gap: 2px;">
-                            <div><i class="fa-solid fa-list-check" style="color: #6366f1;"></i> Daily Tasks: <strong>100 Tasks / day</strong></div>
-                            <div><i class="fa-solid fa-bolt" style="color: #34d399;"></i> Daily Remuneration: <strong style="color: #34d399;">₹8,000 / day</strong></div>
-                            <div><i class="fa-solid fa-calendar-days" style="color: #f59e0b;"></i> 14-Day Total: <strong style="color: #f59e0b;">₹1,12,000</strong></div>
-                        </div>
+                        <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹8,000 / day</strong> | 14-Day Total: <strong>₹1,12,000</strong></div>
                     </div>
                 </div>
-            </div>
-
-            <div style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; justify-content: space-between;">
-                <span id="ws-board-title"><i class="fa-solid fa-wallet"></i> USER WORKSPACE BALANCE BOARD</span>
-                <span style="color: #34d399; font-size: 9px;" id="ws-spot-txt">● LIVE SPOT SYNCHRONIZED</span>
             </div>
 
             <div class="user-balance-grid">
                 <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;" id="ws-inr-lbl">INR Workspace Balance</div>
+                    <div style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
                     <div class="bal-val" id="user-inr-bal">₹0.00</div>
                 </div>
                 <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;" id="ws-yield-lbl">Daily Task Remuneration</div>
+                    <div style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
                     <div class="bal-val" id="user-daily-yield">₹0.00 / Day</div>
                 </div>
-                <div class="bal-card">
-                    <div style="font-size: 9px; color: #f59e0b;" id="ws-gold-lbl">Live 24K Gold Vault (Grams)</div>
-                    <div class="bal-val" id="user-gold-bal" style="color: #f59e0b;">0.000 g</div>
-                </div>
-                <div class="bal-card">
-                    <div style="font-size: 9px; color: #cbd5e1;" id="ws-silver-lbl">Live Silver Vault (Grams)</div>
-                    <div class="bal-val" id="user-silver-bal" style="color: #cbd5e1;">0.000 g</div>
-                </div>
-            </div>
-
-            <div style="display: flex; gap: 8px;">
-                <button id="ws-task-btn" onclick="alert('Execute daily automated task pipelines to credit INR balance!')" style="flex: 1; background: #10b981; color: white; border: none; padding: 8px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-play"></i> Run Daily Tasks</button>
-                <button id="ws-payout-btn" onclick="alert('Withdrawals are processed under Section 194TDS contractor guidelines directly to your locked bank account.')" style="flex: 1; background: #6366f1; color: white; border: none; padding: 8px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Request Payout</button>
             </div>
         </div>
 
-        <!-- WhatsApp Scripts Section -->
-        <div class="section-box" id="whatsapp-section">
-            <h3 id="wa-title" style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
-            <p id="wa-desc" style="font-size: 10px; color: #94a3b8; margin-bottom: 8px;">Share your referral link with auto-embedded ID:</p>
-            <div class="grid-5">
-                <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
-                <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
-                <button class="wa-btn" onclick="shareWhatsApp(3)">Script 3</button>
-                <button class="wa-btn" onclick="shareWhatsApp(4)">Script 4</button>
-                <button class="wa-btn" onclick="shareWhatsApp(5)">Script 5</button>
-                <button class="wa-btn" onclick="shareWhatsApp(6)">Script 6</button>
-                <button class="wa-btn" onclick="shareWhatsApp(7)">Script 7</button>
-                <button class="wa-btn" onclick="shareWhatsApp(8)">Script 8</button>
-                <button class="wa-btn" onclick="shareWhatsApp(9)">Script 9</button>
-                <button class="wa-btn" onclick="shareWhatsApp(10)">Script 10</button>
-            </div>
-            <div id="waStatus" style="font-size: 10px; color: #34d399; margin-top: 6px;"></div>
-        </div>
-
-        <!-- Supported Voucher & Reward Partners Section -->
-        <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
-            <div id="voucher-title" style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-ticket"></i> Supported Voucher & Reward Partners
-            </div>
-            <div id="voucher-sub" style="font-size: 9px; color: #34d399; font-weight: 600; margin-bottom: 12px;">
-                * ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)
-            </div>
-
-            <!-- 24K Gold Showroom Partners -->
-            <div id="gold-title" style="font-size: 10px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-crown"></i> 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)
-            </div>
-            <div class="grid-2" style="margin-bottom: 14px;">
-                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">Tanishq</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
-                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
-                </a>
-                <a href="https://www.grtjewels.com" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">GRT Jewellers</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
-                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
-                </a>
-                <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">Malabar Gold</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
-                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
-                </a>
-                <a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">Kalyan Jewellers</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
-                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
-                </a>
-            </div>
-
-            <!-- Instant Lifestyle & Food Vouchers -->
-            <div id="food-title" style="font-size: 10px; font-weight: bold; color: #38bdf8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-utensils"></i> INSTANT LIFESTYLE & FOOD VOUCHERS
-            </div>
-            <div class="grid-4" style="grid-template-columns: repeat(2, 1fr);">
-                <a href="https://www.swiggy.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
-                    <i class="fa-solid fa-burger" style="color: #f59e0b; display: block; margin-bottom: 4px;"></i>
-                    <div style="color: #fff;">Swiggy</div>
-                </a>
-                <a href="https://www.zomato.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
-                    <i class="fa-solid fa-utensils" style="color: #fb7185; display: block; margin-bottom: 4px;"></i>
-                    <div style="color: #fff;">Zomato</div>
-                </a>
-                <a href="https://www.amazon.in" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
-                    <i class="fa-solid fa-bag-shopping" style="color: #34d399; display: block; margin-bottom: 4px;"></i>
-                    <div style="color: #fff;">Amazon Pay</div>
-                </a>
-                <a href="https://www.flipkart.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
-                    <i class="fa-solid fa-cart-shopping" style="color: #38bdf8; display: block; margin-bottom: 4px;"></i>
-                    <div style="color: #fff;">Flipkart</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Login Section with Strict Access Control -->
         <div class="section-box" id="login-section">
-            <h3 id="login-title" style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> Contractor Secure Node Login</h3>
+            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;">Contractor Secure Node Login</h3>
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                 <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button id="send-otp-btn" onclick="alert('OTP sent via Fast2SMS gateway!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
+                <button onclick="alert('OTP sent!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
             </div>
             <div style="display: flex; gap: 8px;">
                 <input type="text" id="login-otp-code" placeholder="Enter OTP (Admin: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button id="verify-otp-btn" onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify</button>
+                <button onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify</button>
             </div>
         </div>
     </div>
 
-    <!-- Slice Payment Modal -->
+    <!-- Slice Payment Modal with COPY Buttons -->
     <div id="slice-modal">
         <div class="slice-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #ec4899; font-size: 13px;"><i class="fa-solid fa-building-columns"></i> Slice Current Account Details</span>
+                <span style="font-weight: bold; color: #ec4899; font-size: 13px;">Slice Current Account Details</span>
                 <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer;">&times;</button>
             </div>
             <div style="font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; background: #090d16; padding: 12px; border-radius: 8px;">
                 <div><strong>Account Name:</strong> Madzinu Web3 Technologies</div>
-                <div><strong>Account No:</strong> <span style="color: #34d399; font-family: monospace;">033311501076921</span></div>
-                <div><strong>IFSC:</strong> <span style="color: #38bdf8; font-family: monospace;">NESF0000333</span></div>
-                <div><strong>Alternate IFSC:</strong> <span style="font-family: monospace;">NESF0000096</span></div>
-                <div><strong>UPI ID:</strong> <span style="color: #ec4899; font-weight: bold;">madhan958@slc</span></div>
-                <div><strong>Selected Package & Earnings:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹5,000</span></div>
+                <div><strong>Account No:</strong> <span id="txt-acc" style="color: #34d399; font-family: monospace;">033311501076921</span> <button class="copy-btn" onclick="copyText('txt-acc', this)">Copy</button></div>
+                <div><strong>IFSC:</strong> <span id="txt-ifsc" style="color: #38bdf8; font-family: monospace;">NESF0000333</span> <button class="copy-btn" onclick="copyText('txt-ifsc', this)">Copy</button></div>
+                <div><strong>UPI ID:</strong> <span id="txt-upi" style="color: #ec4899; font-weight: bold;">madhan958@slc</span> <button class="copy-btn" onclick="copyText('txt-upi', this)">Copy</button></div>
+                <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹5,000</span></div>
             </div>
-            <p style="font-size: 10px; color: #94a3b8; margin-bottom: 10px;">Transfer the exact amount using your Slice app or any UPI/NEFT app, then enter your UTR / UPI Reference ID below to activate:</p>
             <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" style="width: 100%; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px; margin-bottom: 10px;">
             <button onclick="confirmSlicePayment()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Activate Server Package</button>
         </div>
     </div>
 
-    <!-- Admin Panel Modal -->
-    <div id="admin-modal">
-        <div class="modal-content">
-            <h3 style="color: #fb7185; margin-bottom: 10px;"><i class="fa-solid fa-user-shield"></i> Admin Fingertip Dashboard</h3>
-            <p style="font-size: 11px; color: #94a3b8; margin-bottom: 12px;">Manage user nodes, active packages, and live workspace balances.</p>
-            <div style="background: #090d16; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 11px; text-align: left;">
-                <div><strong>Status:</strong> <span style="color: #34d399;">Authorized & Active</span></div>
-                <div><strong>Gateway:</strong> Slice Current Account Active</div>
-            </div>
-            <button onclick="closeAdminPanel()" style="background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;">Close Dashboard</button>
-        </div>
-    </div>
-
-    <!-- Madzinu AI Chat Widget -->
-    <div id="madzinu-ai-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
-        <button onclick="
-            let box = document.getElementById('madzinu-ai-chatbox');
-            box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
-        " style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-robot"></i></button>
-
-        <div id="madzinu-ai-chatbox" style="display: none; position: absolute; bottom: 65px; right: 0; width: 330px; height: 440px; background: #111827; border: 1px solid #10b981; border-radius: 12px; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.6);">
-            <div style="background: #1f2937; padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #374151;">
-                <span style="color: #34d399; font-weight: bold; font-size: 13px;"><i class="fa-solid fa-brain"></i> Madzinu AI Knowledge Hub</span>
-                <button onclick="document.getElementById('madzinu-ai-chatbox').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px;">&times;</button>
-            </div>
-            <div id="madzinu-ai-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px;">
-                <div style="background: #1f2937; padding: 8px; border-radius: 6px; width: fit-content; max-width: 85%;">Hello! I am Madzinu AI. Ask me anything about server compute tiers, GPay/Slice transfers, or daily jobwork earnings!</div>
-            </div>
-            <div style="padding: 8px; background: #1f2937; border-top: 1px solid #374151; display: flex; gap: 6px;">
-                <input type="text" id="madzinu-ai-input" placeholder="Ask about platform, yields, payouts..." style="flex: 1; background: #374151; border: none; padding: 7px; color: #fff; border-radius: 6px; font-size: 11px;" />
-                <button onclick="
-                    let input = document.getElementById('madzinu-ai-input');
-                    let msgContainer = document.getElementById('madzinu-ai-messages');
-                    let query = input.value.trim();
-                    if(!query) return;
-                    
-                    let userMsg = document.createElement('div');
-                    userMsg.style.cssText = 'background: #059669; color: #fff; padding: 8px; border-radius: 6px; align-self: flex-end; max-width: 85%;';
-                    userMsg.innerText = query;
-                    msgContainer.appendChild(userMsg);
-                    
-                    let q = query.toLowerCase();
-                    input.value = '';
-                    
-                    setTimeout(() => {
-                        let aiMsg = document.createElement('div');
-                        aiMsg.style.cssText = 'background: #1f2937; color: #d1d5db; padding: 8px; border-radius: 6px; align-self: flex-start; max-width: 85%;';
-                        
-                        if(q.includes('gpay') || q.includes('upi') || q.includes('slice')) {
-                            aiMsg.innerText = 'Direct GPay/UPI Intent is linked to madhan958@slc for seamless server package transfers.';
-                        } else if(q.includes('tier') || q.includes('server') || q.includes('earn')) {
-                            aiMsg.innerText = 'Servers range from ₹5,000 (₹394.64/day) up to ₹1,00,000 (₹8,000/day) in daily automated jobwork earnings.';
-                        } else {
-                            aiMsg.innerText = 'Madzinu AI Node operational. You can ask me about server compute tiers, GPay/UPI transfers, or Slice account details!';
-                        }
-                        
-                        msgContainer.appendChild(aiMsg);
-                        msgContainer.scrollTop = msgContainer.scrollHeight;
-                    }, 500);
-                " style="background: #10b981; color: #fff; border: none; padding: 7px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 11px;">
-            <a href="#" onclick="alert('Terms & Conditions: Free tier provides daily tasks. Restricted daily withdrawal and admin approval apply.'); return false;" style="color: #818cf8; text-decoration: underline;">Terms & Conditions</a>
-            <span>•</span>
-            <a href="#" onclick="alert('Refund Policy: All server node activations are non-refundable SaaS cloud computing access fees.'); return false;" style="color: #38bdf8; text-decoration: underline;">Refund Policy</a>
-            <span>•</span>
-            <a href="#" onclick="alert('Privacy Policy: User data and mobile verification logs are securely encrypted.'); return false;" style="color: #34d399; text-decoration: underline;">Privacy Policy</a>
-        </div>
-        <div><strong>Madzinu Web3 Technologies</strong></div>
-        <div style="margin-top: 4px; color: #64748b;" id="footer-startup">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
-    </footer>
-
     <script>
         let pendingAmount = 5000;
         let pendingDailyYield = 394.64;
 
-        const translations = {
-            EN: {
-                adminBtn: "Admin",
-                marqueeTxt: "Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506",
-                heroBadge: "👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
-                heroTitle: "Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span>",
-                heroDesc: "Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000.",
-                launchTermBtn: "LAUNCH SECURE ENTERPRISE TERMINAL",
-                waTitle: "10 Unique WhatsApp Referral Scripts",
-                waDesc: "Share your referral link with auto-embedded ID:",
-                voucherTitle: "Supported Voucher & Reward Partners",
-                voucherSub: "* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)",
-                goldTitle: "24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)",
-                foodTitle: "INSTANT LIFESTYLE & FOOD VOUCHERS",
-                officialWeb: "Official Website",
-                loginTitle: "Contractor Secure Node Login",
-                phonePlaceholder: "Enter Mobile Number",
-                sendOtpBtn: "Send OTP",
-                verifyOtpBtn: "Verify",
-                wsNodeLbl: "CONNECTED CONTRACTOR NODE",
-                wsStatusLbl: "NODE LICENSE STATUS",
-                wsActiveTxt: "14-Day Active Node",
-                wsLogoutBtn: "Logout",
-                catalogTitle: "SELECT SERVER TIER & JOBWORK EARNINGS",
-                catalogDesc: "Review daily task remuneration and pay via GPay / Slice Account to update balance instantly:",
-                wsBoardTitle: "USER WORKSPACE BALANCE BOARD",
-                wsSpotTxt: "● LIVE SPOT SYNCHRONIZED",
-                wsInrLbl: "INR Workspace Balance",
-                wsYieldLbl: "Daily Task Remuneration",
-                wsGoldLbl: "Live 24K Gold Vault (Grams)",
-                wsSilverLbl: "Live Silver Vault (Grams)",
-                wsTaskBtn: "Run Daily Tasks",
-                wsPayoutBtn: "Request Payout",
-                footerStartup: "Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506"
-            },
-            TA: {
-                adminBtn: "நிர்வாகி",
-                marqueeTxt: "இந்திய அரசின் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் (MeitY) | பதிவு எண்: ST20260926506",
-                heroBadge: "👑 இந்தியாவின் முதல் தன்னாட்சி AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
-                heroTitle: "சர்வர் கம்ப்யூட் & <br><span>சுயியக்க கிளவுட் நெட்வொர்க்</span>",
-                heroDesc: "மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹5,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் தொகுப்புகளைப் பெறுங்கள்.",
-                launchTermBtn: "பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக",
-                waTitle: "10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்",
-                waDesc: "உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:",
-                voucherTitle: "ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்",
-                voucherSub: "* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)",
-                goldTitle: "24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)",
-                foodTitle: "உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்",
-                officialWeb: "அதிகாரப்பூர்வ வலைத்தளம்",
-                loginTitle: "ஒப்பந்தக்காரர் பாதுகாப்பான நோடு உள்நுழைவு",
-                phonePlaceholder: "மொபைல் எண்ணை உள்ளிடவும்",
-                sendOtpBtn: "OTP அனுப்பு",
-                verifyOtpBtn: "சரிபார்",
-                wsNodeLbl: "இணைக்கப்பட்ட ஒப்பந்தக்காரர் நோடு",
-                wsStatusLbl: "நோடு உரிம நிலை",
-                wsActiveTxt: "14 நாள் செயலில் உள்ள நோடு",
-                wsLogoutBtn: "வெளியேறு",
-                catalogTitle: "சர்வர் அடுக்கு & தினசரி வருமானத்தைத் தேர்ந்தெடுக்கவும்",
-                catalogDesc: "GPay அல்லது Slice மூலம் செலுத்தி இருப்பைப் உடனடியாகப் புதுப்பிக்கவும்:",
-                wsBoardTitle: "பயனர் பணிநிலை இருப்புப் பலகை",
-                wsSpotTxt: "● நேரலை ஒத்திசைக்கப்பட்டது",
-                wsInrLbl: "ரூபாய் பணிநிலை இருப்பு",
-                wsYieldLbl: "தினசரி பணி ஊதியம்",
-                wsGoldLbl: "நேரலை தங்கக் காப்பகம் (கிராம்)",
-                wsSilverLbl: "நேரலை வெள்ளி காப்பகம் (கிராம்)",
-                wsTaskBtn: "தினசரி பணிகளை இயக்கு",
-                wsPayoutBtn: "பணம் கோரவும்",
-                footerStartup: "இந்திய அரசின் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் (MeitY) | பதிவு எண்: ST20260926506"
-            }
-        };
-
-        function changeLanguage() {
-            const selector = document.getElementById('langSelector');
-            if(!selector) return;
-            const lang = selector.value;
-            const t = translations[lang] || translations['EN'];
-
-            document.getElementById('admin-btn-txt').innerText = t.adminBtn;
-            document.getElementById('marquee-txt').innerText = t.marqueeTxt;
-            document.getElementById('hero-badge').innerText = t.heroBadge;
-            document.getElementById('hero-title').innerHTML = t.heroTitle;
-            document.getElementById('hero-desc').innerText = t.heroDesc;
-            document.getElementById('launch-term-btn').innerHTML = `<i class="fa-solid fa-arrow-right-to-bracket"></i> ${t.launchTermBtn}`;
-            
-            document.getElementById('wa-title').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${t.waTitle}`;
-            document.getElementById('wa-desc').innerText = t.waDesc;
-            document.getElementById('voucher-title').innerHTML = `<i class="fa-solid fa-ticket"></i> ${t.voucherTitle}`;
-            document.getElementById('voucher-sub').innerText = t.voucherSub;
-            document.getElementById('gold-title').innerHTML = `<i class="fa-solid fa-crown"></i> ${t.goldTitle}`;
-            document.getElementById('food-title').innerHTML = `<i class="fa-solid fa-utensils"></i> ${t.foodTitle}`;
-            
-            document.querySelectorAll('.official-web-lbl').forEach(el => el.innerText = t.officialWeb);
-
-            document.getElementById('login-title').innerHTML = `<i class="fa-solid fa-shield-keyhole"></i> ${t.loginTitle}`;
-            document.getElementById('login-mobile').placeholder = t.phonePlaceholder;
-            document.getElementById('send-otp-btn').innerText = t.sendOtpBtn;
-            document.getElementById('verify-otp-btn').innerText = t.verifyOtpBtn;
-
-            document.getElementById('ws-node-lbl').innerText = t.wsNodeLbl;
-            document.getElementById('ws-status-lbl').innerText = t.wsStatusLbl;
-            document.getElementById('ws-active-txt').innerText = t.wsActiveTxt;
-            document.getElementById('ws-logout-btn').innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> ${t.wsLogoutBtn}`;
-            document.getElementById('catalog-title').innerHTML = `<i class="fa-solid fa-server"></i> ${t.catalogTitle}`;
-            document.getElementById('catalog-desc').innerText = t.catalogDesc;
-            document.getElementById('ws-board-title').innerHTML = `<i class="fa-solid fa-wallet"></i> ${t.wsBoardTitle}`;
-            document.getElementById('ws-spot-txt').innerText = t.wsSpotTxt;
-            document.getElementById('ws-inr-lbl').innerText = t.wsInrLbl;
-            document.getElementById('ws-yield-lbl').innerText = t.wsYieldLbl;
-            document.getElementById('ws-gold-lbl').innerText = t.wsGoldLbl;
-            document.getElementById('ws-silver-lbl').innerText = t.wsSilverLbl;
-            document.getElementById('ws-task-btn').innerHTML = `<i class="fa-solid fa-play"></i> ${t.wsTaskBtn}`;
-            document.getElementById('ws-payout-btn').innerHTML = `<i class="fa-solid fa-arrow-up-right-from-square"></i> ${t.wsPayoutBtn}`;
-            document.getElementById('footer-startup').innerText = t.footerStartup;
-        }
-
-        function openAdminPanel() {
-            let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
-            if(pwd === 'madz1222' || pwd === '2026') {
-                document.getElementById('admin-modal').style.display = 'flex';
-            } else {
-                alert('Invalid Admin Password!');
-            }
-        }
-
-        function closeAdminPanel() {
-            document.getElementById('admin-modal').style.display = 'none';
-        }
-
-        function scrollToLogin() {
-            document.getElementById('login-section').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function shareWhatsApp(id) {
-            let msg = encodeURIComponent('Check out Madzinu Web3 Technologies - IndiaAI & MeitY Recognized Autonomous Cloud Compute Platform: https://madzinuweb3technologies.in');
-            window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
+        function copyText(elementId, btn) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                let originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.style.background = '#10b981';
+                btn.style.color = '#fff';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '#374151';
+                    btn.style.color = '#38bdf8';
+                }, 1500);
+            });
         }
 
         function verifySecureNodeAccess() {
-            let mobile = document.getElementById('login-mobile').value.trim();
             let otp = document.getElementById('login-otp-code').value.trim();
             if(otp === '2026' || otp === 'madz1222') {
-                alert('Node Access Verified Successfully!');
-                if(mobile) {
-                    document.getElementById('user-mobile-display').innerText = '+91 ' + mobile;
-                }
+                alert('Node Verified!');
                 document.getElementById('user-workspace-dashboard').style.display = 'block';
                 document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert('Invalid OTP or Admin Code!');
-            }
+            } else { alert('Invalid OTP / Code!'); }
         }
-
         function logoutUser() {
             document.getElementById('user-workspace-dashboard').style.display = 'none';
-            document.getElementById('login-mobile').value = '';
-            document.getElementById('login-otp-code').value = '';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            alert('Successfully logged out from contractor node session.');
         }
-
         function openSlicePayment(amount, dailyYield) {
             pendingAmount = amount;
             pendingDailyYield = dailyYield;
             document.getElementById('slice-modal-amount').innerText = '₹' + parseInt(amount).toLocaleString('en-IN') + ' (Earnings: ₹' + dailyYield + '/Day)';
             document.getElementById('slice-modal').style.display = 'flex';
         }
-
-        function closeSliceModal() {
-            document.getElementById('slice-modal').style.display = 'none';
-        }
-
+        function closeSliceModal() { document.getElementById('slice-modal').style.display = 'none'; }
         function confirmSlicePayment() {
             let utr = document.getElementById('slice-utr-input').value.trim();
-            if(!utr) {
-                alert('Please enter your UPI Reference ID or UTR number!');
-                return;
-            }
+            if(!utr) { alert('Please enter UTR number!'); return; }
             document.getElementById('user-inr-bal').innerText = '₹' + parseInt(pendingAmount).toLocaleString('en-IN') + '.00';
             document.getElementById('user-daily-yield').innerText = '₹' + pendingDailyYield + ' / Day';
             closeSliceModal();
-            alert('Slice payment verification submitted successfully! Server package & daily jobwork earnings activated.');
+            alert('Package activated successfully!');
         }
     </script>
 </body>
