@@ -26,6 +26,8 @@
 
         header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
+        .header-controls { display: flex; align-items: center; gap: 6px; }
+        
         .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding-bottom: 50px; }
         
         .hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
@@ -79,7 +81,10 @@
         <div>
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
         </div>
-        <div>
+        <div class="header-controls">
+            <button onclick="document.getElementById('login-section').scrollIntoView({behavior: 'smooth'})" class="lang-text" 
+                    data-en="Admin Login" data-ta="அட்மின் லாகின்" data-hi="एडमिन लॉगिन" data-te="అడ్మిన్ లాగిన్" data-ml="അഡ്മിൻ ലോഗിൻ" data-kn="ಅಡ್ಮಿನ್ ಲಾಗಿನ್"
+                    style="background: #1e1b4b; color: #38bdf8; border: 1px solid #312e81; padding: 4px 8px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Admin Login</button>
             <select id="lang-select" onchange="changeLanguage(this.value)" style="background: #111827; color: #38bdf8; border: 1px solid #334155; padding: 4px 8px; border-radius: 6px; font-size: 10px;">
                 <option value="en">English</option>
                 <option value="ta">தமிழ்</option>
@@ -185,36 +190,23 @@
         <div class="user-workspace-dashboard" id="user-workspace-dashboard">
             <div class="user-info-bar">
                 <div>
-                    <div class="lang-text" data-en="CONNECTED CONTRACTOR NODE" data-ta="இணைக்கப்பட்ட கான்ட்ராக்டர் நோடு" data-hi="CONNECTED CONTRACTOR NODE" data-te="CONNECTED CONTRACTOR NODE" data-ml="CONNECTED CONTRACTOR NODE" data-kn="CONNECTED CONTRACTOR NODE">CONNECTED CONTRACTOR NODE</div>
+                    <div class="lang-text" data-en="CONNECTED CONTRACTOR NODE" data-ta="இணைக்கப்பட்ட கான்ட்ராக்டர் நோடு">CONNECTED CONTRACTOR NODE</div>
                     <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9840000000</div>
                 </div>
-                <button onclick="logoutUser()" class="lang-text" data-en="Logout" data-ta="வெளியேறு" data-hi="लॉग आउट" data-te="లాగ్‌అవుట్" data-ml="ലോഗ് ഔട്ട്" data-kn="ಲಾಗ್‌ಔಟ್" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
+                <button onclick="logoutUser()" class="lang-text" data-en="Logout" data-ta="வெளியேறு" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
             </div>
 
             <!-- Live API Gold / Silver Rate Balanced with User INR Balance -->
             <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
-                <div class="lang-text" style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;" 
-                     data-en="LIVE MARKET API METAL BALANCED PORTFOLIO" 
-                     data-ta="நேரலை மார்க்கெட் API உலோகம் சமநிலை போர்ட்ஃபோலியோ"
-                     data-hi="LIVE MARKET API METAL BALANCED PORTFOLIO"
-                     data-te="LIVE MARKET API METAL BALANCED PORTFOLIO"
-                     data-ml="LIVE MARKET API METAL BALANCED PORTFOLIO"
-                     data-kn="LIVE MARKET API METAL BALANCED PORTFOLIO"><i class="fa-solid fa-coins"></i> LIVE MARKET API METAL BALANCED PORTFOLIO</div>
+                <div class="lang-text" style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;" data-en="LIVE MARKET API METAL BALANCED PORTFOLIO" data-ta="நேரலை மார்க்கெட் API உலோகம் சமநிலை போர்ட்ஃபோலியோ"><i class="fa-solid fa-coins"></i> LIVE MARKET API METAL BALANCED PORTFOLIO</div>
                 <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
-                    <div><span class="lang-text" data-en="Gold Value:" data-ta="தங்க மதிப்பு:" data-hi="स्वर्ण मूल्य:" data-te="బంగారం విలువ:" data-ml="സ്വർണ്ണ വില:" data-kn="ಚಿನ್ನದ ಮೌಲ್ಯ:">Gold Value:</span> <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">0.000 g</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
-                    <div><span class="lang-text" data-en="Silver Value:" data-ta="வெள்ளி மதிப்பு:" data-hi="चांदी मूल्य:" data-te="వెండి విలువ:" data-ml="വെള്ളി വില:" data-kn="ಬೆಳ್ಳಿ ಮೌಲ್ಯ:">Silver Value:</span> <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">0.00 g</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
+                    <div><span class="lang-text" data-en="Gold Value:" data-ta="தங்க மதிப்பு:">Gold Value:</span> <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">0.000 g</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
+                    <div><span class="lang-text" data-en="Silver Value:" data-ta="வெள்ளி மதிப்பு:">Silver Value:</span> <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">0.00 g</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
                 </div>
             </div>
 
             <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-                <div class="lang-text" 
-                     data-en="1. 14-Day Server Node License (Choose high-throughput cloud compute tiers ₹2,000 to ₹1,00,000 + 18% GST) with strict 14-day cycle earnings." 
-                     data-ta="1. 14-நாள் சர்வர் நோடு லைசென்ஸ் (₹2,000 முதல் ₹1,00,000 வரை கிளவுட் கம்ப்யூட் டயர்கள் + 18% ஜிஎஸ்டி) மற்றும் 14 நாள் சுழற்சி வருமானம்."
-                     data-hi="1. 14-दिवसीय सर्वर नोड लाइसेंस (₹2,000 से ₹1,00,000 + 18% जीएसटी) कठोर 14-दिवसीय चक्र आय के साथ।"
-                     data-te="1. 14-రోజుల సర్వర్ నోడ్ లైసెన్స్ (₹2,000 నుండి ₹1,00,000 + 18% GST) ఖచ్చితమైన 14-రోజుల సైకిల్ సంపాదనతో."
-                     data-ml="1. 14 ദിവസത്തെ സെർവർ നോഡ് ലൈസൻസ് (₹2,000 മുതൽ ₹1,00,000 + 18% GST) കർശനമായ 14 ദിവസത്തെ സൈക്കിൾ വരുമാനത്തോടെ."
-                     data-kn="1. 14 ದಿನಗಳ ಸರ್ವರ್ ನೋಡ್ ಪರವಾನಗಿ (₹2,000 ರಿಂದ ₹1,00,000 + 18% GST) ಕಟ್ಟುನಿಟ್ಟಾದ 14 ದಿನಗಳ ಚಕ್ರ ಗಳಿಕೆಯೊಂದಿಗೆ."
-                     style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License (Choose high-throughput cloud compute tiers)</div>
+                <div class="lang-text" data-en="1. 14-Day Server Node License (Choose high-throughput cloud compute tiers ₹2,000 to ₹1,00,000 + 18% GST) with strict 14-day cycle earnings." data-ta="1. 14-நாள் சர்வர் நோடு லைசென்ஸ் (₹2,000 முதல் ₹1,00,000 வரை கிளவுட் கம்ப்யூட் டயர்கள் + 18% ஜிஎஸ்டி) மற்றும் 14 நாள் சுழற்சி வருமானம்." style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License (Choose high-throughput cloud compute tiers)</div>
                 <div class="server-catalog-grid">
                     <!-- ₹2,000 Server -->
                     <div class="server-card-item">
@@ -222,10 +214,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹2,000 Server (Base)</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹155.50 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹2,177</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹155.50 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹2,177</strong></div>
                     </div>
 
                     <!-- ₹5,000 Server -->
@@ -234,10 +226,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹5,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=5000&cu=INR&tn=Server%205000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹394.64 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹5,525</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹394.64 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹5,525</strong></div>
                     </div>
 
                     <!-- ₹10,000 Server -->
@@ -246,10 +238,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹10,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%2010000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹792.86 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹11,100</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹792.86 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹11,100</strong></div>
                     </div>
 
                     <!-- ₹25,000 Server -->
@@ -258,10 +250,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹25,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=25000&cu=INR&tn=Server%2025000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹1,991.07 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹27,875</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹1,991.07 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹27,875</strong></div>
                     </div>
 
                     <!-- ₹50,000 Server -->
@@ -270,10 +262,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹50,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=50000&cu=INR&tn=Server%2050000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹4,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹56,000</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹4,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹56,000</strong></div>
                     </div>
 
                     <!-- ₹1,00,000 Server -->
@@ -282,29 +274,29 @@
                             <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server (Max)</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20100000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹8,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹1,12,000</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹8,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹1,12,000</strong></div>
                     </div>
                 </div>
             </div>
 
             <!-- 2. Live Workspace Balance -->
-            <div class="lang-text" data-en="2. Live Workspace Balance" data-ta="2. நேரலை பணிமனை இருப்பு" data-hi="2. लाइव कार्यक्षेत्र शेष" data-te="2. లైవ్ వర్క్‌స్పేస్ బ్యాలెన్స్" data-ml="2. ലൈവ് വർക്ക്സ്പേസ് ബാലൻസ്" data-kn="2. ಲೈವ್ ಕಾರ್ಯಕ್ಷೇತ್ರ ಬಾಕಿ" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-wallet"></i> 2. Live Workspace Balance</div>
+            <div class="lang-text" data-en="2. Live Workspace Balance" data-ta="2. நேரலை பணிமனை இருப்பு" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-wallet"></i> 2. Live Workspace Balance</div>
             <div class="user-balance-grid" style="margin-bottom: 12px;">
                 <div class="bal-card">
-                    <div class="lang-text" data-en="INR Workspace Balance" data-ta="INR பணிமனை இருப்பு" data-hi="INR कार्यक्षेत्र शेष" data-te="INR వర్క్‌స్పేస్ బ్యాలెన్స్" data-ml="INR വർക്ക്സ്പേസ് ബാലൻസ്" data-kn="INR ಕಾರ್ಯಕ್ಷೇತ್ರ ಬಾಕಿ" style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
+                    <div class="lang-text" data-en="INR Workspace Balance" data-ta="INR பணிமனை இருப்பு" style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
                     <div class="bal-val" id="user-inr-bal">₹0.00</div>
                 </div>
                 <div class="bal-card">
-                    <div class="lang-text" data-en="Daily Task Remuneration" data-ta="தினசரி பணி ஊதியம்" data-hi="दैनिक कार्य पारिश्रमिक" data-te="దైనిక టాస్క్ వేతనం" data-ml="പ്രതിദിന ടാസ്ക് പ്രതിഫലം" data-kn="ದೈನಂದಿನ ಕಾರ್ಯ ಸಂಭಾವನೆ" style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
+                    <div class="lang-text" data-en="Daily Task Remuneration" data-ta="தினசரி பணி ஊதியம்" style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
                     <div class="bal-val" id="user-daily-yield">₹0.00 / Day</div>
                 </div>
             </div>
         </div>
 
-        <!-- 3. E-Commerce Jobwork Tasks (Expanded with extra professional duties) -->
+        <!-- 3. E-Commerce & Web3 Enterprise Jobwork Tasks -->
         <div class="section-box">
             <div class="lang-text" 
                  data-en="3. E-Commerce & Web3 Enterprise Jobwork Tasks" 
@@ -318,10 +310,6 @@
             <p class="lang-text" 
                data-en="Execute high-throughput automated verification pipelines across top enterprise ecosystems to secure professional remuneration payouts:" 
                data-ta="தொழில்முறை ஊதியத்தைப் பெற முன்னணி நிறுவனங்களின் சுற்றுச்சூழல் அமைப்புகளில் தானியங்கி சரிபார்ப்பு பணிகளை இயக்கவும்:"
-               data-hi="पेशेवर पारिश्रमिक भुगतान सुरक्षित करने के लिए शीर्ष उद्यम पारिस्थितिकी तंत्र में स्वचालित सत्यापन पाइपलाइन निष्पादित करें:"
-               data-te="వృత్తిపరమైన చెల్లింపులను పొందడానికి టాప్ ఎంటర్‌ప్రైజ్ ఎకోసిస్టమ్స్‌లో ఆటోమేటెడ్ వెరిఫికేషన్ పైప్‌లైన్‌లను అమలు చేయండి:"
-               data-ml="പ്രൊഫഷണൽ പേഔട്ടുകൾ സുരക്ഷിതമാക്കാൻ മുൻനിര എന്റർപ്രൈസ് ഇക്കോസിസ്റ്റങ്ങളിൽ ഓട്ടോമേറ്റഡ് പരിശോധനകൾ നടത്തുക:"
-               data-kn="ವೃತ್ತಿಪರ ಸಂಭಾವನೆ ಪಾವತಿಗಳನ್ನು ಸುರಕ್ಷಿತಗೊಳಿಸಲು ಉನ್ನತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಪರಿಸರ ವ್ಯವಸ್ಥೆಗಳಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತ ಪರಿಶೀಲನೆಗಳನ್ನು ಕಾರ್ಯಗತಗೊಳಿಸಿ:"
                style="font-size: 10.5px; color: #94a3b8; margin-bottom: 8px;">Execute high-throughput automated verification pipelines across top enterprise ecosystems to secure professional remuneration payouts:</p>
             
             <ul style="font-size: 10px; color: #cbd5e1; padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
@@ -334,26 +322,11 @@
 
         <!-- 4. 10% - 12% Dynamic Referral Bonus & Gold Vault -->
         <div class="section-box">
-            <div class="lang-text" 
-                 data-en="4. 10% - 12% Dynamic Referral Bonus & Gold Vault" 
-                 data-ta="4. 10% - 12% டைனமிக் பரிந்துரை போனஸ் & தங்க வால்ட்"
-                 data-hi="4. 10% - 12% गतिशील रेफरेल बोनस और गोल्ड वॉल्ट"
-                 data-te="4. 10% - 12% డైనమిక్ రెఫరల్ బోనస్ & గోల్డ్ వాల్ట్"
-                 data-ml="4. 10% - 12% ഡൈനാമിക് റഫറൽ ബോണസ് & ഗോൾഡ് വാൾട്ട്"
-                 data-kn="4. 10% - 12% ಡೈನಾಮಿಕ್ ರೆಫರಲ್ ಬೋನಸ್ ಮತ್ತು ಗೋಲ್ಡ್ ವಾಲ್ಟ್"
-                 style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-gift"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</div>
-            
-            <p class="lang-text" 
-               data-en="Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits." 
-               data-ta="10%-12% பரிந்துரை போனஸ் பெறுங்கள். மேலும், ₹25,000+ சர்வர் தொகுப்புகள் மூலம் பிரத்யேக 24K தங்க வால்ட் மாற்றும் சலுகைகளைப் பெறலாம்."
-               data-hi="10%-12% रेफ़रल बोनस अर्जित करें। साथ ही, एंटरप्राइज़ सर्वर टियर (₹25,000+) विशेष 24K गोल्ड वॉल्ट रूपांतरण लाभ अनलॉक करते हैं।"
-               data-te="10%-12% రెఫరల్ బోనస్‌లను సంపాదించండి. అదనంగా, ఎంటర్‌ప్రైజ్ సర్వర్ టైర్‌లు (₹25,000+) ప్రత్యేకమైన 24K గోల్డ్ వాల్ట్ కన్వర్షన్ ప్రయోజనాలను అన్‌లాక్ చేస్తాయి."
-               data-ml="10%-12% റഫറൽ ബോണസുകൾ നേടുക. കൂടാതെ എന്റർപ്രൈസ് സെർവർ ടയറുകൾ (₹25,000+) പ്രത്യേക 24K ഗോൾഡ് വാൾട്ട് ആനുകൂല്യങ്ങൾ നൽകുന്നു."
-               data-kn="10%-12% ರೆಫರಲ್ ಬೋನಸ್‌ಗಳನ್ನು ಗಳಿಸಿ. ಜೊತೆಗೆ, ಎಂಟರ್‌ಪ್ರೈಸ್ ಸರ್ವರ್ ಶ್ರೇಣಿಗಳು (₹25,000+) ವಿಶೇಷ 24K ಗೋಲ್ಡ್ ವಾಲ್ಟ್ ಪರಿವರ್ತನೆ ಪ್ರಯೋಜನಗಳನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡುತ್ತವೆ."
-               style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.</p>
+            <div class="lang-text" data-en="4. 10% - 12% Dynamic Referral Bonus & Gold Vault" data-ta="4. 10% - 12% டைனமிக் பரிந்துரை போனஸ் & தங்க வால்ட்" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-gift"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</div>
+            <p class="lang-text" data-en="Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits." data-ta="10%-12% பரிந்துரை போனஸ் பெறுங்கள். மேலும், ₹25,000+ சர்வர் தொகுப்புகள் மூலம் பிரத்யேக 24K தங்க வால்ட் மாற்றும் சலுகைகளைப் பெறலாம்." style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.</p>
             
             <!-- WhatsApp Referral Scripts -->
-            <div class="lang-text" data-en="10 Unique WhatsApp Referral Scripts" data-ta="10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை ஸ்கிரிப்ட்கள்" data-hi="10 अद्वितीय व्हाट्सएप रेफरेल स्क्रिप्ट" data-te="10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు" data-ml="10 അദ്വിതീയ വാട്ട്സാപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ" data-kn="10 ಅನನ್ಯ WhatsApp ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು" style="font-size: 10.5px; color: #34d399; margin-bottom: 6px; font-weight: bold;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</div>
+            <div class="lang-text" data-en="10 Unique WhatsApp Referral Scripts" data-ta="10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை ஸ்கிரிப்ட்கள்" style="font-size: 10.5px; color: #34d399; margin-bottom: 6px; font-weight: bold;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</div>
             <div class="grid-5">
                 <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
                 <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
@@ -370,18 +343,8 @@
 
         <!-- Supported Voucher & Reward Partners -->
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
-            <div class="lang-text" 
-                 data-en="Supported Voucher & Reward Partners" 
-                 data-ta="ஆதரிக்கப்படும் வவுச்சர் & வெகுமதி கூட்டாளிகள்"
-                 data-hi="समर्थित वाउचर और रिवॉर्ड पार्टनर"
-                 data-te="మద్దతు ఉన్న వౌచర్ & రివార్డ్ పార్టనర్స్"
-                 data-ml="പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ"
-                 data-kn="ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವಾರ್ಡ್ ಪಾಲುದಾರರು"
-                 style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
-            
-            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 8px; font-weight: bold;" class="lang-text" 
-                 data-en="* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)" 
-                 data-ta="* என்டர்பிரைஸ் வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு & விரைவில் வெளியீடு)">* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)</div>
+            <div class="lang-text" data-en="Supported Voucher & Reward Partners" data-ta="ஆதரிக்கப்படும் வவுச்சர் & வெகுமதி கூட்டாளிகள்" style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
+            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 8px; font-weight: bold;" class="lang-text" data-en="* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)" data-ta="* என்டர்பிரைஸ் வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு & விரைவில் வெளியீடு)">* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)</div>
             
             <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;" class="lang-text" data-en="👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)" data-ta="👑 24K தங்க ஷோரூம் கூட்டாளிகள் (என்டர்பிரைஸ் டயர்கள் ₹25K+)">👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)</div>
             <div class="grid-2" style="margin-bottom: 12px;">
@@ -400,23 +363,14 @@
 
         <!-- Admin Secure Node Login (PERMANENTLY VISIBLE AT BOTTOM) -->
         <div class="section-box" id="login-section" style="border: 1px solid rgba(129, 140, 248, 0.5);">
-            <h3 class="lang-text" 
-                data-en="Contractor Secure Node Login" 
-                data-ta="ஒப்பந்தக்காரர் பாதுகாப்பு நோடு உள்நுழைவு"
-                data-hi="ठेकेदार सुरक्षित नोड लॉगिन"
-                data-te="కాంట్రాక్టర్ సెక్యూర్ నోడ్ లాగిన్"
-                data-ml="കൺട്രാക്ടർ സെക്യൂർ നോഡ് ലോഗിൻ"
-                data-kn="ಗುತ್ತಿಗೆದಾರ ಸುರಕ್ಷಿತ ನೋಡ್ ಲಾಗಿನ್"
-                style="font-size: 11px; color: #818cf8; margin-bottom: 8px;">Contractor Secure Node Login</h3>
-            
+            <h3 class="lang-text" data-en="Contractor Secure Node Login" data-ta="ஒப்பந்தக்காரர் பாதுகாப்பு நோடு உள்நுழைவு" style="font-size: 11px; color: #818cf8; margin-bottom: 8px;">Contractor Secure Node Login</h3>
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                 <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button class="lang-text" data-en="Send OTP" data-ta="OTP அனுப்பு" data-hi="ओटीपी भेजें" data-te="OTP పంపు" data-ml="OTP അയക്കുക" data-kn="OTP ಕಳುಹಿಸಿ" onclick="alert('OTP sent!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
+                <button class="lang-text" data-en="Send OTP" data-ta="OTP அனுப்பு" onclick="alert('OTP sent!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
             </div>
-            
             <div style="display: flex; gap: 8px;">
                 <input type="text" id="login-otp-code" placeholder="Enter OTP (Admin: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button class="lang-text" data-en="Verify & Unlock Server List" data-ta="சரிபார்த்து சர்வர் பட்டியலை திற" data-hi="सत्यापित करें और सर्वर सूची अनलॉक करें" data-te="ధృవీకరించండి & సర్వర్ జాబితాను అన్‌లాక్ చేయండి" data-ml="സ്ഥിരീകരിക്കുക & സെർവർ പട്ടിക തുറക്കുക" data-kn="ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಸರ್ವರ್ ಪಟ್ಟಿ ಅನ್‌ಲಾಕ್ ಮಾಡಿ" onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify & Unlock Server List</button>
+                <button class="lang-text" data-en="Verify & Unlock Server List" data-ta="சரிபார்த்து சர்வர் பட்டியலை திற" onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify & Unlock Server List</button>
             </div>
         </div>
     </div>
