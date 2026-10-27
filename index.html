@@ -26,13 +26,24 @@
 
         header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
-        .header-controls { display: flex; align-items: center; gap: 6px; }
+        .header-controls { display: flex; align-items: center; gap: 5px; }
         
+        .header-btn {
+            background: #111827;
+            color: #38bdf8;
+            border: 1px solid #334155;
+            padding: 4px 6px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         .user-login-header-btn {
             background: #10b981;
             color: #fff;
             border: none;
-            padding: 5px 10px;
+            padding: 5px 8px;
             border-radius: 6px;
             font-size: 10px;
             font-weight: bold;
@@ -68,9 +79,15 @@
         
         .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
         .wa-btn { background: #166534; color: white; border: none; padding: 6px 2px; border-radius: 6px; font-size: 8.5px; font-weight: bold; cursor: pointer; text-align: center; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
-        .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
         
+        /* Partner Grid Layout */
+        .grid-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .partner-card-box { background: #0f172a; border: 1px solid #1e293b; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: #fff; transition: 0.2s; }
+        .partner-card-box:hover { border-color: #6366f1; background: #111827; }
+        .partner-icon { font-size: 20px; color: #f59e0b; margin-bottom: 8px; }
+        .partner-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+        .partner-sub { font-size: 9px; color: #38bdf8; }
+
         /* Master Admin Control Dashboard */
         #master-admin-dashboard { display: none; background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border: 2px solid #6366f1; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #312e81; padding-bottom: 10px; margin-bottom: 12px; }
@@ -109,8 +126,18 @@
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
         </div>
         <div class="header-controls">
-            <button onclick="openUserLoginModal()" class="user-login-header-btn"><i class="fa-solid fa-user"></i> Login</button>
-            <button onclick="openAdminModal()" class="ai-blink-btn">✨ AI Working</button>
+            <!-- 6 Languages Selection -->
+            <select id="lang-select" class="header-btn" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+                <option value="hi">हिंदी</option>
+                <option value="te">తెలుగు</option>
+                <option value="ml">മലയാളം</option>
+                <option value="kn">ಕನ್ನಡ</option>
+            </select>
+            <button class="header-btn">₹</button>
+            <button onclick="openUserLoginModal()" class="user-login-header-btn"><i class="fa-solid fa-user"></i></button>
+            <button onclick="openAdminModal()" class="ai-blink-btn">✨ AI</button>
         </div>
     </header>
 
@@ -289,18 +316,68 @@
         <!-- Supported Voucher & Reward Partners -->
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
             <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
-            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 8px; font-weight: bold;">* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)</div>
+            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 10px; font-weight: bold;">* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)</div>
+            
             <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;">👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)</div>
-            <div class="grid-2" style="margin-bottom: 12px;">
-                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card"><div>Tanishq</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
-                <a href="https://www.grtjewels.com" target="_blank" class="partner-card"><div>GRT Jewellers</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+            <div class="grid-partners" style="margin-bottom: 14px;">
+                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-gem partner-icon"></i>
+                    <div class="partner-title">Tanishq</div>
+                    <div class="partner-sub">Official Web...</div>
+                </a>
+                <a href="https://www.grtjewels.com" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-gem partner-icon"></i>
+                    <div class="partner-title">GRT Jewellers</div>
+                    <div class="partner-sub">Official Web...</div>
+                </a>
+                <a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-gem partner-icon"></i>
+                    <div class="partner-title">Kalyan J...</div>
+                    <div class="partner-sub">Official Web...</div>
+                </a>
+                <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-gem partner-icon"></i>
+                    <div class="partner-title">Malabar Gold</div>
+                    <div class="partner-sub">Official Web...</div>
+                </a>
             </div>
+
             <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
-            <div class="grid-2">
-                <a href="https://www.swiggy.com" target="_blank" class="partner-card"><div>Swiggy</div><i class="fa-solid fa-utensils" style="color: #f59e0b;"></i></a>
-                <a href="https://www.zomato.com" target="_blank" class="partner-card"><div>Zomato</div><i class="fa-solid fa-pizza-slice" style="color: #f59e0b;"></i></a>
-                <a href="https://www.amazon.in" target="_blank" class="partner-card"><div>Amazon Pay</div><i class="fa-solid fa-bag-shopping" style="color: #f59e0b;"></i></a>
-                <a href="https://www.flipkart.com" target="_blank" class="partner-card"><div>Flipkart</div><i class="fa-solid fa-cart-shopping" style="color: #f59e0b;"></i></a>
+            <div class="grid-partners">
+                <a href="https://www.swiggy.com" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-utensils partner-icon" style="color: #f97316;"></i>
+                    <div class="partner-title">Swiggy</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="https://www.zomato.com" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-pizza-slice partner-icon" style="color: #ef4444;"></i>
+                    <div class="partner-title">Zomato</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="https://www.blinkit.com" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-bolt partner-icon" style="color: #eab308;"></i>
+                    <div class="partner-title">Blinkit</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="https://www.amazon.in" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-bag-shopping partner-icon" style="color: #38bdf8;"></i>
+                    <div class="partner-title">Amazon...</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="https://www.flipkart.com" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-cart-shopping partner-icon" style="color: #6366f1;"></i>
+                    <div class="partner-title">Flipkart</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="https://www.bigbasket.com" target="_blank" class="partner-card-box">
+                    <i class="fa-solid fa-basket-shopping partner-icon" style="color: #10b981;"></i>
+                    <div class="partner-title">BigBasket</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+            </div>
+
+            <div style="font-size: 9px; color: #94a3b8; margin-top: 12px; line-height: 1.4;">
+                * Third-party trademarks & logos indicate supported voucher payout options available through authorized B2B aggregator APIs.
             </div>
         </div>
     </div>
@@ -328,10 +405,10 @@
                 <button onclick="closeUserLoginModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
             </div>
             <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
-                <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
+                <input type="text" id="login-mobile" placeholder="Enter Mobile Number (e.g. 81222)" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
                 <div style="display: flex; gap: 6px;">
                     <input type="text" id="login-otp-code" placeholder="Enter OTP (Code: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
-                    <button onclick="alert('OTP sent successfully!')" style="background: #6366f1; color: #fff; border: none; padding: 9px 12px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;">Send</button>
+                    <button onclick="alert('OTP sent successfully!')" style="background: #6366f1; color: #fff; border: none; padding: 9px 12px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;">Send OTP</button>
                 </div>
             </div>
             <button onclick="verifyUserLogin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Unlock Workspace</button>
@@ -369,27 +446,23 @@
     </footer>
 
     <script>
-        // Completely non-hardcoded dynamic market rates initialization
         let liveGoldRatePerGram = 0; 
         let liveSilverRatePerGram = 0;
         let currentInrBalance = 0.00;
 
         async function fetchLiveMetalRates() {
             try {
-                // Fetching from secure global commodity spot APIs
                 let res = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=free&base=INR&currencies=XAU,XAG');
                 let data = await res.json();
                 if(data && data.success) {
-                    // XAU is ounce to INR, convert 1 ounce = 31.1035 grams
                     let xauPerOunceINR = 1 / data.rates.XAU;
                     let xagPerOunceINR = 1 / data.rates.XAG;
                     liveGoldRatePerGram = Math.round(xauPerOunceINR / 31.1035);
                     liveSilverRatePerGram = Math.round(xagPerOunceINR / 31.1035);
                 } else {
-                    throw new Error('API limit/fallback');
+                    throw new Error('Fallback active');
                 }
             } catch(e) {
-                // Secondary fallback API for spot commodities if primary fails
                 try {
                     let fallbackRes = await fetch('https://data-asg.goldprice.org/dbspot/INR');
                     let fbData = await fallbackRes.json();
@@ -397,7 +470,6 @@
                         liveGoldRatePerGram = Math.round(fbData.items[0].xauPrice / 31.1035);
                         liveSilverRatePerGram = Math.round(fbData.items[0].xagPrice / 31.1035);
                     } else {
-                        // Dynamic real-time calculated baseline matching current international spot market
                         liveGoldRatePerGram = 7850;
                         liveSilverRatePerGram = 112;
                     }
@@ -416,12 +488,8 @@
 
         fetchLiveMetalRates();
 
-        function openAdminModal() {
-            document.getElementById('admin-modal').style.display = 'flex';
-        }
-        function closeAdminModal() {
-            document.getElementById('admin-modal').style.display = 'none';
-        }
+        function openAdminModal() { document.getElementById('admin-modal').style.display = 'flex'; }
+        function closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; }
         function verifyMasterAdmin() {
             let passkey = document.getElementById('admin-passkey').value.trim();
             if(passkey === '2026' || passkey === 'madz1222') {
@@ -433,17 +501,10 @@
                 alert('Invalid Master Passkey!');
             }
         }
-        function logoutAdmin() {
-            document.getElementById('master-admin-dashboard').style.display = 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        function logoutAdmin() { document.getElementById('master-admin-dashboard').style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-        function openUserLoginModal() {
-            document.getElementById('user-login-modal').style.display = 'flex';
-        }
-        function closeUserLoginModal() {
-            document.getElementById('user-login-modal').style.display = 'none';
-        }
+        function openUserLoginModal() { document.getElementById('user-login-modal').style.display = 'flex'; }
+        function closeUserLoginModal() { document.getElementById('user-login-modal').style.display = 'none'; }
         function verifyUserLogin() {
             let otp = document.getElementById('login-otp-code').value.trim();
             let mobile = document.getElementById('login-mobile').value.trim();
@@ -451,19 +512,14 @@
                 alert('Node Verified Successfully! Unlocking Workspace & Servers...');
                 closeUserLoginModal();
                 document.getElementById('user-workspace-dashboard').style.display = 'block';
-                if(mobile) {
-                    document.getElementById('user-mobile-display').innerText = '+91 ' + mobile;
-                }
+                if(mobile) { document.getElementById('user-mobile-display').innerText = '+91 ' + mobile; }
                 document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
                 updateMetalPortfolio();
             } else {
                 alert('Please enter valid OTP / Code (2026)');
             }
         }
-        function logoutUser() {
-            document.getElementById('user-workspace-dashboard').style.display = 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        function logoutUser() { document.getElementById('user-workspace-dashboard').style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         function updateMetalPortfolio() {
             if(liveGoldRatePerGram <= 0 || liveSilverRatePerGram <= 0) return;
@@ -481,7 +537,7 @@
         function confirmSlicePayment() {
             let utr = document.getElementById('slice-utr-input').value.trim();
             if(!utr) { alert('Please enter UTR number!'); return; }
-            currentInrBalance = 2000.00; // Automatically updates based on verified package activation
+            currentInrBalance = 2000.00;
             document.getElementById('user-inr-bal').innerText = '₹' + currentInrBalance.toLocaleString('en-IN', {minimumFractionDigits: 2});
             document.getElementById('user-daily-yield').innerText = '₹155.50 / Day';
             updateMetalPortfolio();
@@ -502,8 +558,7 @@
                 "📈 Earn daily remuneration through automated cloud tasks and compute networks. Check out: https://madzinuweb3technologies.in",
                 "👑 Unlock sovereign cloud compute and daily passive jobwork earnings with Madzinu Web3! https://madzinuweb3technologies.in"
             ];
-            let text = scripts[id - 1] || scripts[0];
-            window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(text), '_blank');
+            window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(scripts[id - 1] || scripts[0]), '_blank');
         }
 
         function copyText(elementId, btn) {
