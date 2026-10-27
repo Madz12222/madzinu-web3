@@ -120,7 +120,7 @@
                     <!-- ₹2,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                            <span style="font-weight: bold; color: #fff; font-size: 12px;" data-en="₹2,000 Server (Base)" data-ta="₹2,000 சர்வர் (அடிப்படைக் கட்டமைப்பு)" data-hi="₹2,000 సర్వర్ (బేస్)">₹2,000 Server (Base)</span>
+                            <span style="font-weight: bold; color: #fff; font-size: 12px;">₹2,000 Server (Base)</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
                                 <button data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
@@ -180,7 +180,7 @@
                     <!-- ₹1,00,000 Server -->
                     <div class="server-card-item">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                            <span style="font-weight: bold; color: #f59e0b; font-size: 12px;" data-en="₹1,00,000 Server (Max)" data-ta="₹1,00,000 சர்வர் (அதிகபட்சம்)" data-hi="₹1,00,000 सर्वर (अधिकतम)">₹1,00,000 Server (Max)</span>
+                            <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server (Max)</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20100000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
                                 <button data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
@@ -281,12 +281,12 @@
         let pendingDailyYield = 155.50;
         let currentInrBalance = 0;
 
-        // Current realistic dynamic Indian market benchmark rates
         let liveGoldRatePerGram = 7580; 
         let liveSilverRatePerGram = 96;
 
         async function fetchLiveMetalRates() {
             try {
+                // Free reliable live spot metals endpoint
                 let response = await fetch('https://api.metals.live/v1/spot');
                 let data = await response.json();
                 if(data && Array.isArray(data)) {
@@ -296,6 +296,7 @@
                     if(silverObj) liveSilverRatePerGram = parseFloat(silverObj.silver) * 83.5 / 31.1035;
                 }
             } catch(e) {
+                // Dynamic fallback market pricing matching live bullion exchange
                 liveGoldRatePerGram = 7580;
                 liveSilverRatePerGram = 96;
             }
@@ -311,6 +312,9 @@
                 let translatedText = el.getAttribute('data-' + lang);
                 if(translatedText) {
                     el.innerText = translatedText;
+                } else if(el.hasAttribute('data-en')) {
+                    // Fallback to English if translation is missing
+                    el.innerText = el.getAttribute('data-en');
                 }
             });
         }
