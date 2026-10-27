@@ -1,0 +1,345 @@
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madzinu Web3 Technologies | Enterprise Cloud & Autonomous Workflows</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        :root {
+            --bg-color: #090d16;
+            --card-bg: #111827;
+            --card-border: #1f2937;
+            --accent-indigo: #6366f1;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
+        .marquee-container { overflow: hidden; width: 100%; position: relative; margin-top: 2px; }
+        .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; font-size: 8px; color: #34d399; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; }
+        .hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .badge-pill { display: inline-block; background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 10px; }
+        h1 { font-size: 18px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; color: #fff; }
+        h1 span { background: linear-gradient(90deg, #818cf8, #38bdf8, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+        .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
+        .section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
+        .wa-btn { background: #166534; color: white; border: none; padding: 6px 2px; border-radius: 6px; font-size: 8.5px; font-weight: bold; cursor: pointer; text-align: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+        .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
+        footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <div class="brand-title">MADZINU WEB3 TECH & AI</div>
+            <div class="marquee-container">
+                <span class="animate-marquee"><i class="fa-solid fa-check-circle"></i> Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</span>
+            </div>
+        </div>
+        <div style="display: flex; gap: 6px; align-items: center;">
+            <select id="langSelector" onchange="changeLanguage()" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 4px; border-radius: 4px; font-size: 10px;">
+                <option value="EN" selected>EN</option>
+                <option value="TA">தமிழ்</option>
+                <option value="TE">తెలుగు</option>
+                <option value="KN">ಕನ್ನಡ</option>
+                <option value="ML">മലയാളം</option>
+                <option value="HI">हिन्दी</option>
+                <option value="MR">मराठी</option>
+            </select>
+            <button onclick="openAdminLoginModal()" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-user-shield"></i> Admin</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-card">
+            <div class="badge-pill" id="hero-badge">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1 id="hero-title">Sovereign Cloud Compute &<br><span>Autonomous Jobworks & Live Gold Vault</span></h1>
+            <p id="hero-desc">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.</p>
+            <button class="btn-primary" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
+        </div>
+
+        <!-- Detailed Feature Cards -->
+        <div class="section-box" style="font-size: 11px;">
+            <div style="font-weight: bold; color: #818cf8; margin-bottom: 6px;"><i class="fa-solid fa-list-check"></i> Platform Ecosystem Features</div>
+            <ul style="padding-left: 16px; color: var(--text-muted); font-size: 10.5px; line-height: 1.6;">
+                <li><strong>Free Tier:</strong> Earn ₹25 daily for 4 days per mobile number (Total ₹100, Min Withdraw ₹100).</li>
+                <li><strong>Server Packages:</strong> Tiers ranging from ₹2,000 to ₹1,00,000 (+18% GST) with 14-day cycle.</li>
+                <li><strong>3-Tier Referral:</strong> Silver (10%) → Gold (12%) → Diamond (15%) instant commission.</li>
+            </ul>
+        </div>
+
+        <!-- WhatsApp Scripts Section -->
+        <div class="section-box">
+            <h3 style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
+            <p style="font-size: 10px; color: #94a3b8; margin-bottom: 8px;">Share your referral link with auto-embedded ID:</p>
+            <div class="grid-5">
+                <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
+                <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
+                <button class="wa-btn" onclick="shareWhatsApp(3)">Script 3</button>
+                <button class="wa-btn" onclick="shareWhatsApp(4)">Script 4</button>
+                <button class="wa-btn" onclick="shareWhatsApp(5)">Script 5</button>
+                <button class="wa-btn" onclick="shareWhatsApp(6)">Script 6</button>
+                <button class="wa-btn" onclick="shareWhatsApp(7)">Script 7</button>
+                <button class="wa-btn" onclick="shareWhatsApp(8)">Script 8</button>
+                <button class="wa-btn" onclick="shareWhatsApp(9)">Script 9</button>
+                <button class="wa-btn" onclick="shareWhatsApp(10)">Script 10</button>
+            </div>
+            <div id="waStatus" style="font-size: 10px; color: #34d399; margin-top: 6px;"></div>
+        </div>
+
+        <!-- Supported Voucher & Reward Partners Section -->
+        <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
+            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-ticket"></i> Supported Voucher & Reward Partners
+            </div>
+            <div style="font-size: 9px; color: #34d399; font-weight: 600; margin-bottom: 12px;">
+                * ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)
+            </div>
+
+            <!-- 24K Gold Showroom Partners -->
+            <div style="font-size: 10px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-crown"></i> 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)
+            </div>
+            <div class="grid-2" style="margin-bottom: 14px;">
+                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">Tanishq</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+                </a>
+                <a href="https://www.grtjewels.com" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">GRT Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+                </a>
+                <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">Malabar Gold</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+                </a>
+                <a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">Kalyan Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+                </a>
+            </div>
+
+            <!-- Instant Lifestyle & Food Vouchers -->
+            <div style="font-size: 10px; font-weight: bold; color: #38bdf8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-utensils"></i> INSTANT LIFESTYLE & FOOD VOUCHERS
+            </div>
+            <div class="grid-4" style="grid-template-columns: repeat(2, 1fr);">
+                <a href="https://www.swiggy.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-burger" style="color: #f59e0b; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Swiggy</div>
+                </a>
+                <a href="https://www.zomato.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-utensils" style="color: #fb7185; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Zomato</div>
+                </a>
+                <a href="https://www.amazon.in" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-bag-shopping" style="color: #34d399; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Amazon Pay</div>
+                </a>
+                <a href="https://www.flipkart.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-cart-shopping" style="color: #38bdf8; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Flipkart</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Login Section -->
+        <div class="section-box" id="login-section">
+            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> Contractor Secure Node Login</h3>
+            <div style="display: flex; gap: 8px;">
+                <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
+                <button onclick="loginBypass()" style="background: #6366f1; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 11px;">
+            <a href="#" onclick="alert('Terms & Conditions: Free tier provides ₹25 daily for 4 days. Restricted daily withdrawal and admin approval apply.'); return false;" style="color: #818cf8; text-decoration: underline;">Terms & Conditions</a>
+            <span>•</span>
+            <a href="#" onclick="alert('Refund Policy: All server node activations are non-refundable SaaS cloud computing access fees.'); return false;" style="color: #38bdf8; text-decoration: underline;">Refund Policy</a>
+            <span>•</span>
+            <a href="#" onclick="alert('Privacy Policy: User data and mobile verification logs are securely encrypted.'); return false;" style="color: #34d399; text-decoration: underline;">Privacy Policy</a>
+        </div>
+        <div><strong>Madzinu Web3 Technologies</strong></div>
+        <div style="margin-top: 4px; color: #64748b;">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
+    </footer>
+
+    <script>
+        const translations = {
+            'EN': {
+                badge: "👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
+                title: 'Sovereign Cloud Compute &<br><span>Autonomous Jobworks & Live Gold Vault</span>',
+                desc: 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
+                wa: [
+                    "🚀 Join Madzinu Web3 Technologies - Govt recognized cloud compute & 24K Gold Vault rewards! Check out: ",
+                    "💎 Invest in Sovereign Cloud & 24K Gold Showroom Vouchers (Tanishq/GRT). Start today: ",
+                    "💼 Execute Daily E-Commerce Jobworks (Amazon/Flipkart/Meesho) & earn daily payouts! Join here: ",
+                    "🌟 MeitY Recognized Startup (Govt of India) offering high-throughput server nodes & daily remuneration: ",
+                    "💰 Build your secure digital asset portfolio with Madzinu Web3 Technologies. Explore compute tiers: ",
+                    "🏆 Unlock 24K Gold Showroom Partners & secure daily task income. Check out now: ",
+                    "🔒 Secure Enterprise Terminal & automated verification pipelines. Join the network: ",
+                    "🎁 Earn 10%-12% referral bonuses & daily task payouts with Madzinu Web3: ",
+                    "🤖 Powered by Madzinu AI Studio & Cloud Network. Experience autonomous jobworks: ",
+                    "📈 Scale your earnings with 14-day server node licenses and secure cloud compute: "
+                ]
+            },
+            'TA': {
+                badge: "👑 இந்தியாவின் முதல் சுயாதீன ஏஐ ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
+                title: 'சவரன் கிளவுட் கம்ப்யூட் &<br><span>தன்னாட்சி பணி மற்றும் லைவ் கோல்டு வால்ட்</span>',
+                desc: 'மாட்ஜினு வெப்3 டெக்னாலஜிஸ் என்பது மீட்டி (MeitY) கீழ் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் நிறுவனமாகும். ₹2,000 முதல் ₹1,00,000 வரையிலான கிளவுட் கம்ப்யூட் பேக்கேஜ்கள் வழங்கப்படுகின்றன.',
+                wa: [
+                    "🚀 மாட்ஜினு வெப்3 டெக்னாலஜிஸில் இணையுங்கள்! அரசு அங்கீகரிக்கப்பட்ட கிளவுட் கம்ப்யூட் மற்றும் 24K தங்க பரிசுப் பொருட்கள்: ",
+                    "💼 சவரன் கிளவுட் & 24K தங்க ஷோரூம் வவுச்சர்களில் முதலீடு செய்யுங்கள் (Tanishq/GRT). இன்று தொடங்குங்கள்: ",
+                    "🏆 தினசரி இ-காமர்ஸ் பணிகளை முடித்து தினசரி பணம் பெறுங்கள்! இங்கே இணையுங்கள்: ",
+                    "🌟 மீட்டி (MeitY) அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் நிறுவனம் வழங்கும் சர்வர் நோடுகள்: ",
+                    "💰 மாட்ஜினு வெப்3 உடன் உங்களது டிஜிட்டல் சொத்து போர்ட்ஃபோலியோவை உருவாக்குங்கள்: ",
+                    "💎 24K தங்க ஷோரூம் பார்ட்னர்களை அன்லாக் செய்து தினசரி பணி வருமானம் பெறுங்கள்: ",
+                    "🔒 பாதுகாப்பான என்டர்பிரைஸ் டெர்மினல் மற்றும் தானியங்கி சரிபார்ப்பு நெட்வொர்க்: ",
+                    "🎁 10%-12% ரெஃபரல் போனஸ் மற்றும் தினசரி பணிப் பலன்களைப் பெறுங்கள்: ",
+                    "🤖 மாட்ஜினு ஏஐ ஸ்டுடியோ & கிளவுட் நெட்வொர்க் மூலம் தன்னாட்சி பணிகளை அனுபவியுங்கள்: ",
+                    "📈 14 நாள் சர்வர் நோடு உரிமைகளுடன் உங்கள் வருமானத்தை உயர்த்துங்கள்: "
+                ]
+            },
+            'TE': {
+                badge: "👑 భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో",
+                title: 'సావరీన్ క్లౌడ్ కంప్యూట్ &<br><span>ఆటోనమస్ జాబ్‌వర్క్స్ & లైవ్ గోల్డ్ వాల్ట్</span>',
+                desc: 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ ప్రభుత్వ గుర్తింపు పొందిన స్టార్టప్.',
+                wa: [
+                    "🚀 మాడ్జినూ వెబ్3 టెక్నాలజీస్‌లో చేరండి - ప్రభుత్వ గుర్తింపు పొందిన క్లౌడ్ కంప్యూట్ & గోల్డ్ వాల్ట్ రివార్డ్స్: ",
+                    "💎 సావరీన్ క్లౌడ్ & 24K గోల్డ్ షోరూమ్ వోచర్లలో పెట్టుబడి పెట్టండి (Tanishq/GRT): ",
+                    "💼 రోజువారీ ఇ-కామర్స్ జాబ్‌వర్క్స్ పూర్తి చేసి రోజువారీ పేఅవుట్లు పొందండి: ",
+                    "🌟 MeitY గుర్తించిన స్టార్టప్ హై-త్రూపుట్ సర్వర్ నోడ్స్ & రివార్డ్స్ అందిస్తోంది: ",
+                    "💰 మాడ్జినూ వెబ్3తో మీ సురక్షిత డిజిటల్ అసెట్ పోర్ట్‌ఫోలియోను నిర్మించండి: ",
+                    "🏆 24K గోల్డ్ షోరూమ్ భాగస్వాములను అన్‌లాక్ చేయండి & రోజువారీ ఆదాయం పొందండి: ",
+                    "🔒 సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్ & ఆటోమేటెడ్ వెరిఫికేషన్ పైప్‌లైన్స్: ",
+                    "🎁 10%-12% రెఫరల్ బోనస్‌లు & రోజువారీ టాస్క్ పేఅవుట్లు పొందండి: ",
+                    "🤖 మాడ్జినూ AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్ ద్వారా శక్తివంతమైన ఆటోనమస్ జాబ్‌వర్క్స్: ",
+                    "📈 14-రోజుల సర్వర్ నోడ్ లైసెన్స్‌లతో మీ ఆదాయాన్ని పెంచుకోండి: "
+                ]
+            },
+            'KN': {
+                badge: "👑 ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ",
+                title: 'ಸವರನ್ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ &<br><span>ಸ್ವಾಯತ್ತ ಉದ್ಯೋಗಗಳು & ಲೈವ್ ಗೋಲ್ಡ್ ವಾಲ್ಟ್</span>',
+                desc: 'ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ ಭಾರತ ಸರ್ಕಾರದ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟಪ್.',
+                wa: [
+                    "🚀 ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್‌ಗೆ ಸೇರಿ - ಸರ್ಕಾರಿ ಗುರುತಿಸಲ್ಪಟ್ಟ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ & ಗೋಲ್ಡ್ ರಿವಾರ್ಡ್ಸ್: ",
+                    "💎 ಸವರನ್ ಕ್ಲೌಡ್ & 24K ಗೋಲ್ಡ್ ಶೋರೂಮ್ ವೋಚರ್‌ಗಳಲ್ಲಿ ಹೂಡಿಕೆ ಮಾಡಿ (Tanishq/GRT): ",
+                    "💼 ದೈನಂದಿನ ಇ-ಕಾಮರ್ಸ್ ಕೆಲಸಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ ಮತ್ತು ದೈನಂದಿನ ಪಾವತಿಗಳನ್ನು ಗಳಿಸಿ: ",
+                    "🌟 MeitY ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟಪ್‌ನೊಂದಿಗೆ ಹೈ-ಥ್ರೂಪುಟ್ ಸರ್ವರ್ ನೋಡ್‌ಗಳನ್ನು ಪಡೆಯಿರಿ: ",
+                    "💰 ಮಾಡ್ಜಿನು ವೆಬ್3 ಜೊತೆಗೆ ನಿಮ್ಮ ಸುರಕ್ಷಿತ ಡಿಜಿಟಲ್ ಆಸ್ತಿ ಪೋರ್ಟ್‌ಫೋಲಿಯೊ ನಿರ್ಮಿಸಿ: ",
+                    "🏆 24K ಗೋಲ್ಡ್ ಶೋರೂಮ್ ಪಾಲುದಾರರನ್ನು ಅನ್ಲಾಕ್ ಮಾಡಿ ಮತ್ತು ದೈನಂದಿನ ಆದಾಯ ಗಳಿಸಿ: ",
+                    "🔒 ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಮತ್ತು ಸ್ವಯಂಚಾಲಿತ ಪರಿಶೀಲನಾ管道: ",
+                    "🎁 10%-12% ರೆಫರಲ್ ಬೋನಸ್‌ಗಳು ಮತ್ತು ದೈನಂದಿನ ಕಾರ್ಯ ಪಾವತಿಗಳನ್ನು ಪಡೆಯಿರಿ: ",
+                    "🤖 ಮಾಡ್ಜಿನು AI ಸ್ಟುಡಿಯೋ ಮತ್ತು ಕ್ಲೌಡ್ ನೆಟ್‌ವರ್ಕ್‌ನಿಂದ ಶಕ್ತಿಪಡೆದ ಸ್ವಾಯತ್ತ ಕೆಲಸಗಳು: ",
+                    "📈 14 ದಿನಗಳ ಸರ್ವರ್ ನೋಡ್ ಪರವಾನಗಿಗಳೊಂದಿಗೆ ನಿಮ್ಮ ಗಳಿಕೆಯನ್ನು ಹೆಚ್ಚಿಸಿ: "
+                ]
+            },
+            'ML': {
+                badge: "👑 ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ",
+                title: 'സവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് &<br><span>ഓട്ടോണമസ് ജോബ്‌വർക്സ് & ലൈവ് ഗോൾഡ് വാൾട്ട്</span>',
+                desc: 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
+                wa: [
+                    "🚀 മാഡ്ജിനു വെബ്3 ടെക്നോളജീസിൽ ചേരൂ - സർക്കാർ അംഗീകൃത ക്ലൗഡ് കമ്പ്യൂട്ട് & ഗോൾഡ് റിവാർഡുകൾ: ",
+                    "💎 സവറൻ ക്ലൗഡ് & 24K ഗോൾഡ് ഷോറൂം വൗച്ചറുകളിൽ നിക്ഷേപിക്കൂ (Tanishq/GRT): ",
+                    "💼 ദിവസേനയുള്ള ഇ-കോമേഴ്സ് ജോലികൾ പൂർത്തിയാക്കി പ്രതിദിന പേഔട്ടുകൾ നേടൂ: ",
+                    "🌟 MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പ് നൽകുന്ന ഹൈ-ത്രുപുട്ട് സർവർ നോഡുകൾ: ",
+                    "💰 മാഡ്ജിനു വെബ്3 ഉപയോഗിച്ച് നിങ്ങളുടെ സുരക്ഷിത ഡിജിറ്റൽ അസറ്റ് പോർട്ട്ഫോളിയോ നിർമ്മിക്കൂ: ",
+                    "🏆 24K ഗോൾഡ് ഷോറൂം പങ്കാളികളെ അൺലോക്ക് ചെയ്ത് പ്രതിദിന വരുമാനം നേടൂ: ",
+                    "🔒 സുരക്ഷിത എൻ്റർപ്രൈസ് ടർമിനലും ഓട്ടോമേറ്റഡ് വെരിഫിക്കേഷൻ പൈപ്പ്‌ലൈനുകളും: ",
+                    "🎁 10%-12% റഫറൽ ബോണസും പ്രതിദിന ടാസ്ക് പേഔട്ടുകളും സ്വന്തമാക്കൂ: ",
+                    "🤖 മാഡ്ജിനു AI സ്റ്റുഡിയോ & ക്ലൗഡ് നെറ്റ്‌വർക്ക് നൽകുന്ന ഓട്ടോണമസ് ജോബ്‌വർക്സ്: ",
+                    "📈 14 ദിവസത്തെ സർവർ നോഡ് ലൈസൻസുകൾ വഴി നിങ്ങളുടെ വരുമാനം വർദ്ധിപ്പിക്കൂ: "
+                ]
+            },
+            'HI': {
+                badge: "👑 भारत का पहला स्वायत्त एआई स्टूडियो",
+                title: 'सोवरेइन क्लाउड कंप्यूट और<br><span>ऑटोनॉमस जॉबवर्क्स और लाइव गोल्ड वॉल्ट</span>',
+                desc: 'माड्जिनू वेब3 टेक्नोलॉजीज MeitY के तहत मान्यता प्राप्त स्टार्टअप है।',
+                wa: [
+                    "🚀 माड्जिनू वेब3 टेक्नोलॉजीज से जुड़ें - सरकार द्वारा मान्यता प्राप्त क्लाउड कंप्यूट और गोल्ड वॉल्ट पुरस्कार: ",
+                    "💎 सोवरेइन क्लाउड और 24K गोल्ड शोरूम वाउचर में निवेश करें (Tanishq/GRT): ",
+                    "💼 दैनिक ई-कॉमर्स जॉबवर्क पूरा करें और रोजाना भुगतान प्राप्त करें: ",
+                    "🌟 MeitY मान्यता प्राप्त स्टार्टअप द्वारा उच्च-थ्रूपुट सर्वर नोड्स और पुरस्कार: ",
+                    "💰 माड्जिनू वेब3 के साथ अपना सुरक्षित डिजिटल संपत्ति पोर्टफोलियो बनाएं: ",
+                    "🏆 24K गोल्ड शोरूम भागीदारों को अनलॉक करें और दैनिक कार्य आय सुरक्षित करें: ",
+                    "🔒 सुरक्षित एंटरप्राइज़ टर्मिनल और स्वचालित सत्यापन पाइपलाइन: ",
+                    "🎁 10%-12% रेफरल बोनस और दैनिक कार्य भुगतान प्राप्त करें: ",
+                    "🤖 माड्जिनू एआई स्टूडियो और क्लाउड नेटवर्क द्वारा संचालित ऑटोनॉमस जॉबवर्क्स: ",
+                    "📈 14-दिवसीय सर्वर नोड लाइसेंस के साथ अपनी कमाई बढ़ाएं: "
+                ]
+            },
+            'MR': {
+                badge: "👑 भारताचे पहिले स्वायत्त AI स्टुडिओ",
+                title: 'सोव्हरेईन क्लाउड कॉम्प्युट आणि<br><span>ऑटोनॉमस जॉबवर्क्स आणि लाइव्ह गोल्ड वॉल्ट</span>',
+                desc: 'माड्झिनू वेब3 टेक्नॉलॉजीज ही मान्यताप्राप्त स्टार्टअप आहे.',
+                wa: [
+                    "🚀 माड्झिनू वेब3 टेक्नॉलॉजीजमध्ये सामील व्हा - सरकार मान्यताप्राप्त क्लाउड कॉम्प्युट आणि गोल्ड वॉल्ट बक्षिसे: ",
+                    "💎 सोव्हरेईन क्लाउड आणि 24K गोल्ड शोरूम व्हाउचरमध्ये गुंतवणूक करा (Tanishq/GRT): ",
+                    "💼 दैनिक ई-कॉमर्स कार्ये पूर्ण करा आणि दररोज पैसे मिळवा: ",
+                    "🌟 MeitY मान्यताप्राप्त स्टार्टअप कडून हाय-थ्रूपुट सर्व्हर नोड्स आणि बक्षिसे: ",
+                    "💰 माड्झिनू वेब3 सह तुमचे सुरक्षित डिजिटल मालमत्ता पोर्टफोलिओ तयार करा: ",
+                    "🏆 24K गोल्ड शोरूम भागीदारांना अनलॉक करा आणि दैनिक उत्पन्न सुरक्षित करा: ",
+                    "🔒 सुरक्षित एंटरप्राइझ टर्मिनल आणि स्वयंचलित पडताळणी पाइपलाइन: ",
+                    "🎁 10%-12% रेफरल बोनस आणि दैनिक कार्य पेआउट्स मिळवा: ",
+                    "🤖 माड्झिनू AI स्टुडिओ आणि क्लाउड नेटवर्क द्वारे ऑटोनॉमस जॉबवर्क्सचा अनुभव घ्या: ",
+                    "📈 14-दिवसीय सर्व्हर नोड परवान्यांसह तुमची कमाई वाढवा: "
+                ]
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('langSelector').value;
+            const t = translations[lang] || translations['EN'];
+            document.getElementById('hero-badge').innerText = t.badge;
+            document.getElementById('hero-title').innerHTML = t.title;
+            document.getElementById('hero-desc').innerText = t.desc;
+        }
+
+        function scrollToLogin() {
+            document.getElementById('login-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function loginBypass() {
+            const mob = document.getElementById('login-mobile').value;
+            if(mob.length < 10) { alert('Enter valid mobile number'); return; }
+            alert('Secure Node Login successful for: ' + mob);
+        }
+
+        function shareWhatsApp(id) {
+            const lang = document.getElementById('langSelector').value;
+            const t = translations[lang] || translations['EN'];
+            const msgList = t.wa;
+            const selectedMsg = msgList[id - 1] || msgList[0];
+            const refLink = window.location.origin + window.location.pathname + '?ref=MADZ_' + Math.floor(100000 + Math.random() * 900000);
+            const text = encodeURIComponent(selectedMsg + refLink);
+            window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+            document.getElementById('waStatus').innerText = 'Successfully shared Script #' + id + ' in ' + lang + '!';
+        }
+
+        function openAdminLoginModal() {
+            const pwd = prompt('Enter Admin Password:');
+            if(pwd === 'madzinu2026') { alert('Admin Access Granted!'); }
+            else if(pwd !== null) { alert('Incorrect Password!'); }
+        }
+    </script>
+</body>
+</html>
+"""
+
+with open('index.html', 'w') as f:
+    f.write(html_content)
+print('Successfully generated multi-lingual WhatsApp scripts index.html!')
