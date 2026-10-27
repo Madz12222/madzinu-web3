@@ -899,6 +899,77 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+const fullDictionary = {
+    'TA': {
+        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'இந்தியாவின் முதல் சுயியக்க AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்',
+        'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
+        'Share your referral link with auto-embedded ID:': 'உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:',
+        '10 Unique WhatsApp Referral Scripts': '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்',
+        'Script': 'ஸ்கிரிப்ட்',
+        'Supported Voucher & Reward Partners': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்',
+        '* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)': '* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)',
+        '24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)': '24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)',
+        'Official Website': 'அதிகாரப்பூர்வ வலைத்தளம்',
+        'INSTANT LIFESTYLE & FOOD VOUCHERS': 'உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்',
+        'Contractor Secure Node Login': 'கான்ட்ராக்டர் பாதுகாப்பான நோட் உள்நுழைவு',
+        'Enter Mobile Number': 'மொபைல் எண்ணை உள்ளிடவும்',
+        'Send OTP': 'OTP அனுப்பவும்',
+        'Verify': 'சரிபார்க்கவும்',
+        'Terms & Conditions': 'விதிமுறைகள் & நிபந்தனைகள்',
+        'Refund Policy': 'ரீஃபண்ட் கொள்கை',
+        'Privacy Policy': 'தனியுரிமைக் கொள்கை',
+        'Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506': 'இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் | பதிவு எண்: ST20260926506',
+        'Tanishq': 'தனிஷ்க்',
+        'GRT Jewellers': 'ஜி.ஆர்.டி ஜூவல்லர்ஸ்',
+        'Malabar Gold': 'மலபார் கோல்டு',
+        'Kalyan Jewellers': 'கல்யாண் ஜூவல்லர்ஸ்',
+        'Swiggy': 'ஸ்விகி',
+        'Zomato': 'சொமேட்டோ',
+        'Amazon Pay': 'அமேசான் பே',
+        'Flipkart': 'ப்ளிப்கார்ட்'
+    }
+};
+
+function translatePageFull(lang) {
+    if(lang === 'EN') {
+        location.reload();
+        return;
+    }
+    const map = fullDictionary[lang] || {};
+    
+    function walkTextNodes(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+        let node;
+        while(node = walker.nextNode()) {
+            let text = node.nodeValue.trim();
+            if(text.length > 0) {
+                for(let key in map) {
+                    if(text === key || text.includes(key)) {
+                        node.nodeValue = node.nodeValue.replace(key, map[key]);
+                    }
+                }
+                if(text.startsWith('Script ') && map['Script']) {
+                    node.nodeValue = text.replace('Script', map['Script']);
+                }
+            }
+        }
+    }
+    walkTextNodes(document.body);
+    console.log('Fully translated page to: ' + lang);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selectEl = document.querySelector('select');
+    if(selectEl) {
+        selectEl.onchange = function() {
+            translatePageFull(this.value);
+        };
+    }
+});
+</script>
+
 </body>
 </html>
 
