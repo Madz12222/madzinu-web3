@@ -633,6 +633,98 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+const fullSiteTranslations = {
+    'EN': {
+        'title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
+        'desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
+        'btn': '-> LAUNCH SECURE ENTERPRISE TERMINAL',
+        'whatsapp_title': '10 Unique WhatsApp Referral Scripts',
+        'voucher_title': 'Supported Voucher & Reward Partners'
+    },
+    'TA': {
+        'title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
+        'desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் கம்ப்யூட் தொகுப்புகளைப் பெறுங்கள்.',
+        'btn': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக',
+        'whatsapp_title': '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்',
+        'voucher_title': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்'
+    },
+    'HI': {
+        'title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
+        'desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
+        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें',
+        'whatsapp_title': '10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट',
+        'voucher_title': 'समर्थित वाउचर और पुरस्कार भागीदार'
+    },
+    'TE': {
+        'title': 'సాವರೆన్ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
+        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
+        'btn': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి',
+        'whatsapp_title': '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు',
+        'voucher_title': 'మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు'
+    },
+    'ML': {
+        'title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
+        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
+        'btn': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക',
+        'whatsapp_title': '10 തനതായ വാട്ട്‌സ്ആപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ',
+        'voucher_title': 'പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ'
+    },
+    'KN': {
+        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ ಜಾನೆ',
+        'desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
+        'btn': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ',
+        'whatsapp_title': '10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು',
+        'voucher_title': 'ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವಾರ್ಡ್ ಪಾಲುದಾರರು'
+    }
+};
+
+function changeLanguage(langCode) {
+    let t = fullSiteTranslations[langCode] || fullSiteTranslations['EN'];
+
+    // 1. Title
+    const titleEl = document.querySelector('h1') || document.querySelector('.hero-title');
+    if(titleEl) titleEl.innerText = t.title;
+
+    // 2. Description
+    const descEl = document.querySelector('p');
+    if(descEl) descEl.innerText = t.desc;
+
+    // 3. Button
+    document.querySelectorAll('button, a').forEach(el => {
+        if(el.innerText.includes('LAUNCH') || el.innerText.includes('பாதுகாப்பான')) {
+            el.innerText = t.btn;
+        }
+    });
+
+    // 4. WhatsApp Section Title
+    document.querySelectorAll('h2, h3, div').forEach(el => {
+        if(el.innerText.includes('WhatsApp Referral Scripts') || el.innerText.includes('வாட்ஸ்அப்')) {
+            el.innerText = t.whatsapp_title;
+        }
+    });
+
+    // 5. Voucher Partners Title
+    document.querySelectorAll('h2, h3, div').forEach(el => {
+        if(el.innerText.includes('Supported Voucher') || el.innerText.includes('வவுச்சர்')) {
+            el.innerText = t.voucher_title;
+        }
+    });
+
+    console.log('Fully translated to: ' + langCode);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selectEl = document.querySelector('select');
+    if(selectEl) {
+        selectEl.onchange = function() {
+            changeLanguage(this.value);
+        };
+    }
+});
+</script>
+
 </body>
 </html>
 
