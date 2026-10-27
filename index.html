@@ -1,5 +1,4 @@
-cat << 'EOF' > make_site.py
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -338,9 +337,3 @@ html_content = """<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-with open('index.html', 'w') as f:
-    f.write(html_content)
-print('Full site restored successfully!')
-EOF
