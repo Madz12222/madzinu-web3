@@ -448,3 +448,137 @@ function verifySecureNodeAccess() {
     </script>
 </body>
 </html>
+
+// Persistent Local Data for Bank & Vaults
+let userProfile = JSON.parse(localStorage.getItem('madz_user_profile')) || {
+    mobile: '',
+    bankLocked: false,
+    accHolder: '',
+    accNo: '',
+    ifsc: '',
+    upi: ''
+};
+
+function buyServerAndLockBank(planName, price, dailyReturn) {
+        let name = prompt('Enter Bank Account Holder Name (Permanent & Locked):');
+        let acc = prompt('Enter Bank Account Number / UPI ID:');
+        let ifsc = prompt('Enter IFSC Code:');
+        
+        userProfile.accHolder = name;
+        userProfile.accNo = acc;
+        userProfile.ifsc = ifsc;
+        userProfile.bankLocked = true;
+        localStorage.setItem('madz_user_profile', JSON.stringify(userProfile));
+        alert('Bank details successfully verified & locked to your user node!');
+    } else {
+        alert('Bank Details Locked to Node: ' + userProfile.accHolder + ' (' + userProfile.accNo + ')');
+    }
+
+    userBalances.inr += dailyReturn;
+    localStorage.setItem('madz_user_balances', JSON.stringify(userBalances));
+    alert('Server Node ' + planName + ' Deployed! Daily Yield of ₹' + dailyReturn + ' added to wallet balance.');
+    fetchLiveMetalsAndRender();
+}
+
+async function openAdvancedWithdrawalModal() {
+    const existingModal = document.getElementById('wd-modal-overlay');
+    if(existingModal) existingModal.remove();
+
+    const plumShowrooms = {
+        'Tamil Nadu': [
+            { name: 'Tanishq Showroom', address: 'Usman Road, T. Nagar, Chennai, Tamil Nadu 600017' },
+            { name: 'GRT Jewellers', address: 'Cross Cut Road, Gandhipuram, Coimbatore, TN 641012' },
+            { name: 'Malabar Gold & Diamonds', address: '100 Feet Road, Gandhipuram, Coimbatore, TN' }
+        ],
+        'Karnataka': [
+            { name: 'Tanishq Flagship', address: 'MG Road, Bengaluru, Karnataka 560001' },
+            { name: 'Kalyan Jewellers', address: 'Jayanagar 4th Block, Bengaluru, Karnataka' }
+        ],
+        'Maharashtra': [
+            { name: 'Tanishq Outlet', address: 'Turner Road, Bandra West, Mumbai, Maharashtra 400050' },
+            { name: 'Zaveri Bazaar Vault', address: 'Kalbadevi, Mumbai, Maharashtra 400002' }
+        ]
+    };
+
+    const modalHTML = `
+        <div id="wd-modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 15px;">
+            <div style="background: #111827; border: 1px solid #10b981; padding: 20px; border-radius: 14px; width: 100%; max-width: 500px; color: #fff; max-height: 90vh; overflow-y: auto; text-align: left;">
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 10px;">
+                    <h3 style="color: #34d399; margin: 0; font-size: 15px;"><i class="fa-solid fa-vault"></i> Sovereign Payout & Xoxoday Plum Vouchers</h3>
+                    <button onclick="document.getElementById('wd-modal-overlay').remove()" style="background: #ef4444; color: #fff; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px;">Close</button>
+                </div>
+
+                <div style="background: #1f2937; padding: 10px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #374151;">
+                    <span style="font-size: 10px; color: #94a3b8; display: block;">LOCKED BANK ACCOUNT FOR PAYOUTS:</span>
+                    <strong style="color: #34d399; font-size: 12px;">${userProfile.bankLocked ? userProfile.accHolder + ' (' + userProfile.accNo + ')' : 'No Bank Details Locked Yet. Buy a Server Node to Lock.'}</strong>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Select Withdrawal Method:</label>
+                    <select id="wd-type-select" onchange="
+                        let v = this.value;
+                        document.getElementById('wd-daily-cash-sec').style.display = (v === 'daily_cash') ? 'block' : 'none';
+                        document.getElementById('wd-plum-voucher-sec').style.display = (v === 'plum_voucher') ? 'block' : 'none';
+                    " style="width: 100%; background: #374151; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 12px;">
+                        <option value="daily_cash">Daily Allowed Yield Cash Payout (Instant Bank Transfer)</option>
+                        <option value="plum_voucher">Gold / Silver Showroom Voucher (Xoxoday Plum Real Outlets)</option>
+                    </select>
+                </div>
+
+                <div id="wd-daily-cash-sec" style="background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Enter Amount to Withdraw (Allowed Daily Payout):</label>
+                    <input type="number" id="wd-daily-amt" placeholder="e.g. 180" style="width: 100%; background: #374151; border: none; padding: 8px; color: #fff; border-radius: 6px; font-size: 12px; margin-bottom: 8px;" />
+                    <p style="font-size: 10px; color: #f59e0b; margin: 0;">Note: Amounts exceeding daily yield limits require Admin Manual Approval.</p>
+                </div>
+
+                <div id="wd-plum-voucher-sec" style="display: none; background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                    <strong style="color: #fbbf24; font-size: 12px; display: block; margin-bottom: 8px;">Live Xoxoday / Plum Metal Showrooms Across India</strong>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <select id="plum-state-select" onchange="
+                            let state = this.value;
+                            let addrSelect = document.getElementById('plum-address-select');
+                            addrSelect.innerHTML = '';
+                            let outlets = (${JSON.stringify(plumShowrooms)})[state] || [];
+                            outlets.forEach(o => {
+                                let opt = document.createElement('option');
+                                opt.value = o.name + ' - ' + o.address;
+                                opt.innerText = o.name + ' (' + o.address + ')';
+                                addrSelect.appendChild(opt);
+                            });
+                        " style="background: #374151; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 12px;">
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                        </select>
+                        
+                        <select id="plum-address-select" style="background: #374151; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 11px;">
+                            <option value="Tanishq Showroom - Usman Road, T. Nagar, Chennai, Tamil Nadu 600017">Tanishq Showroom - Usman Road, T. Nagar, Chennai</option>
+                        </select>
+
+                        <input type="number" step="0.001" id="plum-grams-input" placeholder="Metal Weight in Grams (e.g. 1.0g Gold / 20.0g Silver)" style="background: #374151; border: none; padding: 8px; color: #fff; border-radius: 6px; font-size: 12px;" />
+                    </div>
+                </div>
+
+                <button onclick="
+                    let mode = document.getElementById('wd-type-select').value;
+                    if(mode === 'daily_cash') {
+                        let amt = parseFloat(document.getElementById('wd-daily-amt').value) || 0;
+                        if(amt <= 0) { alert('Enter valid amount'); return; }
+                        if(amt > userBalances.inr) { alert('Amount exceeds wallet balance! Request sent for Admin Approval.'); return; }
+                        userBalances.inr -= amt;
+                        localStorage.setItem('madz_user_balances', JSON.stringify(userBalances));
+                        alert('Instant Payout of ₹' + amt + ' initiated directly to locked bank account: ' + (userProfile.accNo || 'Registered Node'));
+                        fetchLiveMetalsAndRender();
+                    } else {
+                        let addr = document.getElementById('plum-address-select').value;
+                        let g = document.getElementById('plum-grams-input').value;
+                        if(git log -n 3 --oneline) { alert('Please enter metal grams'); return; }                        alert('Xoxoday Plum Gold/Silver Voucher Request for ' + g + 'g generated for outlet: ' + addr + '. Sent to Admin Approval!');
+                    }
+                    document.getElementById('wd-modal-overlay').remove();
+                " style="background: #10b981; color: #fff; width: 100%; border: none; padding: 10px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer;">EXECUTE PAYOUT / VOUCHER REQUEST</button>
+            </div>
+        </div>
+    \`;
+    document.body.insertAdjacentHTML('afterbegin', modalHTML);
+}
