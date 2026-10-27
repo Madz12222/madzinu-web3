@@ -725,6 +725,84 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+const translationsMap = {
+    'EN': {
+        'hero_title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
+        'hero_desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
+        'btn_text': '-> LAUNCH SECURE ENTERPRISE TERMINAL',
+        'wa_title': '10 Unique WhatsApp Referral Scripts',
+        'partner_title': 'Supported Voucher & Reward Partners'
+    },
+    'TA': {
+        'hero_title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
+        'hero_desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் கம்ப்யூட் தொகுப்புகளைப் பெறுங்கள்.',
+        'btn_text': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக',
+        'wa_title': '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்',
+        'partner_title': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்'
+    },
+    'HI': {
+        'hero_title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
+        'hero_desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
+        'btn_text': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें',
+        'wa_title': '10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट',
+        'partner_title': 'समर्थित वाउचर और पुरस्कार भागीदार'
+    },
+    'TE': {
+        'hero_title': 'సాವರೆన్ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
+        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
+        'btn_text': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి',
+        'wa_title': '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు',
+        'partner_title': 'మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు'
+    },
+    'ML': {
+        'hero_title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
+        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
+        'btn_text': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക',
+        'wa_title': '10 തനതായ വാട്ട്‌സ്ആപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ',
+        'partner_title': 'പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ'
+    },
+    'KN': {
+        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ ಜಾನೆ',
+        'hero_desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
+        'btn_text': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ',
+        'wa_title': '10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು',
+        'partner_title': 'ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವార్ಡ್ ಪಾಲುದಾರರು'
+    }
+};
+
+function changeLanguage(langCode) {
+    let t = translationsMap[langCode] || translationsMap['EN'];
+
+    // Safely update elements using specific identifiers or data attributes
+    const mainTitle = document.querySelector('.hero-main-title') || document.querySelector('h1');
+    if(mainTitle) mainTitle.innerText = t.hero_title;
+
+    const mainDesc = document.querySelector('.hero-main-desc') || document.querySelector('p');
+    if(mainDesc && mainDesc.innerText.includes('Startup')) mainDesc.innerText = t.hero_desc;
+
+    const termBtn = document.querySelector('.terminal-launch-btn') || document.querySelector('button');
+    if(termBtn) termBtn.innerText = t.btn_text;
+
+    // Target WhatsApp section heading specifically
+    document.querySelectorAll('div, span, h3').forEach(el => {
+        if(el.innerText.trim() === '10 Unique WhatsApp Referral Scripts' || el.innerText.trim() === '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்' || el.innerText.trim() === '10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट' || el.innerText.trim() === '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు' || el.innerText.trim() === '10 തനതായ വാട്ട്‌സ്ആപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ' || el.innerText.trim() === '10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು') {
+            el.innerText = t.wa_title;
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selectEl = document.querySelector('select');
+    if(selectEl) {
+        selectEl.onchange = function() {
+            changeLanguage(this.value);
+        };
+    }
+});
+</script>
+
 </body>
 </html>
 
