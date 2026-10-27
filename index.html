@@ -456,6 +456,63 @@ function changeLanguage(langObj) {
 }
 </script>
 
+
+<script>
+const siteContent = {
+    'EN': {
+        'title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
+        'desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
+        'btn': '-> LAUNCH SECURE ENTERPRISE TERMINAL'
+    },
+    'TA': {
+        'title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
+        'desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் கம்ப்யூட் தொகுப்புகளைப் பெறுங்கள்.',
+        'btn': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக'
+    },
+    'HI': {
+        'title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
+        'desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
+        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें'
+    },
+    'TE': {
+        'title': 'సాವರೆನ್ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
+        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
+        'btn': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి'
+    },
+    'ML': {
+        'title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
+        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
+        'btn': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക'
+    },
+    'KN': {
+        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ 금ಜಾನೆ',
+        'desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
+        'btn': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ప్రೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ'
+    }
+};
+
+function changeLanguage(langObj) {
+    let lang = (typeof langObj === 'string') ? langObj : (langObj.value || 'EN');
+    let t = siteContent[lang] || siteContent['EN'];
+
+    // Find and update title
+    const mainTitle = document.querySelector('h1, .hero-title, h2');
+    if(mainTitle) mainTitle.innerText = t.title;
+
+    // Find and update description
+    const mainDesc = document.querySelector('p');
+    if(mainDesc) mainDesc.innerText = t.desc;
+
+    // Find and update button
+    const termBtn = document.querySelector('button, .terminal-btn');
+    if(termBtn && termBtn.innerText.includes('LAUNCH')) {
+        termBtn.innerText = t.btn;
+    }
+
+    console.log('Language updated to: ' + lang);
+}
+</script>
+
 </body>
 </html>
 
