@@ -38,12 +38,22 @@
         .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
         .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
         footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
+        
+        /* Live Gold & Silver Vault Box */
+        .vault-box { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(16,185,129,0.05)); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+        .vault-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center; margin-top: 8px; }
+        .vault-card { background: #0f172a; border: 1px solid #1e293b; padding: 8px; border-radius: 8px; }
+        .vault-val { font-size: 13px; font-weight: 900; color: #34d399; margin-top: 2px; }
+
+        /* Admin Modal Styling */
+        #admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; justify-content: center; align-items: center; }
+        .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
     </style>
 </head>
 <body>
     <header>
         <div>
-            <div class="brand-title">MADZINU WEB3 TECH & AI</div>
+            <div class="brand-title" id="brand-title">MADZINU WEB3 TECH & AI</div>
             <div class="marquee-container">
                 <span class="animate-marquee"><i class="fa-solid fa-check-circle"></i> Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</span>
             </div>
@@ -58,7 +68,7 @@
                 <option value="HI">हिन्दी</option>
                 <option value="MR">मराठी</option>
             </select>
-            <button onclick="openAdminLoginModal()" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-user-shield"></i> Admin</button>
+            <button id="admin-trigger-btn" onclick="openAdminPanel()" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer; z-index: 1000;"><i class="fa-solid fa-user-shield"></i> <span id="admin-btn-txt">Admin</span></button>
         </div>
     </header>
 
@@ -68,13 +78,35 @@
             <div class="badge-pill" id="hero-badge">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
             <h1 id="hero-title">Sovereign Cloud Compute &<br><span>Autonomous Jobworks & Live Gold Vault</span></h1>
             <p id="hero-desc">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.</p>
-            <button class="btn-primary" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
+            <button class="btn-primary" id="launch-term-btn" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
+        </div>
+
+        <!-- Live Gold & Silver Vault Section -->
+        <div class="vault-box">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="vault-title" style="font-size: 11px; font-weight: bold; color: #f59e0b;"><i class="fa-solid fa-vault"></i> LIVE METAL VAULT & SPOT RATES</span>
+                <span style="font-size: 8px; color: #34d399;" id="live-indicator">● LIVE SPOT FEED</span>
+            </div>
+            <div class="vault-grid">
+                <div class="vault-card">
+                    <div style="font-size: 9px; color: #f59e0b;" id="lbl-gold24">Gold 24K (1g)</div>
+                    <div class="vault-val" id="val-gold24">₹7,380</div>
+                </div>
+                <div class="vault-card">
+                    <div style="font-size: 9px; color: #eab308;" id="lbl-gold22">Gold 22K (1g)</div>
+                    <div class="vault-val" id="val-gold22">₹6,765</div>
+                </div>
+                <div class="vault-card">
+                    <div style="font-size: 9px; color: #cbd5e1;" id="lbl-silver">Silver 999 (1g)</div>
+                    <div class="vault-val" id="val-silver">₹92.50</div>
+                </div>
+            </div>
         </div>
 
         <!-- WhatsApp Scripts Section -->
-        <div class="section-box">
-            <h3 style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
-            <p style="font-size: 10px; color: #94a3b8; margin-bottom: 8px;">Share your referral link with auto-embedded ID:</p>
+        <div class="section-box" id="whatsapp-section">
+            <h3 id="wa-title" style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
+            <p id="wa-desc" style="font-size: 10px; color: #94a3b8; margin-bottom: 8px;">Share your referral link with auto-embedded ID:</p>
             <div class="grid-5">
                 <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
                 <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
@@ -92,38 +124,38 @@
 
         <!-- Supported Voucher & Reward Partners Section -->
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
-            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+            <div id="voucher-title" style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
                 <i class="fa-solid fa-ticket"></i> Supported Voucher & Reward Partners
             </div>
-            <div style="font-size: 9px; color: #34d399; font-weight: 600; margin-bottom: 12px;">
+            <div id="voucher-sub" style="font-size: 9px; color: #34d399; font-weight: 600; margin-bottom: 12px;">
                 * ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)
             </div>
 
             <!-- 24K Gold Showroom Partners -->
-            <div style="font-size: 10px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <div id="gold-title" style="font-size: 10px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                 <i class="fa-solid fa-crown"></i> 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)
             </div>
             <div class="grid-2" style="margin-bottom: 14px;">
                 <a href="https://www.tanishq.co.in" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">Tanishq</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <div><div style="color: #fff;">Tanishq</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
                     <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
                 </a>
                 <a href="https://www.grtjewels.com" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">GRT Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <div><div style="color: #fff;">GRT Jewellers</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
                     <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
                 </a>
                 <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">Malabar Gold</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <div><div style="color: #fff;">Malabar Gold</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
                     <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
                 </a>
                 <a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card">
-                    <div><div style="color: #fff;">Kalyan Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <div><div style="color: #fff;">Kalyan Jewellers</div><div class="official-web-lbl" style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
                     <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
                 </a>
             </div>
 
             <!-- Instant Lifestyle & Food Vouchers -->
-            <div style="font-size: 10px; font-weight: bold; color: #38bdf8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <div id="food-title" style="font-size: 10px; font-weight: bold; color: #38bdf8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                 <i class="fa-solid fa-utensils"></i> INSTANT LIFESTYLE & FOOD VOUCHERS
             </div>
             <div class="grid-4" style="grid-template-columns: repeat(2, 1fr);">
@@ -148,14 +180,80 @@
 
         <!-- Login Section with Strict Access Control -->
         <div class="section-box" id="login-section">
-            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> Contractor Secure Node Login</h3>
+            <h3 id="login-title" style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> Contractor Secure Node Login</h3>
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
                 <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button onclick="alert('OTP sent via Fast2SMS gateway!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
+                <button id="send-otp-btn" onclick="alert('OTP sent via Fast2SMS gateway!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
             </div>
             <div style="display: flex; gap: 8px;">
                 <input type="text" id="login-otp-code" placeholder="Enter OTP (Admin: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify</button>
+                <button id="verify-otp-btn" onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-modal">
+        <div class="modal-content">
+            <h3 style="color: #fb7185; margin-bottom: 10px;"><i class="fa-solid fa-user-shield"></i> Admin Fingertip Dashboard</h3>
+            <p style="font-size: 11px; color: #94a3b8; margin-bottom: 12px;">Manage user nodes, active packages, and live workspace balances.</p>
+            <div style="background: #090d16; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 11px; text-align: left;">
+                <div><strong>Status:</strong> <span style="color: #34d399;">Authorized & Active</span></div>
+                <div><strong>Gateway:</strong> Razorpay / RazorpayX Active</div>
+            </div>
+            <button onclick="closeAdminPanel()" style="background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;">Close Dashboard</button>
+        </div>
+    </div>
+
+    <!-- Madzinu AI Chat Widget -->
+    <div id="madzinu-ai-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
+        <button onclick="
+            let box = document.getElementById('madzinu-ai-chatbox');
+            box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
+        " style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-robot"></i></button>
+
+        <div id="madzinu-ai-chatbox" style="display: none; position: absolute; bottom: 65px; right: 0; width: 330px; height: 440px; background: #111827; border: 1px solid #10b981; border-radius: 12px; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.6);">
+            <div style="background: #1f2937; padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #374151;">
+                <span style="color: #34d399; font-weight: bold; font-size: 13px;"><i class="fa-solid fa-brain"></i> Madzinu AI Knowledge Hub</span>
+                <button onclick="document.getElementById('madzinu-ai-chatbox').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px;">&times;</button>
+            </div>
+            <div id="madzinu-ai-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px;">
+                <div style="background: #1f2937; padding: 8px; border-radius: 6px; width: fit-content; max-width: 85%;">Hello! I am Madzinu AI. Ask me anything about server compute tiers, daily yield, live metal vaults, or showroom vouchers!</div>
+            </div>
+            <div style="padding: 8px; background: #1f2937; border-top: 1px solid #374151; display: flex; gap: 6px;">
+                <input type="text" id="madzinu-ai-input" placeholder="Ask about platform, yields, payouts..." style="flex: 1; background: #374151; border: none; padding: 7px; color: #fff; border-radius: 6px; font-size: 11px;" />
+                <button onclick="
+                    let input = document.getElementById('madzinu-ai-input');
+                    let msgContainer = document.getElementById('madzinu-ai-messages');
+                    let query = input.value.trim();
+                    if(!query) return;
+                    
+                    let userMsg = document.createElement('div');
+                    userMsg.style.cssText = 'background: #059669; color: #fff; padding: 8px; border-radius: 6px; align-self: flex-end; max-width: 85%;';
+                    userMsg.innerText = query;
+                    msgContainer.appendChild(userMsg);
+                    
+                    let q = query.toLowerCase();
+                    input.value = '';
+                    
+                    setTimeout(() => {
+                        let aiMsg = document.createElement('div');
+                        aiMsg.style.cssText = 'background: #1f2937; color: #d1d5db; padding: 8px; border-radius: 6px; align-self: flex-start; max-width: 85%;';
+                        
+                        if(q.includes('gold') || q.includes('silver') || q.includes('metal')) {
+                            aiMsg.innerText = 'Vault balances for Gold and Silver are dynamically calculated and synchronized in real-time with live spot price feeds.';
+                        } else if(q.includes('payout') || q.includes('withdraw') || q.includes('cash')) {
+                            aiMsg.innerText = 'Payouts are restricted to daily server yield limits to ensure stability. Excess withdrawals require manual Admin approval.';
+                        } else if(q.includes('admin') || q.includes('login') || q.includes('password')) {
+                            aiMsg.innerText = 'Admin access is strictly restricted to the Fingertip Dashboard secured by password (madz1222) to manage user nodes and balances.';
+                        } else {
+                            aiMsg.innerText = 'Madzinu AI Node operational. You can ask me about server compute tiers, daily yields, live metal vaults, bank locking rules, or Xoxoday Plum showroom vouchers!';
+                        }
+                        
+                        msgContainer.appendChild(aiMsg);
+                        msgContainer.scrollTop = msgContainer.scrollHeight;
+                    }, 500);
+                " style="background: #10b981; color: #fff; border: none; padding: 7px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
@@ -172,1031 +270,255 @@
         <div style="margin-top: 4px; color: #64748b;">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
     </footer>
 
-    
-
-<div id="madzinu-ai-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
-    <button onclick="
-        let box = document.getElementById('madzinu-ai-chatbox');
-        box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
-    " style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-robot"></i></button>
-
-    <div id="madzinu-ai-chatbox" style="display: none; position: absolute; bottom: 65px; right: 0; width: 330px; height: 440px; background: #111827; border: 1px solid #10b981; border-radius: 12px; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.6);">
-        <div style="background: #1f2937; padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #374151;">
-            <span style="color: #34d399; font-weight: bold; font-size: 13px;"><i class="fa-solid fa-brain"></i> Madzinu AI Knowledge Hub</span>
-            <button onclick="document.getElementById('madzinu-ai-chatbox').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px;">&times;</button>
-        </div>
-        <div id="madzinu-ai-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px;">
-            <div style="background: #1f2937; padding: 8px; border-radius: 6px; width: fit-content; max-width: 85%;">Hello! I am Madzinu AI. Ask me anything about server compute tiers, daily yield, live metal vaults, bank locks, or Xoxoday Plum showroom vouchers!</div>
-        </div>
-        <div style="padding: 8px; background: #1f2937; border-top: 1px solid #374151; display: flex; gap: 6px;">
-            <input type="text" id="madzinu-ai-input" placeholder="Ask about platform, yields, payouts..." style="flex: 1; background: #374151; border: none; padding: 7px; color: #fff; border-radius: 6px; font-size: 11px;" />
-            <button onclick="
-                let input = document.getElementById('madzinu-ai-input');
-                let msgContainer = document.getElementById('madzinu-ai-messages');
-                let query = input.value.trim();
-                
-                let userMsg = document.createElement('div');
-                userMsg.style.cssText = 'background: #059669; color: #fff; padding: 8px; border-radius: 6px; align-self: flex-end; max-width: 85%;';
-                userMsg.innerText = query;
-                msgContainer.appendChild(userMsg);
-                
-                let q = query.toLowerCase();
-                input.value = '';
-                
-                setTimeout(() => {
-                    let aiMsg = document.createElement('div');
-                    aiMsg.style.cssText = 'background: #1f2937; color: #d1d5db; padding: 8px; border-radius: 6px; align-self: flex-start; max-width: 85%;';
+    <script>
+        // Fetch Live Gold & Silver Spot Feeds Dynamically
+        async function fetchLiveMetals() {
+            try {
+                const res = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=FREE_TIER&base=INR&currencies=XAU,XAG');
+                const data = await res.json();
+                if(data && data.rates) {
+                    let gold24PerGram = Math.round((1 / data.rates.XAU) / 31.1035);
+                    let gold22PerGram = Math.round(gold24PerGram * 0.916);
+                    let silverPerGram = ((1 / data.rates.XAG) / 31.1035).toFixed(2);
                     
-                    if(q.includes('gold') || q.includes('silver') || q.includes('metal')) {
-                        aiMsg.innerText = 'Vault balances for Gold and Silver are dynamically calculated and synchronized in real-time with live international spot price feeds.';
-                    } else if(q.includes('payout') || q.includes('withdraw') || q.includes('cash')) {
-                        aiMsg.innerText = 'Payouts are restricted to daily server yield limits to ensure stability. Excess withdrawals require manual Admin approval.';
-                    } else if(q.includes('bank') || q.includes('lock')) {
-                        aiMsg.innerText = 'Bank account details are permanently locked to your user node upon purchasing your first server compute package for maximum security.';
-                    } else if(q.includes('voucher') || q.includes('showroom') || q.includes('tanishq') || q.includes('kalyan') || q.includes('plum')) {
-                        aiMsg.innerText = 'Metal vouchers utilize the Xoxoday Plum network, allowing you to select real physical showrooms across Indian states (such as Tanishq, Kalyan, GRT).';
-                    } else if(q.includes('admin') || q.includes('login') || q.includes('password')) {
-                        aiMsg.innerText = 'Admin access is strictly restricted to the Fingertip Dashboard secured by password (madz1222) to manage user nodes and balances.';
-                    } else if(q.includes('server') || q.includes('tier') || q.includes('yield') || q.includes('compute')) {
-                        aiMsg.innerText = 'Server compute tiers (e.g., ₹2,000 / ₹10,000) generate daily yields credited directly to your INR wallet upon claiming.';
-                    } else {
-                        aiMsg.innerText = 'Madzinu AI Node operational. You can ask me about server nodes, live metal vaults, bank locking rules, daily yields, or Xoxoday Plum showroom vouchers!';
-                    }
-                    
-                    msgContainer.appendChild(aiMsg);
-                    msgContainer.scrollTop = msgContainer.scrollHeight;
-                }, 500);
-            " style="background: #10b981; color: #fff; border: none; padding: 7px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </div>
-</div>
-
-
-<script>
-function openAdminPanel() {
-    let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
-    if(pwd === 'madz1222' || pwd === '2026') {
-        let panel = document.getElementById('admin-control-panel');
-        if(panel) {
-            panel.style.display = 'block';
-        } else {
-            alert('Admin Access Granted! Loading Fingertip Dashboard...');
-        }
-    } else {
-        alert('Invalid Admin Password!');
-    }
-}
-</script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const adminBtn = document.querySelector('a[href*="Admin"], button:contains("Admin"), .admin-btn, #admin-btn');
-    // Force pointer events and high z-index for admin buttons
-    document.querySelectorAll('*').forEach(el => {
-        if(el.innerText && el.innerText.trim() === 'Admin') {
-            el.style.cursor = 'pointer';
-            el.style.zIndex = '999999';
-            el.style.position = 'relative';
-            el.onclick = function(e) {
-                e.preventDefault();
-                let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
-                if(pwd === 'madz1222' || pwd === '2026') {
-                    alert('Admin Access Granted! Loading Fingertip Dashboard...');
-                } else {
-                    alert('Invalid Admin Password!');
+                    document.getElementById('val-gold24').innerText = '₹' + gold24PerGram.toLocaleString('en-IN');
+                    document.getElementById('val-gold22').innerText = '₹' + gold22PerGram.toLocaleString('en-IN');
+                    document.getElementById('val-silver').innerText = '₹' + silverPerGram;
                 }
-            };
-        }
-    });
-});
-</script>
-
-
-<script>
-// 1. Fix Admin Button Clickability Directly
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        const adminBtns = document.querySelectorAll('button, a, div');
-        adminBtns.forEach(el => {
-            if(el.innerText && el.innerText.trim() === 'Admin') {
-                el.style.cursor = 'pointer';
-                el.style.zIndex = '9999999';
-                el.style.position = 'relative';
-                el.onclick = function(e) {
-                    e.preventDefault();
-                    let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
-                    if(pwd === 'madz1222' || pwd === '2026') {
-                        let panel = document.getElementById('admin-control-panel');
-                        if(panel) { panel.style.display = 'block'; alert('Admin Dashboard Unlocked!'); }
-                        else { alert('Admin Access Granted! Loading Fingertip Dashboard...'); }
-                    } else {
-                        alert('Invalid Admin Password!');
-                    }
-                };
+            } catch(e) {
+                console.log('Using default live spot rate fallback');
             }
-        });
-    }, 1000);
-});
+        }
+        fetchLiveMetals();
+        setInterval(fetchLiveMetals, 30000);
 
-// 2. Enhanced Smart AI Response Logic
-function getSmartAIResponse(query) {
-    let q = query.toLowerCase();
-    if(q.includes('gold') || q.includes('silver') || q.includes('metal')) {
-        return 'Vault balances for Gold and Silver are dynamically calculated and synchronized in real-time with live international spot price feeds.';
-    } else if(q.includes('payout') || q.includes('withdraw') || q.includes('cash')) {
-        return 'Payouts are restricted to daily server yield limits to ensure stability. Excess withdrawals require manual Admin approval.';
-    } else if(q.includes('bank') || q.includes('lock')) {
-        return 'Bank account details are permanently locked to your user node upon purchasing your first server compute package for maximum security.';
-    } else if(q.includes('voucher') || q.includes('showroom') || q.includes('tanishq') || q.includes('kalyan') || q.includes('plum')) {
-        return 'Metal vouchers utilize the Xoxoday Plum network, allowing you to select real physical showrooms across Indian states (such as Tanishq, Kalyan, GRT).';
-    } else if(q.includes('admin') || q.includes('login') || q.includes('password')) {
-        return 'Admin access is strictly restricted to the Fingertip Dashboard secured by password (madz1222) to manage user nodes and balances.';
-    } else if(q.includes('server') || q.includes('tier') || q.includes('yield') || q.includes('compute') || q.includes('plan') || q.includes('offering')) {
-        return 'We offer high-performance Sovereign Server Compute tiers (such as ₹2,000 / ₹10,000 nodes) generating daily yields credited directly to your INR wallet upon claiming.';
-    } else {
-        return 'Madzinu AI Node operational. You can ask me about server compute tiers, daily yields, live metal vaults, bank locking rules, or Xoxoday Plum showroom vouchers!';
-    }
-}
-</script>
+        const translations = {
+            EN: {
+                brandTitle: "MADZINU WEB3 TECH & AI",
+                adminBtn: "Admin",
+                heroBadge: "👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
+                heroTitle: "Sovereign Cloud Compute & <br><span>Autonomous Jobworks & Live Gold Vault</span>",
+                heroDesc: "Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.",
+                launchTermBtn: "LAUNCH SECURE ENTERPRISE TERMINAL",
+                vaultTitle: "<i class='fa-solid fa-vault'></i> LIVE METAL VAULT & SPOT RATES",
+                lblGold24: "Gold 24K (1g)",
+                lblGold22: "Gold 22K (1g)",
+                lblSilver: "Silver 999 (1g)",
+                waTitle: "10 Unique WhatsApp Referral Scripts",
+                waDesc: "Share your referral link with auto-embedded ID:",
+                voucherTitle: "Supported Voucher & Reward Partners",
+                voucherSub: "* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)",
+                goldTitle: "24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)",
+                foodTitle: "INSTANT LIFESTYLE & FOOD VOUCHERS",
+                officialWeb: "Official Website",
+                loginTitle: "Contractor Secure Node Login",
+                phonePlaceholder: "Enter Mobile Number",
+                sendOtpBtn: "Send OTP",
+                verifyOtpBtn: "Verify"
+            },
+            TA: {
+                brandTitle: "மாட்ஜினு வெப்3 டெக் & AI",
+                adminBtn: "நிர்வாகி",
+                heroBadge: "👑 இந்தியாவின் முதல் தன்னாட்சி AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
+                heroTitle: "சர்வர் கம்ப்யூட் & <br><span>சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்</span>",
+                heroDesc: "மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் தொகுப்புகளைப் பெறுங்கள்.",
+                launchTermBtn: "பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக",
+                vaultTitle: "<i class='fa-solid fa-vault'></i> நேரலை தங்கக் காப்பகம் & நேரலை விலைகள்",
+                lblGold24: "தங்கம் 24K (1கிராம்)",
+                lblGold22: "தங்கம் 22K (1கிராம்)",
+                lblSilver: "வெள்ளி 999 (1கிராம்)",
+                waTitle: "10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்",
+                waDesc: "உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:",
+                voucherTitle: "ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்",
+                voucherSub: "* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)",
+                goldTitle: "24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)",
+                foodTitle: "உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்",
+                officialWeb: "அதிகாரப்பூர்வ வலைத்தளம்",
+                loginTitle: "ஒப்பந்தக்காரர் பாதுகாப்பான நோடு உள்நுழைவு",
+                phonePlaceholder: "மொபைல் எண்ணை உள்ளிடவும்",
+                sendOtpBtn: "OTP அனுப்பு",
+                verifyOtpBtn: "சரிபார்"
+            },
+            TE: {
+                brandTitle: "మాడ్జినూ వెబ్3 టెక్ & AI",
+                adminBtn: "అడ్మిన్",
+                heroBadge: "👑 భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్",
+                heroTitle: "సాವರೆన్ క్లౌడ్ కంప్యూట్ & <br><span>ఆటోనమస్ జాబ్‌వర్క్స్ & లైవ్ గోల్డ్ వాల్ట్</span>",
+                heroDesc: "మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్. ₹2,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలను అందిస్తుంది.",
+                launchTermBtn: "సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి",
+                vaultTitle: "<i class='fa-solid fa-vault'></i> లైవ్ మెటల్ వాల్ట్ & ధరలు",
+                lblGold24: "బంగారం 24K (1గ్రా)",
+                lblGold22: "బంగారం 22K (1గ్రా)",
+                lblSilver: "వెండి 999 (1గ్రా)",
+                waTitle: "10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు",
+                waDesc: "ఆటో-ఎంబెడెడ్ IDతో మీ రెఫరల్ లింక్‌ని షేర్ చేయండి:",
+                voucherTitle: "మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు",
+                voucherSub: "* ఎంటర్‌ప్రైజ్ రివార్డ్ భాగస్వాములు (API ఇంటిగ్రేషన్ త్వరలో వస్తుంది)",
+                goldTitle: "24K గోల్డ్ షోరూమ్ భాగస్వాములు (₹25K+)",
+                foodTitle: "తక్షణ లైఫ్‌స్టైల్ & ఫుడ్ వౌచర్‌లు",
+                officialWeb: "అధికారిక వెబ్‌సైట్",
+                loginTitle: "కాంట్రాక్టర్ సెక్యూర్ నోడ్ లాగిన్",
+                phonePlaceholder: "మొబైల్ నంబర్‌ను నమోదు చేయండి",
+                sendOtpBtn: "OTP పంపు",
+                verifyOtpBtn: "ధృవీకరించండి"
+            },
+            KN: {
+                brandTitle: "ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ & AI",
+                adminBtn: "ನಿರ್ವಾಹಕ",
+                heroBadge: "👑 ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ ಮತ್ತು ಕ್ಲೌಡ್ ನೆಟ್‌ವರ್ಕ್",
+                heroTitle: "ಸವರನ್ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ & <br><span>ಸ್ವಾಯತ್ತ ಕೆಲಸಗಳು & ಲೈವ್ ಗೋಲ್ಡ್ ವಾಲ್ಟ್</span>",
+                heroDesc: "ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ಅಡಿಯಲ್ಲಿ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟಪ್ ಆಗಿದೆ.",
+                launchTermBtn: "ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ",
+                vaultTitle: "<i class='fa-solid fa-vault'></i> ಲೈವ್ ಗೋಲ್ಡ್ ವಾಲ್ಟ್ & ದರಗಳು",
+                lblGold24: "ಚಿನ್ನ 24K (1ಗ್ರಾಂ)",
+                lblGold22: "ಚಿನ್ನ 22K (1ಗ್ರಾಂ)",
+                lblSilver: "ಬೆಳ್ಳಿ 999 (1ಗ್ರಾಂ)",
+                waTitle: "10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು",
+                waDesc: "ನಿಮ್ಮ ರೆಫರಲ್ ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ:",
+                voucherTitle: "ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವಾರ್ಡ್ ಪಾಲುದಾರರು",
+                voucherSub: "* ಎಂಟರ್‌ಪ್ರೈಜ್ ಪಾಲುದಾರರು ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದ್ದಾರೆ",
+                goldTitle: "24K ಚಿನ್ನದ ಶೋರೂಮ್ ಪಾಲುದಾರರು (₹25K+)",
+                foodTitle: "ಆಹಾರ ಮತ್ತು ಜೀವನಶೈಲಿ ವೋಚರ್‌ಗಳು",
+                officialWeb: "ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್",
+                loginTitle: "ಗುತ್ತಿಗೆದಾರರ ಸುರಕ್ಷಿತ ನೋಡ್ ಲಾಗಿನ್",
+                phonePlaceholder: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ",
+                sendOtpBtn: "OTP ಕಳುಹಿಸಿ",
+                verifyOtpBtn: "ಪರಿಶೀಲಿಸಿ"
+            },
+            ML: {
+                brandTitle: "മാഡ്ജിനു വെബ്3 ടെക് & AI",
+                adminBtn: "അഡ്മിൻ",
+                heroBadge: "👑 ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ & ക്ലൗഡ് നെറ്റ്‌വർക്ക്",
+                heroTitle: "സവേരൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & <br><span>ജോബ്വർക്കുകൾ & ലൈവ് ഗോൾഡ് വാൾട്ട്</span>",
+                heroDesc: "മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY-ക്ക് കീഴിൽ അംഗീകരിക്കപ്പെട്ട സ്റ്റാർട്ടപ്പാണ്.",
+                launchTermBtn: "സുരക്ഷിത എൻ്റർപ്രൈസ് ടെർമിനൽ തുറക്കുക",
+                vaultTitle: "<i class='fa-solid fa-vault'></i> തത്സമയ ഗോൾഡ് വാൾട്ട് & നിരക്കുകൾ",
+                lblGold24: "സ്വർണ്ണം 24K (1ഗ്രാം)",
+                lblGold22: "സ്വർണ്ണം 22K (1ഗ്രാം)",
+                lblSilver: "വെള്ളി 999 (1ഗ്രാം)",
+                waTitle: "10 തനതായ വാട്ട്‌സ്ആപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ",
+                waDesc: "നിങ്ങളുടെ റഫറൽ ലിങ്ക് പങ്കിടുക:",
+                voucherTitle: "പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ",
+                voucherSub: "* എന്റർപ്രൈസ് പങ്കാളികൾ ഉടൻ വരുന്നു",
+                goldTitle: "24K ഗോൾഡ് ഷോറൂം പങ്കാളികൾ (₹25K+)",
+                foodTitle: "ഭക്ഷണ വൗച്ചറുകൾ",
+                officialWeb: "ഔദ്യോഗിക വെബ്സൈറ്റ്",
+                loginTitle: "കൺട്രാക്ടർ സെക്യുർ നോഡ് ലോഗിൻ",
+                phonePlaceholder: "മൊബൈൽ നമ്പർ നൽകുക",
+                sendOtpBtn: "OTP അയക്കുക",
+                verifyOtpBtn: "സ്ഥിരീകരിക്കുക"
+            },
+            HI: {
+                brandTitle: "माड्जिनू वेब3 टेक & AI",
+                adminBtn: "एडमिन",
+                heroBadge: "👑 भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क",
+                heroTitle: "सोवरिन क्लाउड कंप्यूट और <br><span>स्वायत्त जॉबवर्क्स और लाइव गोल्ड वॉल्ट</span>",
+                heroDesc: "मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है। ₹2,000 से ₹1,00,000 तक के सर्वर पैकेज प्रदान करता है।",
+                launchTermBtn: "सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें",
+                vaultTitle: "<i class='fa-solid fa-vault'></i> लाइव गोल्ड वॉल्ट और दरें",
+                lblGold24: "सोना 24K (1ग्राम)",
+                lblGold22: "सोना 22K (1ग्राम)",
+                lblSilver: "चांदी 999 (1ग्राम)",
+                waTitle: "10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट",
+                waDesc: "ऑटो-एम्बेडेड आईडी के साथ अपना रेफ़रल लिंक साझा करें:",
+                voucherTitle: "समर्थित वाउचर और पुरस्कार भागीदार",
+                voucherSub: "* एंटरप्राइज रिवार्ड पार्टनर (API इंटीग्रेशन जल्द आ रहा है)",
+                goldTitle: "24K गोल्ड शोरूम पार्टनर (₹25K+)",
+                foodTitle: "तत्काल लाइफस्टाइल और फूड वाउचर",
+                officialWeb: "आधिकारिक वेबसाइट",
+                loginTitle: "कंट्रैक्टर सिक्योर नोड लॉगिन",
+                phonePlaceholder: "मोबाइल नंबर दर्ज करें",
+                sendOtpBtn: "OTP भेजें",
+                verifyOtpBtn: "सत्यापित करें"
+            },
+            MR: {
+                brandTitle: "माड्झिनू वेब3 टेक & AI",
+                adminBtn: "अडमिन",
+                heroBadge: "👑 भारताचे पहिले स्वायत्त AI स्टुडिओ आणि क्लाउड नेटवर्क",
+                heroTitle: "सोव्हरिन क्लाउड कॉम्प्युट आणि <br><span>स्वायत्त जॉबवर्क्स आणि लाइव्ह गोल्ड वॉल्ट</span>",
+                heroDesc: "माड्झिनू वेब3 टेक्नॉलॉजीज ही MeitY अंतर्गत भारत सरकार मान्यताप्राप्त स्टार्टअप संस्था आहे.",
+                launchTermBtn: "सुरक्षित एंटरप्राइज टर्मिनल सुरू करा",
+                vaultTitle: "<i class='fa-solid fa-vault'></i> थेट सुवर्ण तिजोरी आणि दर",
+                lblGold24: "सोने 24K (1ग्राम)",
+                lblGold22: "सोने 22K (1ग्राम)",
+                lblSilver: "चांदी 999 (1ग्राम)",
+                waTitle: "10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट",
+                waDesc: "तुमची रेफेरल लिंक शेअर करा:",
+                voucherTitle: "समर्थित वाउचर आणि पुरस्कार भागीदार",
+                voucherSub: "* एंटरप्राइज भागीदार लवकरच येत आहेत",
+                goldTitle: "24K गोल्ड शोरूम भागीदार (₹25K+)",
+                foodTitle: "अन्न आणि जीवनशैली वाउचर",
+                officialWeb: "अधिकृत वेबसाइट",
+                loginTitle: "कंट्रैक्टर सिक्योर नोड लॉगिन",
+                phonePlaceholder: "मोबाईल नंबर टाका",
+                sendOtpBtn: "OTP पाठवा",
+                verifyOtpBtn: "तपासा"
+            }
+        };
 
+        function changeLanguage() {
+            const selector = document.getElementById('langSelector');
+            if(!selector) return;
+            const lang = selector.value;
+            const t = translations[lang] || translations['EN'];
 
-<script>
-// 1. Force Admin Button to Open Prompt & Panel
-document.addEventListener('DOMContentLoaded', () => {
-    const adminBtn = document.getElementById('admin-trigger-btn') || document.querySelector('.admin-btn') || Array.from(document.querySelectorAll('button, a, div')).find(el => el.innerText && el.innerText.trim() === 'Admin');
-    if(adminBtn) {
-        adminBtn.style.cursor = 'pointer';
-        adminBtn.style.zIndex = '9999999';
-        adminBtn.onclick = function(e) {
-            e.preventDefault();
+            document.getElementById('brand-title').innerText = t.brandTitle;
+            document.getElementById('admin-btn-txt').innerText = t.adminBtn;
+            document.getElementById('hero-badge').innerText = t.heroBadge;
+            document.getElementById('hero-title').innerHTML = t.heroTitle;
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('launch-term-btn').innerHTML = `<i class="fa-solid fa-arrow-right-to-bracket"></i> ${t.launchTermBtn}`;
+            
+            if(t.vaultTitle) document.getElementById('vault-title').innerHTML = t.vaultTitle;
+            if(t.lblGold24) document.getElementById('lbl-gold24').innerText = t.lblGold24;
+            if(t.lblGold22) document.getElementById('lbl-gold22').innerText = t.lblGold22;
+            if(t.lblSilver) document.getElementById('lbl-silver').innerText = t.lblSilver;
+
+            document.getElementById('wa-title').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${t.waTitle}`;
+            document.getElementById('wa-desc').innerText = t.waDesc;
+            document.getElementById('voucher-title').innerHTML = `<i class="fa-solid fa-ticket"></i> ${t.voucherTitle}`;
+            document.getElementById('voucher-sub').innerText = t.voucherSub;
+            document.getElementById('gold-title').innerHTML = `<i class="fa-solid fa-crown"></i> ${t.goldTitle}`;
+            document.getElementById('food-title').innerHTML = `<i class="fa-solid fa-utensils"></i> ${t.foodTitle}`;
+            
+            document.querySelectorAll('.official-web-lbl').forEach(el => el.innerText = t.officialWeb);
+
+            document.getElementById('login-title').innerHTML = `<i class="fa-solid fa-shield-keyhole"></i> ${t.loginTitle}`;
+            document.getElementById('login-mobile').placeholder = t.phonePlaceholder;
+            document.getElementById('send-otp-btn').innerText = t.sendOtpBtn;
+            document.getElementById('verify-otp-btn').innerText = t.verifyOtpBtn;
+        }
+
+        function openAdminPanel() {
             let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
             if(pwd === 'madz1222' || pwd === '2026') {
-                let panel = document.getElementById('admin-control-panel');
-                if(panel) { panel.style.display = 'block'; alert('Admin Dashboard Unlocked!'); }
-                else { alert('Admin Access Granted! Loading Fingertip Dashboard...'); }
+                document.getElementById('admin-modal').style.display = 'flex';
             } else {
                 alert('Invalid Admin Password!');
             }
-        };
-    }
-});
-
-// 2. Multilingual Translator Logic (English / Tamil)
-function changeLanguage(lang) {
-    const t = {
-        'EN': {
-            'title': 'MADZINU WEB3 TECH & AI',
-            'admin': 'Admin',
-            'server_title': 'Sovereign Cloud Compute & Autonomous Jobworks',
-            'ai_title': 'Madzinu AI Knowledge Hub'
-        },
-        'TA': {
-            'title': 'மாட்ஜினு வெப்3 டெக் & ஏஐ',
-            'admin': 'நிர்வாகி (Admin)',
-            'server_title': 'সারவர் கம்ப்யூட் & கிளவுட் நெட்வொர்க்',
-            'ai_title': 'மாட்ஜினு ஏஐ அறிவு மையம்'
         }
-    };
-    
-    let current = t[lang] ? t[lang] : t['EN'];
-    
-    // Update header title if matches
-    document.querySelectorAll('h1, h2, h3, .brand-title').forEach(el => {
-        if(el.innerText.includes('MADZINU') || el.innerText.includes('Sovereign')) {
-            if(lang === 'TA') el.innerText = current.server_title;
+
+        function closeAdminPanel() {
+            document.getElementById('admin-modal').style.display = 'none';
         }
-    });
-    alert('Language switched to: ' + lang);
-}
-</script>
 
-
-<script>
-// 6 Languages Support Logic
-function changeLanguage(langObj) {
-    let lang = (typeof langObj === 'string') ? langObj : (langObj.value || 'EN');
-    const langNames = {
-        'EN': 'English',
-        'TA': 'தமிழ் (Tamil)',
-        'HI': 'हिन्दी (Hindi)',
-        'TE': 'తెలుగు (Telugu)',
-        'ML': 'മലയാളം (Malayalam)',
-        'KN': 'ಕನ್ನಡ (Kannada)'
-    };
-    alert('Language successfully switched to: ' + (langNames[lang] || lang));
-}
-</script>
-
-
-
-
-
-<script>
-const siteContent = {
-    'EN': {
-        'title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
-        'desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
-        'btn': '-> LAUNCH SECURE ENTERPRISE TERMINAL'
-    },
-    'TA': {
-        'title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
-        'desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் கம்ப்யூட் தொகுப்புகளைப் பெறுங்கள்.',
-        'btn': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக'
-    },
-    'HI': {
-        'title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
-        'desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
-        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें'
-    },
-    'TE': {
-        'title': 'సాವರೆನ್ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
-        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
-        'btn': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి'
-    },
-    'ML': {
-        'title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
-        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
-        'btn': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക'
-    },
-    'KN': {
-        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ 금ಜಾನೆ',
-        'desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
-        'btn': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ప్రೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ'
-    }
-};
-
-function changeLanguage(langObj) {
-    let lang = (typeof langObj === 'string') ? langObj : (langObj.value || 'EN');
-    let t = siteContent[lang] || siteContent['EN'];
-
-    // Find and update title
-    const mainTitle = document.querySelector('h1, .hero-title, h2');
-    if(mainTitle) mainTitle.innerText = t.title;
-
-    // Find and update description
-    const mainDesc = document.querySelector('p');
-    if(mainDesc) mainDesc.innerText = t.desc;
-
-    // Find and update button
-    const termBtn = document.querySelector('button, .terminal-btn');
-    if(termBtn && termBtn.innerText.includes('LAUNCH')) {
-        termBtn.innerText = t.btn;
-    }
-
-    console.log('Language updated to: ' + lang);
-}
-</script>
-
-
-<script>
-const multilingualTexts = {
-    'EN': {
-        'title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
-        'desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
-        'btn': '-> LAUNCH SECURE ENTERPRISE TERMINAL'
-    },
-    'मराठी': {
-        'title': 'सॉवरेन क्लाउड कम्प्यूट आणि लाइव्ह गोल्ड वॉल्ट',
-        'desc': 'मदझिनु वेब3 टेक्नॉलिजिस हा MeitY अंतर्गत भारत सरकार मान्यताप्राप्त स्टार्टअप आहे.',
-        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल सुरू करा'
-    },
-    'TA': {
-        'title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
-        'desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும்.',
-        'btn': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக'
-    },
-    'HI': {
-        'title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
-        'desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
-        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें'
-    },
-    'TE': {
-        'title': 'సాವರೆన్ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
-        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
-        'btn': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి'
-    },
-    'ML': {
-        'title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
-        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
-        'btn': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക'
-    },
-    'KN': {
-        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ ಜಾನೆ',
-        'desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
-        'btn': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ'
-    }
-};
-
-function changeLanguage(langObj) {
-    let lang = (typeof langObj === 'string') ? langObj : (langObj.value || 'EN');
-    let t = multilingualTexts[lang] || multilingualTexts['EN'];
-
-    // Update Header Title if exists or target main heading
-    const titleEl = document.querySelector('h1') || document.querySelector('.hero-title');
-    if(titleEl) titleEl.innerText = t.title;
-
-    // Update Description Paragraph
-    const descEl = document.querySelector('p');
-    if(descEl && descEl.innerText.includes('Startup')) descEl.innerText = t.desc;
-
-    // Update Terminal Button
-    const btnEl = document.querySelector('button');
-    if(btnEl && btnEl.innerText.includes('LAUNCH')) btnEl.innerText = t.btn;
-
-    console.log('Successfully translated page to: ' + lang);
-}
-</script>
-
-
-<script>
-const siteTranslations = {
-    'EN': {
-        'title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
-        'desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
-        'btn': '-> LAUNCH SECURE ENTERPRISE TERMINAL'
-    },
-    'मराठी': {
-        'title': 'सॉवरेन क्लाउड कम्प्यूट आणि लाइव्ह गोल्ड वॉल्ट',
-        'desc': 'मदझिनु वेब3 टेक्नॉलिजिस हा MeitY अंतर्गत भारत सरकार मान्यताप्राप्त स्टार्टअप आहे.',
-        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल सुरू करा'
-    },
-    'TA': {
-        'title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
-        'desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும்.',
-        'btn': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக'
-    },
-    'HI': {
-        'title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
-        'desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
-        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें'
-    },
-    'TE': {
-        'title': 'సాವರೆన్ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
-        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
-        'btn': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి'
-    },
-    'ML': {
-        'title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
-        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
-        'btn': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക'
-    },
-    'KN': {
-        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ ಜಾನೆ',
-        'desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
-        'btn': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ'
-    }
-};
-
-function changeLanguage(langCode) {
-    let t = siteTranslations[langCode] || siteTranslations['EN'];
-    const titleEl = document.querySelector('h1') || document.querySelector('.hero-title');
-    if(titleEl) titleEl.innerText = t.title;
-    const descEl = document.querySelector('p');
-    if(descEl) descEl.innerText = t.desc;
-    const btnEl = document.querySelector('button');
-    if(btnEl) btnEl.innerText = t.btn;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectEl = document.querySelector('select');
-    if(selectEl) {
-        selectEl.onchange = function() {
-            changeLanguage(this.value);
-        };
-    }
-});
-</script>
-
-
-<script>
-const fullSiteTranslations = {
-    'EN': {
-        'title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
-        'desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
-        'btn': '-> LAUNCH SECURE ENTERPRISE TERMINAL',
-        'whatsapp_title': '10 Unique WhatsApp Referral Scripts',
-        'voucher_title': 'Supported Voucher & Reward Partners'
-    },
-    'TA': {
-        'title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
-        'desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் கம்ப்யூட் தொகுப்புகளைப் பெறுங்கள்.',
-        'btn': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக',
-        'whatsapp_title': '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்',
-        'voucher_title': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்'
-    },
-    'HI': {
-        'title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
-        'desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
-        'btn': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें',
-        'whatsapp_title': '10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट',
-        'voucher_title': 'समर्थित वाउचर और पुरस्कार भागीदार'
-    },
-    'TE': {
-        'title': 'సాವರೆన్ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
-        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
-        'btn': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి',
-        'whatsapp_title': '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు',
-        'voucher_title': 'మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు'
-    },
-    'ML': {
-        'title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
-        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
-        'btn': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക',
-        'whatsapp_title': '10 തനതായ വാട്ട്‌സ്ആപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ',
-        'voucher_title': 'പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ'
-    },
-    'KN': {
-        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ ಜಾನೆ',
-        'desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
-        'btn': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ',
-        'whatsapp_title': '10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು',
-        'voucher_title': 'ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವಾರ್ಡ್ ಪಾಲುದಾರರು'
-    }
-};
-
-function changeLanguage(langCode) {
-    let t = fullSiteTranslations[langCode] || fullSiteTranslations['EN'];
-
-    // 1. Title
-    const titleEl = document.querySelector('h1') || document.querySelector('.hero-title');
-    if(titleEl) titleEl.innerText = t.title;
-
-    // 2. Description
-    const descEl = document.querySelector('p');
-    if(descEl) descEl.innerText = t.desc;
-
-    // 3. Button
-    document.querySelectorAll('button, a').forEach(el => {
-        if(el.innerText.includes('LAUNCH') || el.innerText.includes('பாதுகாப்பான')) {
-            el.innerText = t.btn;
+        function scrollToLogin() {
+            document.getElementById('login-section').scrollIntoView({ behavior: 'smooth' });
         }
-    });
 
-    // 4. WhatsApp Section Title
-    document.querySelectorAll('h2, h3, div').forEach(el => {
-        if(el.innerText.includes('WhatsApp Referral Scripts') || el.innerText.includes('வாட்ஸ்அப்')) {
-            el.innerText = t.whatsapp_title;
+        function shareWhatsApp(id) {
+            let msg = encodeURIComponent('Check out Madzinu Web3 Technologies - IndiaAI & MeitY Recognized Autonomous Cloud Compute Platform: https://madzinuweb3technologies.in');
+            window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
         }
-    });
 
-    // 5. Voucher Partners Title
-    document.querySelectorAll('h2, h3, div').forEach(el => {
-        if(el.innerText.includes('Supported Voucher') || el.innerText.includes('வவுச்சர்')) {
-            el.innerText = t.voucher_title;
-        }
-    });
-
-    console.log('Fully translated to: ' + langCode);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectEl = document.querySelector('select');
-    if(selectEl) {
-        selectEl.onchange = function() {
-            changeLanguage(this.value);
-        };
-    }
-});
-</script>
-
-
-<script>
-const translationsMap = {
-    'EN': {
-        'hero_title': 'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault',
-        'hero_desc': 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
-        'btn_text': '-> LAUNCH SECURE ENTERPRISE TERMINAL',
-        'wa_title': '10 Unique WhatsApp Referral Scripts',
-        'partner_title': 'Supported Voucher & Reward Partners'
-    },
-    'TA': {
-        'hero_title': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
-        'hero_desc': 'மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் கம்ப்யூட் தொகுப்புகளைப் பெறுங்கள்.',
-        'btn_text': '-> பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக',
-        'wa_title': '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்',
-        'partner_title': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்'
-    },
-    'HI': {
-        'hero_title': 'संप्रभु क्लाउड कंप्यूट और लाइव गोल्ड वॉल्ट',
-        'hero_desc': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
-        'btn_text': '-> सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें',
-        'wa_title': '10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट',
-        'partner_title': 'समर्थित वाउचर और पुरस्कार भागीदार'
-    },
-    'TE': {
-        'hero_title': 'సాವರೆన్ క్లౌడ్ కంప్యూట్ & లైవ్ గోల్డ్ వాల్ట్',
-        'desc': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్.',
-        'btn_text': '-> సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి',
-        'wa_title': '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు',
-        'partner_title': 'మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు'
-    },
-    'ML': {
-        'hero_title': 'സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ലൈവ് ഗോൾഡ് വാൾട്ട്',
-        'desc': 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
-        'btn_text': '-> സുരക്ഷിത എന്റർപ്രൈസ് ടെർമിനൽ സമാരംഭിക്കുക',
-        'wa_title': '10 തനതായ വാട്ട്‌സ്ആപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ',
-        'partner_title': 'പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ'
-    },
-    'KN': {
-        'title': 'ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಚಿನ್ನದ ಜಾನೆ',
-        'hero_desc': 'ಮಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ MeitY ನಿಂದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದೆ.',
-        'btn_text': '-> ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ಟರ್ಮಿನಲ್ ಪ್ರಾರಂಭಿಸಿ',
-        'wa_title': '10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು',
-        'partner_title': 'ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವార్ಡ್ ಪಾಲುದಾರರು'
-    }
-};
-
-function changeLanguage(langCode) {
-    let t = translationsMap[langCode] || translationsMap['EN'];
-
-    // Safely update elements using specific identifiers or data attributes
-    const mainTitle = document.querySelector('.hero-main-title') || document.querySelector('h1');
-    if(mainTitle) mainTitle.innerText = t.hero_title;
-
-    const mainDesc = document.querySelector('.hero-main-desc') || document.querySelector('p');
-    if(mainDesc && mainDesc.innerText.includes('Startup')) mainDesc.innerText = t.hero_desc;
-
-    const termBtn = document.querySelector('.terminal-launch-btn') || document.querySelector('button');
-    if(termBtn) termBtn.innerText = t.btn_text;
-
-    // Target WhatsApp section heading specifically
-    document.querySelectorAll('div, span, h3').forEach(el => {
-        if(el.innerText.trim() === '10 Unique WhatsApp Referral Scripts' || el.innerText.trim() === '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்' || el.innerText.trim() === '10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट' || el.innerText.trim() === '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు' || el.innerText.trim() === '10 തനതായ വാട്ട്‌സ്ആപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ' || el.innerText.trim() === '10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು') {
-            el.innerText = t.wa_title;
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectEl = document.querySelector('select');
-    if(selectEl) {
-        selectEl.onchange = function() {
-            changeLanguage(this.value);
-        };
-    }
-});
-</script>
-
-
-<script>
-const dictionary = {
-    'TA': {
-        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'இந்தியாவின் முதல் சுயியக்க AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்',
-        'Share your referral link with auto-embedded ID:': 'உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:',
-        'Script': 'ஸ்கிரிப்ட்',
-        'Supported Voucher & Reward Partners': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்',
-        '* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)': '* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)',
-        '24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)': '24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)',
-        'Official Website': 'அதிகாரப்பூர்வ வலைத்தளம்',
-        'INSTANT LIFESTYLE & FOOD VOUCHERS': ' உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்',
-        'Contractor Secure Node Login': 'கான்ட்ராக்டர் பாதுகாப்பான நோட் உள்நுழைவு',
-        'Send OTP': 'OTP அனுப்பவும்',
-        'Verify': 'சரிபார்க்கவும்',
-        'Terms & Conditions': 'விதிமுறைகள் & நிபந்தனைகள்',
-        'Refund Policy': 'ரீஃபண்ட் கொள்கை',
-        'Privacy Policy': 'தனியுரிமைக் கொள்கை',
-        'Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506': 'இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் | பதிவு எண்: ST20260926506'
-    },
-    'HI': {
-        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क',
-        'Share your referral link with auto-embedded ID:': 'ऑटो-एम्बेडेड आईडी के साथ अपना रेफ़रल लिंक साझा करें:',
-        'Script': 'स्क्रिप्ट',
-        'Supported Voucher & Reward Partners': 'समर्थित वाउचर और पुरस्कार भागीदार',
-        'Official Website': 'आधिकारिक वेबसाइट',
-        'INSTANT LIFESTYLE & FOOD VOUCHERS': 'तत्काल लाइफस्टाइल और फूड वाउचर',
-        'Contractor Secure Node Login': 'ठेकेदार सुरक्षित नोड लॉगिन',
-        'Send OTP': 'OTP भेजें',
-        'Verify': 'सत्यापित करें'
-    },
-    'TE': {
-        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్',
-        'Share your referral link with auto-embedded ID:': 'ఆటో-ఎంబెడెడ్ IDతో మీ రెఫరల్ లింక్‌ని షేర్ చేయండి:',
-        'Script': 'స్క్రిప్ట్',
-        'Supported Voucher & Reward Partners': 'మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు',
-        'Official Website': 'అధికారిక వెబ్‌సైట్',
-        'INSTANT LIFESTYLE & FOOD VOUCHERS': 'తక్షణ లైఫ్‌స్టైల్ & ఫుడ్ వౌచర్‌లు'
-    },
-    'ML': {
-        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ & ക്ലൗഡ് നെറ്റ്‌വർക്ക്',
-        'Share your referral link with auto-embedded ID:': 'ഓട്ടോ-എബഡഡ് ഐഡി ഉപയോഗിച്ച് നിങ്ങളുടെ റഫറൽ ലിങ്ക് പങ്കിടുക:',
-        'Script': 'സ്ക്രിപ്റ്റ്',
-        'Supported Voucher & Reward Partners': 'പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ',
-        'Official Website': 'ഔദ്യോഗിക വെബ്സൈറ്റ്'
-    },
-    'KN': {
-        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ ಮತ್ತು ಕ್ಲೌಡ್ ನೆಟ್‌ವರ್ಕ್',
-        'Share your referral link with auto-embedded ID:': 'ಸ್ವಯಂಚಾಲಿತ ಐಡಿಯೊಂದಿಗೆ ನಿಮ್ಮ ರೆಫರಲ್ ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ:',
-        'Script': 'ಸ್ಕ್ರಿಪ್ಟ್',
-        'Supported Voucher & Reward Partners': 'ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವಾರ್ಡ್ ಪಾಲುದಾರರು',
-        'Official Website': 'ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್'
-    }
-};
-
-function translatePage(lang) {
-    if(lang === 'EN') {
-        location.reload();
-        return;
-    }
-    const map = dictionary[lang] || {};
-    
-    // Walk through all text nodes in the body
-    function walkTextNodes(root) {
-        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
-        let node;
-        while(node = walker.nextNode()) {
-            let text = node.nodeValue.trim();
-            if(text.length > 0) {
-                // Check exact or partial match
-                for(let key in map) {
-                    if(text.includes(key)) {
-                        node.nodeValue = node.nodeValue.replace(key, map[key]);
-                    }
-                }
-                // Handle Script 1 to Script 10 dynamically
-                if(text.startsWith('Script ') && map['Script']) {
-                    node.nodeValue = text.replace('Script', map['Script']);
-                }
-            }
-        }
-    }
-    walkTextNodes(document.body);
-    console.log('Fully translated to: ' + lang);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectEl = document.querySelector('select');
-    if(selectEl) {
-        selectEl.onchange = function() {
-            translatePage(this.value);
-        };
-    }
-});
-</script>
-
-
-<script>
-const fullDictionary = {
-    'TA': {
-        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'இந்தியாவின் முதல் சுயியக்க AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்',
-        'Sovereign Cloud Compute & Autonomous Jobworks & Live Gold Vault': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க் & தங்கக் காப்பகம்',
-        'Share your referral link with auto-embedded ID:': 'உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:',
-        '10 Unique WhatsApp Referral Scripts': '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்',
-        'Script': 'ஸ்கிரிப்ட்',
-        'Supported Voucher & Reward Partners': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்',
-        '* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)': '* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)',
-        '24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)': '24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)',
-        'Official Website': 'அதிகாரப்பூர்வ வலைத்தளம்',
-        'INSTANT LIFESTYLE & FOOD VOUCHERS': 'உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்',
-        'Contractor Secure Node Login': 'கான்ட்ராக்டர் பாதுகாப்பான நோட் உள்நுழைவு',
-        'Enter Mobile Number': 'மொபைல் எண்ணை உள்ளிடவும்',
-        'Send OTP': 'OTP அனுப்பவும்',
-        'Verify': 'சரிபார்க்கவும்',
-        'Terms & Conditions': 'விதிமுறைகள் & நிபந்தனைகள்',
-        'Refund Policy': 'ரீஃபண்ட் கொள்கை',
-        'Privacy Policy': 'தனியுரிமைக் கொள்கை',
-        'Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506': 'இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் | பதிவு எண்: ST20260926506',
-        'Tanishq': 'தனிஷ்க்',
-        'GRT Jewellers': 'ஜி.ஆர்.டி ஜூவல்லர்ஸ்',
-        'Malabar Gold': 'மலபார் கோல்டு',
-        'Kalyan Jewellers': 'கல்யாண் ஜூவல்லர்ஸ்',
-        'Swiggy': 'ஸ்விகி',
-        'Zomato': 'சொமேட்டோ',
-        'Amazon Pay': 'அமேசான் பே',
-        'Flipkart': 'ப்ளிப்கார்ட்'
-    }
-};
-
-function translatePageFull(lang) {
-    if(lang === 'EN') {
-        location.reload();
-        return;
-    }
-    const map = fullDictionary[lang] || {};
-    
-    function walkTextNodes(root) {
-        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
-        let node;
-        while(node = walker.nextNode()) {
-            let text = node.nodeValue.trim();
-            if(text.length > 0) {
-                for(let key in map) {
-                    if(text === key || text.includes(key)) {
-                        node.nodeValue = node.nodeValue.replace(key, map[key]);
-                    }
-                }
-                if(text.startsWith('Script ') && map['Script']) {
-                    node.nodeValue = text.replace('Script', map['Script']);
-                }
-            }
-        }
-    }
-    walkTextNodes(document.body);
-    console.log('Fully translated page to: ' + lang);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectEl = document.querySelector('select');
-    if(selectEl) {
-        selectEl.onchange = function() {
-            translatePageFull(this.value);
-        };
-    }
-});
-</script>
-
-
-<script>
-window.addEventListener('load', () => {
-    const selectEl = document.querySelector('select');
-    if(selectEl) {
-        selectEl.addEventListener('change', function() {
-            if(this.value === 'TA') {
-                document.body.innerHTML = document.body.innerHTML
-                    .replace(/Supported Voucher & Reward Partners/g, 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்')
-                    .replace(/Official Website/g, 'அதிகாரப்பூர்வ வலைத்தளம்')
-                    .replace(/INSTANT LIFESTYLE & FOOD VOUCHERS/g, 'உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்')
-                    .replace(/Contractor Secure Node Login/g, 'கான்ட்ராக்டர் பாதுகாப்பான நோட் உள்நுழைவு')
-                    .replace(/Enter Mobile Number/g, 'மொபைல் எண்ணை உள்ளிடவும்')
-                    .replace(/Send OTP/g, 'OTP அனுப்பவும்')
-                    .replace(/Verify/g, 'சரிபார்க்கவும்')
-                    .replace(/Terms & Conditions/g, 'விதிமுறைகள் & நிபந்தனைகள்')
-                    .replace(/Refund Policy/g, 'ரீஃபண்ட் கொள்கை')
-                    .replace(/Privacy Policy/g, 'தனியுரிமைக் கொள்கை');
+        function verifySecureNodeAccess() {
+            let otp = document.getElementById('login-otp-code').value.trim();
+            if(otp === '2026' || otp === 'madz1222') {
+                alert('Node Access Verified Successfully!');
             } else {
-                location.reload();
+                alert('Invalid OTP or Admin Code!');
             }
-        });
-    }
-});
-</script>
-
-
-<script>
-window.addEventListener('load', () => {
-    const selectEl = document.querySelector('select');
-    if(selectEl) {
-        selectEl.addEventListener('change', function() {
-            if(this.value === 'TA') {
-                document.body.innerHTML = document.body.innerHTML
-                    .replace(/Supported Voucher & Reward Partners/g, 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்')
-                    .replace(/\* ENTERPRISE REWARD PARTNERS \(API INTEGRATION & PILOT ROLLOUT COMING SOON\)/g, '* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)')
-                    .replace(/24K GOLD SHOWROOM PARTNERS \(ENTERPRISE TIERS ₹25K\+\)/g, '24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)')
-                    .replace(/Official Website/g, 'அதிகாரப்பூர்வ வலைத்தளம்')
-                    .replace(/INSTANT LIFESTYLE & FOOD VOUCHERS/g, 'உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்')
-                    .replace(/Swiggy/g, 'ஸ்விகி')
-                    .replace(/Zomato/g, 'சொமேட்டோ')
-                    .replace(/Amazon Pay/g, 'அமேசான் பே')
-                    .replace(/Flipkart/g, 'ப்ளிப்கார்ட்')
-                    .replace(/Enter Mobile Number/g, 'மொபைல் எண்ணை உள்ளிடவும்')
-                    .replace(/Enter OTP \(Admin: 2026\)/g, 'OTP-ஐ உள்ளிடவும் (அட்மின்: 2026)')
-                    .replace(/Terms & Conditions/g, 'விதிமுறைகள் & நிபந்தனைகள்')
-                    .replace(/Refund Policy/g, 'ரீஃபண்ட் கொள்கை')
-                    .replace(/Privacy Policy/g, 'தனியுரிமைக் கொள்கை')
-                    .replace(/Share your referral link with auto-embedded ID:/g, 'உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:');
-            } else {
-                location.reload();
-            }
-        });
-    }
-});
-</script>
-
-
-<script>
-const translations = {
-    EN: {
-        brandTitle: "MADZINU WEB3 TECH & AI",
-        adminBtn: "Admin",
-        heroBadge: "INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
-        heroTitle: "Sovereign Cloud Compute & Autonomous Jobworks",
-        heroDesc: "Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days, manage live workspace balances, and execute daily automated jobworks.",
-        launchTermBtn: "LAUNCH SECURE ENTERPRISE TERMINAL",
-        waTitle: "10 Unique WhatsApp Referral Scripts",
-        waDesc: "Share your referral link with auto-embedded ID:",
-        voucherTitle: "Supported Voucher & Reward Partners",
-        voucherSub: "* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)",
-        goldTitle: "24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)",
-        foodTitle: "INSTANT LIFESTYLE & FOOD VOUCHERS",
-        officialWeb: "Official Website",
-        feat1Title: "Daily E-Commerce Jobworks",
-        feat1List: "<li><strong>Amazon:</strong> Fulfillment center node sync & SKU audit logs</li><li><strong>Flipkart:</strong> Logistics routing & pin-code serviceability checks</li><li><strong>Meesho:</strong> Catalog pricing verification & vendor order feeds</li><li><strong>MeitY Registered Startup Entity (Govt. of India)</strong></li><li><strong>Task Allocation & Professional Remuneration (14-Day Cycle)</strong></li>",
-        feat2Title: "1. 14-Day Server Node License",
-        feat2Desc: "Choose high-throughput cloud compute tiers (₹2,000 to ₹1,00,000 + 18% GST) with strict 14-day node validity and batch task workloads.",
-        feat3Title: "2. Live Workspace Balance",
-        feat3Desc: "Track real-time earned balance starting fresh at ₹0.00 directly inside your workspace terminal dashboard.",
-        feat4Title: "3. E-Commerce Jobwork Tasks",
-        feat4Desc: "Execute daily automated verification pipelines for Amazon, Flipkart, and Meesho to secure professional remuneration.",
-        feat5Title: "4. 10% - 12% Dynamic Referral Bonus",
-        feat5Desc: "Share your direct node activation link and earn a 10% base referral bonus (increases to 12% upon reaching 15 continuous active team members) credited instantly.",
-        loginTitle: "Contractor Secure Node Login",
-        phonePlaceholder: "Enter Mobile Number (e.g. 8122252222)",
-        sendOtpBtn: "Send OTP",
-        verifyOtpBtn: "Verify & Launch",
-        bypassBtn: "Direct Login Bypass",
-        dashActiveLbl: "Active Workspace Node",
-        dashSubLbl: "Deploy a server node below to unlock assigned daily task batches over 14 days.",
-        upgradeNodeBtn: "Purchase / Upgrade Server Node",
-        workloadHeading: "Verified Operational Workloads",
-        closeTermBtn: "Close Terminal",
-        execBtn: "Start Sequential Execution",
-        modalStoreTitle: "Select Server Node Subscription",
-        modalStoreSub: "Each server tier assigns automated task batches and professional remuneration over a 14-day cycle. Includes dynamic referral bonus eligibility (up to 12%).",
-        deployNodeBtn: "Deploy Selected Server Node via Razorpay",
-        footerDisc: "<p>Madzinu Web3 Technologies — Govt. of India Recognized Startup Entity (MeitY) | IndiaAI Portal Approved (Reg No: ST20260926506)</p><p>Non-refundable 14-Day SaaS Cloud Computing & E-Commerce Jobwork Access. Remuneration based on assigned daily task workloads. Subject to Section 194TDS contractor guidelines & RazorpayX routing.</p>"
-    },
-    TE: {
-        brandTitle: "మాడ్జినూ వెబ్3 టెక్ & AI",
-        adminBtn: "అడ్మిన్",
-        heroBadge: "భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్",
-        heroTitle: "సావెరిన్ క్లౌడ్ కమ్యూట్ & ఆటోనమస్ జాబ్‌వర్క్స్",
-        heroDesc: "మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY క్రింద గుర్తించబడిన స్టార్టప్. ₹2,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలను అందిస్తుంది.",
-        launchTermBtn: "సెక్యూర్ ఎంటర్‌ప్రైజ్ టెర్మినల్‌ను లాంచ్ చేయండి",
-        waTitle: "10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు",
-        waDesc: "ఆటో-ఎంబెడెడ్ IDతో మీ రెఫరల్ లింక్‌ని షేర్ చేయండి:",
-        voucherTitle: "మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు",
-        voucherSub: "* ఎంటర్‌ప్రైజ్ రివార్డ్ భాగస్వాములు (API ఇంటిగ్రేషన్ & పైలట్ రోల్‌అవుట్ త్వరలో వస్తుంది)",
-        goldTitle: "24K గోల్డ్ షోరూమ్ భాగస్వాములు (ఎంటర్‌ప్రైజ్ టైర్స్ ₹25K+)",
-        foodTitle: "తక్షణ లైఫ్‌స్టైల్ & ఫుడ్ వౌచర్‌లు",
-        officialWeb: "అధికారిక వెబ్‌సైట్",
-        feat1Title: "డైలీ ఇ-కామర్స్ జాబ్‌వర్క్స్",
-        feat1List: "<li><strong>Amazon:</strong> నెట్‌వర్క్ సింక్ & SKU ఆడిట్ లాగ్‌లు</li><li><strong>Flipkart:</strong> లాజిస్టిక్స్ రూటింగ్ & పిన్‌కోడ్ తనిఖీలు</li>",
-        feat2Title: "1. 14-రోజుల సర్వర్ నోడ్ లైసెన్స్",
-        feat2Desc: "అధిక పనితీరు గల క్లౌడ్ కంప్యూట్ టైర్లను ఎంచుకోండి.",
-        feat3Title: "2. లైవ్ వర్క్‌స్పేస్ బ్యాలెన్స్",
-        feat3Desc: "₹0.00 నుండి ప్రారంభమయ్యే రియల్ టైమ్ ఆదాయాన్ని ట్రాక్ చేయండి.",
-        feat4Title: "3. ఇ-కామర్స్ జాబ్‌వర్క్ టాస్క్‌లు",
-        feat4Desc: "వృత్తిపరమైన వేతనాన్ని పొందడానికి ఆటోమేటెడ్ వెరిఫికేషన్ పైప్‌లైన్‌లను అమలు చేయండి.",
-        feat5Title: "4. 10% - 12% డైనమిక్ రెఫరల్ బోనస్",
-        feat5Desc: "10% బేస్ రెఫరల్ బోనస్ పొందండి (15 మంది క్రియాశీల సభ్యులను చేరుకున్నప్పుడు 12%కి పెరుగుతుంది).",
-        loginTitle: "కాంట్రాక్టర్ సెక్యూర్ నోడ్ లాగిన్",
-        phonePlaceholder: "మొబైల్ నంబర్‌ను నమోదు చేయండి",
-        sendOtpBtn: "OTP పంపు",
-        verifyOtpBtn: "ధృవీకరించండి & లాంచ్ చేయండి",
-        bypassBtn: "డైరెక్ట్ లాగిన్ బైపాస్",
-        dashActiveLbl: "యాక్టివ్ వర్క్‌స్పేస్ నోడ్",
-        dashSubLbl: "14 రోజులకు రోజువారీ పనులను అన్‌లాక్ చేయడానికి సర్వర్ నోడ్‌ను డిప్లాయ్ చేయండి.",
-        upgradeNodeBtn: "సర్వర్ నోడ్‌ను కొనుగోలు చేయండి / అప్‌గ్రేడ్ చేయండి",
-        workloadHeading: "ధృవీకరించబడిన కార్యాచరణ పనులు",
-        closeTermBtn: "టెర్మినల్ మూసివేయి",
-        execBtn: "సీక్వెన్షియల్ ఎగ్జిక్యూషన్ ప్రారంభించు",
-        modalStoreTitle: "సర్వర్ నోడ్ సబ్‌స్క్రిప్షన్‌ని ఎంచుకోండి",
-        modalStoreSub: "ప్రతి సర్వర్ శ్రేణిలో ఆటోమేటెడ్ టాస్క్ బ్యాచ్‌లు ఉంటాయి.",
-        deployNodeBtn: "Razorpay ద్వారా సర్వర్ నోడ్‌ని డిప్లాయ్ చేయండి",
-        footerDisc: "<p>మాడ్జినూ వెబ్3 టెక్నాలజీస్ — MeitY గుర్తింపు పొందిన స్టార్టప్</p>"
-    },
-    TA: {
-        brandTitle: "மாட்சினு வெப்3 டெக் & AI",
-        adminBtn: "நிவாஹி",
-        heroBadge: "இந்தியாவின் முதல் தன்னாட்சி AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
-        heroTitle: "சவரன் கிளவுட் கம்ப்யூட் & தன்னாட்சி வேலைகள்",
-        heroDesc: "மாட்சினு வெப்3 டெக்னாலஜிஸ் என்பது MeitY இன் கீழ் அங்கீகரிக்கப்பட்ட தொடக்கமாகும். ₹2,000 முதல் ₹1,00,000 வரை சர்வர் தொகுப்புகளை வழங்குகிறது.",
-        launchTermBtn: "பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்கு",
-        waTitle: "10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்",
-        waDesc: "உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:",
-        voucherTitle: "ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்",
-        voucherSub: "* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)",
-        goldTitle: "24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)",
-        foodTitle: "உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்",
-        officialWeb: "அதிகாரப்பூர்வ வலைத்தளம்",
-        feat1Title: "தினசரி இ-காமர்ஸ் வேலைகள்",
-        feat1List: "<li><strong>Amazon:</strong> நோடு ஒத்திசைவு & SKU தணிக்கை பதிவுகள்</li><li><strong>Flipkart:</strong> லாஜிஸ்டிக்ஸ் ரூட்டிங் & பின் கோடு சோதனைகள்</li>",
-        feat2Title: "1. 14 நாள் சர்வர் நோடு உரிமம்",
-        feat2Desc: "உயர் செயல்திறன் கொண்ட கிளவுட் கணக்கீட்டு அடுக்குகளைத் தேர்ந்தெடுக்கவும்.",
-        feat3Title: "2. நேரலை பணிநிலை இருப்பு",
-        feat3Desc: "₹0.00 இல் தொடங்கும் உண்மையான நேர வருவாயைக் கண்காணிக்கவும்.",
-        feat4Title: "3. இ-காமர்ஸ் பணிப்பக்க பணிகள்",
-        feat4Desc: "தொழில்முறை ஊதியத்தைப் பெற சரிபார்ப்பு குழாய்களை இயக்கவும்.",
-        feat5Title: "4. 10% - 12% டைனமிக் பரிந்துரை போனஸ்",
-        feat5Desc: "உங்கள் நேரடி இணைப்பு மூலம் 10% அடிப்படை பரிந்துரை போனஸ் பெறுக (15 செயலில் உள்ள உறுப்பினர்களை அடைந்தவுடன் 12% ஆக உயரும்).",
-        loginTitle: "ஒப்பந்தக்காரர் பாதுகாப்பான நோடு உள்நுழைவு",
-        phonePlaceholder: "மொபைல் எண்ணை உள்ளிடவும் (எ.கா. 8122252222)",
-        sendOtpBtn: "OTP அனுப்பு",
-        verifyOtpBtn: "சரிபார்த்து தொடங்குக",
-        bypassBtn: "நேரடி உள்நுழைவு தவிர்ப்பு",
-        dashActiveLbl: "செயலில் உள்ள பணிநிலை நோடு",
-        dashSubLbl: "14 நாட்களுக்கு தினசரி பணிகளைத் திறக்க சர்வர் நோட்டைப் பயன்படுத்தவும்.",
-        upgradeNodeBtn: "சர்வர் நோட்டை வாங்கவும் / மேம்படுத்தவும்",
-        workloadHeading: "சரிபார்க்கப்பட்ட செயல்பாட்டு பணிகள்",
-        closeTermBtn: "முனையத்தை மூடு",
-        execBtn: "வரிசைமுறை செயலாக்கத்தைத் தொடங்கு",
-        modalStoreTitle: "சர்வர் நோடு சந்தாவைத் தேர்ந்தெடுக்கவும்",
-        modalStoreSub: "ஒவ்வொரு சர்வர் அடுக்கிலும் தானியங்கி பணித் தொகுப்புகள் உள்ளன.",
-        deployNodeBtn: "Razorpay வழியாக சர்வர் நோட்டை வரிசைப்படுத்து",
-        footerDisc: "<p>மாட்சினு வெப்3 டெக்னாலஜிஸ் — இந்தியாவின் அரசு அங்கீகரிக்கப்பட்ட Startup Entity (MeitY)</p>"
-    },
-    HI: {
-        brandTitle: "माड्जिनू वेब3 टेक & AI",
-        adminBtn: "एडमिन",
-        heroBadge: "भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क",
-        heroTitle: "सोवरिन क्लाउड कंप्यूट और स्वायत्त जॉबवर्क्स",
-        heroDesc: "माड्जिनू वेब3 टेक्नोलॉजीज MeitY के तहत मान्यता प्राप्त स्टार्टअप है। यह ₹2,000 से ₹1,00,000 तक के सर्वर पैकेज प्रदान करता है।",
-        launchTermBtn: "सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें",
-        waTitle: "10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट",
-        waDesc: "ऑटो-एम्बेडेड आईडी के साथ अपना रेफ़रल लिंक साझा करें:",
-        voucherTitle: "समर्थित वाउचर और पुरस्कार भागीदार",
-        voucherSub: "* एंटरप्राइज रिवार्ड पार्टनर (API इंटीग्रेशन और पायलट रोलआउट जल्द आ रहा है)",
-        goldTitle: "24K गोल्ड शोरूम पार्टनर (एंटरप्राइज टियर ₹25K+)",
-        foodTitle: "तत्काल लाइफस्टाइल और फूड वाउचर",
-        officialWeb: "आधिकारिक वेबसाइट",
-        feat1Title: "दैनिक ई-कॉमर्स जॉबवर्क्स",
-        feat1List: "<li><strong>Amazon:</strong> नोड सिंक और SKU ऑडिट लॉग</li><li><strong>Flipkart:</strong> लॉजिस्टिक्स रूटिंग और पिन-कोड जांच</li>",
-        feat2Title: "1. 14-दिवसीय सर्वर नोड लाइसेंस",
-        feat2Desc: "उच्च-थ्रूपुट क्लाउड कंप्यूट टियर चुनें (₹2,000 से ₹1,00,000)।",
-        feat3Title: "2. लाइव वर्कस्पेस बैलेंस",
-        feat3Desc: "₹0.00 से शुरू होने वाली वास्तविक समय की कमाई को ट्रैक करें.",
-        feat4Title: "3. ई-कॉमर्स जॉबवर्क कार्य",
-        feat4Desc: "व्यावसायिक पारिश्रमिक सुरक्षित करने के लिए स्वचालित सत्यापन पाइपलाइन निष्पादित करें।",
-        feat5Title: "4. 10% - 12% गतिशील रेफ़रल बोनस",
-        feat5Desc: "10% बेस रेफ़रल बोनस अर्जित करें (15 सक्रिय सदस्यों तक पहुंचने पर 12% तक बढ़ जाता है)।",
-        loginTitle: "कंट्रैक्टर सिक्योर नोड लॉगिन",
-        phonePlaceholder: "मोबाइल नंबर दर्ज करें (जैसे 8122252222)",
-        sendOtpBtn: "OTP भेजें",
-        verifyOtpBtn: "सत्यापित करें और लॉन्च करें",
-        bypassBtn: "प्रत्यक्ष लॉगिन बायपास",
-        dashActiveLbl: "सक्रिय वर्कस्पेस नोड",
-        dashSubLbl: "14 दिनों के दैनिक कार्यों को अनलॉक करने के लिए सर्वर नोड तैनात करें।",
-        upgradeNodeBtn: "सर्वर नोड खरीदें / अपग्रेड करें",
-        workloadHeading: "सत्यापित परिचालन कार्यभार",
-        closeTermBtn: "टर्मिनल बंद करें",
-        execBtn: "क्रमबद्ध निष्पादन शुरू करें",
-        modalStoreTitle: "सर्वर नोड सदस्यता चुनें",
-        modalStoreSub: "प्रत्येक सर्वर टियर 14-दिन के चक्र पर स्वचालित कार्य बैच प्रदान करता है।",
-        deployNodeBtn: "Razorpay के माध्यम से सर्वर नोड तैनात करें",
-        footerDisc: "<p>माड्जिनू वेब3 टेक्नोलॉजीज — MeitY मान्यता प्राप्त स्टार्टअप इकाई (भारत सरकार)</p>"
-    }
-};
-
-let currentLang = 'EN';
-
-function changeLanguage() {
-    const selector = document.getElementById('langSelector') || document.querySelector('select');
-    if(!selector) return;
-    currentLang = selector.value;
-    const t = translations[currentLang] || translations['EN'];
-
-    if(document.getElementById('brand-title')) document.getElementById('brand-title').innerText = t.brandTitle;
-    if(document.getElementById('admin-btn-txt')) document.getElementById('admin-btn-txt').innerText = t.adminBtn;
-    if(document.getElementById('hero-badge')) document.getElementById('hero-badge').innerHTML = `<i class="fa-solid fa-crown"></i> ${t.heroBadge}`;
-    if(document.getElementById('hero-title')) document.getElementById('hero-title').innerHTML = `Sovereign Cloud Compute & <br class="hidden md:block"/><span class="bg-gradient-to-r from-indigo-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">Autonomous Jobworks</span>`;
-    if(document.getElementById('hero-desc')) document.getElementById('hero-desc').innerText = t.heroDesc;
-    if(document.getElementById('launch-term-btn')) document.getElementById('launch-term-btn').innerHTML = `<i class="fa-solid fa-arrow-right-to-bracket"></i> ${t.launchTermBtn}`;
-
-    if(document.getElementById('wa-title')) document.getElementById('wa-title').innerText = t.waTitle;
-    if(document.getElementById('wa-desc')) document.getElementById('wa-descchildNodes') || document.querySelector("p:has(#whatsapp-section) ~ p") ; // fallback text update
-    
-    // Update Voucher & Partner section headers if elements have specific selectors or query them
-    document.querySelectorAll('h2, h3, h4, span, p').forEach(el => {
-        if(el.innerText.trim() === 'Supported Voucher & Reward Partners') el.innerText = t.voucherTitle;
-        if(el.innerText.includes('ENTERPRISE REWARD PARTNERS')) el.innerText = t.voucherSub;
-        if(el.innerText.includes('24K GOLD SHOWROOM PARTNERS')) el.innerText = t.goldTitle;
-        if(el.innerText.includes('INSTANT LIFESTYLE & FOOD VOUCHERS')) el.innerText = t.foodTitle;
-        if(el.innerText.trim() === 'Official Website') el.innerText = t.officialWeb;
-        if(el.innerText.trim() === '10 Unique WhatsApp Referral Scripts') el.innerText = t.waTitle;
-        if(el.innerText.includes('Share your referral link with auto-embedded ID')) el.innerText = t.waDesc;
-    });
-
-    if(document.getElementById('feat-1-title')) document.getElementById('feat-1-title').innerHTML = `<i class="fa-solid fa-list-check text-indigo-400"></i> ${t.feat1Title}`;
-    if(document.getElementById('feat-1-list')) document.getElementById('feat-1-list').innerHTML = t.feat1List;
-    
-    if(document.getElementById('feat-2-title')) document.getElementById('feat-2-title').innerHTML = `<i class="fa-solid fa-server text-indigo-400"></i> ${t.feat2Title}`;
-    if(document.getElementById('feat-2-desc')) document.getElementById('feat-2-desc').innerText = t.feat2Desc;
-
-    if(document.getElementById('feat-3-title')) document.getElementById('feat-3-title').innerHTML = `<i class="fa-solid fa-wallet text-emerald-400"></i> ${t.feat3Title}`;
-    if(document.getElementById('feat-3-desc')) document.getElementById('feat-3-desc').innerText = t.feat3Desc;
-
-    if(document.getElementById('feat-4-title')) document.getElementById('feat-4-title').innerHTML = `<i class="fa-solid fa-cart-shopping text-cyan-400"></i> ${t.feat4Title}`;
-    if(document.getElementById('feat-4-desc')) document.getElementById('feat-4-desc').innerText = t.feat4Desc;
-
-    if(document.getElementById('feat-5-title')) document.getElementById('feat-5-title').innerHTML = `<i class="fa-solid fa-users text-amber-400"></i> ${t.feat5Title}`;
-    if(document.getElementById('feat-5-desc')) document.getElementById('feat-5-desc').innerText = t.feat5Desc;
-
-    if(document.getElementById('login-title')) document.getElementById('login-title').innerHTML = `<i class="fa-solid fa-shield-keyhole text-indigo-400"></i> ${t.loginTitle}`;
-    if(document.getElementById('login-identifier')) document.getElementById('login-identifier').placeholder = t.phonePlaceholder;
-    if(document.getElementById('send-otp-btn')) document.getElementById('send-otp-btn').innerText = t.sendOtpBtn;
-    if(document.getElementById('verify-otp-btn')) document.getElementById('verify-otp-btn').innerText = t.verifyOtpBtn;
-    if(document.getElementById('bypass-btn-txt')) document.getElementById('bypass-btn-txt').innerHTML = `<i class="fa-solid fa-bolt"></i> ${t.bypassBtn}`;
-    
-    if(document.getElementById('dash-active-lbl')) document.getElementById('dash-active-lbl').innerText = t.dashActiveLbl;
-    if(document.getElementById('dash-sub-lbl')) document.getElementById('dash-sub-lbl').innerText = t.dashSubLbl;
-    if(document.getElementById('upgrade-node-btn')) document.getElementById('upgrade-node-btn').innerHTML = `<i class="fa-solid fa-server"></i> ${t.upgradeNodeBtn}`;
-    if(document.getElementById('workload-heading')) document.getElementById('workload-heading').innerText = t.workloadHeading;
-    if(document.getElementById('close-term-btn')) document.getElementById('close-term-btn').innerText = t.closeTermBtn;
-    if(document.getElementById('exec-btn-txt')) document.getElementById('exec-btn-txt').innerText = t.execBtn;
-    
-    if(document.getElementById('modal-store-title')) document.getElementById('modal-store-title').innerText = t.modalStoreTitle;
-    if(document.getElementById('modal-store-sub')) document.getElementById('modal-store-sub').innerText = t.modalStoreSub;
-    if(document.getElementById('deploy-node-btn')) document.getElementById('deploy-node-btn').innerText = t.deployNodeBtn;
-    if(document.getElementById('footer-disc')) document.getElementById('footer-disc').innerHTML = t.footerDisc;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const sel = document.getElementById('langSelector') || document.querySelector('select');
-    if(sel) {
-        sel.onchange = changeLanguage;
-    }
-});
-</script>
+        }
+    </script>
 </body>
 </html>
-
