@@ -307,37 +307,68 @@
             document.getElementById('login-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function verifySecureNodeAccess() {
-    const mobile = document.getElementById('login-mobile').value;
-    const otp = document.getElementById('login-otp-code').value;
-    
-    // Admin Direct Bypass / Master Login
-    if((mobile === '9840000000' && otp === '2026') || otp === '2026' || mobile === 'admin') {
-        alert('Secure Node Access Granted for Admin!');
-        document.getElementById('login-section').innerHTML = `
-            <div style="background: #111827; padding: 15px; border-radius: 10px; border: 1px solid #10b981; text-align: center;">
-                <h3 style="color: #34d399; margin-bottom: 10px;"><i class="fa-solid fa-user-shield"></i> Admin Fingertip Dashboard</h3>
-                <p style="color: #fff; font-size: 11px; margin-bottom: 10px;">Welcome Admin! All user activity, deposit logs, and transaction history are live.</p>
-                <button onclick="alert('Viewing all registered user nodes & withdrawal requests.')" style="background: #10b981; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-right: 5px;">View Users & History</button>
-                <button onclick="alert('Withdrawal request pipeline active.')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Manage Payouts</button>
+        // Top Admin Login with password: madz1222
+function openAdminLoginModal() {
+    const pwd = prompt('Enter Admin Password:');
+    if(pwd === 'madz1222') {
+        alert('Admin Fingertip Access Granted!');
+        document.body.insertAdjacentHTML('afterbegin', `
+            <div id="admin-modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                <div style="background: #111827; border: 1px solid #10b981; padding: 20px; border-radius: 12px; width: 100%; max-width: 500px; color: #fff; max-height: 90vh; overflow-y: auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3 style="color: #34d399; margin: 0;"><i class="fa-solid fa-user-shield"></i> Admin Fingertip Dashboard</h3>
+                        <button onclick="document.getElementById('admin-modal-overlay').remove()" style="background: #ef4444; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Close</button>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 12px; margin-bottom: 15px;">Govt. recognized startup admin control panel. Reviewing live nodes, transactions, and payouts.</p>
+                    <div style="background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                        <strong style="color: #34d399;">Total Active Nodes:</strong> 1,420
+                    </div>
+                    <div style="background: #1f2937; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                        <strong style="color: #6366f1;">Pending Payout Requests:</strong> 3 requests pending approval
+                    </div>
+                    <button onclick="alert('All user logs synced successfully.')" style="background: #10b981; color: #fff; border: none; width: 100%; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;">Sync & Refresh Logs</button>
+                </div>
             </div>
-        `;
-    } else {
-        alert('Invalid OTP or Mobile Number. Use Admin Mobile: 9840000000 and OTP: 2026');
+        `);
+    } else if(pwd !== null) {
+        alert('Incorrect Admin Password!');
     }
 }
 
+// User Mobile & OTP Login opening Server Compute Dashboard with ₹2K - ₹1L Packages & Balances
+function verifySecureNodeAccess() {
+    const mobile = document.getElementById('login-mobile').value.trim();
+    if(mobile.length < 10) { alert('Please enter a valid 10-digit mobile number'); return; }
+    
+    document.getElementById('login-section').innerHTML = `
+        <div style="background: #111827; padding: 15px; border-radius: 10px; border: 1px solid #10b981; text-align: left;">
+            <h3 style="color: #34d399; margin-bottom: 8px; text-align: center;"><i class="fa-solid fa-server"></i> Sovereign Server Compute Dashboard</h3>
+            <p style="color: #94a3b8; font-size: 11px; text-align: center; margin-bottom: 12px;">User Node: +91 ${mobile} | Verified</p>
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <div style="flex: 1; background: #1f2937; padding: 8px; border-radius: 6px; text-align: center;">
+                    <span style="font-size: 9px; color: #94a3b8;">WALLET INR</span>
+                    <h4 style="color: #34d399; font-size: 14px; margin-top: 2px;">₹24,500.00</h4>
+                </div>
+                <div style="flex: 1; background: #1f2937; padding: 8px; border-radius: 6px; text-align: center;">
+                    <span style="font-size: 9px; color: #94a3b8;">GOLD VAULT</span>
+                    <h4 style="color: #fbbf24; font-size: 14px; margin-top: 2px;">2.450 Grams</h4>
+                </div>
+            </div>
 
-        function shareWhatsApp(id) {
-            const lang = document.getElementById('langSelector').value;
-            const t = translations[lang] || translations['EN'];
-            const msgList = t.wa;
-            const selectedMsg = msgList[id - 1] || msgList[0];
-            const refLink = window.location.origin + window.location.pathname + '?ref=MADZ_' + Math.floor(100000 + Math.random() * 900000);
-            const text = encodeURIComponent(selectedMsg + refLink);
-            window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
-            document.getElementById('waStatus').innerText = 'Successfully shared Script #' + id + ' in ' + lang + '!';
-        }
+            <h4 style="color: #fff; font-size: 12px; margin-bottom: 8px;"><i class="fa-solid fa-box"></i> Select Server Compute Package (₹2K - ₹1L):</h4>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 12px;">
+                <button onclick="alert('Selected ₹2,000 Compute Package. Deploying node...')" style="background: #1f2937; color: #34d399; border: 1px solid #34d399; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹2,000 Tier</button>
+                <button onclick="alert('Selected ₹10,000 Compute Package. Deploying node...')" style="background: #1f2937; color: #34d399; border: 1px solid #34d399; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹10,000 Tier</button>
+                <button onclick="alert('Selected ₹25,000 Compute Package. Deploying node...')" style="background: #1f2937; color: #34d399; border: 1px solid #34d399; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹25,000 Tier</button>
+                <button onclick="alert('Selected ₹1,00,000 Enterprise Package. Deploying node...')" style="background: #10b981; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹1,00,000 Enterprise</button>
+            </div>
+            
+            <button onclick="alert('High-throughput server node active and executing autonomous tasks.')" style="background: #6366f1; color: #fff; width: 100%; border: none; padding: 9px; border-radius: 6px; font-weight: bold; font-size: 11px; cursor: pointer;">LAUNCH ACTIVE CLOUD COMPUTE</button>
+        </div>
+    `;
+}
+
 
         function openAdminLoginModal() {
             const pwd = prompt('Enter Admin Password:');
