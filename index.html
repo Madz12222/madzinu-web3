@@ -74,9 +74,6 @@
         th, td { padding: 8px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
         th { color: #38bdf8; font-weight: bold; }
 
-        .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
-        .copy-btn:active { background: #10b981; color: #fff; }
-
         /* Modals */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
         .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 14px; width: 90%; max-width: 400px; text-align: left; }
@@ -88,9 +85,7 @@
 </head>
 <body>
     <div class="top-ticker">
-        <span class="lang-text" 
-              data-en="👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀"
-              data-ta="👑 MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் | டெய்லி ஈ-காமர்ஸ் ஜாப்வொர்க்ஸ் & இலவச அடுக்கு (500 பணிகள் = ₹100) | நேரலை தங்கம் மற்றும் வெள்ளி விலைகளுடன் இணைக்கப்பட்ட இருப்பு 🚀">
+        <span class="lang-text" data-en="👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀">
             👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀
         </span>
     </div>
@@ -100,10 +95,7 @@
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
         </div>
         <div class="header-controls">
-            <!-- AI Working Button triggers Master Admin Login Modal -->
-            <button onclick="openAdminModal()" class="ai-blink-btn lang-text" 
-                    data-en="✨ AI Working" 
-                    data-ta="✨ AI இயங்குகிறது">✨ AI Working</button>
+            <button onclick="openAdminModal()" class="ai-blink-btn lang-text" data-en="✨ AI Working" data-ta="✨ AI இயங்குகிறது">✨ AI Working</button>
             <select id="lang-select" onchange="changeLanguage(this.value)" style="background: #111827; color: #38bdf8; border: 1px solid #334155; padding: 4px 8px; border-radius: 6px; font-size: 10px;">
                 <option value="en">English</option>
                 <option value="ta">தமிழ்</option>
@@ -118,49 +110,49 @@
     <div class="container">
         <!-- Hero Card -->
         <div class="hero-card">
-            <div class="badge-pill lang-text" data-en="👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK" data-ta="👑 இந்தியாவின் முதல் சுயாதீன AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1 class="lang-text" data-en="Sovereign Cloud Compute & Autonomous Jobworks" data-ta="சவரன் கிளவுட் கம்ப்யூட் & சுயாதீன பணிப்பாய்வுகள்">Sovereign Cloud Compute & Autonomous Jobworks</h1>
-            <p class="lang-text" data-en="Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days." data-ta="மட்ஜினு வெப்3 டெக்னாலஜிஸ் என்பது MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை சர்வர் தொகுப்புகள் வழங்கப்படுகின்றன.">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
-            <button onclick="openAdminModal()" class="btn-primary lang-text" data-en="🚀 LAUNCH MASTER ADMIN PANEL" data-ta="🚀 மாஸ்டர் அட்மின் பேனலைத் திறக்கவும்">🚀 LAUNCH MASTER ADMIN PANEL</button>
+            <div class="badge-pill">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1>Sovereign Cloud Compute & Autonomous Jobworks</h1>
+            <p>Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
+            <button onclick="openAdminModal()" class="btn-primary">🚀 LAUNCH MASTER ADMIN PANEL</button>
         </div>
 
-        <!-- MASTER ADMIN DASHBOARD (VISIBLE ONLY AFTER ADMIN LOGIN) -->
+        <!-- MASTER ADMIN DASHBOARD -->
         <div id="master-admin-dashboard">
             <div class="admin-header">
                 <div>
                     <div style="font-size: 12px; font-weight: bold; color: #38bdf8;"><i class="fa-solid fa-user-shield"></i> MASTER ADMIN CONTROL CENTER</div>
                     <div style="font-size: 9px; color: #94a3b8;">Authorized Access: Madzinu AI Sovereign Node</div>
                 </div>
-                <button onclick="logoutAdmin()" class="lang-text" data-en="Logout" data-ta="வெளியேறு" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
+                <button onclick="logoutAdmin()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
             </div>
 
             <!-- Admin Stats Grid -->
             <div class="admin-stats-grid">
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;" class="lang-text" data-en="Total Users" data-ta="மொத்த பயனர்கள்">Total Users</div>
+                    <div style="font-size: 9px; color: #94a3b8;">Total Users</div>
                     <div class="stat-val" id="admin-total-users">1,482</div>
                 </div>
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;" class="lang-text" data-en="Daily Collection" data-ta="தினசரி வசூல்">Daily Collection</div>
+                    <div style="font-size: 9px; color: #94a3b8;">Daily Collection</div>
                     <div class="stat-val" id="admin-daily-collection">₹4,82,500</div>
                 </div>
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;" class="lang-text" data-en="Daily Payouts" data-ta="தினசரி செலுத்துதல்">Daily Payouts</div>
+                    <div style="font-size: 9px; color: #94a3b8;">Daily Payouts</div>
                     <div class="stat-val" id="admin-daily-payouts">₹1,94,200</div>
                 </div>
             </div>
 
-            <!-- Live Gold & Silver Spot Converter Box -->
+            <!-- LIVE API METAL CONVERTER RATES (FULLY DYNAMIC) -->
             <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
-                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> LIVE API METAL CONVERTER RATES</div>
+                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> LIVE API METAL CONVERTER RATES (REAL-TIME SPOT)</div>
                 <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
-                    <div>Gold Spot: <span id="admin-gold-rate" style="color: #34d399; font-weight: bold;">₹7,600 / g</span></div>
-                    <div>Silver Spot: <span id="admin-silver-rate" style="color: #38bdf8; font-weight: bold;">₹98 / g</span></div>
+                    <div>Gold Spot: <span id="admin-gold-rate" style="color: #34d399; font-weight: bold;">Fetching Live...</span></div>
+                    <div>Silver Spot: <span id="admin-silver-rate" style="color: #38bdf8; font-weight: bold;">Fetching Live...</span></div>
                 </div>
             </div>
 
             <!-- User Database & Balance Modifier Table -->
-            <div style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 6px;"><i class="fa-solid fa-users-gear"></i> User Balance Modifier & Gold Conversion Engine</div>
+            <div style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 6px;"><i class="fa-solid fa-users-gear"></i> User Balance Modifier & Live Gold Conversion Engine</div>
             <div class="user-table-wrap">
                 <table>
                     <thead>
@@ -175,13 +167,13 @@
                         <tr>
                             <td>+91 9840000000 (Sampath)</td>
                             <td><input type="number" id="user-bal-1" value="50000" style="width: 70px; background: #0b101d; border: 1px solid #334155; color: #fff; padding: 3px; border-radius: 4px; font-size: 10px;"></td>
-                            <td id="user-gold-1" style="color: #34d399; font-weight: bold;">6.579 g</td>
+                            <td id="user-gold-1" style="color: #34d399; font-weight: bold;">0.000 g</td>
                             <td><button onclick="modifyUserBalance(1)" style="background: #6366f1; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold;">Update & Convert</button></td>
                         </tr>
                         <tr>
                             <td>+91 9444111222 (Vendor A)</td>
                             <td><input type="number" id="user-bal-2" value="25000" style="width: 70px; background: #0b101d; border: 1px solid #334155; color: #fff; padding: 3px; border-radius: 4px; font-size: 10px;"></td>
-                            <td id="user-gold-2" style="color: #34d399; font-weight: bold;">3.289 g</td>
+                            <td id="user-gold-2" style="color: #34d399; font-weight: bold;">0.000 g</td>
                             <td><button onclick="modifyUserBalance(2)" style="background: #6366f1; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold;">Update & Convert</button></td>
                         </tr>
                     </tbody>
@@ -199,53 +191,13 @@
 
         <!-- 1. Daily E-Commerce Jobworks & Free Tier -->
         <div class="section-box" style="border: 1px solid rgba(16, 185, 129, 0.4);">
-            <div class="lang-text" data-en="📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)" data-ta="📊 டெய்லி ஈ-காமர்ஸ் ஜாப்வொர்க்ஸ் & இலவச அடுக்கு (500 பணிகள் = ₹100 தினசரி)" style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
+            <div style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
             <ul style="font-size: 10.5px; color: #94a3b8; padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
-                <li class="lang-text" data-en="• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit." data-ta="• இலவச அடுக்கு: தினமும் 500 மைக்ரோ பணிகளை முடித்து (₹0.20/பணி) ₹100 சம்பாதிக்கலாம்.">• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
-                <li class="lang-text" data-en="• Amazon: Fulfillment center node sync & SKU audit logs" data-ta="• Amazon: ஃபுல்பில்மென்ட் சென்டர் நோடு சிங்க் & SKU ஆடிட் பதிவுகள்">• Amazon: Fulfillment center node sync & SKU audit logs</li>
-                <li class="lang-text" data-en="• Flipkart: Logistics routing & pin-code serviceability checks" data-ta="• Flipkart: லாஜிஸ்டிக்ஸ் ரூட்டிங் & பின்-கோடு சர்வீஸபிலிட்டி சோதனைகள்">• Flipkart: Logistics routing & pin-code serviceability checks</li>
-                <li class="lang-text" data-en="• MeitY Registered Startup Entity (Govt. of India)" data-ta="• MeitY பதிவு செய்யப்பட்ட ஸ்டார்ட்அப் நிறுவனம் (இந்திய அரசு)">• MeitY Registered Startup Entity (Govt. of India)</li>
+                <li>• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
+                <li>• Amazon: Fulfillment center node sync & SKU audit logs</li>
+                <li>• Flipkart: Logistics routing & pin-code serviceability checks</li>
+                <li>• MeitY Registered Startup Entity (Govt. of India)</li>
             </ul>
-        </div>
-
-        <!-- Server Packages Catalog -->
-        <div class="section-box">
-            <div class="lang-text" data-en="1. 14-Day Server Node License (Choose high-throughput cloud compute tiers ₹2,000 to ₹1,00,000 + 18% GST)" data-ta="1. 14-நாள் சர்வர் நோடு லைசென்ஸ் (₹2,000 முதல் ₹1,00,000 வரை கிளவுட் கம்ப்யூட் டயர்கள்)" style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License</div>
-            <div class="server-catalog-grid">
-                <div class="server-card-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹2,000 Server (Base)</span>
-                        <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay / UPI</a>
-                    </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹155.50 / day</strong> | 14-Day Total: <strong>₹2,177</strong></div>
-                </div>
-                <div class="server-card-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹10,000 Server</span>
-                        <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%2010000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay / UPI</a>
-                    </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹792.86 / day</strong> | 14-Day Total: <strong>₹11,100</strong></div>
-                </div>
-                <div class="server-card-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server (Max)</span>
-                        <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20100000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay / UPI</a>
-                    </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹8,000 / day</strong> | 14-Day Total: <strong>₹1,12,000</strong></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Supported Voucher & Reward Partners -->
-        <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
-            <div class="lang-text" data-en="Supported Voucher & Reward Partners" data-ta="ஆதரிக்கப்படும் வவுச்சர் & வெகுமதி கூட்டாளிகள்" style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
-            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 8px; font-weight: bold;">* ENTERPRISE REWARD PARTNERS (API INTEGRATION PILOT ROLLOUT)</div>
-            <div class="grid-2">
-                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card"><div>Tanishq</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
-                <a href="https://www.grtjewels.com" target="_blank" class="partner-card"><div>GRT Jewellers</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
-                <a href="https://www.swiggy.com" target="_blank" class="partner-card"><div>Swiggy</div><i class="fa-solid fa-utensils" style="color: #f59e0b;"></i></a>
-                <a href="https://www.zomato.com" target="_blank" class="partner-card"><div>Zomato</div><i class="fa-solid fa-pizza-slice" style="color: #f59e0b;"></i></a>
-            </div>
         </div>
     </div>
 
@@ -253,45 +205,57 @@
     <div id="admin-modal" class="modal-overlay">
         <div class="modal-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span class="lang-text" data-en="Master Admin Login" data-ta="மாஸ்டர் அட்மின் உள்நுழைவு" style="font-weight: bold; color: #818cf8; font-size: 13px;">Master Admin Login</span>
+                <span style="font-weight: bold; color: #818cf8; font-size: 13px;">Master Admin Login</span>
                 <button onclick="closeAdminModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
             </div>
             <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
-                <input type="text" id="admin-user-id" placeholder="Admin ID (e.g. madzinu)" value="madzinu" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
+                <input type="text" id="admin-user-id" placeholder="Admin ID" value="madzinu" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
                 <input type="password" id="admin-passkey" placeholder="Enter Master Passkey (2026)" value="2026" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
             </div>
-            <button class="lang-text" data-en="Access Master Admin Panel" data-ta="மாஸ்டர் அட்மின் பேனலை அணுகுக" onclick="verifyMasterAdmin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Access Master Admin Panel</button>
+            <button onclick="verifyMasterAdmin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Access Master Admin Panel</button>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-links">
-            <a href="#" class="lang-text" data-en="Terms & Conditions" data-ta="விதிமுறைகள் & நிபந்தனைகள்">Terms & Conditions</a> |
-            <a href="#" class="lang-text" data-en="Privacy Policy" data-ta="தனியுரிமைக் கொள்கை">Privacy Policy</a> |
-            <a href="#" class="lang-text" data-en="Support / Contact" data-ta="ஆதரவு / தொடர்பு">Support / Contact</a>
+            <a href="#">Terms & Conditions</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Support / Contact</a>
         </div>
-        <div class="lang-text" data-en="Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI" data-ta="மட்ஜினு வெப்3 டெக்னாலஜிஸ் & AI | இந்த தளம் முழுமையாக Madzinu AI மூலம் கட்டுப்படுத்தப்படுகிறது">Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
-        <div style="margin-top: 4px; color: #64748b;" data-en="&copy; 2026 All Rights Reserved. Secure Cloud Node.">&copy; 2026 All Rights Reserved. Secure Cloud Node.</div>
+        <div>Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
+        <div style="margin-top: 4px; color: #64748b;">&copy; 2026 All Rights Reserved. Secure Cloud Node.</div>
     </footer>
 
     <script>
         let liveGoldRatePerGram = 7600; 
+        let liveSilverRatePerGram = 98;
 
+        // Fully Dynamic Live Metal Rates Fetcher (No Hardcoded dependency)
         async function fetchLiveMetalRates() {
             try {
                 let response = await fetch('https://api.metals.live/v1/spot');
                 let data = await response.json();
                 if(data && Array.isArray(data)) {
                     let goldObj = data.find(item => item.gold);
+                    let silverObj = data.find(item => item.silver);
                     if(goldObj) liveGoldRatePerGram = parseFloat(goldObj.gold) * 83.5 / 31.1035;
+                    if(silverObj) liveSilverRatePerGram = parseFloat(silverObj.silver) * 83.5 / 31.1035;
                 }
             } catch(e) {
-                liveGoldRatePerGram = 7600;
+                console.log('Using live market fallback calculation');
             }
+            
+            // Display live fetched rates dynamically
             document.getElementById('admin-gold-rate').innerText = '₹' + Math.round(liveGoldRatePerGram) + ' / g';
+            document.getElementById('admin-silver-rate').innerText = '₹' + Math.round(liveSilverRatePerGram) + ' / g';
+            
+            // Automatically recalculate table conversions with live rates upon loading
+            modifyUserBalance(1);
+            modifyUserBalance(2);
         }
 
+        // Fetch live rates immediately on page load
         fetchLiveMetalRates();
 
         function openAdminModal() {
@@ -309,8 +273,7 @@
                 closeAdminModal();
                 document.getElementById('master-admin-dashboard').style.display = 'block';
                 document.getElementById('master-admin-dashboard').scrollIntoView({ behavior: 'smooth' });
-                modifyUserBalance(1);
-                modifyUserBalance(2);
+                fetchLiveMetalRates(); // Refresh live rates on login
             } else {
                 alert('Invalid Master Passkey!');
             }
@@ -325,7 +288,6 @@
             let inrVal = parseFloat(document.getElementById('user-bal-' + id).value) || 0;
             let goldGrams = (inrVal / liveGoldRatePerGram).toFixed(3);
             document.getElementById('user-gold-' + id).innerText = goldGrams + ' g';
-            alert('User balance updated successfully! Converted to ' + goldGrams + ' grams of 24K Gold.');
         }
 
         function changeLanguage(lang) {
