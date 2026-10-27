@@ -62,7 +62,7 @@
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
         .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
         
-        /* Master Admin Dashboard (Hidden by default, opens upon login) */
+        /* Master Admin Control Dashboard */
         #master-admin-dashboard { display: none; background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border: 2px solid #6366f1; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
         .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #312e81; padding-bottom: 10px; margin-bottom: 12px; }
         .admin-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
@@ -73,6 +73,9 @@
         table { width: 100%; border-collapse: collapse; font-size: 10px; text-align: left; }
         th, td { padding: 8px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
         th { color: #38bdf8; font-weight: bold; }
+
+        .server-catalog-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+        .server-card-item { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; }
 
         .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
         .copy-btn:active { background: #10b981; color: #fff; }
@@ -88,8 +91,13 @@
 </head>
 <body>
     <div class="top-ticker">
-        <span class="lang-text" data-en="👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀"
-              data-ta="👑 MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் | டெய்லி ஈ-காமர்ஸ் ஜாப்வொர்க்ஸ் & இலவச அடுக்கு (500 பணிகள் = ₹100) | நேரலை தங்கம் மற்றும் வெள்ளி விலைகளுடன் இணைக்கப்பட்ட இருப்பு 🚀">
+        <span class="lang-text" 
+              data-en="👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀"
+              data-ta="👑 MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் | டெய்லி ஈ-காமர்ஸ் ஜாப்வொர்க்ஸ் & இலவச அடுக்கு (500 பணிகள் = ₹100) | நேரலை தங்கம் மற்றும் வெள்ளி விலைகளுடன் இணைக்கப்பட்ட இருப்பு 🚀"
+              data-hi="👑 MeitY के तहत भारत सरकार मान्यता प्राप्त स्टार्टअप | दैनिक ई-कॉमर्स जॉबवर्क्स और मुफ्त टियर | रियल-टाइम लाइव गोल्ड और सिल्वर रेट पोर्टफोलियो 🚀"
+              data-te="👑 MeitY గుర్తింపు పొందిన స్టార్టప్ | రోజువారీ ఇ-కామర్స్ జాబ్‌వర్క్స్ & ఉచిత టైర్ | రియల్ టైమ్ లైవ్ గోల్డ్ & సిల్వర్ రేట్ పోర్ట్‌ఫోలియో 🚀"
+              data-ml="👑 MeitY അംഗീകരിച്ച സ്റ്റാർട്ടപ്പ് | പ്രതിദിന ഇ-കോമേഴ്സ് ജോബ്‌വർക്സ് & സൗജന്യ ടയർ | തത്സമയ സ്വർണ്ണ & വെള്ളി നിരക്ക് പോർട്ട്ഫോളിയോ 🚀"
+              data-kn="👑 MeitY ಅಡಿಯಲ್ಲಿ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟ್‌ಅಪ್ | ದೈನಂದಿನ ಇ-ಕಾಮರ್ಸ್ ಉದ್ಯೋಗಗಳು ಮತ್ತು ಉಚಿತ ಶ್ರೇಣಿ | ರಿಯಲ್-ಟೈಮ್ ಲೈವ್ ಗೋಲ್ಡ್ ಮತ್ತು ಸಿಲ್ವರ್ ದರ ಪೋರ್ಟ್ಫೋಲಿಯೋ 🚀">
             👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀
         </span>
     </div>
@@ -99,8 +107,13 @@
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
         </div>
         <div class="header-controls">
-            <!-- AI Working Button triggers Admin Login Popup -->
-            <button onclick="openAdminModal()" class="ai-blink-btn lang-text" data-en="✨ AI Working" data-ta="✨ AI இயங்குகிறது">✨ AI Working</button>
+            <button onclick="openAdminModal()" class="ai-blink-btn lang-text" 
+                    data-en="✨ AI Working" 
+                    data-ta="✨ AI இயங்குகிறது" 
+                    data-hi="✨ एआई कार्य कर रहा है" 
+                    data-te="✨ AI పనిచేస్తోంది" 
+                    data-ml="✨ AI പ്രവർത്തിക്കുന്നു" 
+                    data-kn="✨ AI ಕೆಲಸ ಮಾಡುತ್ತಿದೆ">✨ AI Working</button>
             <select id="lang-select" onchange="changeLanguage(this.value)" style="background: #111827; color: #38bdf8; border: 1px solid #334155; padding: 4px 8px; border-radius: 6px; font-size: 10px;">
                 <option value="en">English</option>
                 <option value="ta">தமிழ்</option>
@@ -113,33 +126,33 @@
     </header>
 
     <div class="container">
-        <!-- MASTER ADMIN DASHBOARD (Hidden by default, appears when admin logs in) -->
+        <!-- MASTER ADMIN CONTROL CENTER (DISPLAYS ONLY AFTER ADMIN LOGIN) -->
         <div id="master-admin-dashboard">
             <div class="admin-header">
                 <div>
                     <div style="font-size: 12px; font-weight: bold; color: #38bdf8;"><i class="fa-solid fa-user-shield"></i> MASTER ADMIN CONTROL CENTER</div>
                     <div style="font-size: 9px; color: #94a3b8;">Authorized Access: Madzinu AI Sovereign Node</div>
                 </div>
-                <button onclick="logoutAdmin()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
+                <button onclick="logoutAdmin()" class="lang-text" data-en="Logout" data-ta="வெளியேறு" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
             </div>
 
             <!-- Admin Stats Grid -->
             <div class="admin-stats-grid">
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Total Users</div>
+                    <div style="font-size: 9px; color: #94a3b8;" class="lang-text" data-en="Total Users" data-ta="மொத்த பயனர்கள்">Total Users</div>
                     <div class="stat-val" id="admin-total-users">1,482</div>
                 </div>
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Collection</div>
+                    <div style="font-size: 9px; color: #94a3b8;" class="lang-text" data-en="Daily Collection" data-ta="தினசரி வசூல்">Daily Collection</div>
                     <div class="stat-val" id="admin-daily-collection">₹4,82,500</div>
                 </div>
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Payouts</div>
+                    <div style="font-size: 9px; color: #94a3b8;" class="lang-text" data-en="Daily Payouts" data-ta="தினசரி செலுத்துதல்">Daily Payouts</div>
                     <div class="stat-val" id="admin-daily-payouts">₹1,94,200</div>
                 </div>
             </div>
 
-            <!-- LIVE API METAL CONVERTER RATES -->
+            <!-- Live API Metal Rates -->
             <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
                 <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> LIVE API METAL CONVERTER RATES (REAL-TIME SPOT)</div>
                 <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
@@ -186,64 +199,171 @@
             </div>
         </div>
 
-        <!-- Original User Homepage & Server Packages -->
+        <!-- HERO CARD (ORIGINAL HOME PAGE) -->
         <div class="hero-card">
-            <div class="badge-pill lang-text" data-en="👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK" data-ta="👑 இந்தியாவின் முதல் சுயாதீன AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1 class="lang-text" data-en="Sovereign Cloud Compute & Autonomous Jobworks" data-ta="சவரன் கிளவுட் கம்ப்யூட் & சுயாதீன பணிப்பாய்வுகள்">Sovereign Cloud Compute & Autonomous Jobworks</h1>
-            <p class="lang-text" data-en="Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days." data-ta="மட்ஜினு வெப்3 டெக்னாலஜிஸ் என்பது MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை சர்வர் தொகுப்புகள் வழங்கப்படுகின்றன.">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
-            <button onclick="openAdminModal()" class="btn-primary lang-text" data-en="🚀 LAUNCH MASTER ADMIN PANEL" data-ta="🚀 மாஸ்டர் அட்மின் பேனலைத் திறக்கவும்">🚀 LAUNCH MASTER ADMIN PANEL</button>
+            <div class="badge-pill lang-text" 
+                 data-en="👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK" 
+                 data-ta="👑 இந்தியாவின் முதல் சுயாதீன AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்"
+                 data-hi="👑 भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क"
+                 data-te="👑 భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్"
+                 data-ml="👑 ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ & ക്ലൗഡ് നെറ്റ്‌വർക്ക്"
+                 data-kn="👑 ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ ಮತ್ತು ಕ್ಲೌಡ್ ನೆಟ್‌ವರ್ಕ್">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            
+            <h1 class="lang-text" 
+                data-en="Sovereign Cloud Compute & Autonomous Jobworks" 
+                data-ta="சவரன் கிளவுட் கம்ப்யூட் & சுயாதீன பணிப்பாய்வுகள்"
+                data-hi="संप्रभु क्लाउड कंप्यूट और स्वायत्त कार्य"
+                data-te="సావరిన్ క్లౌడ్ కంప్యూట్ & స్వయంప్రతిపత్తి కలిగిన జాబ్‌వర్క్స్"
+                data-ml="സോവറിൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ഓട്ടോണമസ് ജോബ്‌വർക്സ്"
+                data-kn="ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಸ್ವಾಯತ್ತ ಉದ್ಯೋಗಗಳು">Sovereign Cloud Compute & Autonomous Jobworks</h1>
+            
+            <p class="lang-text" 
+               data-en="Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days." 
+               data-ta="மட்ஜினு வெப்3 டெக்னாலஜிஸ் என்பது MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை சர்வர் தொகுப்புகள் மற்றும் 14 நாள் தொழில்முறை பணி ஊதியம் வழங்கப்படுகிறது."
+               data-hi="Madzinu Web3 Technologies MeitY के तहत भारत सरकार मान्यता प्राप्त स्टार्टअप है, जिसमें ₹2,000 से ₹1,00,000 तक सर्वर पैकेज और 14 दिनों की पेशेवर कार्य पारिश्रमिक मिलती है।"
+               data-te="Madzinu Web3 Technologies అనేది MeitY కింద గుర్తింపు పొందిన స్టార్టప్. ₹2,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలు మరియు 14 రోజుల వృత్తిపరమైన పని వేతనం అందించబడుతుంది."
+               data-ml="Madzinu Web3 Technologies എന്നത് MeitY-ന് കീഴിലുള്ള അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്. ₹2,000 മുതൽ ₹1,00,000 വരെയുള്ള സെർവർ പാക്കേജുകളും 14 ദിവസത്തെ പ്രതിഫലവും ലഭിക്കുന്നു."
+               data-kn="Madzinu Web3 Technologies MeitY ಅಡಿಯಲ್ಲಿ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದ್ದು, ₹2,000 ರಿಂದ ₹1,00,000 ವರೆಗಿನ சர்வர் தொகுப்புகள் வழங்கப்படுகின்றன.">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
+            
+            <button onclick="openAdminModal()" class="btn-primary lang-text" 
+               data-en="🚀 LAUNCH SECURE ENTERPRISE NODE" 
+               data-ta="🚀 பாதுகாப்பான என்டர்பிரைஸ் நோடைத் தொடங்கவும்">🚀 LAUNCH SECURE ENTERPRISE NODE</button>
         </div>
 
-        <!-- Daily E-Commerce Jobworks & Free Tier -->
+        <!-- 1. Daily E-Commerce Jobworks & Free Tier -->
         <div class="section-box" style="border: 1px solid rgba(16, 185, 129, 0.4);">
-            <div class="lang-text" data-en="📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)" data-ta="📊 டெய்லி ஈ-காமர்ஸ் ஜாப்வொர்க்ஸ் & இலவச அடுக்கு (500 பணிகள் = ₹100 தினசரி)" style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
+            <div class="lang-text" 
+                 data-en="📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)" 
+                 data-ta="📊 டெய்லி ஈ-காமர்ஸ் ஜாப்வொர்க்ஸ் & இலவச அடுக்கு (500 பணிகள் = ₹100 தினசரி, குறைந்தபட்ச எடுப்பு ₹100)"
+                 style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
+            
             <ul style="font-size: 10.5px; color: #94a3b8; padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
-                <li class="lang-text" data-en="• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit." data-ta="• இலவச அடுக்கு: தினமும் 500 மைக்ரோ பணிகளை முடித்து (₹0.20/பணி) ₹100 சம்பாதிக்கலாம்.">• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
+                <li class="lang-text" 
+                    data-en="• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit." 
+                    data-ta="• இலவச அடுக்கு: தினமும் 500 மைக்ரோ பணிகளை முடித்து (₹0.20/பணி) ₹100 சம்பாதிக்கலாம். குறைந்தபட்ச எடுப்பு ₹100.">• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
                 <li class="lang-text" data-en="• Amazon: Fulfillment center node sync & SKU audit logs" data-ta="• Amazon: ஃபுல்பில்மென்ட் சென்டர் நோடு சிங்க் & SKU ஆடிட் பதிவுகள்">• Amazon: Fulfillment center node sync & SKU audit logs</li>
                 <li class="lang-text" data-en="• Flipkart: Logistics routing & pin-code serviceability checks" data-ta="• Flipkart: லாஜிஸ்டிக்ஸ் ரூட்டிங் & பின்-கோடு சர்வீஸபிலிட்டி சோதனைகள்">• Flipkart: Logistics routing & pin-code serviceability checks</li>
+                <li class="lang-text" data-en="• Meesho: Catalog pricing verification & vendor order feeds" data-ta="• Meesho: கேட்டலாக் விலை சரிபார்ப்பு & வெண்டர் ஆர்டர் ஃபீட்ஸ்">• Meesho: Catalog pricing verification & vendor order feeds</li>
                 <li class="lang-text" data-en="• MeitY Registered Startup Entity (Govt. of India)" data-ta="• MeitY பதிவு செய்யப்பட்ட ஸ்டார்ட்அப் நிறுவனம் (இந்திய அரசு)">• MeitY Registered Startup Entity (Govt. of India)</li>
             </ul>
         </div>
 
-        <!-- 1. 14-Day Server Node License -->
+        <!-- Server Packages Catalog (ALL 6 ORIGINAL PACKAGES WITH GPAY & SLICE) -->
         <div class="section-box">
-            <div class="lang-text" data-en="1. 14-Day Server Node License (Choose high-throughput cloud compute tiers ₹2,000 to ₹1,00,000 + 18% GST)" data-ta="1. 14-நாள் சர்வர் நோடு லைசென்ஸ் (₹2,000 முதல் ₹1,00,000 வரை கிளவுட் கம்ப்யூட் டயர்கள்)" style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License</div>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                        <span style="font-weight: bold; color: #fff; font-size: 11px;">₹2,000 Server (Base)</span>
-                        <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 4px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay / UPI</a>
+            <div class="lang-text" data-en="1. 14-Day Server Node License (Choose high-throughput cloud compute tiers ₹2,000 to ₹1,00,000 + 18% GST) with strict 14-day cycle earnings." data-ta="1. 14-நாள் சர்வர் நோடு லைசென்ஸ் (₹2,000 முதல் ₹1,00,000 வரை கிளவுட் கம்ப்யூட் டயர்கள் + 18% ஜிஎஸ்டி)" style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License</div>
+            
+            <div class="server-catalog-grid">
+                <!-- ₹2,000 Server -->
+                <div class="server-card-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹2,000 Server (Base)</span>
+                        <div style="display: flex; gap: 4px;">
+                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                            <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                        </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹155.50 / day</strong> | 14-Day Total: <strong>₹2,177</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹155.50 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹2,177</strong></div>
                 </div>
 
-                <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                        <span style="font-weight: bold; color: #fff; font-size: 11px;">₹10,000 Server</span>
-                        <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%2010000" target="_blank" style="background: #2563eb; color: white; padding: 4px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay / UPI</a>
+                <!-- ₹5,000 Server -->
+                <div class="server-card-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹5,000 Server</span>
+                        <div style="display: flex; gap: 4px;">
+                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=5000&cu=INR&tn=Server%205000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                            <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                        </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹792.86 / day</strong> | 14-Day Total: <strong>₹11,100</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹394.64 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹5,525</strong></div>
                 </div>
 
-                <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                        <span style="font-weight: bold; color: #f59e0b; font-size: 11px;">₹1,00,000 Server (Max)</span>
-                        <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20100000" target="_blank" style="background: #2563eb; color: white; padding: 4px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay / UPI</a>
+                <!-- ₹10,000 Server -->
+                <div class="server-card-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹10,000 Server</span>
+                        <div style="display: flex; gap: 4px;">
+                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%2010000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                            <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                        </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹8,000 / day</strong> | 14-Day Total: <strong>₹1,12,000</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹792.86 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹11,100</strong></div>
                 </div>
+
+                <!-- ₹25,000 Server -->
+                <div class="server-card-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹25,000 Server</span>
+                        <div style="display: flex; gap: 4px;">
+                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=25000&cu=INR&tn=Server%2025000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                            <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                        </div>
+                    </div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹1,991.07 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹27,875</strong></div>
+                </div>
+
+                <!-- ₹50,000 Server -->
+                <div class="server-card-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹50,000 Server</span>
+                        <div style="display: flex; gap: 4px;">
+                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=50000&cu=INR&tn=Server%2050000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                            <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                        </div>
+                    </div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹4,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹56,000</strong></div>
+                </div>
+
+                <!-- ₹1,00,000 Server -->
+                <div class="server-card-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server (Max)</span>
+                        <div style="display: flex; gap: 4px;">
+                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20100000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
+                            <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                        </div>
+                    </div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹8,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹1,12,000</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 10% - 12% Dynamic Referral Bonus & WhatsApp Scripts -->
+        <div class="section-box">
+            <div class="lang-text" data-en="4. 10% - 12% Dynamic Referral Bonus & Gold Vault" data-ta="4. 10% - 12% டைனமிக் பரிந்துரை போனஸ் & தங்க வால்ட்" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-gift"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</div>
+            <p class="lang-text" data-en="Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits." data-ta="10%-12% பரிந்துரை போனஸ் பெறுங்கள். மேலும், ₹25,000+ சர்வர் தொகுப்புகள் மூலம் பிரத்யேக 24K தங்க வால்ட் மாற்றும் சலுகைகளைப் பெறலாம்." style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.</p>
+            
+            <div class="lang-text" data-en="10 Unique WhatsApp Referral Scripts" data-ta="10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை ஸ்கிரிப்ட்கள்" style="font-size: 10.5px; color: #34d399; margin-bottom: 6px; font-weight: bold;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</div>
+            <div class="grid-5">
+                <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
+                <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
+                <button class="wa-btn" onclick="shareWhatsApp(3)">Script 3</button>
+                <button class="wa-btn" onclick="shareWhatsApp(4)">Script 4</button>
+                <button class="wa-btn" onclick="shareWhatsApp(5)">Script 5</button>
+                <button class="wa-btn" onclick="shareWhatsApp(6)">Script 6</button>
+                <button class="wa-btn" onclick="shareWhatsApp(7)">Script 7</button>
+                <button class="wa-btn" onclick="shareWhatsApp(8)">Script 8</button>
+                <button class="wa-btn" onclick="shareWhatsApp(9)">Script 9</button>
+                <button class="wa-btn" onclick="shareWhatsApp(10)">Script 10</button>
             </div>
         </div>
 
         <!-- Supported Voucher & Reward Partners -->
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
             <div class="lang-text" data-en="Supported Voucher & Reward Partners" data-ta="ஆதரிக்கப்படும் வவுச்சர் & வெகுமதி கூட்டாளிகள்" style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
-            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 8px; font-weight: bold;">* ENTERPRISE REWARD PARTNERS (API INTEGRATION PILOT ROLLOUT)</div>
-            <div class="grid-2">
+            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 8px; font-weight: bold;" class="lang-text" data-en="* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)" data-ta="* என்டர்பிரைஸ் வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு & விரைவில் வெளியீடு)">* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)</div>
+            
+            <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;" class="lang-text" data-en="👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)" data-ta="👑 24K தங்க ஷோரூம் கூட்டாளிகள் (என்டர்பிரைஸ் டயர்கள் ₹25K+)">👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)</div>
+            <div class="grid-2" style="margin-bottom: 12px;">
                 <a href="https://www.tanishq.co.in" target="_blank" class="partner-card"><div>Tanishq</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
                 <a href="https://www.grtjewels.com" target="_blank" class="partner-card"><div>GRT Jewellers</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+            </div>
+
+            <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;" class="lang-text" data-en="⚡ INSTANT LIFESTYLE & FOOD VOUCHERS" data-ta="⚡ இன்ஸ்டன்ட் லைஃப்ஸ்டைல் & உணவு வவுச்சர்கள்">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
+            <div class="grid-2">
                 <a href="https://www.swiggy.com" target="_blank" class="partner-card"><div>Swiggy</div><i class="fa-solid fa-utensils" style="color: #f59e0b;"></i></a>
                 <a href="https://www.zomato.com" target="_blank" class="partner-card"><div>Zomato</div><i class="fa-solid fa-pizza-slice" style="color: #f59e0b;"></i></a>
+                <a href="https://www.amazon.in" target="_blank" class="partner-card"><div>Amazon Pay</div><i class="fa-solid fa-bag-shopping" style="color: #f59e0b;"></i></a>
+                <a href="https://www.flipkart.com" target="_blank" class="partner-card"><div>Flipkart</div><i class="fa-solid fa-cart-shopping" style="color: #f59e0b;"></i></a>
             </div>
         </div>
     </div>
@@ -263,22 +383,47 @@
         </div>
     </div>
 
+    <!-- Slice Payment Modal -->
+    <div id="slice-modal" class="modal-overlay">
+        <div class="modal-content" style="border-color: #ec4899;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
+                <span class="lang-text" data-en="Slice Current Account Details" data-ta="ஸ்லைஸ் நடப்பு கணக்கு விவரங்கள்" style="font-weight: bold; color: #ec4899; font-size: 13px;">Slice Current Account Details</span>
+                <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
+            </div>
+            <div style="font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; background: #090d16; padding: 12px; border-radius: 8px;">
+                <div><strong>Account Name:</strong> Madzinu Web3 Technologies</div>
+                <div><strong>Account No:</strong> <span id="txt-acc" style="color: #34d399; font-family: monospace;">033311501076921</span> <button class="copy-btn" onclick="copyText('txt-acc', this)">Copy</button></div>
+                <div><strong>IFSC:</strong> <span id="txt-ifsc" style="color: #38bdf8; font-family: monospace;">NESF0000333</span> <button class="copy-btn" onclick="copyText('txt-ifsc', this)">Copy</button></div>
+                <div><strong>UPI ID:</strong> <span id="txt-upi" style="color: #ec4899; font-weight: bold;">madhan958@slc</span> <button class="copy-btn" onclick="copyText('txt-upi', this)">Copy</button></div>
+                <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹2,000</span></div>
+            </div>
+            <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" style="width: 100%; background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px; margin-bottom: 10px;">
+            <button onclick="confirmSlicePayment()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Activate Server Package</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-links">
-            <a href="#">Terms & Conditions</a> |
-            <a href="#">Privacy Policy</a> |
-            <a href="#">Support / Contact</a>
+            <a href="#" class="lang-text" data-en="Terms & Conditions" data-ta="விதிமுறைகள் & நிபந்தனைகள்">Terms & Conditions</a> |
+            <a href="#" class="lang-text" data-en="Privacy Policy" data-ta="தனியுரிமைக் கொள்கை">Privacy Policy</a> |
+            <a href="#" class="lang-text" data-en="Support / Contact" data-ta="ஆதரவு / தொடர்பு">Support / Contact</a>
         </div>
-        <div>Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
-        <div style="margin-top: 4px; color: #64748b;">&copy; 2026 All Rights Reserved. Secure Cloud Node.</div>
+        <div class="lang-text" 
+             data-en="Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI" 
+             data-ta="மட்ஜினு வெப்3 டெக்னாலஜிஸ் & AI | இந்த தளம் முழுமையாக Madzinu AI மூலம் கட்டுப்படுத்தப்படுகிறது"
+             data-hi="Madzinu Web3 Technologies & AI | यह साइट पूरी तरह से Madzinu AI द्वारा नियंत्रित है"
+             data-te="Madzinu Web3 Technologies & AI | ఈ సైట్ పూర్తిగా Madzinu AI ద్వారా నియంత్రించబడుతుంది"
+             data-ml="Madzinu Web3 Technologies & AI | ഈ സൈറ്റ് പൂർണ്ണമായും Madzinu AI നിയന്ത്രിക്കുന്നു"
+             data-kn="Madzinu Web3 Technologies & AI | ಈ ಸೈಟ್ ಅನ್ನು ಸಂಪೂರ್ಣವಾಗಿ Madzinu AI ನಿಯಂತ್ರಿಸುತ್ತದೆ">Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
+        <div style="margin-top: 4px; color: #64748b;" class="lang-text" data-en="&copy; 2026 All Rights Reserved. Secure Cloud Node." data-ta="&copy; 2026 அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.">&copy; 2026 All Rights Reserved. Secure Cloud Node.</div>
     </footer>
 
     <script>
         let liveGoldRatePerGram = 7600; 
         let liveSilverRatePerGram = 98;
 
-        // Fully Dynamic Live Metal Rates Fetcher
+        // Dynamic Live Metal API Fetcher
         async function fetchLiveMetalRates() {
             try {
                 let response = await fetch('https://api.metals.live/v1/spot');
@@ -338,6 +483,55 @@
             document.querySelectorAll('.lang-text').forEach(el => {
                 let translatedText = el.getAttribute('data-' + lang);
                 if(translatedText) el.innerText = translatedText;
+            });
+        }
+
+        function openSlicePayment(amount, dailyYield) {
+            document.getElementById('slice-modal-amount').innerText = '₹' + parseInt(amount).toLocaleString('en-IN') + ' (Earnings: ₹' + dailyYield + '/Day)';
+            document.getElementById('slice-modal').style.display = 'flex';
+        }
+
+        function closeSliceModal() {
+            document.getElementById('slice-modal').style.display = 'none';
+        }
+
+        function confirmSlicePayment() {
+            let utr = document.getElementById('slice-utr-input').value.trim();
+            if(!utr) { alert('Please enter UTR number!'); return; }
+            closeSliceModal();
+            alert('Package payment request submitted for verification!');
+        }
+
+        function shareWhatsApp(id) {
+            let scripts = [
+                "🚀 Join Madzinu Web3 Technologies AI Cloud Network! Earn daily remuneration starting from ₹2,000 server tier. Check it out: https://madzinuweb3technologies.in",
+                "💡 Boost your income with autonomous jobworks and MeitY recognized server compute packages at Madzinu Web3! https://madzinuweb3technologies.in",
+                "🌟 Secure enterprise cloud compute platform with guaranteed 14-day total returns. Join now: https://madzinuweb3technologies.in",
+                "💎 Experience India's first autonomous AI studio & cloud network with partner perks. Provision your node today: https://madzinuweb3technologies.in",
+                "🔥 High-throughput server compute packages from ₹2k to ₹1L with daily task rewards. Visit: https://madzinuweb3technologies.in",
+                "⚡ Autonomous workflows and daily yields. Start your node on Madzinu Web3: https://madzinuweb3technologies.in",
+                "🌐 Govt. of India recognized startup under MeitY. Explore server tiers and partner showrooms: https://madzinuweb3technologies.in",
+                "💼 Professional web3 cloud computing and contractor secure node access. Join us: https://madzinuweb3technologies.in",
+                "📈 Earn daily remuneration through automated cloud tasks and compute networks. Check out: https://madzinuweb3technologies.in",
+                "👑 Unlock sovereign cloud compute and daily passive jobwork earnings with Madzinu Web3! https://madzinuweb3technologies.in"
+            ];
+            let text = scripts[id - 1] || scripts[0];
+            let msg = encodeURIComponent(text);
+            window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
+        }
+
+        function copyText(elementId, btn) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                let originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.style.background = '#10b981';
+                btn.style.color = '#fff';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '#374151';
+                    btn.style.color = '#38bdf8';
+                }, 1500);
             });
         }
     </script>
