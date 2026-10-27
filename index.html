@@ -504,6 +504,23 @@ function verifySecureNodeAccess() {
     </div>
 </div>
 
+
+<script>
+function openAdminPanel() {
+    let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
+    if(pwd === 'madz1222' || pwd === '2026') {
+        let panel = document.getElementById('admin-control-panel');
+        if(panel) {
+            panel.style.display = 'block';
+        } else {
+            alert('Admin Access Granted! Loading Fingertip Dashboard...');
+        }
+    } else {
+        alert('Invalid Admin Password!');
+    }
+}
+</script>
+
 </body>
 </html>
 
