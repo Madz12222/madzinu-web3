@@ -996,6 +996,37 @@ window.addEventListener('load', () => {
 });
 </script>
 
+
+<script>
+window.addEventListener('load', () => {
+    const selectEl = document.querySelector('select');
+    if(selectEl) {
+        selectEl.addEventListener('change', function() {
+            if(this.value === 'TA') {
+                document.body.innerHTML = document.body.innerHTML
+                    .replace(/Supported Voucher & Reward Partners/g, 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்')
+                    .replace(/\* ENTERPRISE REWARD PARTNERS \(API INTEGRATION & PILOT ROLLOUT COMING SOON\)/g, '* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)')
+                    .replace(/24K GOLD SHOWROOM PARTNERS \(ENTERPRISE TIERS ₹25K\+\)/g, '24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)')
+                    .replace(/Official Website/g, 'அதிகாரப்பூர்வ வலைத்தளம்')
+                    .replace(/INSTANT LIFESTYLE & FOOD VOUCHERS/g, 'உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்')
+                    .replace(/Swiggy/g, 'ஸ்விகி')
+                    .replace(/Zomato/g, 'சொமேட்டோ')
+                    .replace(/Amazon Pay/g, 'அமேசான் பே')
+                    .replace(/Flipkart/g, 'ப்ளிப்கார்ட்')
+                    .replace(/Enter Mobile Number/g, 'மொபைல் எண்ணை உள்ளிடவும்')
+                    .replace(/Enter OTP \(Admin: 2026\)/g, 'OTP-ஐ உள்ளிடவும் (அட்மின்: 2026)')
+                    .replace(/Terms & Conditions/g, 'விதிமுறைகள் & நிபந்தனைகள்')
+                    .replace(/Refund Policy/g, 'ரீஃபண்ட் கொள்கை')
+                    .replace(/Privacy Policy/g, 'தனியுரிமைக் கொள்கை')
+                    .replace(/Share your referral link with auto-embedded ID:/g, 'உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:');
+            } else {
+                location.reload();
+            }
+        });
+    }
+});
+</script>
+
 </body>
 </html>
 
