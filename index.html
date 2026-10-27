@@ -74,8 +74,9 @@
         .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
         .copy-btn:active { background: #10b981; color: #fff; }
 
-        #slice-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
-        .slice-content { background: #111827; border: 1px solid #ec4899; padding: 20px; border-radius: 14px; width: 90%; max-width: 420px; text-align: left; }
+        /* Modals */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
+        .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 14px; width: 90%; max-width: 400px; text-align: left; }
         
         footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
@@ -100,7 +101,8 @@
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
         </div>
         <div class="header-controls">
-            <button onclick="document.getElementById('login-section').scrollIntoView({behavior: 'smooth'})" class="ai-blink-btn lang-text" 
+            <!-- AI Working Button triggers Admin Popup Modal -->
+            <button onclick="openAdminModal()" class="ai-blink-btn lang-text" 
                     data-en="✨ AI Working" 
                     data-ta="✨ AI இயங்குகிறது" 
                     data-hi="✨ एआई कार्य कर रहा है" 
@@ -143,15 +145,11 @@
                data-hi="Madzinu Web3 Technologies MeitY के तहत भारत सरकार मान्यता प्राप्त स्टार्टअप है, जिसमें ₹2,000 से ₹1,00,000 तक सर्वर पैकेज और 14 दिनों की पेशेवर कार्य पारिश्रमिक मिलती है।"
                data-te="Madzinu Web3 Technologies అనేది MeitY కింద గుర్తింపు పొందిన స్టార్టప్. ₹2,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలు మరియు 14 రోజుల వృత్తిపరమైన పని వేతనం అందించబడుతుంది."
                data-ml="Madzinu Web3 Technologies എന്നത് MeitY-ന് കീഴിലുള്ള അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്. ₹2,000 മുതൽ ₹1,00,000 വരെയുള്ള സെർവർ പാക്കേജുകളും 14 ദിവസത്തെ പ്രതിഫലവും ലഭിക്കുന്നു."
-               data-kn="Madzinu Web3 Technologies MeitY ಅಡಿಯಲ್ಲಿ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದ್ದು, ₹2,000 ರಿಂದ ₹1,00,000 ವರೆಗಿನ ಸರ್ವರ್ ಪ್ಯಾಕೇಜ್‌ಗಳು ಮತ್ತು 14 ದಿನಗಳ ಸಂಭಾವನೆ ನೀಡಲಾಗುತ್ತದೆ.">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
+               data-kn="Madzinu Web3 Technologies MeitY ಅಡಿಯಲ್ಲಿ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಆಗಿದ್ದು, ₹2,000 ರಿಂದ ₹1,00,000 ವರೆಗಿನ ಪ್ಯಾಕೇಜ್‌ಗಳು ಮತ್ತು ಸಂಭಾವನೆ ನೀಡಲಾಗುತ್ತದೆ.">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
             
-            <a href="#login-section" class="btn-primary lang-text" 
+            <button onclick="openAdminModal()" class="btn-primary lang-text" 
                data-en="🚀 LAUNCH SECURE ENTERPRISE NODE" 
-               data-ta="🚀 பாதுகாப்பான என்டர்பிரைஸ் நோடைத் தொடங்கவும்"
-               data-hi="🚀 सुरक्षित एंटरप्राइज़ नोड लॉन्च करें"
-               data-te="🚀 సురక్షిత ఎంటర్‌ప్రైజ్ నోడ్‌ని ప్రారంభించండి"
-               data-ml="🚀 സുരക്ഷിത എന്റർപ്രൈസ് നോഡ് ആരംഭിക്കുക"
-               data-kn="🚀 ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ನೋಡ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ">🚀 LAUNCH SECURE ENTERPRISE NODE</a>
+               data-ta="🚀 பாதுகாப்பான என்டர்பிரைஸ் நோடைத் தொடங்கவும்">🚀 LAUNCH SECURE ENTERPRISE NODE</button>
         </div>
 
         <!-- 1. Daily E-Commerce Jobworks & Free Tier -->
@@ -159,76 +157,38 @@
             <div class="lang-text" 
                  data-en="📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)" 
                  data-ta="📊 டெய்லி ஈ-காமர்ஸ் ஜாப்வொர்க்ஸ் & இலவச அடுக்கு (500 பணிகள் = ₹100 தினசரி, குறைந்தபட்ச எடுப்பு ₹100)"
-                 data-hi="📊 दैनिक ई-कॉमर्स जॉबवर्क्स और मुफ्त टियर (500 कार्य = ₹100 दैनिक, न्यूनतम निकासी ₹100)"
-                 data-te="📊 రోజువారీ ఇ-కామర్స్ జాబ్‌వర్క్స్ & ఉచిత టైర్ (500 టాస్క్‌లు = ₹100 రోజువారీ, కనిష్ట విత్‌డ్రా ₹100)"
-                 data-ml="📊 പ്രതിദിന ഇ-കോമേഴ്സ് ജോബ്‌വർക്സ് & സൗജന്യ ടയർ (500 ടാസ്ക്കുകൾ = ₹100 പ്രതിദിനം, മിനിമം പിൻവലിക്കൽ ₹100)"
-                 data-kn="📊 ದೈನಂದಿನ ಇ-ಕಾಮರ್ಸ್ ಉದ್ಯೋಗಗಳು ಮತ್ತು ಉಚಿತ ಶ್ರೇಣಿ (500 ಕಾರ್ಯಗಳು = ₹100 ದೈನಂದಿನ, ಕನಿಷ್ಠ ಹಿಂತೆಗೆದುಕೊಳ್ಳುವಿಕೆ ₹100)"
                  style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
             
             <ul style="font-size: 10.5px; color: #94a3b8; padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
-                <li class="lang-text" 
-                    data-en="• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit." 
-                    data-ta="• இலவச அடுக்கு: தினமும் 500 மைக்ரோ பணிகளை முடித்து (₹0.20/பணி) ₹100 சம்பாதிக்கலாம். குறைந்தபட்ச எடுப்பு ₹100."
-                    data-hi="• मुफ्त टियर: प्रतिदिन 500 माइक्रो-टास्क पूरे करें (₹0.20/टास्क) और ₹100 कमाएं। न्यूनतम निकासी ₹100।"
-                    data-te="• ఉచిత టైర్: ప్రతిరోజూ 500 మైక్రో-టాస్క్‌లను పూర్తి చేసి (₹0.20/టాస్క్) ₹100 సంపాదించండి. కనిష్ట విత్‌డ్రా ₹100."
-                    data-ml="• സൗജന്യ ടയർ: ദിവസവും 500 മൈക്രോ-ടാസ്ക്കുകൾ പൂർത്തിയാക്കി (₹0.20/ടാസ്ക്) ₹100 സമ്പാദിക്കുക. മിനിമം പിൻവലിക്കൽ ₹100."
-                    data-kn="• ಉಚಿತ ಶ್ರೇಣಿ: ಪ್ರತಿದಿನ 500 ಮೈಕ್ರೋ-ಕಾರ್ಯಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ (₹0.20/ಕಾರ್ಯ) ₹100 ಗಳಿಸಿ. ಕನಿಷ್ಠ ಹಿಂತೆಗೆದುಕೊಳ್ಳುವಿಕೆ ₹100.">• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
-                
-                <li class="lang-text" 
-                    data-en="• Amazon: Fulfillment center node sync & SKU audit logs" 
-                    data-ta="• Amazon: ஃபுல்பில்மென்ட் சென்டர் நோடு சிங்க் & SKU ஆடிட் பதிவுகள்"
-                    data-hi="• अमेज़न: फ़ुलफ़िलमेंट सेंटर नोड सिंक और SKU ऑडिट लॉग"
-                    data-te="• అమెజాన్: ఫుల్‌ఫిల్మెంట్ సెంటర్ నోడ్ సింక్ & SKU ఆడిట్ లాగ్స్"
-                    data-ml="• ആമസോൺ: ഫുൾഫിൽമെന്റ് സെന്റർ നോഡ് സിങ്ക് & SKU ഓഡിറ്റ് ലോഗുകൾ"
-                    data-kn="• ಅಮೆಜಾನ್: ಫುಲ್‌ಫಿಲ್‌ಮೆಂಟ್ ಸೆಂಟರ್ ನೋಡ್ ಸಿಂಕ್ ಮತ್ತು SKU ಆಡಿಟ್ ಲಾಗ್‌ಗಳು">• Amazon: Fulfillment center node sync & SKU audit logs</li>
-                
-                <li class="lang-text" 
-                    data-en="• Flipkart: Logistics routing & pin-code serviceability checks" 
-                    data-ta="• Flipkart: லாஜிஸ்டிக்ஸ் ரூட்டிங் & பின்-கோடு சர்வீஸபிலிட்டி சோதனைகள்"
-                    data-hi="• फ्लिपकार्ट: लॉजिस्टिक्स रूटिंग और पिन-कोड सर्विसएबिलिटी जांच"
-                    data-te="• Flipkart: లాజిస్టిక్స్ రూటింగ్ & పిన్-కోడ్ సర్వీసబిలిటీ చెక్స్"
-                    data-ml="• ഫ്ലിപ്കാർട്ട്: ലോജിസ്റ്റിക്സ് റൂട്ടിംഗ് & പിൻ-ಕೋഡ് സർവീസബിലിറ്റി പരിശോധനകൾ"
-                    data-kn="• Flipkart: ಲಾಜಿಸ್ಟಿಕ್ಸ್ ರೂಟಿಂಗ್ ಮತ್ತು ಪಿನ್-ಕೋಡ್ ಸೇವೆಯ ಲಭ್ಯತೆ ಪರಿಶೀಲನೆ">• Flipkart: Logistics routing & pin-code serviceability checks</li>
-                
-                <li class="lang-text" 
-                    data-en="• Meesho: Catalog pricing verification & vendor order feeds" 
-                    data-ta="• Meesho: கேட்டலாக் விலை சரிபார்ப்பு & வெண்டர் ஆர்டர் ஃபீডস"
-                    data-hi="• मीशो: कैटलॉग मूल्य सत्यापन और वेंडर ऑर्डर फीड"
-                    data-te="• మీషో: కేటలాగ్ ధర ధృవీకరణ & వెండర్ ఆర్డర్ ఫీడ్స్"
-                    data-ml="• മീഷോ: കാറ്റലോഗ് വില പരിശോധന & വെണ്ടർ ഓർഡർ ഫീഡുകൾ"
-                    data-kn="• ಮೀಶೋ: ಕ್ಯಾಟಲಾಗ್ ಬೆಲೆ ಪರಿಶೀಲನೆ ಮತ್ತು ವೆಂಡರ್ ಆರ್ಡರ್ ಫೀಡ್‌ಗಳು">• Meesho: Catalog pricing verification & vendor order feeds</li>
-                
-                <li class="lang-text" 
-                    data-en="• MeitY Registered Startup Entity (Govt. of India)" 
-                    data-ta="• MeitY பதிவு செய்யப்பட்ட ஸ்டார்ட்அப் நிறுவனம் (இந்திய அரசு)"
-                    data-hi="• MeitY पंजीकृत स्टार्टअप इकाई (भारत सरकार)"
-                    data-te="• MeitY రిజిస్టర్డ్ స్టార్టప్ ఎంటిటీ (భారత ప్రభుత్వం)"
-                    data-ml="• MeitY രജിസ്റ്റർ ചെയ്ത സ്റ്റാർട്ടപ്പ് സ്ഥാപനം (ഇന്ത്യൻ സർക്കാർ)"
-                    data-kn="• MeitY ನೋಂದಾಯಿತ ಸ್ಟಾರ್ಟ್‌ಅಪ್ ಸಂಸ್ಥೆ (ಭಾರತ ಸರ್ಕಾರ)">• MeitY Registered Startup Entity (Govt. of India)</li>
+                <li class="lang-text" data-en="• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit." data-ta="• இலவச அடுக்கு: தினமும் 500 மைக்ரோ பணிகளை முடித்து (₹0.20/பணி) ₹100 சம்பாதிக்கலாம். குறைந்தபட்ச எடுப்பு ₹100.">• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
+                <li class="lang-text" data-en="• Amazon: Fulfillment center node sync & SKU audit logs" data-ta="• Amazon: ஃபுல்பில்மென்ட் சென்டர் நோடு சிங்க் & SKU ஆடிட் பதிவுகள்">• Amazon: Fulfillment center node sync & SKU audit logs</li>
+                <li class="lang-text" data-en="• Flipkart: Logistics routing & pin-code serviceability checks" data-ta="• Flipkart: லாஜிஸ்டிக்ஸ் ரூட்டிங் & பின்-கோடு சர்வீஸபிலிட்டி சோதனைகள்">• Flipkart: Logistics routing & pin-code serviceability checks</li>
+                <li class="lang-text" data-en="• Meesho: Catalog pricing verification & vendor order feeds" data-ta="• Meesho: கேட்டலாக் விலை சரிபார்ப்பு & வெண்டர் ஆர்டர் ஃபீডস">• Meesho: Catalog pricing verification & vendor order feeds</li>
+                <li class="lang-text" data-en="• MeitY Registered Startup Entity (Govt. of India)" data-ta="• MeitY பதிவு செய்யப்பட்ட ஸ்டார்ட்அப் நிறுவனம் (இந்திய அரசு)">• MeitY Registered Startup Entity (Govt. of India)</li>
             </ul>
         </div>
 
-        <!-- Server Packages & Workspace Dashboard (VISIBLE ONLY AFTER LOGIN) -->
+        <!-- Server Packages & Workspace Dashboard (VISIBLE ONLY AFTER ADMIN LOGIN) -->
         <div class="user-workspace-dashboard" id="user-workspace-dashboard">
             <div class="user-info-bar">
                 <div>
-                    <div class="lang-text" data-en="CONNECTED CONTRACTOR NODE" data-ta="இணைக்கப்பட்ட கான்ட்ராக்டர் நோடு" data-hi="CONNECTED CONTRACTOR NODE" data-te="CONNECTED CONTRACTOR NODE" data-ml="CONNECTED CONTRACTOR NODE" data-kn="CONNECTED CONTRACTOR NODE">CONNECTED CONTRACTOR NODE</div>
+                    <div class="lang-text" data-en="CONNECTED CONTRACTOR NODE" data-ta="இணைக்கப்பட்ட கான்ட்ராக்டர் நோடு">CONNECTED CONTRACTOR NODE</div>
                     <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9840000000</div>
                 </div>
-                <button onclick="logoutUser()" class="lang-text" data-en="Logout" data-ta="வெளியேறு" data-hi="लॉग आउट" data-te="లాగ్‌అవుట్" data-ml="ലോഗ് ഔട്ട്" data-kn="ಲಾಗ್‌ಔಟ್" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
+                <button onclick="logoutAdmin()" class="lang-text" data-en="Logout" data-ta="வெளியேறு" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
             </div>
 
             <!-- Live API Gold / Silver Rate Balanced with User INR Balance -->
             <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
-                <div class="lang-text" style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;" data-en="LIVE MARKET API METAL BALANCED PORTFOLIO" data-ta="நேரலை மார்க்கெட் API உலோகம் சமநிலை போர்ட்ஃபோலியோ" data-hi="LIVE MARKET API METAL BALANCED PORTFOLIO" data-te="LIVE MARKET API METAL BALANCED PORTFOLIO"><i class="fa-solid fa-coins"></i> LIVE MARKET API METAL BALANCED PORTFOLIO</div>
+                <div class="lang-text" style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;" data-en="LIVE MARKET API METAL BALANCED PORTFOLIO" data-ta="நேரலை மார்க்கெட் API உலோகம் சமநிலை போர்ட்ஃபோலியோ"><i class="fa-solid fa-coins"></i> LIVE MARKET API METAL BALANCED PORTFOLIO</div>
                 <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
-                    <div><span class="lang-text" data-en="Gold Value:" data-ta="தங்க மதிப்பு:" data-hi="स्वर्ण मूल्य:" data-te="బంగారం విలువ:" data-ml="സ്വർണ്ണ വില:" data-kn="ಚಿನ್ನದ ಮೌಲ್ಯ:">Gold Value:</span> <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">0.000 g</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
-                    <div><span class="lang-text" data-en="Silver Value:" data-ta="வெள்ளி மதிப்பு:" data-hi="चांदी मूल्य:" data-te="వెండి విలువ:" data-ml="വെള്ളി വില:" data-kn="ಬೆಳ್ಳಿ ಮೌಲ್ಯ:">Silver Value:</span> <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">0.00 g</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
+                    <div><span class="lang-text" data-en="Gold Value:" data-ta="தங்க மதிப்பு:">Gold Value:</span> <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">0.000 g</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
+                    <div><span class="lang-text" data-en="Silver Value:" data-ta="வெள்ளி மதிப்பு:">Silver Value:</span> <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">0.00 g</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
                 </div>
             </div>
 
             <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
-                <div class="lang-text" data-en="1. 14-Day Server Node License (Choose high-throughput cloud compute tiers ₹2,000 to ₹1,00,000 + 18% GST) with strict 14-day cycle earnings." data-ta="1. 14-நாள் சர்வர் நோடு லைசென்ஸ் (₹2,000 முதல் ₹1,00,000 வரை கிளவுட் கம்ப்யூட் டயர்கள் + 18% ஜிஎஸ்டி) மற்றும் 14 நாள் சுழற்சி வருமானம்." style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License (Choose high-throughput cloud compute tiers)</div>
+                <div class="lang-text" data-en="1. 14-Day Server Node License (Choose high-throughput cloud compute tiers ₹2,000 to ₹1,00,000 + 18% GST) with strict 14-day cycle earnings." data-ta="1. 14-நாள் சர்வர் நோடு லைசென்ஸ் (₹2,000 முதல் ₹1,00,000 வரை கிளவுட் கம்ப்யூட் டயர்கள் + 18% ஜிஎஸ்டி) மற்றும் 14 நாள் சுழற்சி வருமானம்." style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License</div>
                 <div class="server-catalog-grid">
                     <!-- ₹2,000 Server -->
                     <div class="server-card-item">
@@ -236,10 +196,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹2,000 Server (Base)</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹155.50 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹2,177</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹155.50 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹2,177</strong></div>
                     </div>
 
                     <!-- ₹5,000 Server -->
@@ -248,10 +208,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹5,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=5000&cu=INR&tn=Server%205000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹394.64 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹5,525</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹394.64 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹5,525</strong></div>
                     </div>
 
                     <!-- ₹10,000 Server -->
@@ -260,10 +220,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹10,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%2010000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹792.86 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹11,100</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹792.86 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹11,100</strong></div>
                     </div>
 
                     <!-- ₹25,000 Server -->
@@ -272,10 +232,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹25,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=25000&cu=INR&tn=Server%2025000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹1,991.07 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹27,875</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹1,991.07 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹27,875</strong></div>
                     </div>
 
                     <!-- ₹50,000 Server -->
@@ -284,10 +244,10 @@
                             <span style="font-weight: bold; color: #fff; font-size: 12px;">₹50,000 Server</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=50000&cu=INR&tn=Server%2050000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹4,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹56,000</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹4,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹56,000</strong></div>
                     </div>
 
                     <!-- ₹1,00,000 Server -->
@@ -296,23 +256,23 @@
                             <span style="font-weight: bold; color: #f59e0b; font-size: 12px;">₹1,00,000 Server (Max)</span>
                             <div style="display: flex; gap: 4px;">
                                 <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=100000&cu=INR&tn=Server%20100000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" data-hi="स्लाइस विवरण" data-te="స్లైస్ వివరాలు" data-ml="സ്ലൈസ് വിശദാംശങ്ങൾ" data-kn="ಸ್ಲೈಸ್ ವಿವರಗಳು" onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
+                                <button class="lang-text" data-en="Slice Details" data-ta="ஸ்லைஸ் விவரங்கள்" onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                             </div>
                         </div>
-                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:" data-hi="दैनिक पारिश्रमिक:" data-te="దైనిక వేతనం:" data-ml="പ്രതിദിന പ്രതിഫലം:" data-kn="ದೈನಂದಿನ ಸಂಭಾವನೆ:">Daily Remuneration:</span> <strong style="color: #34d399;">₹8,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:" data-hi="14-दिन कुल:" data-te="14 రోజుల మొత్తం:" data-ml="14 ദിവസത്തെ ആകെ:" data-kn="14 ದಿನಗಳ ಒಟ್ಟು:">14-Day Total:</span> <strong>₹1,12,000</strong></div>
+                        <div style="font-size: 10px; color: #94a3b8;"><span class="lang-text" data-en="Daily Remuneration:" data-ta="தினசரி ஊதியம்:">Daily Remuneration:</span> <strong style="color: #34d399;">₹8,000 / day</strong> | <span class="lang-text" data-en="14-Day Total:" data-ta="14-நாள் மொத்தம்:">14-Day Total:</span> <strong>₹1,12,000</strong></div>
                     </div>
                 </div>
             </div>
 
             <!-- 2. Live Workspace Balance -->
-            <div class="lang-text" data-en="2. Live Workspace Balance" data-ta="2. நேரலை பணிமனை இருப்பு" data-hi="2. लाइव कार्यक्षेत्र शेष" data-te="2. లైవ్ వర్క్‌స్పేస్ బ్యాలెన్స్" data-ml="2. ലൈവ് വർക്ക്സ്പേസ് ബാലൻസ്" data-kn="2. ಲೈವ್ ಕಾರ್ಯಕ್ಷೇತ್ರ ಬಾಕಿ" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-wallet"></i> 2. Live Workspace Balance</div>
+            <div class="lang-text" data-en="2. Live Workspace Balance" data-ta="2. நேரலை பணிமனை இருப்பு" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-wallet"></i> 2. Live Workspace Balance</div>
             <div class="user-balance-grid" style="margin-bottom: 12px;">
                 <div class="bal-card">
-                    <div class="lang-text" data-en="INR Workspace Balance" data-ta="INR பணிமனை இருப்பு" data-hi="INR कार्यक्षेत्र शेष" data-te="INR వర్క్‌స్పేస్ బ్యాలెన్స్" data-ml="INR വർക്ക്സ്പേസ് ബാലൻസ്" data-kn="INR ಕಾರ್ಯಕ್ಷೇತ್ರ ಬಾಕಿ" style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
+                    <div class="lang-text" data-en="INR Workspace Balance" data-ta="INR பணிமனை இருப்பு" style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
                     <div class="bal-val" id="user-inr-bal">₹0.00</div>
                 </div>
                 <div class="bal-card">
-                    <div class="lang-text" data-en="Daily Task Remuneration" data-ta="தினசரி பணி ஊதியம்" data-hi="दैनिक कार्य पारिश्रमिक" data-te="దైనిక టాస్క్ వేతనం" data-ml="പ്രതിദിന ടാസ്ക് പ്രതിഫലം" data-kn="ದೈನಂದಿನ ಕಾರ್ಯ ಸಂಭಾವನೆ" style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
+                    <div class="lang-text" data-en="Daily Task Remuneration" data-ta="தினசரி பணி ஊதியம்" style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
                     <div class="bal-val" id="user-daily-yield">₹0.00 / Day</div>
                 </div>
             </div>
@@ -320,20 +280,8 @@
 
         <!-- 3. E-Commerce & Web3 Enterprise Jobwork Tasks -->
         <div class="section-box">
-            <div class="lang-text" 
-                 data-en="3. E-Commerce & Web3 Enterprise Jobwork Tasks" 
-                 data-ta="3. இ-காமர்ஸ் & வெப்3 என்டர்பிரைஸ் ஜாப்வொர்க் பணிகள்"
-                 data-hi="3. ई-कॉमर्स और वेब3 एंटरप्राइज़ जॉबवर्क कार्य"
-                 data-te="3. ఇ-కామర్స్ & వెబ్3 ఎంటర్‌ప్రైజ్ జాబ్‌వర్క్ టాస్క్‌లు"
-                 data-ml="3. ഇ-കോമേഴ്സ് & വെബ്3 എന്റർപ്രൈസ് ജോബ്‌വർക്സ്"
-                 data-kn="3. ಇ-ಕಾಮರ್ಸ್ ಮತ್ತು ವೆಬ್3 ಎಂಟರ್‌ಪ್ರೈಸ್ ಉದ್ಯೋಗ ಕಾರ್ಯಗಳು"
-                 style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-tasks"></i> 3. E-Commerce & Web3 Enterprise Jobwork Tasks</div>
-            
-            <p class="lang-text" 
-               data-en="Execute high-throughput automated verification pipelines across top enterprise ecosystems to secure professional remuneration payouts:" 
-               data-ta="தொழில்முறை ஊதியத்தைப் பெற முன்னணி நிறுவனங்களின் சுற்றுச்சூழல் அமைப்புகளில் தானியங்கி சரிபார்ப்பு பணிகளை இயக்கவும்:"
-               style="font-size: 10.5px; color: #94a3b8; margin-bottom: 8px;">Execute high-throughput automated verification pipelines across top enterprise ecosystems to secure professional remuneration payouts:</p>
-            
+            <div class="lang-text" data-en="3. E-Commerce & Web3 Enterprise Jobwork Tasks" data-ta="3. இ-காமர்ஸ் & வெப்3 என்டர்பிரைஸ் ஜாப்வொர்க் பணிகள்" style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-tasks"></i> 3. E-Commerce & Web3 Enterprise Jobwork Tasks</div>
+            <p class="lang-text" data-en="Execute high-throughput automated verification pipelines across top enterprise ecosystems to secure professional remuneration payouts:" data-ta="தொழில்முறை ஊதியத்தைப் பெற முன்னணி நிறுவனங்களின் சுற்றுச்சூழல் அமைப்புகளில் தானியங்கி சரிபார்ப்பு பணிகளை இயக்கவும்:" style="font-size: 10.5px; color: #94a3b8; margin-bottom: 8px;">Execute high-throughput automated verification pipelines across top enterprise ecosystems to secure professional remuneration payouts:</p>
             <ul style="font-size: 10px; color: #cbd5e1; padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
                 <li class="lang-text" data-en="• Amazon & Flipkart SKU Catalog Audits & Inventory Sync" data-ta="• Amazon & Flipkart SKU கேட்டலாக் தணிக்கை மற்றும் இன்வென்ட்ரி ஒத்திசைவு">• Amazon & Flipkart SKU Catalog Audits & Inventory Sync</li>
                 <li class="lang-text" data-en="• Meesho & Myntra Vendor Order Feed Reconciliation" data-ta="• Meesho & Myntra வெண்டர் ஆர்டர் ஃபீட் நல்லிணக்கம்">• Meesho & Myntra Vendor Order Feed Reconciliation</li>
@@ -347,7 +295,6 @@
             <div class="lang-text" data-en="4. 10% - 12% Dynamic Referral Bonus & Gold Vault" data-ta="4. 10% - 12% டைனமிக் பரிந்துரை போனஸ் & தங்க வால்ட்" style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-gift"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</div>
             <p class="lang-text" data-en="Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits." data-ta="10%-12% பரிந்துரை போனஸ் பெறுங்கள். மேலும், ₹25,000+ சர்வர் தொகுப்புகள் மூலம் பிரத்யேக 24K தங்க வால்ட் மாற்றும் சலுகைகளைப் பெறலாம்." style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.</p>
             
-            <!-- WhatsApp Referral Scripts -->
             <div class="lang-text" data-en="10 Unique WhatsApp Referral Scripts" data-ta="10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை ஸ்கிரிப்ட்கள்" style="font-size: 10.5px; color: #34d399; margin-bottom: 6px; font-weight: bold;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</div>
             <div class="grid-5">
                 <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
@@ -382,27 +329,32 @@
                 <a href="https://www.flipkart.com" target="_blank" class="partner-card"><div>Flipkart</div><i class="fa-solid fa-cart-shopping" style="color: #f59e0b;"></i></a>
             </div>
         </div>
+    </div>
 
-        <!-- Admin Secure Node Login (PERMANENTLY VISIBLE AT BOTTOM) -->
-        <div class="section-box" id="login-section" style="border: 1px solid rgba(129, 140, 248, 0.5);">
-            <h3 class="lang-text" data-en="Contractor Secure Node Login" data-ta="ஒப்பந்தக்காரர் பாதுகாப்பு நோடு உள்நுழைவு" style="font-size: 11px; color: #818cf8; margin-bottom: 8px;">Contractor Secure Node Login</h3>
-            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button class="lang-text" data-en="Send OTP" data-ta="OTP அனுப்பு" onclick="alert('OTP sent!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
+    <!-- Admin Secure Node Login Popup Modal -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
+                <span class="lang-text" data-en="Admin Secure Node Login" data-ta="அட்மின் பாதுகாப்பு நோடு உள்நுழைவு" style="font-weight: bold; color: #818cf8; font-size: 13px;">Admin Secure Node Login</span>
+                <button onclick="closeAdminModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
             </div>
-            <div style="display: flex; gap: 8px;">
-                <input type="text" id="login-otp-code" placeholder="Enter OTP (Admin: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button class="lang-text" data-en="Verify & Unlock Server List" data-ta="சரிபார்த்து சர்வர் பட்டியலை திற" onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify & Unlock Server List</button>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                <input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
+                <div style="display: flex; gap: 6px;">
+                    <input type="text" id="login-otp-code" placeholder="Enter OTP (Admin: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
+                    <button class="lang-text" data-en="Send OTP" data-ta="OTP" onclick="alert('OTP sent successfully!')" style="background: #6366f1; color: #fff; border: none; padding: 9px 12px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;">Send</button>
+                </div>
             </div>
+            <button class="lang-text" data-en="Verify & Unlock Admin Panel" data-ta="சரிபார்த்து அட்மின் பேனலைத் திற" onclick="verifyAdminLogin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Unlock Admin Panel</button>
         </div>
     </div>
 
     <!-- Slice Payment Modal -->
-    <div id="slice-modal">
-        <div class="slice-content">
+    <div id="slice-modal" class="modal-overlay">
+        <div class="modal-content" style="border-color: #ec4899;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
                 <span class="lang-text" data-en="Slice Current Account Details" data-ta="ஸ்லைஸ் நடப்பு கணக்கு விவரங்கள்" style="font-weight: bold; color: #ec4899; font-size: 13px;">Slice Current Account Details</span>
-                <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer;">&times;</button>
+                <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
             </div>
             <div style="font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; background: #090d16; padding: 12px; border-radius: 8px;">
                 <div><strong>Account Name:</strong> Madzinu Web3 Technologies</div>
@@ -411,7 +363,7 @@
                 <div><strong>UPI ID:</strong> <span id="txt-upi" style="color: #ec4899; font-weight: bold;">madhan958@slc</span> <button class="copy-btn" onclick="copyText('txt-upi', this)">Copy</button></div>
                 <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹2,000</span></div>
             </div>
-            <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" style="width: 100%; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px; margin-bottom: 10px;">
+            <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" style="width: 100%; background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px; margin-bottom: 10px;">
             <button class="lang-text" data-en="Verify & Activate Server Package" data-ta="சரிபார்த்து சர்வர் தொகுப்பை இயக்கு" onclick="confirmSlicePayment()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Activate Server Package</button>
         </div>
     </div>
@@ -461,6 +413,36 @@
         }
 
         fetchLiveMetalRates();
+
+        function openAdminModal() {
+            document.getElementById('admin-modal').style.display = 'flex';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').style.display = 'none';
+        }
+
+        function verifyAdminLogin() {
+            let otp = document.getElementById('login-otp-code').value.trim();
+            let mobile = document.getElementById('login-mobile').value.trim();
+            if(otp === '2026' || otp === 'madz1222') {
+                alert('Admin Node Verified Successfully! Unlocking Dashboard...');
+                closeAdminModal();
+                document.getElementById('user-workspace-dashboard').style.display = 'block';
+                if(mobile) {
+                    document.getElementById('user-mobile-display').innerText = '+91 ' + mobile;
+                }
+                document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
+                updateMetalPortfolio();
+            } else { 
+                alert('Invalid OTP / Passkey! Please enter valid Admin OTP (2026).'); 
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('user-workspace-dashboard').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function changeLanguage(lang) {
             document.querySelectorAll('.lang-text').forEach(el => {
@@ -514,27 +496,6 @@
             let text = scripts[id - 1] || scripts[0];
             let msg = encodeURIComponent(text);
             window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
-        }
-
-        function verifySecureNodeAccess() {
-            let otp = document.getElementById('login-otp-code').value.trim();
-            let mobile = document.getElementById('login-mobile').value.trim();
-            if(otp === '2026' || otp === 'madz1222') {
-                alert('Node Verified Successfully! Unlocking Server List...');
-                document.getElementById('user-workspace-dashboard').style.display = 'block';
-                if(mobile) {
-                    document.getElementById('user-mobile-display').innerText = '+91 ' + mobile;
-                }
-                document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
-                updateMetalPortfolio();
-            } else { 
-                alert('Invalid OTP / Code! Please enter valid Admin/Node OTP.'); 
-            }
-        }
-
-        function logoutUser() {
-            document.getElementById('user-workspace-dashboard').style.display = 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function openSlicePayment(amount, dailyYield) {
