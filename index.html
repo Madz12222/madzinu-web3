@@ -28,6 +28,11 @@
         p { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
         .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; }
         .section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
+        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
+        .wa-btn { background: #166534; color: white; border: none; padding: 6px 2px; border-radius: 6px; font-size: 8.5px; font-weight: bold; cursor: pointer; text-align: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+        .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
+        
         #user-workspace-dashboard { display: none; background: linear-gradient(135deg, #0f172a 0%, #111827 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
         .user-info-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 10px; margin-bottom: 12px; font-size: 11px; }
         .user-balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
@@ -36,7 +41,6 @@
         .server-catalog-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
         .server-card-item { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; }
         
-        /* Copy button style */
         .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
         .copy-btn:active { background: #10b981; color: #fff; }
 
@@ -145,6 +149,34 @@
             </div>
         </div>
 
+        <!-- WhatsApp Scripts Section -->
+        <div class="section-box">
+            <h3 style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
+            <div class="grid-5">
+                <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
+                <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
+                <button class="wa-btn" onclick="shareWhatsApp(3)">Script 3</button>
+                <button class="wa-btn" onclick="shareWhatsApp(4)">Script 4</button>
+                <button class="wa-btn" onclick="shareWhatsApp(5)">Script 5</button>
+                <button class="wa-btn" onclick="shareWhatsApp(6)">Script 6</button>
+                <button class="wa-btn" onclick="shareWhatsApp(7)">Script 7</button>
+                <button class="wa-btn" onclick="shareWhatsApp(8)">Script 8</button>
+                <button class="wa-btn" onclick="shareWhatsApp(9)">Script 9</button>
+                <button class="wa-btn" onclick="shareWhatsApp(10)">Script 10</button>
+            </div>
+        </div>
+
+        <!-- Gold Showroom Partners Section -->
+        <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
+            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 8px;"><i class="fa-solid fa-crown"></i> 24K Gold Showroom Partners (Tanishq, GRT, Malabar, Kalyan)</div>
+            <div class="grid-2">
+                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card"><div>Tanishq</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+                <a href="https://www.grtjewels.com" target="_blank" class="partner-card"><div>GRT Jewellers</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+                <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card"><div>Malabar Gold</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+                <a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card"><div>Kalyan Jewellers</div><i class="fa-solid fa-gem" style="color: #f59e0b;"></i></a>
+            </div>
+        </div>
+
         <div class="section-box" id="login-section">
             <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;">Contractor Secure Node Login</h3>
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
@@ -177,6 +209,15 @@
         </div>
     </div>
 
+    <!-- AI Chat Widget -->
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 99999;">
+        <button onclick="let box=document.getElementById('ai-box'); box.style.display=box.style.display==='flex'?'none':'flex';" style="background: #10b981; color: #fff; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 18px;"><i class="fa-solid fa-robot"></i></button>
+        <div id="ai-box" style="display: none; position: absolute; bottom: 55px; right: 0; width: 300px; height: 350px; background: #111827; border: 1px solid #10b981; border-radius: 10px; flex-direction: column; overflow: hidden;">
+            <div style="background: #1f2937; padding: 10px; color: #34d399; font-weight: bold; font-size: 12px;">Madzinu AI Hub</div>
+            <div style="flex: 1; padding: 8px; font-size: 10px; color: #d1d5db; overflow-y: auto;">Hello! Ask me about server compute tiers, UPI copy details, or daily earnings.</div>
+        </div>
+    </div>
+
     <script>
         let pendingAmount = 5000;
         let pendingDailyYield = 394.64;
@@ -194,6 +235,11 @@
                     btn.style.color = '#38bdf8';
                 }, 1500);
             });
+        }
+
+        function shareWhatsApp(id) {
+            let msg = encodeURIComponent('Check out Madzinu Web3 Technologies Cloud Compute Platform: https://madzinuweb3technologies.in');
+            window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
         }
 
         function verifySecureNodeAccess() {
