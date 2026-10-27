@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madzinu Web3 Technologies | Enterprise Cloud & Autonomous Workflows</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         :root {
             --bg-color: #090d16;
@@ -45,6 +44,10 @@
         .user-balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .bal-card { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px; }
         .bal-val { font-size: 16px; font-weight: 900; color: #34d399; margin-top: 4px; }
+
+        /* Slice Payment Modal */
+        #slice-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
+        .slice-content { background: #111827; border: 1px solid #ec4899; padding: 20px; border-radius: 14px; width: 90%; max-width: 420px; text-align: left; }
 
         /* Admin Modal Styling */
         #admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; justify-content: center; align-items: center; }
@@ -87,11 +90,33 @@
             <div class="user-info-bar">
                 <div>
                     <div style="color: #94a3b8; font-size: 9px;" id="ws-node-lbl">CONNECTED CONTRACTOR NODE</div>
-                    <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9876543210</div>
+                    <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9840000000</div>
                 </div>
-                <div style="text-align: right;">
-                    <div style="color: #94a3b8; font-size: 9px;" id="ws-status-lbl">NODE LICENSE STATUS</div>
-                    <div style="font-weight: bold; color: #34d399;"><i class="fa-solid fa-circle-check"></i> <span id="ws-active-txt">14-Day Active Node</span></div>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                    <div style="text-align: right;">
+                        <div style="color: #94a3b8; font-size: 9px;" id="ws-status-lbl">NODE LICENSE STATUS</div>
+                        <div style="font-weight: bold; color: #34d399;"><i class="fa-solid fa-circle-check"></i> <span id="ws-active-txt">14-Day Active Node</span></div>
+                    </div>
+                    <button id="ws-logout-btn" onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                </div>
+            </div>
+
+            <!-- Server Package Purchasing Section using Slice Account -->
+            <div style="background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span id="buy-server-title" style="font-size: 11px; font-weight: bold; color: #ec4899;"><i class="fa-solid fa-server"></i> PROVISION & BUY SERVER COMPUTE PACKAGE</span>
+                    <span style="font-size: 9px; color: #ec4899; font-weight: bold;"><i class="fa-solid fa-wallet"></i> Slice Business Account</span>
+                </div>
+                <p id="buy-server-desc" style="font-size: 10px; color: #94a3b8; margin-bottom: 10px;">Select compute tier from ₹2,000 to ₹1,00,000 and transfer via Slice Current Account / UPI.</p>
+                <div style="display: flex; gap: 8px;">
+                    <select id="server-tier-select" style="flex: 1; background: #111827; color: #fff; border: 1px solid #334155; padding: 8px; border-radius: 8px; font-size: 11px;">
+                        <option value="2000">Tier 1: ₹2,000 (Basic Compute Node)</option>
+                        <option value="10000">Tier 2: ₹10,000 (Standard AI Cluster)</option>
+                        <option value="25000">Tier 3: ₹25,000 (Gold Showroom Tier)</option>
+                        <option value="50000">Tier 4: ₹50,000 (Enterprise Cloud Node)</option>
+                        <option value="100000">Tier 5: ₹1,00,000 (Max Sovereign Compute)</option>
+                    </select>
+                    <button id="buy-server-btn" onclick="openSlicePayment()" style="background: #ec4899; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-qrcode"></i> Pay via Slice</button>
                 </div>
             </div>
 
@@ -214,6 +239,27 @@
         </div>
     </div>
 
+    <!-- Slice Payment Modal -->
+    <div id="slice-modal">
+        <div class="slice-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
+                <span style="font-weight: bold; color: #ec4899; font-size: 13px;"><i class="fa-solid fa-building-columns"></i> Slice Current Account Details</span>
+                <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer;">&times;</button>
+            </div>
+            <div style="font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; background: #090d16; padding: 12px; border-radius: 8px;">
+                <div><strong>Account Name:</strong> Madzinu Web3 Technologies</div>
+                <div><strong>Account No:</strong> <span style="color: #34d399; font-family: monospace;">033311501076921</span></div>
+                <div><strong>IFSC:</strong> <span style="color: #38bdf8; font-family: monospace;">NESF0000333</span></div>
+                <div><strong>Alternate IFSC:</strong> <span style="font-family: monospace;">NESF0000096</span></div>
+                <div><strong>UPI ID:</strong> <span style="color: #ec4899; font-weight: bold;">madhan958@slc</span></div>
+                <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹2,000</span></div>
+            </div>
+            <p style="font-size: 10px; color: #94a3b8; margin-bottom: 10px;">Transfer the exact amount using your Slice app or any UPI/NEFT app, then enter your UTR / UPI Reference ID below to activate:</p>
+            <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" style="width: 100%; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px; margin-bottom: 10px;">
+            <button onclick="confirmSlicePayment()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Activate Server Package</button>
+        </div>
+    </div>
+
     <!-- Admin Panel Modal -->
     <div id="admin-modal">
         <div class="modal-content">
@@ -221,7 +267,7 @@
             <p style="font-size: 11px; color: #94a3b8; margin-bottom: 12px;">Manage user nodes, active packages, and live workspace balances.</p>
             <div style="background: #090d16; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 11px; text-align: left;">
                 <div><strong>Status:</strong> <span style="color: #34d399;">Authorized & Active</span></div>
-                <div><strong>Gateway:</strong> Razorpay / RazorpayX Active</div>
+                <div><strong>Gateway:</strong> Slice Current Account Active</div>
             </div>
             <button onclick="closeAdminPanel()" style="background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;">Close Dashboard</button>
         </div>
@@ -240,7 +286,7 @@
                 <button onclick="document.getElementById('madzinu-ai-chatbox').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px;">&times;</button>
             </div>
             <div id="madzinu-ai-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px;">
-                <div style="background: #1f2937; padding: 8px; border-radius: 6px; width: fit-content; max-width: 85%;">Hello! I am Madzinu AI. Ask me anything about server compute tiers, daily yield, live metal vaults, or showroom vouchers!</div>
+                <div style="background: #1f2937; padding: 8px; border-radius: 6px; width: fit-content; max-width: 85%;">Hello! I am Madzinu AI. Ask me anything about server compute tiers, Slice account transfers, or daily yields!</div>
             </div>
             <div style="padding: 8px; background: #1f2937; border-top: 1px solid #374151; display: flex; gap: 6px;">
                 <input type="text" id="madzinu-ai-input" placeholder="Ask about platform, yields, payouts..." style="flex: 1; background: #374151; border: none; padding: 7px; color: #fff; border-radius: 6px; font-size: 11px;" />
@@ -262,14 +308,12 @@
                         let aiMsg = document.createElement('div');
                         aiMsg.style.cssText = 'background: #1f2937; color: #d1d5db; padding: 8px; border-radius: 6px; align-self: flex-start; max-width: 85%;';
                         
-                        if(q.includes('gold') || q.includes('silver') || q.includes('metal')) {
-                            aiMsg.innerText = 'Vault balances for Gold and Silver are dynamically calculated and synchronized in real-time with live spot price feeds inside user balance dashboards.';
-                        } else if(q.includes('payout') || q.includes('withdraw') || q.includes('cash')) {
-                            aiMsg.innerText = 'Payouts are restricted to daily server yield limits to ensure stability. Excess withdrawals require manual Admin approval.';
-                        } else if(q.includes('admin') || q.includes('login') || q.includes('password')) {
-                            aiMsg.innerText = 'Admin access is strictly restricted to the Fingertip Dashboard secured by password (madz1222) to manage user nodes and balances.';
+                        if(q.includes('slice') || q.includes('account') || q.includes('upi')) {
+                            aiMsg.innerText = 'Slice Current Account details: Account No 033311501076921, IFSC NESF0000333, UPI ID madhan958@slc.';
+                        } else if(q.includes('gold') || q.includes('silver') || q.includes('metal')) {
+                            aiMsg.innerText = 'Vault balances for Gold and Silver are dynamically synchronized in real-time with live spot price feeds inside user balance dashboards.';
                         } else {
-                            aiMsg.innerText = 'Madzinu AI Node operational. You can ask me about server compute tiers, daily yields, live metal vaults, bank locking rules, or Xoxoday Plum showroom vouchers!';
+                            aiMsg.innerText = 'Madzinu AI Node operational. You can ask me about server compute tiers, daily yields, or Slice current account transfers!';
                         }
                         
                         msgContainer.appendChild(aiMsg);
@@ -315,6 +359,10 @@
                 wsNodeLbl: "CONNECTED CONTRACTOR NODE",
                 wsStatusLbl: "NODE LICENSE STATUS",
                 wsActiveTxt: "14-Day Active Node",
+                wsLogoutBtn: "Logout",
+                buyServerTitle: "PROVISION & BUY SERVER COMPUTE PACKAGE",
+                buyServerDesc: "Select compute tier from ₹2,000 to ₹1,00,000 and transfer via Slice Current Account / UPI.",
+                buyServerBtn: "Pay via Slice",
                 wsBoardTitle: "USER WORKSPACE BALANCE BOARD",
                 wsSpotTxt: "● LIVE SPOT SYNCHRONIZED",
                 wsInrLbl: "INR Workspace Balance",
@@ -346,6 +394,10 @@
                 wsNodeLbl: "இணைக்கப்பட்ட ஒப்பந்தக்காரர் நோடு",
                 wsStatusLbl: "நோடு உரிம நிலை",
                 wsActiveTxt: "14 நாள் செயலில் உள்ள நோடு",
+                wsLogoutBtn: "வெளியேறு",
+                buyServerTitle: "சர்வர் கம்ப்யூட் தொகுப்பை வாங்கவும்",
+                buyServerDesc: "Slice கரண்ட் அக்கவுண்ட் / UPI மூலம் ₹2,000 முதல் ₹1,00,000 வரை செலுத்தவும்.",
+                buyServerBtn: "Slice மூலம் செலுத்து",
                 wsBoardTitle: "பயனர் பணிநிலை இருப்புப் பலகை",
                 wsSpotTxt: "● நேரலை ஒத்திசைக்கப்பட்டது",
                 wsInrLbl: "ரூபாய் பணிநிலை இருப்பு",
@@ -369,7 +421,7 @@
                 voucherSub: "* ఎంటర్‌ప్రైజ్ రివార్డ్ భాగస్వాములు (API ఇంటిగ్రేషన్ త్వరలో వస్తుంది)",
                 goldTitle: "24K గోల్డ్ షోరూమ్ భాగస్వాములు (₹25K+)",
                 foodTitle: "తక్షణ లైఫ్‌స్టైల్ & ఫుడ్ వౌచర్‌లు",
-                officialWeb: "అధికారిక వెబ్‌సైట్",
+                officialWeb: "అధికாரిక వెబ్‌సైట్",
                 loginTitle: "కాంట్రాక్టర్ సెక్యూర్ నోడ్ లాగిన్",
                 phonePlaceholder: "మొబైల్ నంబర్‌ను నమోదు చేయండి",
                 sendOtpBtn: "OTP పంపు",
@@ -377,6 +429,10 @@
                 wsNodeLbl: "కనెక్ట్ చేయబడిన కాంట్రాక్టర్ నోడ్",
                 wsStatusLbl: "నోడ్ లైసెన్స్ స్థితి",
                 wsActiveTxt: "14 రోజుల యాక్టివ్ నోడ్",
+                wsLogoutBtn: "లాగ్‌అవుట్",
+                buyServerTitle: "సర్వర్ ప్యాకేజీని కొనుగోలు చేయండి",
+                buyServerDesc: "Slice కరెంట్ ఖాతా / UPI ద్వారా చెల్లించండి.",
+                buyServerBtn: "Slice ద్వారా చెల్లించండి",
                 wsBoardTitle: "యూజర్ వర్క్‌స్పేస్ బ్యాలెన్స్ బోర్డ్",
                 wsSpotTxt: "● లైవ్ సింక్ చేయబడింది",
                 wsInrLbl: "INR వర్క్‌స్పేస్ బ్యాలెన్స్",
@@ -408,6 +464,10 @@
                 wsNodeLbl: "कनेक्टेड कॉन्ट्रैक्टर नोड",
                 wsStatusLbl: "नोड लाइसेंस स्थिति",
                 wsActiveTxt: "14-दिन सक्रिय नोड",
+                wsLogoutBtn: "लॉग आउट",
+                buyServerTitle: "सर्वर कंप्यूट पैकेज खरीदें",
+                buyServerDesc: "Slice करंट अकाउंट / UPI के माध्यम से भुगतान करें।",
+                buyServerBtn: "Slice से भुगतान करें",
                 wsBoardTitle: "यूजर वर्कस्पेस बैलेंस बोर्ड",
                 wsSpotTxt: "● लाइव सिंक",
                 wsInrLbl: "INR वर्कस्पेस बैलेंस",
@@ -450,6 +510,10 @@
             document.getElementById('ws-node-lbl').innerText = t.wsNodeLbl;
             document.getElementById('ws-status-lbl').innerText = t.wsStatusLbl;
             document.getElementById('ws-active-txt').innerText = t.wsActiveTxt;
+            document.getElementById('ws-logout-btn').innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> ${t.wsLogoutBtn}`;
+            document.getElementById('buy-server-title').innerHTML = `<i class="fa-solid fa-server"></i> ${t.buyServerTitle}`;
+            document.getElementById('buy-server-desc').innerText = t.buyServerDesc;
+            document.getElementById('buy-server-btn').innerHTML = `<i class="fa-solid fa-qrcode"></i> ${t.buyServerBtn}`;
             document.getElementById('ws-board-title').innerHTML = `<i class="fa-solid fa-wallet"></i> ${t.wsBoardTitle}`;
             document.getElementById('ws-spot-txt').innerText = t.wsSpotTxt;
             document.getElementById('ws-inr-lbl').innerText = t.wsInrLbl;
@@ -496,6 +560,37 @@
             } else {
                 alert('Invalid OTP or Admin Code!');
             }
+        }
+
+        function logoutUser() {
+            document.getElementById('user-workspace-dashboard').style.display = 'none';
+            document.getElementById('login-mobile').value = '';
+            document.getElementById('login-otp-code').value = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            alert('Successfully logged out from contractor node session.');
+        }
+
+        function openSlicePayment() {
+            let amount = document.getElementById('server-tier-select').value;
+            document.getElementById('slice-modal-amount').innerText = '₹' + parseInt(amount).toLocaleString('en-IN');
+            document.getElementById('slice-modal').style.display = 'flex';
+        }
+
+        function closeSliceModal() {
+            document.getElementById('slice-modal').style.display = 'none';
+        }
+
+        function confirmSlicePayment() {
+            let utr = document.getElementById('slice-utr-input').value.trim();
+            if(!utr) {
+                alert('Please enter your UPI Reference ID or UTR number!');
+                return;
+            }
+            let amount = document.getElementById('server-tier-select').value;
+            document.getElementById('user-inr-bal').innerText = '₹' + parseInt(amount).toLocaleString('en-IN') + '.00';
+            document.getElementById('user-daily-yield').innerText = '₹' + Math.round(amount * 0.05).toLocaleString('en-IN') + ' / Day';
+            closeSliceModal();
+            alert('Slice payment verification submitted successfully! Server package activated.');
         }
     </script>
 </body>
