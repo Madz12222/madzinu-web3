@@ -52,26 +52,30 @@
 <body>
     <header>
         <div>
-            <div class=brand-title>MADZINU WEB3 TECH & AI</div>
+            <div class="brand-title">MADZINU WEB3 TECH & AI</div>
         </div>
         <div>
-            <select id=lang-select style="background: #111827; color: #38bdf8; border: 1px solid #334155; padding: 4px 8px; border-radius: 6px; font-size: 10px;">
-                <option value=en>English</option>
-                <option value=ta>தமிழ்</option>
+            <select id="lang-select" onchange="changeLanguage(this.value)" style="background: #111827; color: #38bdf8; border: 1px solid #334155; padding: 4px 8px; border-radius: 6px; font-size: 10px;">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+                <option value="hi">हिंदी</option>
+                <option value="te">తెలుగు</option>
+                <option value="ml">മലയാളം</option>
+                <option value="kn">ಕನ್ನಡ</option>
             </select>
         </div>
     </header>
 
-    <div class=container>
-        <div class=hero-card>
-            <div class=badge-pill>👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1>Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span></h1>
-            <p>Govt. of India Recognized Startup under MeitY. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000.</p>
-            <button class=btn-primary onclick="document.getElementById('catalog-section').scrollIntoView({behavior: 'smooth'})">VIEW SERVER PACKAGES & EARNINGS</button>
+    <div class="container">
+        <div class="hero-card">
+            <div class="badge-pill" data-en="👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK" data-ta="👑 இந்தியாவின் முதல் சுயாதீன AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்" data-hi="👑 भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क" data-te="👑 భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్" data-ml="👑 ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ & ക്ലൗಡ್ നെറ്റ്‌വർക്ക്" data-kn="👑 ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ ಮತ್ತು ಕ್ಲೌಡ್ ನೆಟ್‌ವರ್ಕ್">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1 data-en="Sovereign Cloud Compute & Autonomous Jobworks" data-ta="சவரன் கிளவுட் கம்ப்யூட் & சுயாதீன பணிப்பாய்வுகள்" data-hi="संप्रभु क्लाउड कंप्यूट और स्वायत्त कार्य" data-te="సావరిన్ క్లౌడ్ కంప్యూట్ & స్వయంప్రతిపత్తి కలిగిన జాబ్‌వర్క్స్" data-ml="സോവറിൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ഓട്ടോണമസ് ജോബ്‌വർക്ಸ್" data-kn="ಸಾರ್ವಭೌಮ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ ಮತ್ತು ಸ್ವಾಯತ್ತ ಉದ್ಯೋಗಗಳು">Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span></h1>
+            <p data-en="Govt. of India Recognized Startup under MeitY. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000." data-ta="MeitY-ன் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப். ₹5,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் தொகுப்புகளை வழங்குகிறோம்." data-hi="MeitY के तहत भारत सरकार मान्यता प्राप्त स्टार्टअप। ₹5,000 से ₹1,00,000 तक सर्वर पैकेज प्रदान करें।" data-te="MeitY గుర్తింపు పొందిన స్టార్టప్. ₹5,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలు అందుబాటులో ఉన్నాయి." data-ml="MeitY അംഗീകരിച്ച സ്റ്റാർട്ടപ്പ്. ₹5,000 മുതൽ ₹1,00,000 വരെയുള്ള സെർവർ പാക്കേജുകൾ.">Govt. of India Recognized Startup under MeitY. Provision high-throughput server compute packages from ₹5,000 to ₹1,00,000.</p>
+            <button class="btn-primary" onclick="document.getElementById('catalog-section').scrollIntoView({behavior: 'smooth'})">VIEW SERVER PACKAGES & EARNINGS</button>
         </div>
 
-        <div class=user-workspace-dashboard id=catalog-section>
-            <div class=user-info-bar>
+        <div class="user-workspace-dashboard" id="catalog-section">
+            <div class="user-info-bar">
                 <div>
                     <div style="color: #94a3b8; font-size: 9px;">MEITY RECOGNIZED PORTAL</div>
                     <div style="font-weight: bold; color: #38bdf8;">Madzinu Web3 Compute Node</div>
@@ -220,6 +224,15 @@
     <script>
         let pendingAmount = 5000;
         let pendingDailyYield = 394.64;
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                let translatedText = el.getAttribute('data-' + lang);
+                if(translatedText) {
+                    el.innerText = translatedText;
+                }
+            });
+        }
 
         function copyText(elementId, btn) {
             const text = document.getElementById(elementId).innerText;
