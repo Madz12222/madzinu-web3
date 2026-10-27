@@ -308,15 +308,25 @@
         }
 
         function verifySecureNodeAccess() {
-            const mobile = document.getElementById('login-mobile').value;
-            const otp = document.getElementById('login-otp-code').value;
-            if(mobile.length < 10) { alert('Enter valid mobile number'); return; }
-            if(mobile === '9840000000' && otp === '2026') {
-                alert('Secure Node Access Granted for Admin!');
-            } else {
-                alert('Direct access not allowed. Please verify via valid OTP or admin credentials.');
-            }
-        }
+    const mobile = document.getElementById('login-mobile').value;
+    const otp = document.getElementById('login-otp-code').value;
+    
+    // Admin Direct Bypass / Master Login
+    if((mobile === '9840000000' && otp === '2026') || otp === '2026' || mobile === 'admin') {
+        alert('Secure Node Access Granted for Admin!');
+        document.getElementById('login-section').innerHTML = `
+            <div style="background: #111827; padding: 15px; border-radius: 10px; border: 1px solid #10b981; text-align: center;">
+                <h3 style="color: #34d399; margin-bottom: 10px;"><i class="fa-solid fa-user-shield"></i> Admin Fingertip Dashboard</h3>
+                <p style="color: #fff; font-size: 11px; margin-bottom: 10px;">Welcome Admin! All user activity, deposit logs, and transaction history are live.</p>
+                <button onclick="alert('Viewing all registered user nodes & withdrawal requests.')" style="background: #10b981; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-right: 5px;">View Users & History</button>
+                <button onclick="alert('Withdrawal request pipeline active.')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Manage Payouts</button>
+            </div>
+        `;
+    } else {
+        alert('Invalid OTP or Mobile Number. Use Admin Mobile: 9840000000 and OTP: 2026');
+    }
+}
+
 
         function shareWhatsApp(id) {
             const lang = document.getElementById('langSelector').value;
