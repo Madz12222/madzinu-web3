@@ -340,33 +340,73 @@ function verifySecureNodeAccess() {
     const mobile = document.getElementById('login-mobile').value.trim();
     if(mobile.length < 10) { alert('Please enter a valid 10-digit mobile number'); return; }
     
-    document.getElementById('login-section').innerHTML = `
-        <div style="background: #111827; padding: 15px; border-radius: 10px; border: 1px solid #10b981; text-align: left;">
-            <h3 style="color: #34d399; margin-bottom: 8px; text-align: center;"><i class="fa-solid fa-server"></i> Sovereign Server Compute Dashboard</h3>
-            <p style="color: #94a3b8; font-size: 11px; text-align: center; margin-bottom: 12px;">User Node: +91 ${mobile} | Verified</p>
-            
-            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                <div style="flex: 1; background: #1f2937; padding: 8px; border-radius: 6px; text-align: center;">
-                    <span style="font-size: 9px; color: #94a3b8;">WALLET INR</span>
-                    <h4 style="color: #34d399; font-size: 14px; margin-top: 2px;">₹24,500.00</h4>
-                </div>
-                <div style="flex: 1; background: #1f2937; padding: 8px; border-radius: 6px; text-align: center;">
-                    <span style="font-size: 9px; color: #94a3b8;">GOLD VAULT</span>
-                    <h4 style="color: #fbbf24; font-size: 14px; margin-top: 2px;">2.450 Grams</h4>
-                </div>
-            </div>
+    const existingModal = document.getElementById('user-dashboard-modal');
+    if(existingModal) existingModal.remove();
 
-            <h4 style="color: #fff; font-size: 12px; margin-bottom: 8px;"><i class="fa-solid fa-box"></i> Select Server Compute Package (₹2K - ₹1L):</h4>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 12px;">
-                <button onclick="alert('Selected ₹2,000 Compute Package. Deploying node...')" style="background: #1f2937; color: #34d399; border: 1px solid #34d399; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹2,000 Tier</button>
-                <button onclick="alert('Selected ₹10,000 Compute Package. Deploying node...')" style="background: #1f2937; color: #34d399; border: 1px solid #34d399; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹10,000 Tier</button>
-                <button onclick="alert('Selected ₹25,000 Compute Package. Deploying node...')" style="background: #1f2937; color: #34d399; border: 1px solid #34d399; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹25,000 Tier</button>
-                <button onclick="alert('Selected ₹1,00,000 Enterprise Package. Deploying node...')" style="background: #10b981; color: #fff; border: none; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">₹1,00,000 Enterprise</button>
+    const modalHTML = `
+        <div id="user-dashboard-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 15px;">
+            <div style="background: #111827; border: 1px solid #10b981; padding: 20px; border-radius: 14px; width: 100%; max-width: 520px; color: #fff; max-height: 90vh; overflow-y: auto; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 10px;">
+                    <h3 style="color: #34d399; margin: 0; font-size: 16px;"><i class="fa-solid fa-server"></i> Sovereign Server Compute Dashboard</h3>
+                    <button onclick="document.getElementById('user-dashboard-modal').remove()" style="background: #ef4444; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">Close</button>
+                </div>
+                
+                <p style="color: #94a3b8; font-size: 11px; margin-bottom: 15px;">User Node: <strong style="color: #fff;">+91 ${mobile}</strong> | Verified & Active</p>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <div style="flex: 1; background: #1f2937; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #374151;">
+                        <span style="font-size: 10px; color: #94a3b8; display: block; margin-bottom: 4px;">WALLET INR BALANCE</span>
+                        <h4 style="color: #34d399; font-size: 18px; margin: 0;">₹24,500.00</h4>
+                    </div>
+                    <div style="flex: 1; background: #1f2937; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #374151;">
+                        <span style="font-size: 10px; color: #94a3b8; display: block; margin-bottom: 4px;">LIVE GOLD VAULT</span>
+                        <h4 style="color: #fbbf24; font-size: 18px; margin: 0;">2.450 Grams</h4>
+                    </div>
+                </div>
+
+                <h4 style="color: #fff; font-size: 13px; margin-bottom: 10px;"><i class="fa-solid fa-microchip"></i> Server Compute Tiers & Daily Yield:</h4>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px;">
+                    <div style="background: #1f2937; padding: 10px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #374151;">
+                        <div>
+                            <strong style="color: #34d399; font-size: 13px;">₹2,000 Compute Tier</strong>
+                            <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">Daily Return: ₹180 / day</div>
+                        </div>
+                        <button onclick="alert('Successfully deployed ₹2,000 Server Node!')" style="background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Deploy</button>
+                    </div>
+
+                    <div style="background: #1f2937; padding: 10px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #374151;">
+                        <div>
+                            <strong style="color: #34d399; font-size: 13px;">₹10,000 Compute Tier</strong>
+                            <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">Daily Return: ₹950 / day</div>
+                        </div>
+                        <button onclick="alert('Successfully deployed ₹10,000 Server Node!')" style="background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Deploy</button>
+                    </div>
+
+                    <div style="background: #1f2937; padding: 10px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #374151;">
+                        <div>
+                            <strong style="color: #34d399; font-size: 13px;">₹25,000 Compute Tier</strong>
+                            <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">Daily Return: ₹2,500 / day + Gold Reward</div>
+                        </div>
+                        <button onclick="alert('Successfully deployed ₹25,000 Server Node!')" style="background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Deploy</button>
+                    </div>
+
+                    <div style="background: #1f2937; padding: 10px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #374151;">
+                        <div>
+                            <strong style="color: #f59e0b; font-size: 13px;">₹1,00,000 Enterprise Tier</strong>
+                            <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">Daily Return: ₹10,500 / day + Showroom Tanishq Access</div>
+                        </div>
+                        <button onclick="alert('Successfully deployed ₹1,00,000 Enterprise Node!')" style="background: #f59e0b; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;">Deploy</button>
+                    </div>
+                </div>
+
+                <button onclick="alert('All active cloud compute nodes are synchronizing at high throughput.')" style="background: #6366f1; color: #fff; width: 100%; border: none; padding: 10px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer;">SYNC ACTIVE COMPUTE NETWORK</button>
             </div>
-            
-            <button onclick="alert('High-throughput server node active and executing autonomous tasks.')" style="background: #6366f1; color: #fff; width: 100%; border: none; padding: 9px; border-radius: 6px; font-weight: bold; font-size: 11px; cursor: pointer;">LAUNCH ACTIVE CLOUD COMPUTE</button>
         </div>
     `;
+
+    document.body.insertAdjacentHTML('afterbegin', modalHTML);
 }
 
     </script>
