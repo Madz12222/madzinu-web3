@@ -593,6 +593,57 @@ function getSmartAIResponse(query) {
 }
 </script>
 
+
+<script>
+// 1. Force Admin Button to Open Prompt & Panel
+document.addEventListener('DOMContentLoaded', () => {
+    const adminBtn = document.getElementById('admin-trigger-btn') || document.querySelector('.admin-btn') || Array.from(document.querySelectorAll('button, a, div')).find(el => el.innerText && el.innerText.trim() === 'Admin');
+    if(adminBtn) {
+        adminBtn.style.cursor = 'pointer';
+        adminBtn.style.zIndex = '9999999';
+        adminBtn.onclick = function(e) {
+            e.preventDefault();
+            let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
+            if(pwd === 'madz1222' || pwd === '2026') {
+                let panel = document.getElementById('admin-control-panel');
+                if(panel) { panel.style.display = 'block'; alert('Admin Dashboard Unlocked!'); }
+                else { alert('Admin Access Granted! Loading Fingertip Dashboard...'); }
+            } else {
+                alert('Invalid Admin Password!');
+            }
+        };
+    }
+});
+
+// 2. Multilingual Translator Logic (English / Tamil)
+function changeLanguage(lang) {
+    const t = {
+        'EN': {
+            'title': 'MADZINU WEB3 TECH & AI',
+            'admin': 'Admin',
+            'server_title': 'Sovereign Cloud Compute & Autonomous Jobworks',
+            'ai_title': 'Madzinu AI Knowledge Hub'
+        },
+        'TA': {
+            'title': 'மாட்ஜினு வெப்3 டெக் & ஏஐ',
+            'admin': 'நிர்வாகி (Admin)',
+            'server_title': 'সারவர் கம்ப்யூட் & கிளவுட் நெட்வொர்க்',
+            'ai_title': 'மாட்ஜினு ஏஐ அறிவு மையம்'
+        }
+    };
+    
+    let current = t[lang] ? t[lang] : t['EN'];
+    
+    // Update header title if matches
+    document.querySelectorAll('h1, h2, h3, .brand-title').forEach(el => {
+        if(el.innerText.includes('MADZINU') || el.innerText.includes('Sovereign')) {
+            if(lang === 'TA') el.innerText = current.server_title;
+        }
+    });
+    alert('Language switched to: ' + lang);
+}
+</script>
+
 </body>
 </html>
 
