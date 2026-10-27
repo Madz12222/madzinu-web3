@@ -970,6 +970,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+window.addEventListener('load', () => {
+    const selectEl = document.querySelector('select');
+    if(selectEl) {
+        selectEl.addEventListener('change', function() {
+            if(this.value === 'TA') {
+                document.body.innerHTML = document.body.innerHTML
+                    .replace(/Supported Voucher & Reward Partners/g, 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்')
+                    .replace(/Official Website/g, 'அதிகாரப்பூர்வ வலைத்தளம்')
+                    .replace(/INSTANT LIFESTYLE & FOOD VOUCHERS/g, 'உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்')
+                    .replace(/Contractor Secure Node Login/g, 'கான்ட்ராக்டர் பாதுகாப்பான நோட் உள்நுழைவு')
+                    .replace(/Enter Mobile Number/g, 'மொபைல் எண்ணை உள்ளிடவும்')
+                    .replace(/Send OTP/g, 'OTP அனுப்பவும்')
+                    .replace(/Verify/g, 'சரிபார்க்கவும்')
+                    .replace(/Terms & Conditions/g, 'விதிமுறைகள் & நிபந்தனைகள்')
+                    .replace(/Refund Policy/g, 'ரீஃபண்ட் கொள்கை')
+                    .replace(/Privacy Policy/g, 'தனியுரிமைக் கொள்கை');
+            } else {
+                location.reload();
+            }
+        });
+    }
+});
+</script>
+
 </body>
 </html>
 
