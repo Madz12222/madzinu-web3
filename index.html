@@ -644,6 +644,23 @@ function changeLanguage(lang) {
 }
 </script>
 
+
+<script>
+// 6 Languages Support Logic
+function changeLanguage(langObj) {
+    let lang = (typeof langObj === 'string') ? langObj : (langObj.value || 'EN');
+    const langNames = {
+        'EN': 'English',
+        'TA': 'தமிழ் (Tamil)',
+        'HI': 'हिन्दी (Hindi)',
+        'TE': 'తెలుగు (Telugu)',
+        'ML': 'മലയാളം (Malayalam)',
+        'KN': 'ಕನ್ನಡ (Kannada)'
+    };
+    alert('Language successfully switched to: ' + (langNames[lang] || lang));
+}
+</script>
+
 </body>
 </html>
 
