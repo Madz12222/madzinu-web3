@@ -803,6 +803,102 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+const dictionary = {
+    'TA': {
+        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'இந்தியாவின் முதல் சுயியக்க AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்',
+        'Share your referral link with auto-embedded ID:': 'உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:',
+        'Script': 'ஸ்கிரிப்ட்',
+        'Supported Voucher & Reward Partners': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்',
+        '* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)': '* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)',
+        '24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)': '24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)',
+        'Official Website': 'அதிகாரப்பூர்வ வலைத்தளம்',
+        'INSTANT LIFESTYLE & FOOD VOUCHERS': ' உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்',
+        'Contractor Secure Node Login': 'கான்ட்ராக்டர் பாதுகாப்பான நோட் உள்நுழைவு',
+        'Send OTP': 'OTP அனுப்பவும்',
+        'Verify': 'சரிபார்க்கவும்',
+        'Terms & Conditions': 'விதிமுறைகள் & நிபந்தனைகள்',
+        'Refund Policy': 'ரீஃபண்ட் கொள்கை',
+        'Privacy Policy': 'தனியுரிமைக் கொள்கை',
+        'Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506': 'இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் | பதிவு எண்: ST20260926506'
+    },
+    'HI': {
+        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क',
+        'Share your referral link with auto-embedded ID:': 'ऑटो-एम्बेडेड आईडी के साथ अपना रेफ़रल लिंक साझा करें:',
+        'Script': 'स्क्रिप्ट',
+        'Supported Voucher & Reward Partners': 'समर्थित वाउचर और पुरस्कार भागीदार',
+        'Official Website': 'आधिकारिक वेबसाइट',
+        'INSTANT LIFESTYLE & FOOD VOUCHERS': 'तत्काल लाइफस्टाइल और फूड वाउचर',
+        'Contractor Secure Node Login': 'ठेकेदार सुरक्षित नोड लॉगिन',
+        'Send OTP': 'OTP भेजें',
+        'Verify': 'सत्यापित करें'
+    },
+    'TE': {
+        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్',
+        'Share your referral link with auto-embedded ID:': 'ఆటో-ఎంబెడెడ్ IDతో మీ రెఫరల్ లింక్‌ని షేర్ చేయండి:',
+        'Script': 'స్క్రిప్ట్',
+        'Supported Voucher & Reward Partners': 'మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు',
+        'Official Website': 'అధికారిక వెబ్‌సైట్',
+        'INSTANT LIFESTYLE & FOOD VOUCHERS': 'తక్షణ లైఫ్‌స్టైల్ & ఫుడ్ వౌచర్‌లు'
+    },
+    'ML': {
+        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ & ക്ലൗഡ് നെറ്റ്‌വർക്ക്',
+        'Share your referral link with auto-embedded ID:': 'ഓട്ടോ-എബഡഡ് ഐഡി ഉപയോഗിച്ച് നിങ്ങളുടെ റഫറൽ ലിങ്ക് പങ്കിടുക:',
+        'Script': 'സ്ക്രിപ്റ്റ്',
+        'Supported Voucher & Reward Partners': 'പിന്തുണയ്ക്കുന്ന വൗച്ചർ & റിവാർഡ് പങ്കാളികൾ',
+        'Official Website': 'ഔദ്യോഗിക വെബ്സൈറ്റ്'
+    },
+    'KN': {
+        'INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ ಮತ್ತು ಕ್ಲೌಡ್ ನೆಟ್‌ವರ್ಕ್',
+        'Share your referral link with auto-embedded ID:': 'ಸ್ವಯಂಚಾಲಿತ ಐಡಿಯೊಂದಿಗೆ ನಿಮ್ಮ ರೆಫರಲ್ ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ:',
+        'Script': 'ಸ್ಕ್ರಿಪ್ಟ್',
+        'Supported Voucher & Reward Partners': 'ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವಾರ್ಡ್ ಪಾಲುದಾರರು',
+        'Official Website': 'ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್'
+    }
+};
+
+function translatePage(lang) {
+    if(lang === 'EN') {
+        location.reload();
+        return;
+    }
+    const map = dictionary[lang] || {};
+    
+    // Walk through all text nodes in the body
+    function walkTextNodes(root) {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+        let node;
+        while(node = walker.nextNode()) {
+            let text = node.nodeValue.trim();
+            if(text.length > 0) {
+                // Check exact or partial match
+                for(let key in map) {
+                    if(text.includes(key)) {
+                        node.nodeValue = node.nodeValue.replace(key, map[key]);
+                    }
+                }
+                // Handle Script 1 to Script 10 dynamically
+                if(text.startsWith('Script ') && map['Script']) {
+                    node.nodeValue = text.replace('Script', map['Script']);
+                }
+            }
+        }
+    }
+    walkTextNodes(document.body);
+    console.log('Fully translated to: ' + lang);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const selectEl = document.querySelector('select');
+    if(selectEl) {
+        selectEl.onchange = function() {
+            translatePage(this.value);
+        };
+    }
+});
+</script>
+
 </body>
 </html>
 
