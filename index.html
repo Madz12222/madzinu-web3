@@ -521,6 +521,30 @@ function openAdminPanel() {
 }
 </script>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const adminBtn = document.querySelector('a[href*="Admin"], button:contains("Admin"), .admin-btn, #admin-btn');
+    // Force pointer events and high z-index for admin buttons
+    document.querySelectorAll('*').forEach(el => {
+        if(el.innerText && el.innerText.trim() === 'Admin') {
+            el.style.cursor = 'pointer';
+            el.style.zIndex = '999999';
+            el.style.position = 'relative';
+            el.onclick = function(e) {
+                e.preventDefault();
+                let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
+                if(pwd === 'madz1222' || pwd === '2026') {
+                    alert('Admin Access Granted! Loading Fingertip Dashboard...');
+                } else {
+                    alert('Invalid Admin Password!');
+                }
+            };
+        }
+    });
+});
+</script>
+
 </body>
 </html>
 
