@@ -54,9 +54,9 @@
 <body>
     <header>
         <div>
-            <div class="brand-title" id="brand-title">MADZINU WEB3 TECH & AI</div>
+            <div class="brand-title">MADZINU WEB3 TECH & AI</div>
             <div class="marquee-container">
-                <span class="animate-marquee"><i class="fa-solid fa-check-circle"></i> Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</span>
+                <span class="animate-marquee"><i class="fa-solid fa-check-circle"></i> <span id="marquee-txt">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</span></span>
             </div>
         </div>
         <div style="display: flex; gap: 6px; align-items: center;">
@@ -289,16 +289,16 @@
             <a href="#" onclick="alert('Privacy Policy: User data and mobile verification logs are securely encrypted.'); return false;" style="color: #34d399; text-decoration: underline;">Privacy Policy</a>
         </div>
         <div><strong>Madzinu Web3 Technologies</strong></div>
-        <div style="margin-top: 4px; color: #64748b;">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
+        <div style="margin-top: 4px; color: #64748b;" id="footer-startup">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
     </footer>
 
     <script>
         const translations = {
             EN: {
-                brandTitle: "MADZINU WEB3 TECH & AI",
                 adminBtn: "Admin",
+                marqueeTxt: "Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506",
                 heroBadge: "👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
-                heroTitle: "Sovereign Cloud Compute & <br><span>Autonomous Jobworks</span>",
+                heroTitle: "Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span>",
                 heroDesc: "Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.",
                 launchTermBtn: "LAUNCH SECURE ENTERPRISE TERMINAL",
                 waTitle: "10 Unique WhatsApp Referral Scripts",
@@ -322,11 +322,12 @@
                 wsGoldLbl: "Live 24K Gold Vault (Grams)",
                 wsSilverLbl: "Live Silver Vault (Grams)",
                 wsTaskBtn: "Run Daily Tasks",
-                wsPayoutBtn: "Request Payout"
+                wsPayoutBtn: "Request Payout",
+                footerStartup: "Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506"
             },
             TA: {
-                brandTitle: "மாட்ஜினு வெப்3 டெக் & AI",
                 adminBtn: "நிர்வாகி",
+                marqueeTxt: "இந்திய அரசின் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் (MeitY) | பதிவு எண்: ST20260926506",
                 heroBadge: "👑 இந்தியாவின் முதல் தன்னாட்சி AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
                 heroTitle: "சர்வர் கம்ப்யூட் & <br><span>சுயியக்க கிளவுட் நெட்வொர்க்</span>",
                 heroDesc: "மாட்ஜினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் தொகுப்புகளைப் பெறுங்கள்.",
@@ -352,11 +353,12 @@
                 wsGoldLbl: "நேரலை தங்கக் காப்பகம் (கிராம்)",
                 wsSilverLbl: "நேரலை வெள்ளி காப்பகம் (கிராம்)",
                 wsTaskBtn: "தினசரி பணிகளை இயக்கு",
-                wsPayoutBtn: "பணம் கோரவும்"
+                wsPayoutBtn: "பணம் கோரவும்",
+                footerStartup: "இந்திய அரசின் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் (MeitY) | பதிவு எண்: ST20260926506"
             },
             TE: {
-                brandTitle: "మాడ్జినూ వెబ్3 టెక్ & AI",
                 adminBtn: "అడ్మిన్",
+                marqueeTxt: "భారత ప్రభుత్వ గుర్తింపు పొందిన స్టార్టప్ (MeitY) | రిజిస్ట్రేషన్ నెం: ST20260926506",
                 heroBadge: "👑 భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లౌడ్ నెట్‌వర్క్",
                 heroTitle: "సాವರೆన్ క్లౌడ్ కంప్యూట్ & <br><span>ఆటోనమస్ జాబ్‌వర్క్స్</span>",
                 heroDesc: "మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్. ₹2,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలను అందిస్తుంది.",
@@ -382,11 +384,12 @@
                 wsGoldLbl: "లైవ్ గోల్డ్ వాల్ట్ (గ్రాములు)",
                 wsSilverLbl: "లైవ్ సిల్వర్ వాల్ట్ (గ్రాములు)",
                 wsTaskBtn: "డైలీ టాస్క్‌లు రన్ చేయండి",
-                wsPayoutBtn: "పేఅవుట్ కోరండి"
+                wsPayoutBtn: "పేఅవుట్ కోరండి",
+                footerStartup: "భారత ప్రభుత్వ గుర్తింపు పొందిన స్టార్టప్ (MeitY) | రిజిస్ట్రేషన్ నెం: ST20260926506"
             },
             HI: {
-                brandTitle: "माड्जिनू वेब3 टेक & AI",
                 adminBtn: "एडमिन",
+                marqueeTxt: "भारत सरकार मान्यता प्राप्त स्टार्टअप (MeitY) | पंजीकरण संख्या: ST20260926506",
                 heroBadge: "👑 भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क",
                 heroTitle: "सोवरिन क्लाउड कंप्यूट और <br><span>स्वायत्त जॉबवर्क्स</span>",
                 heroDesc: "मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है। ₹2,000 से ₹1,00,000 तक के सर्वर पैकेज प्रदान करता है।",
@@ -412,7 +415,8 @@
                 wsGoldLbl: "लाइव गोल्ड वॉल्ट (ग्राम)",
                 wsSilverLbl: "लाइव सिल्वर वॉल्ट (ग्राम)",
                 wsTaskBtn: "दैनिक कार्य चलाएं",
-                wsPayoutBtn: "पेआउट अनुरोध करें"
+                wsPayoutBtn: "पेआउट अनुरोध करें",
+                footerStartup: "भारत सरकार मान्यता प्राप्त स्टार्टअप (MeitY) | पंजीकरण संख्या: ST20260926506"
             }
         };
 
@@ -422,8 +426,8 @@
             const lang = selector.value;
             const t = translations[lang] || translations['EN'];
 
-            document.getElementById('brand-title').innerText = t.brandTitle;
             document.getElementById('admin-btn-txt').innerText = t.adminBtn;
+            document.getElementById('marquee-txt').innerText = t.marqueeTxt;
             document.getElementById('hero-badge').innerText = t.heroBadge;
             document.getElementById('hero-title').innerHTML = t.heroTitle;
             document.getElementById('hero-desc').innerText = t.heroDesc;
@@ -443,18 +447,18 @@
             document.getElementById('send-otp-btn').innerText = t.sendOtpBtn;
             document.getElementById('verify-otp-btn').innerText = t.verifyOtpBtn;
 
-            // Workspace Dashboard translations
-            if(document.getElementById('ws-node-lbl')) document.getElementById('ws-node-lbl').innerText = t.wsNodeLbl;
-            if(document.getElementById('ws-status-lbl')) document.getElementById('ws-status-lbl').innerText = t.wsStatusLbl;
-            if(document.getElementById('ws-active-txt')) document.getElementById('ws-active-txt').innerText = t.wsActiveTxt;
-            if(document.getElementById('ws-board-title')) document.getElementById('ws-board-title').innerHTML = `<i class="fa-solid fa-wallet"></i> ${t.wsBoardTitle}`;
-            if(document.getElementById('ws-spot-txt')) document.getElementById('ws-spot-txt').innerText = t.wsSpotTxt;
-            if(document.getElementById('ws-inr-lbl')) document.getElementById('ws-inr-lbl').innerText = t.wsInrLbl;
-            if(document.getElementById('ws-yield-lbl')) document.getElementById('ws-yield-lbl').innerText = t.wsYieldLbl;
-            if(document.getElementById('ws-gold-lbl')) document.getElementById('ws-gold-lbl').innerText = t.wsGoldLbl;
-            if(document.getElementById('ws-silver-lbl')) document.getElementById('ws-silver-lbl').innerText = t.wsSilverLbl;
-            if(document.getElementById('ws-task-btn')) document.getElementById('ws-task-btn').innerHTML = `<i class="fa-solid fa-play"></i> ${t.wsTaskBtn}`;
-            if(document.getElementById('ws-payout-btn')) document.getElementById('ws-payout-btn').innerHTML = `<i class="fa-solid fa-arrow-up-right-from-square"></i> ${t.wsPayoutBtn}`;
+            document.getElementById('ws-node-lbl').innerText = t.wsNodeLbl;
+            document.getElementById('ws-status-lbl').innerText = t.wsStatusLbl;
+            document.getElementById('ws-active-txt').innerText = t.wsActiveTxt;
+            document.getElementById('ws-board-title').innerHTML = `<i class="fa-solid fa-wallet"></i> ${t.wsBoardTitle}`;
+            document.getElementById('ws-spot-txt').innerText = t.wsSpotTxt;
+            document.getElementById('ws-inr-lbl').innerText = t.wsInrLbl;
+            document.getElementById('ws-yield-lbl').innerText = t.wsYieldLbl;
+            document.getElementById('ws-gold-lbl').innerText = t.wsGoldLbl;
+            document.getElementById('ws-silver-lbl').innerText = t.wsSilverLbl;
+            document.getElementById('ws-task-btn').innerHTML = `<i class="fa-solid fa-play"></i> ${t.wsTaskBtn}`;
+            document.getElementById('ws-payout-btn').innerHTML = `<i class="fa-solid fa-arrow-up-right-from-square"></i> ${t.wsPayoutBtn}`;
+            document.getElementById('footer-startup').innerText = t.footerStartup;
         }
 
         function openAdminPanel() {
