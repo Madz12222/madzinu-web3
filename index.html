@@ -3,302 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madzinu Web3 Technologies</title>
+    <title>Madzinu Web3 Technologies | Enterprise Cloud & Autonomous Workflows</title>
     <style>
         :root {
             --bg-color: #0b0f19;
             --card-bg: #111827;
-            --accent-blue: #2563eb;
-            --accent-cyan: #06b6d4;
-            --text-color: #f3f4f6;
-            --muted-text: #9ca3af;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #1f2937;
         }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #1f2937;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            color: var(--muted-text);
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Floating AI Support Widget */
-        #ai-widget-bubble {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-            z-index: 1000;
-        }
-
-        #ai-chat-box {
-            display: none;
-            position: fixed;
-            bottom: 95px;
-            right: 25px;
-            width: 340px;
-            height: 460px;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            flex-direction: column;
-            z-index: 1000;
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background: #1f2937;
-            padding: 14px 16px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #374151;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 12px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .message {
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 14px;
-            max-width: 85%;
-            line-height: 1.4;
-        }
-
-        .bot-msg {
-            background: #1f2937;
-            color: #e5e7eb;
-            align-self: flex-start;
-        }
-
-        .user-msg {
-            background: var(--accent-blue);
-            color: white;
-            align-self: flex-end;
-        }
-
-        .chat-input-area {
-            padding: 10px;
-            background: #1f2937;
-            display: flex;
-            gap: 8px;
-            border-top: 1px solid #374151;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #374151;
-            background: #0b0f19;
-            color: white;
-            outline: none;
-        }
-
-        .chat-input-area button {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 10px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding-bottom: 80px; }
+        header { background: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
+        .badge { background: rgba(59, 130, 246, 0.1); color: var(--accent-color); padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.85rem; border: 1px solid rgba(59, 130, 246, 0.2); }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        .hero { text-align: center; padding: 3rem 1rem; background: linear-gradient(135deg, #111827 0%, #1e293b 100%); border-radius: 1rem; border: 1px solid var(--border-color); margin-bottom: 2rem; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 800px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 0.75rem; padding: 1.5rem; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-3px); border-color: var(--accent-color); }
+        .card h3 { margin-bottom: 1rem; color: var(--accent-color); font-size: 1.3rem; }
+        .card ul { list-style: none; padding-left: 0; }
+        .card ul li { margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+        .card ul li::before { content: "•"; color: var(--accent-color); font-weight: bold; }
+        
+        .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .chat-btn { background: var(--accent-color); color: #fff; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: background 0.2s; }
+        .chat-btn:hover { background: var(--accent-hover); }
+        .chat-box { position: absolute; bottom: 80px; right: 0; width: 350px; height: 480px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 1rem; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .chat-header { background: #1e293b; padding: 1rem; font-weight: bold; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .close-chat { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; }
+        .chat-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; }
+        .msg { padding: 0.75rem 1rem; border-radius: 0.5rem; max-width: 80%; line-height: 1.4; }
+        .msg.bot { background: #1e293b; color: var(--text-main); align-self: flex-start; border: 1px solid var(--border-color); }
+        .msg.user { background: var(--accent-color); color: #fff; align-self: flex-end; }
+        .chat-input-area { padding: 0.75rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem; background: var(--card-bg); }
+        .chat-input-area input { flex: 1; background: var(--bg-color); border: 1px solid var(--border-color); padding: 0.5rem 0.75rem; border-radius: 0.5rem; color: #fff; outline: none; }
+        .chat-input-area input:focus { border-color: var(--accent-color); }
+        .chat-input-area button { background: var(--accent-color); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; }
+        .chat-input-area button:hover { background: var(--accent-hover); }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Madzinu Web3 Technologies</div>
+        <div class="logo">Madzinu Web3</div>
+        <div class="badge">Govt. Recognized Startup (MeitY/IndiaAI)</div>
     </header>
 
-    <div class="hero">
-        <h1>Welcome to Madzinu Web3</h1>
-        <p>Govt. of India Recognized Startup driving next-generation decentralized solutions, custom applications, and automated Web3 workflows.</p>
-    </div>
-
-    <!-- AI Floating Chatbot Widget -->
-    <div id="ai-widget-bubble" onclick="toggleAIChat()">🤖</div>
-
-    <div id="ai-chat-box">
-        <div class="chat-header">
-            <span>Madzinu AI Support</span>
-            <span onclick="toggleAIChat()" style="cursor:pointer;">✖</span>
+    <div class="container">
+        <div class="hero">
+            <h1>Autonomous Web3 & Cloud Ecosystem</h1>
+            <p>Empowering sovereign cloud compute packages, autonomous e-commerce jobworks (Amazon, Flipkart, Meesho syncs), and enterprise reward ecosystems.</p>
         </div>
-        <div class="chat-messages" id="chat-messages">
-            <div class="message bot-msg">
-                Hello! I am the official AI assistant for Madzinu Web3 Technologies. How can I clear any doubts regarding our website or services today?
+
+        <div class="grid">
+            <div class="card">
+                <h3>Daily Earnings & Tiers</h3>
+                <ul>
+                    <li><strong>Free Tier:</strong> Earn ₹25 daily for 4 days per mobile number (Total ₹100).</li>
+                    <li><strong>Server Packages:</strong> Tiers ranging from ₹2,000 to ₹1,00,000 (+18% GST).</li>
+                    <li><strong>14-Day Cycle:</strong> Automated task remuneration and milestone rewards.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>3-Tier Referral Program</h3>
+                <ul>
+                    <li><strong>Silver Tier (0-10 referrals):</strong> 10% instant commission.</li>
+                    <li><strong>Gold Tier (11-25 referrals):</strong> 12% instant commission.</li>
+                    <li><strong>Diamond Tier (26+ referrals):</strong> 15% instant commission.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Enterprise Gold Vault</h3>
+                <ul>
+                    <li>Exclusive 24K Gold Vault Showroom Vouchers.</li>
+                    <li>Partnered with Tanishq, Malabar Gold, GRT, and Kalyan Jewellers.</li>
+                    <li>Unlocked on server packages from ₹25,000 up to ₹1,00,000.</li>
+                </ul>
             </div>
         </div>
-        <div class="chat-input-area">
-            <input type="text" id="user-input" placeholder="Ask anything..." onkeypress="if(event.key==='Enter') sendAIMessage()">
-            <button onclick="sendAIMessage()">Send</button>
+    </div>
+
+    <div class="chat-widget">
+        <button class="chat-btn" id="chatToggleBtn">💬</button>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <span>Madzinu AI Support</span>
+                <button class="close-chat" id="closeChatBtn">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="msg bot">Welcome to Madzinu Web3 Technologies! How can we assist you with our compute packages or earnings today?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="userInput" placeholder="Ask anything about packages, earnings..." />
+                <button id="sendBtn">Send</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function toggleAIChat() {
-            const box = document.getElementById('ai-chat-box');
-            box.style.display = box.style.display === 'none' || box.style.display === '' ? 'flex' : 'none';
-        }
+        const chatToggleBtn = document.getElementById('chatToggleBtn');
+        const closeChatBtn = document.getElementById('closeChatBtn');
+        const chatBox = document.getElementById('chatBox');
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
 
-        async function sendAIMessage() {
-            const input = document.getElementById('user-input');
-            const msg = input.value.trim();
-            if (!msg) return;
-
-            const chat = document.getElementById('chat-messages');
-
-            // 1. Append User Message
-            chat.innerHTML += `<div class="message user-msg">${msg}</div>`;
-            input.value = '';
-            chat.scrollTop = chat.scrollHeight;
-
-            // 2. Append Loading Placeholder
-            const loadingId = 'loading-' + Date.now();
-            chat.innerHTML += `<div id="${loadingId}" class="message bot-msg"><i>Thinking...</i></div>`;
-            chat.scrollTop = chat.scrollHeight;
-
-            try {
-                // System Instruction to set persona
-                const systemPrompt = "You are the official Customer Support AI for Madzinu Web3 Technologies, a Govt. of India recognized startup based in Chennai, Tamil Nadu. Answer queries politely, professionally, and accurately regarding Web3 development, smart contracts, custom web applications, and company services. Keep answers concise and helpful.";
-
-                // Live fetch call to Gemini endpoint
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: msg, system: systemPrompt })
-                });
-
-                const data = await response.json();
-                const botReply = data.reply || "Thank you for reaching out! For official inquiries, feel free to contact support@madzinuweb3technologies.com.";
-
-                document.getElementById(loadingId).innerText = botReply;
-            } catch (err) {
-                document.getElementById(loadingId).innerText = "Madzinu Web3 Technologies is dedicated to building next-gen decentralized applications. Feel free to ask about our ecosystem!";
-            }
-
-            chat.scrollTop = chat.scrollHeight;
-        }
-    </script>
-
-</body>
-</html>
-
-<!-- Madzinu Web3 AI Floating Support Widget -->
-<div id="ai-widget-bubble" onclick="toggleAIChat()" style="position: fixed; bottom: 80px; right: 20px; background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.5); z-index: 9999;">🤖</div>
-
-<div id="ai-chat-box" style="display: none; position: fixed; bottom: 145px; right: 20px; width: 330px; height: 450px; background: #111827; border: 1px solid #1f2937; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); flex-direction: column; z-index: 9999; overflow: hidden; font-family: sans-serif;">
-    <div style="background: #1f2937; padding: 12px 16px; font-weight: bold; color: white; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #374151;">
-        <span>Madzinu AI Support</span>
-        <span onclick="toggleAIChat()" style="cursor:pointer; color: #9ca3af;">✕</span>
-    </div>
-    <div id="chat-messages" style="flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
-        <div style="background: #1f2937; color: #e5e7eb; padding: 10px 14px; border-radius: 8px; font-size: 14px; max-width: 85%;">
-            Hello! I am the official AI assistant for Madzinu Web3 Technologies. How can I help you today with voucher redemptions, node access, or platform queries?
-        </div>
-    </div>
-    <div style="padding: 10px; background: #1f2937; display: flex; gap: 8px; border-top: 1px solid #374151;">
-        <input type="text" id="user-input" placeholder="Ask anything..." style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #374151; background: #0b0f19; color: white; outline: none;" onkeypress="if(event.key==='Enter') sendAIMessage()">
-        <button onclick="sendAIMessage()" style="background: #2563eb; color: white; border: none; padding: 10px 14px; border-radius: 6px; cursor: pointer; font-weight: bold;">Send</button>
-    </div>
-</div>
-
-<script>
-function toggleAIChat() {
-    const box = document.getElementById('ai-chat-box');
-    box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
-}
-
-async function sendAIMessage() {
-    const input = document.getElementById('user-input');
-    const msg = input.value.trim();
-    if (!msg) return;
-
-    const chat = document.getElementById('chat-messages');
-
-    // Add User Message
-    chat.innerHTML += `<div style="background: #2563eb; color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; align-self: flex-end; max-width: 85%;">${msg}</div>`;
-    input.value = '';
-    chat.scrollTop = chat.scrollHeight;
-
-    // Add Loading Placeholder
-    const loadingId = 'loading-' + Date.now();
-    chat.innerHTML += `<div id="${loadingId}" style="background: #1f2937; color: #e5e7eb; padding: 10px 14px; border-radius: 8px; font-size: 14px; align-self: flex-start; max-width: 85%;"><i>Thinking...</i></div>`;
-    chat.scrollTop = chat.scrollHeight;
-
-    try {
-        const systemPrompt = "You are the official Customer Support AI for Madzinu Web3 Technologies (Govt. of India recognized startup). Assist users professionally with doubts regarding Web3 vouchers, node login, payments, and company details.";
-        const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: msg, system: systemPrompt })
+        chatToggleBtn.addEventListener('click', () => {
+            chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
         });
 
-        const data = await response.json();
-        const botReply = data.reply || "Thank you for contacting Madzinu Web3 Technologies!";
-        document.getElementById(loadingId).innerText = botReply;
-    } catch (err) {
-        document.getElementById(loadingId).innerText = "We are here to assist you! For node issues or custom queries, please reach out to support@madzinuweb3technologies.com.";
-    }
-    chat.scrollTop = chat.scrollHeight;
-}
-</script>
+        closeChatBtn.addEventListener('click', () => {
+            chatBox.style.display = 'none';
+        });
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            const userDiv = document.createElement('div');
+            userDiv.className = 'msg user';
+            userDiv.textContent = text;
+            chatMessages.appendChild(userDiv);
+            userInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: text })
+                });
+                const data = await res.json();
+
+                const botDiv = document.createElement('div');
+                botDiv.className = 'msg bot';
+                botDiv.innerHTML = data.reply.replace(/\n/g, '<br>');
+                chatMessages.appendChild(botDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (err) {
+                const errDiv = document.createElement('div');
+                errDiv.className = 'msg bot';
+                errDiv.textContent = "Error connecting to AI backend. Please try again.";
+                chatMessages.appendChild(errDiv);
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
