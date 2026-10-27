@@ -582,3 +582,49 @@ async function openAdvancedWithdrawalModal() {
     \`;
     document.body.insertAdjacentHTML('afterbegin', modalHTML);
 }
+
+<div id="madzinu-ai-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
+    <button onclick="
+        let box = document.getElementById('madzinu-ai-chatbox');
+        box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
+    " style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-robot"></i></button>
+
+    <div id="madzinu-ai-chatbox" style="display: none; position: absolute; bottom: 65px; right: 0; width: 320px; height: 420px; background: #111827; border: 1px solid #10b981; border-radius: 12px; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.6);">
+        <div style="background: #1f2937; padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #374151;">
+            <span style="color: #34d399; font-weight: bold; font-size: 13px;"><i class="fa-solid fa-brain"></i> Madzinu AI Core</span>
+            <button onclick="document.getElementById('madzinu-ai-chatbox').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px;">&times;</button>
+        </div>
+        <div id="madzinu-ai-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px;">
+            <div style="background: #1f2937; padding: 8px; border-radius: 6px; width: fit-content; max-width: 85%;";>Hello! I am Madzinu AI. How can I assist you with your server compute nodes, gold/silver vaults, or payouts today?</div>
+        </div>
+        <div style="padding: 8px; background: #1f2937; border-top: 1px solid #374151; display: flex; gap: 6px;">
+            <input type="text" id="madzinu-ai-input" placeholder="Ask Madzinu AI..." style="flex: 1; background: #374151; border: none; padding: 7px; color: #fff; border-radius: 6px; font-size: 11px;" />
+            <button onclick="
+                let input = document.getElementById('madzinu-ai-input');
+                let msgContainer = document.getElementById('madzinu-ai-messages');
+                
+                let userMsg = document.createElement('div');
+                userMsg.style.cssText = 'background: #059669; color: #fff; padding: 8px; border-radius: 6px; align-self: flex-end; max-width: 85%;';
+                userMsg.innerText = input.value;
+                msgContainer.appendChild(userMsg);
+                
+                let q = input.value.toLowerCase();
+                input.value = '';
+                
+                setTimeout(() => {
+                    let aiMsg = document.createElement('div');
+                    aiMsg.style.cssText = 'background: #1f2937; color: #d1d5db; padding: 8px; border-radius: 6px; align-self: flex-start; max-width: 85%;';
+                    if(q.includes('gold') || q.includes('silver')) {
+                        aiMsg.innerText = 'Metal vaults are dynamically synchronized with live spot market feeds in real-time.';
+                    } else if(q.includes('payout') || q.includes('withdraw')) {
+                        aiMsg.innerText = 'Payouts operate under daily yield caps tied to active server nodes with admin audit safeguards.';
+                    } else {
+                        aiMsg.innerText = 'Madzinu AI node operational. System security and blockchain parameters are secure.';
+                    }
+                    msgContainer.appendChild(aiMsg);
+                    msgContainer.scrollTop = msgContainer.scrollHeight;
+                }, 500);
+            " style="background: #10b981; color: #fff; border: none; padding: 7px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
