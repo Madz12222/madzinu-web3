@@ -168,6 +168,32 @@ window.sendMadzinuOTP = async function(phoneNumber) {
     * { pointer-events: auto; }
   </style>
   
+
+  <style>
+    /* Fix top overlapping banner */
+    body {
+      padding-top: 50px !important;
+    }
+    marquee, .top-banner, [class*="marquee"], [class*="banner"] {
+      position: relative !important;
+      margin-bottom: 10px !important;
+      z-index: 100 !important;
+    }
+
+    /* Move floating AI button up so it doesn't overlap script buttons */
+    button[class*="ai"], .ai-float, [id*="ai"], [aria-label*="AI"] {
+      bottom: 80px !important;
+      right: 20px !important;
+      z-index: 999999 !important;
+    }
+
+    /* Ensure all buttons and elements are fully clickable */
+    button, a, input, select, [role="button"] {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
+  </style>
+  
 </head>
 <body>
     <div class="top-ticker">
