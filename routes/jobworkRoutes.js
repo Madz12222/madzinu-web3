@@ -6,10 +6,12 @@ const router = express.Router();
 
 // Configure Email Transporter (Gmail / Enterprise SMTP)
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.hostinger.com',
+    port: 465,
+    secure: true,
     auth: {
-        user: process.env.EMAIL_USER || 'support@madzinuweb3technologies.in',
-        pass: process.env.EMAIL_PASS || 'your_app_password'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
