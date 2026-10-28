@@ -870,10 +870,7 @@ window.sendMadzinuOTP = async function(phoneNumber) {
             if(!mobile || mobile.length < 10) { alert('Enter valid mobile number.'); return; }
             generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
             
-        fetch('/api/send-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone: document.querySelector('input').value })
+        window.sendMadzinuOTP(phoneInput ? phoneInput.value : phone).value })
         })
         .then(res => res.json())
         .then(data => alert('SMS Gateway Response: ' + JSON.stringify(data)))
@@ -1209,10 +1206,7 @@ async function sendOtp() {
     alert('Sending request to backend for ' + phone + '...');
 
     try {
-        const res = await window.fetch('/api/send-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone })
+        const res = await window.window.sendMadzinuOTP(phoneInput ? phoneInput.value : phone)
         });
         
         const data = await res.json();
@@ -1231,10 +1225,7 @@ async function sendOtp() {
 </script>
 
     try {
-        const res = await fetch('/api/send-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone })
+        const res = await window.sendMadzinuOTP(phoneInput ? phoneInput.value : phone)
         });
         const data = await res.json();
         if (data.success) {
@@ -1250,10 +1241,7 @@ async function sendOtp() {
 
 
     try {
-        const res = await fetch('/api/send-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone })
+        const res = await window.sendMadzinuOTP(phoneInput ? phoneInput.value : phone)
         });
         const data = await res.json();
         if (data.success) {
