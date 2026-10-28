@@ -194,6 +194,18 @@ window.sendMadzinuOTP = async function(phoneNumber) {
     }
   </style>
   
+
+  <script>
+    // Bulletproof Event Delegation for Login & Interactive Buttons
+    document.addEventListener('click', function(event) {
+      const target = event.target.closest('button, a, .login-btn, [class*="login"], [id*="login"], [role="button"]');
+      if (target) {
+        console.log('Clicked interactive element:', target);
+        // Force pointer action if needed
+      }
+    }, true);
+  </script>
+  
 </head>
 <body>
     <div class="top-ticker">
