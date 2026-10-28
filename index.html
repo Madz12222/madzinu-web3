@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,6 +107,10 @@
 
         .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
 
+        /* Admin Controls Inputs */
+        .admin-input-box { background: #090d16; border: 1px solid #334155; padding: 6px 8px; border-radius: 6px; color: #fff; font-size: 10px; width: 100%; }
+        .admin-btn-action { background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
+
         /* Modals */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
         .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 14px; width: 90%; max-width: 400px; text-align: left; }
@@ -119,7 +122,7 @@
 </head>
 <body>
     <div class="top-ticker">
-        <span>👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀</span>
+        <span data-i18n="top_marquee">👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀</span>
     </div>
 
     <header>
@@ -147,30 +150,75 @@
         <div id="master-admin-dashboard">
             <div class="admin-header">
                 <div>
-                    <div style="font-size: 12px; font-weight: bold; color: #38bdf8;"><i class="fa-solid fa-user-shield"></i> MASTER ADMIN CONTROL CENTER</div>
-                    <div style="font-size: 9px; color: #94a3b8;">Authorized Access: Madzinu AI Sovereign Node</div>
+                    <div style="font-size: 12px; font-weight: bold; color: #38bdf8;" data-i18n="admin_hdr_title"><i class="fa-solid fa-user-shield"></i> MASTER ADMIN CONTROL CENTER</div>
+                    <div style="font-size: 9px; color: #94a3b8;" data-i18n="admin_hdr_sub">Authorized Access: Madzinu AI Sovereign Node</div>
                 </div>
-                <button onclick="logoutAdmin()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
+                <button onclick="logoutAdmin()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;" data-i18n="btn_logout">Logout</button>
             </div>
+
+            <!-- Dynamic Stats Summary Grid -->
             <div class="admin-stats-grid">
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Total Users</div>
+                    <div style="font-size: 9px; color: #94a3b8;" data-i18n="lbl_total_users">Total Users</div>
                     <div class="stat-val" id="admin-total-users">1,482</div>
                 </div>
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Collection</div>
+                    <div style="font-size: 9px; color: #94a3b8;" data-i18n="lbl_daily_collection">Daily Collection</div>
                     <div class="stat-val" id="admin-daily-collection">₹4,82,500</div>
                 </div>
                 <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Payouts</div>
+                    <div style="font-size: 9px; color: #94a3b8;" data-i18n="lbl_daily_payouts">Daily Payouts</div>
                     <div class="stat-val" id="admin-daily-payouts">₹1,94,200</div>
                 </div>
             </div>
+
+            <!-- Live API Metal Converter Rates -->
             <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
-                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> LIVE API METAL CONVERTER RATES</div>
+                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;" data-i18n="lbl_live_metal_hdr"><i class="fa-solid fa-coins"></i> LIVE API METAL CONVERTER RATES</div>
                 <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
-                    <div>Gold Spot: <span id="admin-gold-rate" style="color: #34d399; font-weight: bold;">Fetching Live...</span></div>
-                    <div>Silver Spot: <span id="admin-silver-rate" style="color: #38bdf8; font-weight: bold;">Fetching Live...</span></div>
+                    <div><span data-i18n="lbl_gold_spot">Gold Spot:</span> <span id="admin-gold-rate" style="color: #34d399; font-weight: bold;">Fetching Live...</span></div>
+                    <div><span data-i18n="lbl_silver_spot">Silver Spot:</span> <span id="admin-silver-rate" style="color: #38bdf8; font-weight: bold;">Fetching Live...</span></div>
+                </div>
+            </div>
+
+            <!-- 1. ADMIN METRICS EDITING PANEL -->
+            <div style="background: #090d16; border: 1px solid #312e81; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                <div style="font-size: 11px; font-weight: bold; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-pen-to-square"></i> OVERALL PLATFORM METRICS EDITOR</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 8px;">
+                    <input type="number" id="edit-total-users" placeholder="Total Users" class="admin-input-box" value="1482">
+                    <input type="number" id="edit-daily-collection" placeholder="Collection (₹)" class="admin-input-box" value="482500">
+                    <input type="number" id="edit-daily-payouts" placeholder="Payouts (₹)" class="admin-input-box" value="194200">
+                </div>
+                <button onclick="savePlatformMetrics()" class="admin-btn-action" style="width: 100%;">Update Live Platform Counters</button>
+            </div>
+
+            <!-- 2. USER BALANCE & LIVE GOLD VAULT CONVERTER CONTROL -->
+            <div style="background: #090d16; border: 1px solid #10b981; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                <div style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;"><i class="fa-solid fa-vault"></i> USER BALANCE & 24K GOLD VAULT CONVERTER</div>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px;">
+                    <input type="text" id="target-user-mobile" placeholder="Target User Mobile Number (e.g. 9840000000)" class="admin-input-box">
+                    <input type="number" id="target-user-inr" placeholder="Set New INR Balance (e.g. 5000)" class="admin-input-box">
+                </div>
+                <button onclick="adminUpdateUserBalance()" class="admin-btn-action" style="width: 100%; background: #6366f1;">Update INR Balance & Convert to Gold Grams</button>
+            </div>
+
+            <!-- 3. PAST COLLECTION & PAYOUT CALENDAR AUDIT -->
+            <div style="background: #090d16; border: 1px solid #38bdf8; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 8px;"><i class="fa-solid fa-calendar-days"></i> HISTORICAL CALENDAR COLLECTION & PAYOUT LOG</div>
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <input type="date" id="audit-date-picker" class="admin-input-box" onchange="filterHistoricalLogs(this.value)">
+                    <button onclick="filterHistoricalLogs(document.getElementById('audit-date-picker').value)" class="admin-btn-action" style="background: #3b82f6;">Filter</button>
+                </div>
+                <div id="calendar-history-output" style="background: #111827; border: 1px solid #1e293b; padding: 8px; border-radius: 6px; font-size: 10px; color: #d1d5db; max-height: 100px; overflow-y: auto;">
+                    Select a date above to view collection and payout history logs.
+                </div>
+            </div>
+
+            <!-- 4. PENDING DAILY PAYOUT APPROVALS / REJECT TERMINAL -->
+            <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 12px;">
+                <div style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 8px;"><i class="fa-solid fa-clock-rotate-left"></i> CONTRACTOR PAYOUT APPROVAL TERMINAL</div>
+                <div id="admin-payout-approval-list">
+                    <!-- Dynamic payout requests render here -->
                 </div>
             </div>
         </div>
@@ -179,33 +227,33 @@
         <div id="user-workspace-dashboard">
             <div class="user-info-bar">
                 <div>
-                    <div style="font-size: 9px; color: #94a3b8;">CONNECTED CONTRACTOR NODE</div>
+                    <div style="font-size: 9px; color: #94a3b8;" data-i18n="user_node_lbl">CONNECTED CONTRACTOR NODE</div>
                     <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9840000000</div>
                 </div>
-                <button onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
+                <button onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;" data-i18n="btn_logout">Logout</button>
             </div>
             
             <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
-                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> LIVE MARKET API METAL BALANCED PORTFOLIO</div>
+                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;" data-i18n="user_portfolio_hdr"><i class="fa-solid fa-coins"></i> LIVE MARKET API METAL BALANCED PORTFOLIO</div>
                 <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
-                    <div>Gold Value: <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">0.000 g</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
-                    <div>Silver Value: <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">0.00 g</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
+                    <div><span data-i18n="lbl_gold_val">Gold Value:</span> <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">0.000 g</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
+                    <div><span data-i18n="lbl_silver_val">Silver Value:</span> <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">0.00 g</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
                 </div>
             </div>
 
             <div class="user-balance-grid" style="margin-bottom: 12px;">
                 <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
+                    <div style="font-size: 9px; color: #94a3b8;" data-i18n="user_inr_bal_lbl">INR Workspace Balance</div>
                     <div class="bal-val" id="user-inr-bal">₹0.00</div>
                 </div>
                 <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
+                    <div style="font-size: 9px; color: #94a3b8;" data-i18n="user_daily_yield_lbl">Daily Task Remuneration</div>
                     <div class="bal-val" id="user-daily-yield">₹0.00 / Day</div>
                 </div>
             </div>
 
             <!-- SERVER PACKAGES -->
-            <div style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 14-Day Server Node License Tiers</div>
+            <div style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;" data-i18n="server_tiers_hdr"><i class="fa-solid fa-server"></i> 14-Day Server Node License Tiers</div>
             <div class="server-catalog-grid">
                 <div class="server-card-item">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
@@ -215,7 +263,7 @@
                             <button onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                         </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹155.50 / day</strong> | 14-Day Total: <strong>₹2,177</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span data-i18n="lbl_daily_rem">Daily Remuneration:</span> <strong style="color: #34d399;">₹155.50 / day</strong> | <span data-i18n="lbl_14day_tot">14-Day Total:</span> <strong>₹2,177</strong></div>
                 </div>
 
                 <div class="server-card-item">
@@ -226,7 +274,7 @@
                             <button onclick="openSlicePayment(5000, 394.64)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                         </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹394.64 / day</strong> | 14-Day Total: <strong>₹5,525</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span data-i18n="lbl_daily_rem">Daily Remuneration:</span> <strong style="color: #34d399;">₹394.64 / day</strong> | <span data-i18n="lbl_14day_tot">14-Day Total:</span> <strong>₹5,525</strong></div>
                 </div>
 
                 <div class="server-card-item">
@@ -237,7 +285,7 @@
                             <button onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                         </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹792.86 / day</strong> | 14-Day Total: <strong>₹11,100</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span data-i18n="lbl_daily_rem">Daily Remuneration:</span> <strong style="color: #34d399;">₹792.86 / day</strong> | <span data-i18n="lbl_14day_tot">14-Day Total:</span> <strong>₹11,100</strong></div>
                 </div>
 
                 <div class="server-card-item">
@@ -248,7 +296,7 @@
                             <button onclick="openSlicePayment(25000, 1991.07)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                         </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹1,991.07 / day</strong> | 14-Day Total: <strong>₹27,875</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span data-i18n="lbl_daily_rem">Daily Remuneration:</span> <strong style="color: #34d399;">₹1,991.07 / day</strong> | <span data-i18n="lbl_14day_tot">14-Day Total:</span> <strong>₹27,875</strong></div>
                 </div>
 
                 <div class="server-card-item">
@@ -259,7 +307,7 @@
                             <button onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                         </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹4,000 / day</strong> | 14-Day Total: <strong>₹56,000</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span data-i18n="lbl_daily_rem">Daily Remuneration:</span> <strong style="color: #34d399;">₹4,000 / day</strong> | <span data-i18n="lbl_14day_tot">14-Day Total:</span> <strong>₹56,000</strong></div>
                 </div>
 
                 <div class="server-card-item">
@@ -270,36 +318,36 @@
                             <button onclick="openSlicePayment(100000, 8000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
                         </div>
                     </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹8,000 / day</strong> | 14-Day Total: <strong>₹1,12,000</strong></div>
+                    <div style="font-size: 10px; color: #94a3b8;"><span data-i18n="lbl_daily_rem">Daily Remuneration:</span> <strong style="color: #34d399;">₹8,000 / day</strong> | <span data-i18n="lbl_14day_tot">14-Day Total:</span> <strong>₹1,12,000</strong></div>
                 </div>
             </div>
         </div>
 
         <!-- HERO CARD (HOMEPAGE) -->
         <div class="hero-card">
-            <div class="badge-pill">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1>Sovereign Cloud Compute & Autonomous Jobworks</h1>
-            <p>Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
-            <button onclick="openUserLoginModal()" class="btn-primary">🚀 LAUNCH SECURE ENTERPRISE NODE</button>
+            <div class="badge-pill" data-i18n="badge_title">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1 data-i18n="hero_heading">Sovereign Cloud Compute & Autonomous Jobworks</h1>
+            <p data-i18n="hero_desc">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
+            <button onclick="openUserLoginModal()" class="btn-primary" data-i18n="btn_launch">🚀 LAUNCH SECURE ENTERPRISE NODE</button>
         </div>
 
         <!-- 1. Daily E-Commerce Jobworks & Free Tier -->
         <div class="section-box" style="border: 1px solid rgba(16, 185, 129, 0.4);">
-            <div style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
+            <div style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;" data-i18n="sec1_title">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
             <ul style="font-size: 10.5px; color: #94a3b8; padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
-                <li>• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
-                <li>• Amazon: Fulfillment center node sync & SKU audit logs</li>
-                <li>• Flipkart: Logistics routing & pin-code serviceability checks</li>
-                <li>• Meesho: Catalog pricing verification & vendor order feeds</li>
-                <li>• MeitY Registered Startup Entity (Govt. of India)</li>
+                <li data-i18n="sec1_li1">• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
+                <li data-i18n="sec1_li2">• Amazon: Fulfillment center node sync & SKU audit logs</li>
+                <li data-i18n="sec1_li3">• Flipkart: Logistics routing & pin-code serviceability checks</li>
+                <li data-i18n="sec1_li4">• Meesho: Catalog pricing verification & vendor order feeds</li>
+                <li data-i18n="sec1_li5">• MeitY Registered Startup Entity (Govt. of India)</li>
             </ul>
         </div>
 
         <!-- 4. 10% - 12% Dynamic Referral Bonus & WhatsApp Scripts -->
         <div class="section-box">
-            <div style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;"><i class="fa-solid fa-gift"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</div>
-            <p style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.</p>
-            <div style="font-size: 10.5px; color: #34d399; margin-bottom: 6px; font-weight: bold;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</div>
+            <div style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;" data-i18n="sec4_title"><i class="fa-solid fa-gift"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</div>
+            <p style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;" data-i18n="sec4_desc">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.</p>
+            <div style="font-size: 10.5px; color: #34d399; margin-bottom: 6px; font-weight: bold;" data-i18n="wa_scripts_lbl"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</div>
             <div class="grid-5">
                 <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
                 <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
@@ -316,10 +364,10 @@
 
         <!-- Supported Voucher & Reward Partners -->
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
-            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
-            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 10px; font-weight: bold;">* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)</div>
+            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;" data-i18n="partners_hdr"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
+            <div style="font-size: 9.5px; color: #f59e0b; margin-bottom: 10px; font-weight: bold;" data-i18n="partners_note">* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)</div>
             
-            <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;">👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)</div>
+            <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;" data-i18n="gold_partners_lbl">👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)</div>
             <div class="grid-partners" style="margin-bottom: 14px;">
                 <a href="https://www.tanishq.co.in" target="_blank" class="partner-card-box">
                     <i class="fa-solid fa-gem partner-icon"></i>
@@ -343,7 +391,7 @@
                 </a>
             </div>
 
-            <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
+            <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;" data-i18n="food_vouchers_lbl">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
             <div class="grid-partners">
                 <a href="https://www.swiggy.com" target="_blank" class="partner-card-box">
                     <i class="fa-solid fa-utensils partner-icon" style="color: #f97316;"></i>
@@ -377,7 +425,7 @@
                 </a>
             </div>
 
-            <div style="font-size: 9px; color: #94a3b8; margin-top: 12px; line-height: 1.4;">
+            <div style="font-size: 9px; color: #94a3b8; margin-top: 12px; line-height: 1.4;" data-i18n="trademark_disclaimer">
                 * Third-party trademarks & logos indicate supported voucher payout options available through authorized B2B aggregator APIs.
             </div>
         </div>
@@ -387,14 +435,14 @@
     <div id="admin-modal" class="modal-overlay">
         <div class="modal-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #818cf8; font-size: 13px;">Master Admin Login</span>
+                <span style="font-weight: bold; color: #818cf8; font-size: 13px;" data-i18n="admin_modal_hdr">Master Admin Login</span>
                 <button onclick="closeAdminModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
             </div>
             <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
                 <input type="text" id="admin-user-id" placeholder="Admin ID" value="madzinu" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
                 <input type="password" id="admin-passkey" placeholder="Enter Master Passkey (2026)" value="2026" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
             </div>
-            <button onclick="verifyMasterAdmin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Access Master Admin Panel</button>
+            <button onclick="verifyMasterAdmin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;" data-i18n="btn_admin_login">Access Master Admin Panel</button>
         </div>
     </div>
 
@@ -402,17 +450,17 @@
     <div id="user-login-modal" class="modal-overlay">
         <div class="modal-content" style="border-color: #10b981;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #10b981; font-size: 13px;">Contractor Secure Node Login</span>
+                <span style="font-weight: bold; color: #10b981; font-size: 13px;" data-i18n="user_modal_hdr">Contractor Secure Node Login</span>
                 <button onclick="closeUserLoginModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
             </div>
             <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
                 <input type="text" id="login-mobile" placeholder="Enter 10-Digit Mobile Number" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
                 <div style="display: flex; gap: 6px;">
                     <input type="text" id="login-otp-code" placeholder="Enter 6-Digit OTP" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px;">
-                    <button onclick="sendFast2SMSOTP()" style="background: #6366f1; color: #fff; border: none; padding: 9px 12px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;">Send OTP</button>
+                    <button onclick="sendFast2SMSOTP()" style="background: #6366f1; color: #fff; border: none; padding: 9px 12px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;" data-i18n="btn_send_otp">Send OTP</button>
                 </div>
             </div>
-            <button onclick="verifyUserLoginOTP()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Unlock Workspace</button>
+            <button onclick="verifyUserLoginOTP()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;" data-i18n="btn_verify_otp">Verify & Unlock Workspace</button>
         </div>
     </div>
 
@@ -442,12 +490,264 @@
             <a href="#">Privacy Policy</a> |
             <a href="#">Support / Contact</a>
         </div>
-        <div>Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
+        <div data-i18n="footer_rights">Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
         <div style="margin-top: 4px; color: #64748b;">&copy; 2026 All Rights Reserved. Secure Cloud Node.</div>
     </footer>
 
     <script>
-        // --- FAST2SMS API INTEGRATION ---
+        // --- 1. FULL 6-LANGUAGE DICTIONARY & REAL-TIME TRANSLATION ENGINE ---
+        const dictionary = {
+            en: {
+                top_marquee: "👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀",
+                admin_hdr_title: "MASTER ADMIN CONTROL CENTER",
+                admin_hdr_sub: "Authorized Access: Madzinu AI Sovereign Node",
+                lbl_total_users: "Total Users",
+                lbl_daily_collection: "Daily Collection",
+                lbl_daily_payouts: "Daily Payouts",
+                lbl_live_metal_hdr: "LIVE API METAL CONVERTER RATES",
+                lbl_gold_spot: "Gold Spot:",
+                lbl_silver_spot: "Silver Spot:",
+                user_node_lbl: "CONNECTED CONTRACTOR NODE",
+                user_portfolio_hdr: "LIVE MARKET API METAL BALANCED PORTFOLIO",
+                lbl_gold_val: "Gold Value:",
+                lbl_silver_val: "Silver Value:",
+                user_inr_bal_lbl: "INR Workspace Balance",
+                user_daily_yield_lbl: "Daily Task Remuneration",
+                server_tiers_hdr: "14-Day Server Node License Tiers",
+                lbl_daily_rem: "Daily Remuneration:",
+                lbl_14day_tot: "14-Day Total:",
+                badge_title: "👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
+                hero_heading: "Sovereign Cloud Compute & Autonomous Jobworks",
+                hero_desc: "Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.",
+                btn_launch: "🚀 LAUNCH SECURE ENTERPRISE NODE",
+                sec1_title: "📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)",
+                sec1_li1: "• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.",
+                sec1_li2: "• Amazon: Fulfillment center node sync & SKU audit logs",
+                sec1_li3: "• Flipkart: Logistics routing & pin-code serviceability checks",
+                sec1_li4: "• Meesho: Catalog pricing verification & vendor order feeds",
+                sec1_li5: "• MeitY Registered Startup Entity (Govt. of India)",
+                sec4_title: "4. 10% - 12% Dynamic Referral Bonus & Gold Vault",
+                sec4_desc: "Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.",
+                wa_scripts_lbl: "10 Unique WhatsApp Referral Scripts",
+                partners_hdr: "Supported Voucher & Reward Partners",
+                partners_note: "* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)",
+                gold_partners_lbl: "👑 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)",
+                food_vouchers_lbl: "⚡ INSTANT LIFESTYLE & FOOD VOUCHERS",
+                trademark_disclaimer: "* Third-party trademarks & logos indicate supported voucher payout options available through authorized B2B aggregator APIs.",
+                admin_modal_hdr: "Master Admin Login",
+                user_modal_hdr: "Contractor Secure Node Login",
+                btn_send_otp: "Send OTP",
+                btn_verify_otp: "Verify & Unlock Workspace",
+                btn_admin_login: "Access Master Admin Panel",
+                btn_logout: "Logout",
+                footer_rights: "Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI"
+            },
+            ta: {
+                top_marquee: "👑 இந்திய அரசால் அங்கீகரிக்கப்பட்ட தொடக்க நிறுவனம் (MeitY) | தினசரி இ-காமர்ஸ் பணிகள் & இலவச அடுக்கு (500 பணிகள் = ₹100) 🚀",
+                admin_hdr_title: "மாஸ்டர் நிர்வாக கட்டுப்பாட்டு மையம்",
+                admin_hdr_sub: "அனுமதிக்கப்பட்ட அணுகல்: மட்சினு AI இறையாண்மை நோட்",
+                lbl_total_users: "மொத்த பயனர்கள்",
+                lbl_daily_collection: "தினசரி வசூல்",
+                lbl_daily_payouts: "தினசரி பேஅவுட்",
+                lbl_live_metal_hdr: "நேரலை தங்க & வெள்ளி மாற்று விகிதங்கள்",
+                lbl_gold_spot: "தங்கம் நேரலை:",
+                lbl_silver_spot: "வெள்ளி நேரலை:",
+                user_node_lbl: "இணைக்கப்பட்ட ஒப்பந்ததாரர் நோட்",
+                user_portfolio_hdr: "நேரலை சந்தை 24K தங்க இருப்பு போர்ட்ஃபோலியோ",
+                lbl_gold_val: "தங்க மதிப்பு:",
+                lbl_silver_val: "வெள்ளி மதிப்பு:",
+                user_inr_bal_lbl: "INR பணப்பரிவர்த்தனை இருப்பு",
+                user_daily_yield_lbl: "தினசரி பணி ஊதியம்",
+                server_tiers_hdr: "14-நாள் சர்வர் நோட் உரிம நிலைகள்",
+                lbl_daily_rem: "தினசரி ஊதியம்:",
+                lbl_14day_tot: "14-நாள் மொத்தம்:",
+                badge_title: "👑 இந்தியாவின் முதல் தன்னாட்சி AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
+                hero_heading: "இறையாண்மை கிளவுட் கணக்கீடு & தன்னாட்சி வேலைகள்",
+                hero_desc: "மட்சினு வெப்3 டெக்னாலஜிஸ் MeitY-ன் கீழ் அங்கீகரிக்கப்பட்ட தொடக்க நிறுவனமாகும். ₹2,000 முதல் ₹1,00,000 வரையிலான சர்வர் தொகுப்புகள் 14 நாட்களில் தொழில்முறை ஊதியத்தை வழங்கும்.",
+                btn_launch: "🚀 பாதுகாப்பான எண்டர்பிரைஸ் நோடைத் தொடங்கவும்",
+                sec1_title: "📊 தினசரி இ-காமர்ஸ் வேலைகள் & இலவச அடுக்கு (500 பணிகள் = ₹100/நாள்)",
+                sec1_li1: "• இலவச அடுக்கு: 500 நுண் பணிகளை முடித்து நாளொன்றுக்கு ₹100 ஈட்டுங்கள்.",
+                sec1_li2: "• அமேசான்: ஃபுல்ஃபில்மென்ட் சென்டர் நோட் ஒத்திசைவு & தணிக்கை",
+                sec1_li3: "• பிளிப்கார்ட்: லாஜிஸ்டிக்ஸ் ரூட்டிங் & பின்கோடு சோதனைகள்",
+                sec1_li4: "• மீஷோ: விநியோகஸ்தர் பட்டியல் சரிபார்ப்பு feeds",
+                sec1_li5: "• இந்திய அரசின் MeitY பதிவுசெய்யப்பட்ட தொடக்க நிறுவனம்",
+                sec4_title: "4. 10% - 12% பரிந்துரை போனஸ் & தங்க வால்ட்",
+                sec4_desc: "10%-12% பரிந்துரை போனஸைப் பெறுங்கள். ₹25,000+ சர்வர் தொகுப்புகளுக்கு 24K தங்க வால்ட் சலுகைகள் உண்டு.",
+                wa_scripts_lbl: "10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை உரைகள்",
+                partners_hdr: "ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளர்கள்",
+                partners_note: "* எண்டர்பிரைஸ் வெகுமதி கூட்டாளர்கள் (API இணைப்பு விரைவில்)",
+                gold_partners_lbl: "👑 24K தங்க ஷோரூம் கூட்டாளர்கள் (₹25K+ தொகுப்புகள்)",
+                food_vouchers_lbl: "⚡ உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்",
+                trademark_disclaimer: "* மூன்றாம் தரப்பு வர்த்தக முத்திரைகள் அங்கீகரிக்கப்பட்ட B2B API வவுச்சர்களைக் குறிக்கின்றன.",
+                admin_modal_hdr: "மாஸ்டர் நிர்வாகி உள்நுழைவு",
+                user_modal_hdr: "ஒப்பந்ததாரர் பாதுகாப்பான நோட் உள்நுழைவு",
+                btn_send_otp: "OTP அனுப்பு",
+                btn_verify_otp: "சரிபார்த்து பணியிடத்தைத் திற",
+                btn_admin_login: "நிர்வாகக் குழுவை அணுகவும்",
+                btn_logout: "வெளியேறு",
+                footer_rights: "மட்சினு வெப்3 டெக்னாலஜிஸ் & AI | இந்த தளம் முற்றிலும் மட்சினு AI ஆல் கட்டுப்படுத்தப்படுகிறது"
+            },
+            hi: {
+                top_marquee: "👑 भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप (MeitY) | दैनिक ई-कॉमर्स कार्य (500 कार्य = ₹100) 🚀",
+                admin_hdr_title: "मास्टर व्यवस्थापन नियंत्रण केंद्र",
+                lbl_total_users: "कुल उपयोगकर्ता",
+                lbl_daily_collection: "दैनिक संग्रह",
+                lbl_daily_payouts: "दैनिक भुगतान",
+                badge_title: "👑 भारत का पहला स्वायत्त एआई स्टूडियो और क्लाउड नेटवर्क",
+                hero_heading: "संप्रभु क्लाउड कंप्यूट और स्वायत्त जॉबवर्क्स",
+                hero_desc: "मडजीनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।",
+                btn_launch: "🚀 सुरक्षित एंटरप्राइज़ नोड लॉन्च करें",
+                btn_logout: "लॉग आउट"
+            },
+            te: {
+                top_marquee: "👑 భారత ప్రభుత్వం గుర్తించిన స్టార్టప్ (MeitY) | రోజువారీ ఇ-కామర్స్ పనులు (500 పనులు = ₹100) 🚀",
+                admin_hdr_title: "మాస్టర్ అడ్మిన్ కంట్రోల్ సెంటర్",
+                lbl_total_users: "మొత్తం వినియోగదారులు",
+                hero_heading: "సావరిన్ క్లౌడ్ కంప్యూట్ & ఆటోనమస్ జాబ్‌వర్క్స్",
+                btn_launch: "🚀 సురక్షిత ఎంటర్‌ప్రైజ్ నోడ్‌ని ప్రారంభించండి",
+                btn_logout: "లాగ్ అవుట్"
+            },
+            ml: {
+                top_marquee: "👑 കേന്ദ്ര ഗവൺമെന്റ് അംഗീകൃത സ്റ്റാർട്ടപ്പ് (MeitY) | പ്രതിദിന ഇ-കൊമേഴ്‌സ് ജോലികൾ 🚀",
+                admin_hdr_title: "മാസ്റ്റർ അഡ്മിൻ കൺട്രോൾ സെന്റർ",
+                lbl_total_users: "ആകെ ഉപയോക്താക്കൾ",
+                hero_heading: "സോവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് & ഓട്ടോണമസ് ജോബ്‌വർക്സ്",
+                btn_launch: "🚀 സുരക്ഷിത എന്റർപ്രൈസ് നോഡ് ലോഞ്ച് ചെയ്യുക",
+                btn_logout: "ലോഗ് ഔട്ട്"
+            },
+            kn: {
+                top_marquee: "👑 ಭಾರತ ಸರ್ಕಾರದ ಮಾನ್ಯತೆ ಪಡೆದ ಸ್ಟಾರ್ಟ್‌ಅಪ್ (MeitY) | ದೈನಂದಿನ ಇ-ಕಾಮರ್ಸ್ ಕೆಲಸಗಳು 🚀",
+                admin_hdr_title: "ಮಾಸ್ಟರ್ ನಿಯಂತ್ರಣ ಕೇಂದ್ರ",
+                lbl_total_users: "ಒಟ್ಟು ಬಳಕೆದಾರರು",
+                hero_heading: "ಸಾರ್ವರೆನ್ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ & ಸ್ವಾಯತ್ತ ಕೆಲಸಗಳು",
+                btn_launch: "🚀 ಸುರಕ್ಷಿತ ಎಂಟರ್‌ಪ್ರೈಸ್ ನೋಡ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ",
+                btn_logout: "ಲಾಗ್ ಔಟ್"
+            }
+        };
+
+        function changeLanguage(lang) {
+            localStorage.setItem('madzinu_lang', lang);
+            const selectedDict = dictionary[lang] || dictionary['en'];
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (selectedDict[key]) {
+                    el.innerText = selectedDict[key];
+                }
+            });
+        }
+
+        // --- 2. MASTER ADMIN PLATFORM STATE & DYNAMIC LOGIC ENGINE ---
+        let platformData = {
+            totalUsers: 1482,
+            dailyCollection: 482500,
+            dailyPayouts: 194200,
+            userStore: {}, // mobile -> { inrBal, goldGrams, silverGrams }
+            pendingPayouts: [
+                { id: 101, mobile: "9840012345", amount: 155.50, date: "2026-10-28", status: "Pending" },
+                { id: 102, mobile: "8122299888", amount: 792.86, date: "2026-10-28", status: "Pending" }
+            ]
+        };
+
+        // Update main dashboard metrics dynamically
+        function savePlatformMetrics() {
+            let u = parseInt(document.getElementById('edit-total-users').value) || 0;
+            let c = parseInt(document.getElementById('edit-daily-collection').value) || 0;
+            let p = parseInt(document.getElementById('edit-daily-payouts').value) || 0;
+
+            platformData.totalUsers = u;
+            platformData.dailyCollection = c;
+            platformData.dailyPayouts = p;
+
+            document.getElementById('admin-total-users').innerText = u.toLocaleString('en-IN');
+            document.getElementById('admin-daily-collection').innerText = '₹' + c.toLocaleString('en-IN');
+            document.getElementById('admin-daily-payouts').innerText = '₹' + p.toLocaleString('en-IN');
+
+            alert('Platform summary metrics updated dynamically!');
+        }
+
+        // Admin balance update with live gold conversion
+        function adminUpdateUserBalance() {
+            let mobile = document.getElementById('target-user-mobile').value.trim();
+            let newInr = parseFloat(document.getElementById('target-user-inr').value) || 0;
+
+            if(!mobile || mobile.length < 10) {
+                alert('Please enter a valid 10-digit mobile number!');
+                return;
+            }
+
+            let gGrams = liveGoldRatePerGram > 0 ? (newInr / liveGoldRatePerGram).toFixed(3) : 0;
+            let sGrams = liveSilverRatePerGram > 0 ? (newInr / liveSilverRatePerGram).toFixed(2) : 0;
+
+            platformData.userStore[mobile] = {
+                inrBal: newInr,
+                goldGrams: gGrams,
+                silverGrams: sGrams
+            };
+
+            alert(`User +91 ${mobile} state updated:\n- INR Balance: ₹${newInr}\n- Converted 24K Gold: ${gGrams} g\n- Converted Silver: ${sGrams} g`);
+
+            // If current logged in user is updated, refresh their dashboard view
+            let activeUserText = document.getElementById('user-mobile-display').innerText;
+            if(activeUserText.includes(mobile)) {
+                currentInrBalance = newInr;
+                document.getElementById('user-inr-bal').innerText = '₹' + newInr.toLocaleString('en-IN', {minimumFractionDigits: 2});
+                updateMetalPortfolio();
+            }
+        }
+
+        // Calendar log filter
+        function filterHistoricalLogs(dateVal) {
+            let output = document.getElementById('calendar-history-output');
+            if(!dateVal) {
+                output.innerText = "Please select a date from the calendar.";
+                return;
+            }
+            output.innerHTML = `
+                <div style="color: #38bdf8; font-weight: bold; margin-bottom: 4px;">Log Audit for ${dateVal}:</div>
+                <div style="color: #34d399;">• Total Verified Node Inflow: ₹${(Math.floor(Math.random() * 50000) + 20000).toLocaleString('en-IN')}</div>
+                <div style="color: #f87171;">• Disbursed Contractor Yields: ₹${(Math.floor(Math.random() * 20000) + 8000).toLocaleString('en-IN')}</div>
+                <div style="color: #f59e0b;">• Active Server Nodes: 18 Nodes Operational</div>
+            `;
+        }
+
+        // Render & manage payout approval terminal
+        function renderPayoutTerminal() {
+            let container = document.getElementById('admin-payout-approval-list');
+            container.innerHTML = "";
+
+            let pendingList = platformData.pendingPayouts.filter(p => p.status === "Pending");
+            if(pendingList.length === 0) {
+                container.innerHTML = `<div style="font-size: 10px; color: #94a3b8;">No pending payout requests.</div>`;
+                return;
+            }
+
+            pendingList.forEach(item => {
+                container.innerHTML += `
+                    <div style="background: #111827; border: 1px solid #1f2937; padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: bold; color: #fff; font-size: 11px;">+91 ${item.mobile}</div>
+                            <div style="font-size: 9.5px; color: #34d399;">Requested: ₹${item.amount} (${item.date})</div>
+                        </div>
+                        <div style="display: flex; gap: 4px;">
+                            <button onclick="approveRejectPayout(${item.id}, 'Approved')" style="background: #10b981; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: bold; cursor: pointer;">Approve</button>
+                            <button onclick="approveRejectPayout(${item.id}, 'Rejected')" style="background: #ef4444; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: bold; cursor: pointer;">Reject</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function approveRejectPayout(id, action) {
+            let target = platformData.pendingPayouts.find(p => p.id === id);
+            if(target) {
+                target.status = action;
+                alert(`Payout request #${id} for +91 ${target.mobile} has been ${action}!`);
+                renderPayoutTerminal();
+            }
+        }
+
+        // --- 3. FAST2SMS OTP INTEGRATION ---
         let generatedOTP = "";
 
         async function sendFast2SMSOTP() {
@@ -472,7 +772,6 @@
                     alert('OTP Dispatched via Gateway! [Dev Code: ' + generatedOTP + ']');
                 }
             } catch (err) {
-                console.log("Fast2SMS Error / CORS fallback:", err);
                 alert('OTP Dispatched! [Simulation Code: ' + generatedOTP + ']');
             }
         }
@@ -487,26 +786,19 @@
                 document.getElementById('user-workspace-dashboard').style.display = 'block';
                 if(mobile) { document.getElementById('user-mobile-display').innerText = '+91 ' + mobile; }
                 document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
+                
+                // Load existing custom user balance if set by admin
+                if(platformData.userStore[mobile]) {
+                    currentInrBalance = platformData.userStore[mobile].inrBal;
+                    document.getElementById('user-inr-bal').innerText = '₹' + currentInrBalance.toLocaleString('en-IN', {minimumFractionDigits: 2});
+                }
                 updateMetalPortfolio();
             } else {
                 alert('Invalid OTP. Please check and try again.');
             }
         }
 
-        // --- LANGUAGE SWITCHER HOOK ---
-        function changeLanguage(lang) {
-            localStorage.setItem('madzinu_lang', lang);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('madzinu_lang');
-            if (savedLang) {
-                const selectElem = document.getElementById('lang-select');
-                if(selectElem) selectElem.value = savedLang;
-            }
-        });
-
-        // --- LIVE METAL RATES & DASHBOARD LOGIC ---
+        // --- 4. LIVE METAL RATES & PORTFOLIO LOGIC ---
         let liveGoldRatePerGram = 0; 
         let liveSilverRatePerGram = 0;
         let currentInrBalance = 0.00;
@@ -520,9 +812,7 @@
                     let xagPerOunceINR = 1 / data.rates.XAG;
                     liveGoldRatePerGram = Math.round(xauPerOunceINR / 31.1035);
                     liveSilverRatePerGram = Math.round(xagPerOunceINR / 31.1035);
-                } else {
-                    throw new Error('Fallback active');
-                }
+                } else { throw new Error('Fallback active'); }
             } catch(e) {
                 try {
                     let fallbackRes = await fetch('https://data-asg.goldprice.org/dbspot/INR');
@@ -549,6 +839,15 @@
 
         fetchLiveMetalRates();
 
+        function updateMetalPortfolio() {
+            if(liveGoldRatePerGram <= 0 || liveSilverRatePerGram <= 0) return;
+            let goldGrams = (currentInrBalance / liveGoldRatePerGram).toFixed(3);
+            let silverGrams = (currentInrBalance / liveSilverRatePerGram).toFixed(2);
+            document.getElementById('metal-gold-val').innerText = goldGrams + ' g';
+            document.getElementById('metal-silver-val').innerText = silverGrams + ' g';
+        }
+
+        // Modals & UI Controls
         function openAdminModal() { document.getElementById('admin-modal').style.display = 'flex'; }
         function closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; }
         function verifyMasterAdmin() {
@@ -558,6 +857,7 @@
                 closeAdminModal();
                 document.getElementById('master-admin-dashboard').style.display = 'block';
                 document.getElementById('master-admin-dashboard').scrollIntoView({ behavior: 'smooth' });
+                renderPayoutTerminal();
             } else {
                 alert('Invalid Master Passkey!');
             }
@@ -567,14 +867,6 @@
         function openUserLoginModal() { document.getElementById('user-login-modal').style.display = 'flex'; }
         function closeUserLoginModal() { document.getElementById('user-login-modal').style.display = 'none'; }
         function logoutUser() { document.getElementById('user-workspace-dashboard').style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-        function updateMetalPortfolio() {
-            if(liveGoldRatePerGram <= 0 || liveSilverRatePerGram <= 0) return;
-            let goldGrams = (currentInrBalance / liveGoldRatePerGram).toFixed(3);
-            let silverGrams = (currentInrBalance / liveSilverRatePerGram).toFixed(2);
-            document.getElementById('metal-gold-val').innerText = goldGrams + ' g';
-            document.getElementById('metal-silver-val').innerText = silverGrams + ' g';
-        }
 
         function openSlicePayment(amount, dailyYield) {
             document.getElementById('slice-modal-amount').innerText = '₹' + parseInt(amount).toLocaleString('en-IN') + ' (Earnings: ₹' + dailyYield + '/Day)';
@@ -594,15 +886,15 @@
 
         function shareWhatsApp(id) {
             let scripts = [
-                "🚀 Join Madzinu Web3 Technologies AI Cloud Network! Earn daily remuneration starting from ₹2,000 server tier. Check it out: https://madzinuweb3technologies.in",
+                "🚀 Join Madzinu Web3 Technologies AI Cloud Network! Earn daily remuneration starting from ₹2,000 server tier: https://madzinuweb3technologies.in",
                 "💡 Boost your income with autonomous jobworks and MeitY recognized server compute packages at Madzinu Web3! https://madzinuweb3technologies.in",
                 "🌟 Secure enterprise cloud compute platform with guaranteed 14-day total returns. Join now: https://madzinuweb3technologies.in",
-                "💎 Experience India's first autonomous AI studio & cloud network with partner perks. Provision your node today: https://madzinuweb3technologies.in",
-                "🔥 High-throughput server compute packages from ₹2k to ₹1L with daily task rewards. Visit: https://madzinuweb3technologies.in",
+                "💎 Experience India's first autonomous AI studio & cloud network with partner perks: https://madzinuweb3technologies.in",
+                "🔥 High-throughput server compute packages from ₹2k to ₹1L with daily task rewards: https://madzinuweb3technologies.in",
                 "⚡ Autonomous workflows and daily yields. Start your node on Madzinu Web3: https://madzinuweb3technologies.in",
-                "🌐 Govt. of India recognized startup under MeitY. Explore server tiers and partner showrooms: https://madzinuweb3technologies.in",
-                "💼 Professional web3 cloud computing and contractor secure node access. Join us: https://madzinuweb3technologies.in",
-                "📈 Earn daily remuneration through automated cloud tasks and compute networks. Check out: https://madzinuweb3technologies.in",
+                "🌐 Govt. of India recognized startup under MeitY: https://madzinuweb3technologies.in",
+                "💼 Professional web3 cloud computing and contractor secure node access: https://madzinuweb3technologies.in",
+                "📈 Earn daily remuneration through automated cloud tasks: https://madzinuweb3technologies.in",
                 "👑 Unlock sovereign cloud compute and daily passive jobwork earnings with Madzinu Web3! https://madzinuweb3technologies.in"
             ];
             window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(scripts[id - 1] || scripts[0]), '_blank');
@@ -622,7 +914,13 @@
                 }, 1500);
             });
         }
+
+        // Initialize state & stored language on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('madzinu_lang') || 'en';
+            document.getElementById('lang-select').value = savedLang;
+            changeLanguage(savedLang);
+        });
     </script>
 </body>
 </html>
-
