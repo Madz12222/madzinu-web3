@@ -1,45 +1,28 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
-    mobile: { type: String, required: true, unique: true },
-    fullName: { type: String, default: '' },
-    bankDetails: {
-        accountNumber: { type: String, default: '' },
-        ifscCode: { type: String, default: '' },
-        upiId: { type: String, default: '' },
-        isVerified: { type: Boolean, default: false }
-    },
-    activeTier: { type: String, enum: ['STARTER', 'STANDARD', 'ENTERPRISE'], default: 'ENTERPRISE' },
-    tierPrice: { type: Number, default: 50000 },
-    dailyTargetPayout: { type: Number, default: 4000 },
-    requiredJobworks: { type: Number, default: 200 },
-    unitPrice: { type: Number, default: 20 },
-    walletBalance: { type: Number, default: 0 },
+    email: { type: String, required: true, unique: true },
+    name: { type: String },
     createdAt: { type: Date, default: Date.now }
 });
 
 const JobworkLedgerSchema = new mongoose.Schema({
-    mobile: { type: String, required: true, index: true },
-    executionDate: { type: String, required: true },
-    jobworkId: { type: String, required: true },
-    taskCategory: { type: String, default: 'Enterprise SKU Audit' },
-    unitPrice: { type: Number, default: 20.00 },
-    sha256Hash: { type: String, required: true },
-    status: { type: String, default: 'COMPLETED' },
-    timestamp: { type: Date, default: Date.now }
+    orderId: { type: String, required: true, unique: true },
+    clientEmail: { type: String, required: true },
+    specification: { type: String },
+    amount: { type: Number, required: true },
+    ipAddress: { type: String },
+    status: { type: String, default: 'Completed' },
+    createdAt: { type: Date, default: Date.now }
 });
 
 const PayoutSchema = new mongoose.Schema({
-    mobile: { type: String, required: true },
-    amount: { type: Number, required: true },
-    payoutMode: { type: String, enum: ['IMPS', 'NEFT', 'UPI'], default: 'UPI' },
-    utrNumber: { type: String, default: 'PENDING' },
-    status: { type: String, enum: ['PENDING', 'VERIFIED', 'DISPATCHED', 'REJECTED'], default: 'PENDING' },
-    requestedAt: { type: Date, default: Date.now }
+    orderId: { type: String },
+    amount: { type: Number },
+    status: { type: String, default: 'Pending' },
+    createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = {
-    User: mongoose.model('User', UserSchema),
-    JobworkLedger: mongoose.model('JobworkLedger', JobworkLedgerSchema),
-    Payout: mongoose.model('Payout', PayoutSchema)
-};
+export const User = mongoose.models.User || mongoose.model('User', UserSchema);
+export const JobworkLedger = mongoose.models.JobworkLedger || mongoose.model('JobworkLedger', JobworkLedgerSchema);
+export const Payout = mongoose.models.Payout || mongoose.model('Payout', PayoutSchema);

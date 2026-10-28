@@ -1,7 +1,8 @@
-const express = require('express');
-const crypto = require('crypto');
-const nodemailer = require('nodemailer');
-const { User, JobworkLedger, Payout } = require('../models/Schema');
+import { generateServerPlanEmail } from '../templates/serverPlanEmail.js';
+import express from 'express';
+import crypto from 'crypto';
+import nodemailer from 'nodemailer';
+import { User, JobworkLedger, Payout } from '../models/Schema.js';
 const router = express.Router();
 
 // Configure Email Transporter (Gmail / Enterprise SMTP)
@@ -38,7 +39,7 @@ Madzinu Web3 Technologies`
 }
 
 // Helper: Hook for SMS / WhatsApp Gateway (Fast2SMS / Twilio / MSG91)
-const https = require('https');
+import https from 'https';
 
 // Helper: Send Instant Mobile SMS Alert via Fast2SMS
 async function sendMobileAlert(mobileNumber, messageText) {
@@ -182,4 +183,47 @@ router.post('/request-payout', async (req, res) => {
     }
 });
 
-module.exports = router;
+
+// Dynamic Order Completion & Email Receipt Route
+router.post('/complete-order', async (req, res) => {
+    try {
+        const { clientName, userEmail, orderDetails } = req.body; 
+
+        if (!userEmail || !orderDetails) {
+            return res.status(400).json({ success: false, error: "Missing required order payload fields." });
+        }
+
+        // Generate dynamic HTML template based on incoming user order details
+        const htmlContent = generateServerPlanEmail({
+            clientName: clientName || "Valued Customer",
+            orderId: orderDetails.orderId || ("M3W-" + Math.floor(100000 + Math.random() * 900000)),
+            planName: orderDetails.planName || "Enterprise VPS Plan",
+            billingCycle: orderDetails.billingCycle || "Annual",
+            serverSpecs: {
+                cpu: orderDetails.cpu || "4 vCPU Cores",
+                ram: orderDetails.ram || "8 GB RAM",
+                storage: orderDetails.storage || "100 GB NVMe SSD",
+                bandwidth: orderDetails.bandwidth || "Unmetered 1 Gbps"
+            },
+            amountPaid: orderDetails.price ? `₹${Number(orderDetails.price).toLocaleString('en-IN')}.00 INR` : "₹0.00 INR",
+            ipAddress: orderDetails.assignedIp || "Provisioning Pending"
+        });
+
+        // Dispatch via Hostinger SMTP
+        await transporter.sendMail({
+            from: `"Madzinu Web3 Technologies" <${process.env.EMAIL_USER}>`,
+            to: userEmail,
+            replyTo: process.env.EMAIL_USER,
+            subject: `Server Purchase Confirmation - Order #${orderDetails.orderId || 'SUCCESS'}`,
+            html: htmlContent
+        });
+
+        console.log(`✅ Automated order receipt sent to ${userEmail}`);
+        res.status(200).json({ success: true, message: "Server order processed & receipt dispatched successfully!" });
+    } catch (err) {
+        console.error("❌ Checkout Route Mail Error:", err.message);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+export default router;

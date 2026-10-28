@@ -1,20 +1,33 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const jobworkRoutes = require('./routes/jobworkRoutes');
+import dotenv from 'dotenv';
+dotenv.config();
+import path from 'path';
+import { fileURLToPath } from 'url';
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import jobworkRoutes from './routes/jobworkRoutes.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/madzinu_audit_db';
+// Serve static frontend files from 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect(MONGO_URI)
-    .then(() => console.log('✅ MongoDB Audit Database Connected Successfully'))
-    .catch(err => console.error('❌ Database Connection Error:', err));
+// API Routes
+app.use('/api', jobworkRoutes);
 
-app.use('/api/v1/jobwork', jobworkRoutes);
+// Root Webpage fallback route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Enterprise Audit Server running on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`🚀 Madzinu Web3 Server running successfully on port ${PORT}`);
+});
