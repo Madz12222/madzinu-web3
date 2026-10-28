@@ -1,24 +1,27 @@
 const https = require('https');
 
 module.exports = (req, res) => {
-  res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST,PUT');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return res.status(200).end();
   }
 
   let body = '';
   req.on('data', chunk => { body += chunk; });
   req.on('end', () => {
-    let parsedBody = {};
-    try { if (body) parsedBody = JSON.parse(body); } catch (e) {}
+    let parsed = {};
+    try {
+      if (body) parsed = JSON.parse(body);
+    } catch (e) {}
 
-    const phone = parsedBody.phone || req.query.phone;
-    const otp = parsedBody.otp || req.query.otp || Math.floor(100000 + Math.random() * 900000);
+    // Extract phone or query phone
+    const phone = parsed.phone || req.query.phone;
+    
+    // Dynamic OTP: Use passed OTP or generate random 6-digit number
+    const otp = parsed.otp || req.query.otp || Math.floor(100000 + Math.random() * 900000).toString();
 
     if (!phone) {
       return res.status(400).json({ success: false, message: 'Phone number required' });
@@ -31,18 +34,23 @@ module.exports = (req, res) => {
     const url = `https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=q&message=${encodedMsg}&flash=0&numbers=${phone}`;
 
     https.get(url, (apiRes) => {
-      let data = '';
-      apiRes.on('data', (chunk) => { data += chunk; });
+      let responseData = '';
+      apiRes.on('data', chunk => { responseData += chunk; });
       apiRes.on('end', () => {
+        let parsedFast2SMS = {};
         try {
-          const parsed = JSON.parse(data);
-          res.status(200).json({ success: true, response: parsed });
+          parsedFast2SMS = JSON.parse(responseData);
         } catch (e) {
-          res.status(200).json({ success: true, raw: data });
+          parsedFast2SMS = { raw: responseData };
         }
+        return res.status(200).json({
+          success: true,
+          otp: otp,
+          fast2sms: parsedFast2SMS
+        });
       });
     }).on('error', (err) => {
-      res.status(500).json({ success: false, error: err.message });
+      return res.status(500).json({ success: false, error: err.message });
     });
   });
 };
