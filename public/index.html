@@ -243,6 +243,27 @@
     });
   </script>
   
+
+    <style>
+        @keyframes vibrantGlow {
+            0% { background: linear-gradient(135deg, #6366f1, #3b82f6); box-shadow: 0 0 5px rgba(99,102,241,0.6); transform: scale(1); }
+            33% { background: linear-gradient(135deg, #ec4899, #8b5cf6); box-shadow: 0 0 15px rgba(236,72,153,0.9); transform: scale(1.03); }
+            66% { background: linear-gradient(135deg, #10b981, #06b6d4); box-shadow: 0 0 15px rgba(16,185,129,0.9); transform: scale(1.03); }
+            100% { background: linear-gradient(135deg, #6366f1, #3b82f6); box-shadow: 0 0 5px rgba(99,102,241,0.6); transform: scale(1); }
+        }
+        .ai-blink-btn {
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            animation: vibrantGlow 2s infinite ease-in-out;
+        }
+    </style>
+  
 </head>
 <body>
     <div class="top-ticker">
