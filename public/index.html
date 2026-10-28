@@ -1239,53 +1239,7 @@ async function sendOtp() {
 
     alert('Sending request to backend for ' + phone + '...');
 
-    try {
-        const res = await window.window.sendMadzinuOTP(phoneInput ? phoneInput.value : phone)
-        });
-        
-        const data = await res.json();
-        console.log('Server response:', data);
-        
-        if (data.success) {
-            alert('🚀 Real OTP Sent via Fast2SMS successfully!');
-        } else {
-            alert('❌ Failed: ' + (data.message || JSON.stringify(data)));
-        }
-    } catch (err) {
-        console.error('Fetch error:', err);
-        alert('❌ Network Error: ' + err.message);
-    }
-}
-</script>
-
-    try {
-        const res = await window.sendMadzinuOTP(phoneInput ? phoneInput.value : phone)
-        });
-        const data = await res.json();
-        if (data.success) {
-            alert('🚀 Live SMS Dispatched via Fast2SMS to ' + phone);
-        } else {
-            alert('❌ Gateway Error: ' + (data.message || 'Failed'));
-        }
-    } catch (err) {
-        alert('❌ Network connection error.');
-    }
-}
-</script>
-
-
-    try {
-        const res = await window.sendMadzinuOTP(phoneInput ? phoneInput.value : phone)
-        });
-        const data = await res.json();
-        if (data.success) {
-            alert('🚀 Real OTP Dispatched via Fast2SMS Gateway successfully!');
-        } else {
-            alert('❌ Failed to send OTP: ' + (data.message || 'Unknown error'));
-        }
-    } catch (err) {
-        console.error('Error:', err);
-        alert('❌ Network error connecting to SMS gateway.');
+     connecting to SMS gateway.');
     }
 }
 </script></body>
