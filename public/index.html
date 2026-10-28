@@ -123,50 +123,7 @@
       margin: 5px auto !important;
     }
   </style>
-  <script>
-    document.addEventListener('click', function(e) {
-      const targetText = e.target.closest('button, a, div')?.innerText || '';
-      
-      // Admin Access trigger (AI button)
-      const isAdminClick = targetText.includes('AI') || e.target.closest('[class*="ai"], [id*="ai"]');
-      
-      // User Login / Node Launch trigger
-      const isUserClick = targetText.includes('LAUNCH SECURE ENTERPRISE NODE') || 
-                          targetText.includes('User Login') || 
-                          e.target.closest('[class*="user"], [id*="user"], .fa-user');
-
-      if (isAdminClick && !isUserClick) {
-        e.preventDefault();
-        e.stopPropagation();
-        const adminPass = prompt('Enter Admin Access Code:');
-        if (adminPass) {
-          if (adminPass === '1234' || adminPass === 'admin') {
-            alert('Admin Access Granted');
-          } else {
-            alert('Invalid Admin Code');
-          }
-        }
-        return;
-      }
-
-      if (isUserClick) {
-        e.preventDefault();
-        e.stopPropagation();
-        const phone = prompt('Enter your phone number for OTP verification:');
-        if (phone && window.sendMadzinuOTP) {
-          window.sendMadzinuOTP(phone).then(res => {
-            if (res.success) {
-              alert('OTP sent successfully! Generated OTP: ' + res.otp);
-              window.currentOTP = res.otp;
-            } else {
-              alert('Failed to send OTP.');
-            }
-          });
-        }
-        return;
-      }
-    }, true);
-  </script>
+  
   
 
   <style>
