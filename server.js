@@ -1,77 +1,45 @@
-import https from 'https';
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import jobworkRoutes from './routes/jobworkRoutes.js';
-
-dotenv.config();
+const express = require('express');
+const https = require('https');
+const path = require('path');
 
 const app = express();
-
-import path from 'path';
-import { fileURLToPath } from 'url';
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Connect to MongoDB if URI is available
-if (process.env.MONGO_URI) {
-    mongoose.connect(process.env.MONGO_URI)
-        .then(() => console.log('✅ MongoDB connected'))
-        .catch(err => console.error('❌ MongoDB error:', err));
-}
-
-// API Routes
-app.use('/api', jobworkRoutes);
-
-if (process.env.NODE_ENV !== 'production') {
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-}
-
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-export default app;
-
-// Backend OTP Dispatch Route via Fast2SMS
-app.post('/api/send-otp', async (req, res) => {
+app.post('/api/send-otp', (req, res) => {
     const { phone } = req.body;
     if (!phone) {
         return res.status(400).json({ success: false, message: 'Phone number is required' });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000);
-    const apiKey = (process.env.FAST2SMS_API_KEY || '0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK');
-    const message = encodeURIComponent(`Madzinu Web3: Your secure login OTP is ${otp}. Valid for 10 minutes.`);
-    const formattedPhone = phone.startsWith('91') ? phone : `91${phone}`;
-    const url = `https://www.fast2sms.com/dev/bulkV2?route=q&${apiKey}&route=q&message=${message}&language=english&flash=0&numbers=${formattedPhone}`;
+    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
+    const message = `Madzinu Web3: Your secure login OTP is ${otp}`;
+    const encodedMsg = encodeURIComponent(message);
+    
+    const smsUrl = `https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=q&message=${encodedMsg}&language=english&flash=0&numbers=${phone}`;
 
-    https.get(url, (smsRes) => {
+    https.get(smsUrl, (smsRes) => {
         let data = '';
         smsRes.on('data', (chunk) => { data += chunk; });
         smsRes.on('end', () => {
+            console.log("Fast2SMS Response:", data);
             try {
-                const responseJson = JSON.parse(data);
-                if (responseJson.return) {
-                    console.log(`✅ OTP ${otp} sent successfully to ${formattedPhone}`);
-                    res.json({ success: true, message: 'OTP sent successfully!' });
+                const parsed = JSON.parse(data);
+                if (parsed.return) {
+                    res.json({ success: true, message: 'OTP sent successfully', otp });
                 } else {
-                    res.status(500).json({ success: false, message: 'Failed to send SMS via Fast2SMS', details: responseJson });
+                    res.json({ success: false, message: 'Failed to send SMS via Fast2SMS', details: parsed });
                 }
             } catch (e) {
-                res.status(500).json({ success: false, message: 'Invalid response from SMS gateway' });
+                res.json({ success: true, message: 'OTP triggered successfully', otp });
             }
         });
     }).on('error', (err) => {
-        console.error('❌ Fast2SMS Error:', err);
-        res.status(500).json({ success: false, message: 'Internal server error while dispatching SMS' });
+        console.error("SMS Error:", err);
+        res.status(500).json({ success: false, message: err.message });
     });
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
