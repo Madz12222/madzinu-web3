@@ -6,14 +6,14 @@
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/server.cjs"
+      "src": "/api/(.*)",
+      "dest": "server.cjs"
     },
     {
-      "source": "/((?!api/).*)",
-      "destination": "/public/$1"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
