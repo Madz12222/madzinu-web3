@@ -1161,5 +1161,32 @@ function shareWhatsApp(index) {
   window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
 }
 </script>
-</body>
+<script>
+async function sendOtp() {
+    const phoneInput = document.getElementById('phoneInput') || document.querySelector('input[type="tel"]');
+    const phone = phoneInput ? phoneInput.value : prompt('Enter mobile number for OTP:');
+    
+    if (!phone || phone.length < 10) {
+        alert('Please enter a valid mobile number.');
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone })
+        });
+        const data = await res.json();
+        if (data.success) {
+            alert('🚀 Real OTP Dispatched via Fast2SMS Gateway successfully!');
+        } else {
+            alert('❌ Failed to send OTP: ' + (data.message || 'Unknown error'));
+        }
+    } catch (err) {
+        console.error('Error:', err);
+        alert('❌ Network error connecting to SMS gateway.');
+    }
+}
+</script></body>
 </html>
