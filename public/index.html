@@ -522,78 +522,17 @@
                 <a href="https://www.blinkit.com" target="_blank" class="partner-card-box"><i class="fa-solid fa-bolt partner-icon" style="color: #eab308;"></i><div class="partner-title">Blinkit</div><div class="partner-sub">Portal</div></a>
                 <a href="https://www.amazon.in" target="_blank" class="partner-card-box"><i class="fa-solid fa-bag-shopping partner-icon" style="color: #38bdf8;"></i><div class="partner-title">Amazon...</div><div class="partner-sub">Portal</div></a>
                 <a href="https://www.flipkart.com" target="_blank" class="partner-card-box"><i class="fa-solid fa-cart-shopping partner-icon" style="color: #6366f1;"></i><div class="partner-title">Flipkart</div><div class="partner-sub">Portal</div></a>
-                <a href="https://www.bigbasket.com" target="_blank" class="partner-card-box"><i class="fa-solid fa-basket-shopping partner-icon" style="color: #10b981;"></i><div class="partner-title">BigBasket</div><div class="partner-sub">Portal</div></a>
-  
-                <!-- Ask Me Card placed right below BigBasket -->
                 
-                </div> <!-- Close grid partners -->
-                <div onclick="toggleMadzinuAIChat()" style="cursor: pointer; grid-column: span 2; background: linear-gradient(135deg, #1e1b4b, #312e81, #1e1b4b); border: 2px solid #ec4899; padding: 16px; border-radius: 12px; text-align: center; margin-top: 10px; animation: vibrantGlow 2s infinite ease-in-out; box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);">
-                    <i class="fa-solid fa-robot" style="font-size: 24px; color: #f472b6; margin-bottom: 6px;"></i>
-                    <div style="font-size: 14px; font-weight: bold; color: #fff; margin-bottom: 2px;">🤖 ASK MADZINU AI SOVEREIGN ASSISTANT</div>
-                    <div style="font-size: 10px; color: #38bdf8;">Tap here to launch instant AI assistance, pricing, server tiers & node guidance!</div>
-                </div>
-                <div class="grid-partners" style="display: none;"> <!-- Hidden spacer to keep rest intact -->
+                <a href="https://www.bigbasket.com" target="_blank" class="partner-card-box"><i class="fa-solid fa-basket-shopping partner-icon" style="color: #10b981;"></i><div class="partner-title">BigBasket</div><div class="partner-sub">Portal</div></a>
+            </div>
+
+            <!-- Full Width Attractive Blinking Ask AI Card -->
+            <div onclick="toggleMadzinuAIChat()" style="cursor: pointer; width: 100%; background: linear-gradient(135deg, #1e1b4b, #312e81, #1e1b4b); border: 2px solid #ec4899; padding: 16px; border-radius: 12px; text-align: center; margin-top: 12px; animation: vibrantGlow 2s infinite ease-in-out; box-shadow: 0 0 20px rgba(236, 72, 153, 0.6); position: relative; z-index: 10;">
+                <i class="fa-solid fa-robot" style="font-size: 24px; color: #f472b6; margin-bottom: 6px;"></i>
+                <div style="font-size: 14px; font-weight: bold; color: #fff; margin-bottom: 2px;">🤖 ASK MADZINU AI SOVEREIGN ASSISTANT</div>
+                <div style="font-size: 10px; color: #38bdf8;">Tap here to launch instant AI assistance, pricing, server tiers & node guidance!</div>
+            </div>
   
-            </div>
-        </div>
-    </div>
-
-    <!-- Modals -->
-    <div id="admin-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #818cf8; font-size: 13px;" data-i18n="admin_modal_hdr">Master Admin Login</span>
-                <button onclick="closeAdminModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
-                <input type="text" id="admin-user-id" placeholder="Admin ID" value="" class="admin-input-box">
-                <input type="password" id="admin-passkey" placeholder="Enter Master Passkey" value="" class="admin-input-box">
-            </div>
-            <button onclick="verifyMasterAdmin()" class="admin-btn-action" style="width: 100%; padding: 10px;" data-i18n="btn_admin_login">Access Master Admin Panel</button>
-        </div>
-    </div>
-
-    <div id="user-login-modal" class="modal-overlay">
-        <div class="modal-content" style="border-color: #10b981;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #10b981; font-size: 13px;" data-i18n="user_modal_hdr">Contractor Secure Node Login</span>
-                <button onclick="closeUserLoginModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
-                <input type="text" id="login-mobile" placeholder="Enter 10-Digit Mobile Number" class="admin-input-box">
-                <div style="display: flex; gap: 6px;">
-                    <input type="text" id="login-otp-code" placeholder="Enter 6-Digit OTP" class="admin-input-box" style="flex-grow: 1;">
-                    <button onclick="sendFast2SMSOTP()" style="background: #6366f1; color: #fff; border: none; padding: 9px 12px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;" data-i18n="btn_send_otp">Send OTP</button>
-                </div>
-            </div>
-            <button onclick="verifyUserLoginOTP()" class="admin-btn-action" style="width: 100%; padding: 10px;" data-i18n="btn_verify_otp">Verify & Unlock Workspace</button>
-        </div>
-    </div>
-
-    <div id="slice-modal" class="modal-overlay">
-        <div class="modal-content" style="border-color: #ec4899;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #ec4899; font-size: 13px;">Slice Current Account Details</span>
-                <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
-            </div>
-            <div style="font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; background: #090d16; padding: 12px; border-radius: 8px;">
-                <div><strong>Account Name:</strong> Madzinu Web3 Technologies</div>
-                <div><strong>Account No:</strong> <span id="txt-acc" style="color: #34d399; font-family: monospace;">033311501076921</span> <button class="copy-btn" onclick="copyText('txt-acc', this)">Copy</button></div>
-                <div><strong>IFSC:</strong> <span id="txt-ifsc" style="color: #38bdf8; font-family: monospace;">NESF0000333</span> <button class="copy-btn" onclick="copyText('txt-ifsc', this)">Copy</button></div>
-                <div><strong>UPI ID:</strong> <span id="txt-upi" style="color: #ec4899; font-weight: bold;">madhan958@slc</span> <button class="copy-btn" onclick="copyText('txt-upi', this)">Copy</button></div>
-                <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹2,000</span></div>
-            </div>
-            <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" class="admin-input-box" style="margin-bottom: 10px;">
-            <button onclick="confirmSlicePayment()" class="admin-btn-action" style="width: 100%; padding: 10px;">Verify & Activate Server Package</button>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-links">
-            <a href="#">Terms & Conditions</a> |
-            <a href="#">Privacy Policy</a> |
-            <a href="#">Support / Contact</a>
-        </div>
         <div data-i18n="footer_rights">Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
         <div style="margin-top: 4px; color: #64748b;">&copy; 2026 All Rights Reserved. Secure Cloud Node.</div>
     </footer>
