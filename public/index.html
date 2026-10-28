@@ -1022,10 +1022,7 @@
     </script>
 
 
-    <div style="padding: 10px; background: #090d16; display: flex; gap: 6px; border-top: 1px solid #1f2937;">
-        <input type="text" id="ai-user-input" placeholder="Ask Madzinu AI..." style="background: #090d16; border: 1px solid #334155; padding: 6px 8px; border-radius: 6px; color: #fff; font-size: 10px; width: 100%; flex-grow: 1;">
-        <button onclick="sendMadzinuAIMessage()" style="background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-paper-plane"></i></button>
-    </div>
+    
 </div>
 
 <script>
@@ -1293,5 +1290,19 @@ function shareWhatsApp(index) {
         }
     });
 </script>
+
+  <script>
+    function toggleMadzinuAIChat() {
+      const drawer = document.getElementById('madzinu-ai-drawer');
+      if (drawer) {
+        if (drawer.style.display === 'block') {
+          drawer.style.display = 'none';
+        } else {
+          drawer.style.display = 'block';
+        }
+      }
+    }
+  </script>
+  
 </body>
 </html>
