@@ -285,7 +285,7 @@
             </select>
             
             <button onclick="openUserLoginModal()" class="user-login-header-btn"><i class="fa-solid fa-user"></i></button>
-            <button onclick="openAdminModal()" class="ai-blink-btn">✨ AI</button>
+            <button onclick="toggleMadzinuAIChat()" class="ai-blink-btn">✨ AI</button>
         </div>
     </header>
 
@@ -525,11 +525,15 @@
                 <a href="https://www.bigbasket.com" target="_blank" class="partner-card-box"><i class="fa-solid fa-basket-shopping partner-icon" style="color: #10b981;"></i><div class="partner-title">BigBasket</div><div class="partner-sub">Portal</div></a>
   
                 <!-- Ask Me Card placed right below BigBasket -->
-                <div onclick="toggleMadzinuAIChat()" class="partner-card-box" style="cursor: pointer; border: 1px dashed #6366f1; background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(236,72,153,0.15));">
-                    <i class="fa-solid fa-robot partner-icon" style="color: #ec4899;"></i>
-                    <div class="partner-title" style="color: #38bdf8;">Ask Me AI</div>
-                    <div class="partner-sub">Sovereign Assistant</div>
+                
+                </div> <!-- Close grid partners -->
+                <div onclick="toggleMadzinuAIChat()" style="cursor: pointer; grid-column: span 2; background: linear-gradient(135deg, #1e1b4b, #312e81, #1e1b4b); border: 2px solid #ec4899; padding: 16px; border-radius: 12px; text-align: center; margin-top: 10px; animation: vibrantGlow 2s infinite ease-in-out; box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);">
+                    <i class="fa-solid fa-robot" style="font-size: 24px; color: #f472b6; margin-bottom: 6px;"></i>
+                    <div style="font-size: 14px; font-weight: bold; color: #fff; margin-bottom: 2px;">🤖 ASK MADZINU AI SOVEREIGN ASSISTANT</div>
+                    <div style="font-size: 10px; color: #38bdf8;">Tap here to launch instant AI assistance, pricing, server tiers & node guidance!</div>
                 </div>
+                <div class="grid-partners" style="display: none;"> <!-- Hidden spacer to keep rest intact -->
+  
             </div>
         </div>
     </div>
