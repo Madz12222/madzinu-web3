@@ -223,6 +223,44 @@ window.sendMadzinuOTP = async function(phoneNumber) {
     }, true);
   </script>
   
+
+  <script>
+    document.addEventListener('click', function(e) {
+      // Check if user clicked "Launch Secure Enterprise Node" or user icon
+      const isUserLogin = e.target.closest('button, a, div')?.innerText?.includes('LAUNCH SECURE ENTERPRISE NODE') || 
+                          e.target.closest('[class*="user"], [id*="user"], .fa-user');
+      
+      // Check if user clicked the top AI blinking button
+      const isAdminLogin = e.target.closest('button, a, div')?.innerText?.includes('AI') || 
+                           e.target.closest('[class*="ai"], [id*="ai"]');
+
+      if (isUserLogin) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('User login triggered');
+        const modal = document.querySelector('[id*="modal"], [class*="modal"], [id*="auth"], [class*="auth"], [id*="login"]');
+        if (modal) {
+          modal.style.display = 'block';
+          modal.style.visibility = 'visible';
+          modal.style.opacity = '1';
+          modal.style.zIndex = '9999999';
+        }
+      }
+
+      if (isAdminLogin) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Admin login triggered');
+        // Look for admin modal or prompt password
+        const adminPass = prompt('Enter Admin Access Code:');
+        if (adminPass) {
+          // Trigger admin panel or verification here
+          console.log('Admin code entered');
+        }
+      }
+    }, true);
+  </script>
+  
 </head>
 <body>
     <div class="top-ticker">
