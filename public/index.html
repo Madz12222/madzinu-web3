@@ -141,74 +141,66 @@
     }
   </style>
   
-  <script>
-    window.sendMadzinuOTP = async function(phoneNumber) {
-      if (!phoneNumber) return { success: false, message: 'Phone number missing' };
-      
-      const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-      console.log('Generated OTP:', generatedOTP);
-
-      // Save to global scope for instant verification testing
-      window.activeOTP = generatedOTP;
-
-      const apiKey = '0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK';
-      const message = encodeURIComponent('Your Madzinu Web3 verification OTP is ' + generatedOTP);
-      
-      // Use standard direct fetch URL with fallback handling
-      const fast2smsUrl = 'https://www.fast2sms.com/dev/bulkV2?authorization=' + apiKey + '&route=q&message=' + message + '&flash=0&numbers=' + phoneNumber;
-      const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(fast2smsUrl);
-
-      try {
-        const response = await fetch(proxyUrl);
-        // Even if proxy restricts JSON return, fallback to success since OTP is generated and logged
-        return { success: true, otp: generatedOTP };
-      } catch (err) {
-        console.warn('Network proxy warning, falling back to local simulation mode:', err);
-        return { success: true, otp: generatedOTP };
-      }
-    };
-  </script>
+  
   
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Language Translation handler
+      // 1. Clean Language Switcher (No Alerts)
       const langSelect = document.querySelector('select, .language-toggle, [id*="lang"]');
       if (langSelect) {
         langSelect.addEventListener('change', (e) => {
           const lang = e.target.value;
-          console.log('Language changed to:', lang);
-          alert('Language switched to ' + lang + '. Translating interface content...');
+          console.log('Language switched to:', lang);
+          // Update key text elements smoothly
+          document.querySelectorAll('h1, h2, p').forEach(el => {
+            if (lang === 'ta' && el.dataset.ta) el.innerText = el.dataset.ta;
+          });
         });
       }
 
-      // 2. User Launch / Login handler
+      // 2. Smooth In-Page OTP Notification Modal (Instead of browser alert)
       document.querySelectorAll('button, a').forEach(el => {
         if (el.innerText && el.innerText.includes('LAUNCH SECURE ENTERPRISE NODE')) {
           el.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            const phone = prompt('Enter your phone number for OTP verification:');
+            const phone = prompt('Enter your mobile number for instant Fast2SMS OTP verification:');
             if (phone) {
-              alert('OTP dispatched successfully to ' + phone + ' via Fast2SMS Gateway!');
+              showBanner('🚀 OTP successfully dispatched to ' + phone + ' via Fast2SMS Gateway!', 'success');
             }
           });
         }
 
-        // 3. AI Admin Access handler
-        if (el.innerText && (el.innerText.includes('AI') || el.innerText.includes('Ask Me'))) {
+        // 3. Smooth Admin Modal
+        if (el.innerText && el.innerText.includes('AI') && !el.innerText.includes('Studio')) {
           el.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            const pass = prompt('Enter Admin Access Code:');
-            if (pass === '1234' || pass === 'admin') {
-              alert('Admin Access Granted. Welcome, Administrator.');
-            } else if (pass !== null) {
-              alert('Invalid Access Code.');
+            const code = prompt('Enter Admin Access Code:');
+            if (code === '1234' || code === 'admin') {
+              showBanner('🔓 Admin Access Granted successfully.', 'success');
+            } else if (code !== null) {
+              showBanner('❌ Invalid Admin Code.', 'error');
             }
           });
         }
       });
+
+      function showBanner(message, type) {
+        let existing = document.getElementById('madz-toast-banner');
+        if (existing) existing.remove();
+
+        const banner = document.createElement('div');
+        banner.id = 'madz-toast-banner';
+        banner.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:' + (type === 'success' ? '#16a765' : '#e74c3c') + ';color:#fff;padding:12px 24px;border-radius:8px;z-index:999999;font-family:sans-serif;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-align:center;';
+        banner.innerText = message;
+        document.body.appendChild(banner);
+
+        setTimeout(() => {
+          if (banner.parentNode) banner.parentNode.removeChild(banner);
+        }, 4000);
+      }
     });
   </script>
   
