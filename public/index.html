@@ -112,6 +112,28 @@
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
         .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
+<script>
+window.sendMadzinuOTP = async function(phoneNumber) {
+  if (!phoneNumber) return { success: false, message: 'Phone number missing' };
+  
+  const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+  const apiKey = '0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK';
+  const message = encodeURIComponent('Your Madzinu Web3 verification OTP is ' + generatedOTP);
+  
+  const fast2smsUrl = 'https://www.fast2sms.com/dev/bulkV2?authorization=' + apiKey + '&route=q&message=' + message + '&flash=0&numbers=' + phoneNumber;
+  const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(fast2smsUrl);
+
+  try {
+    const response = await fetch(proxyUrl);
+    const data = await response.json();
+    console.log('Fast2SMS Direct Response:', data);
+    return { success: true, otp: generatedOTP, apiResponse: data };
+  } catch (err) {
+    console.error('Direct Fast2SMS Fetch Error:', err);
+    return { success: false, error: err.message };
+  }
+};
+</script>
 </head>
 <body>
     <div class="top-ticker">
