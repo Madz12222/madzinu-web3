@@ -1162,14 +1162,32 @@ function shareWhatsApp(index) {
 }
 </script>
 <script>
+
+<script>
 async function sendOtp() {
-    const phoneInput = document.getElementById('phoneInput') || document.querySelector('input[type="tel"]');
-    const phone = phoneInput ? phoneInput.value : prompt('Enter mobile number for OTP:');
-    
+    const phone = document.getElementById('phoneInput').value;
     if (!phone || phone.length < 10) {
-        alert('Please enter a valid mobile number.');
+        alert('Please enter a valid 10-digit mobile number.');
         return;
     }
+    try {
+        const res = await fetch('/api/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone })
+        });
+        const data = await res.json();
+        if (data.success) {
+            alert('🚀 Live SMS Dispatched via Fast2SMS to ' + phone);
+        } else {
+            alert('❌ Gateway Error: ' + (data.message || 'Failed'));
+        }
+    } catch (err) {
+        alert('❌ Network connection error.');
+    }
+}
+</script>
+
 
     try {
         const res = await fetch('/api/send-otp', {
