@@ -1,6 +1,6 @@
 const https = require('https');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -9,19 +9,15 @@ module.exports = (req, res) => {
     return res.status(200).end();
   }
 
-  let body = '';
-  req.on('data', chunk => { body += chunk; });
-  req.on('end', () => {
-    let parsed = {};
-    try {
-      if (body) parsed = JSON.parse(body);
-    } catch (e) {}
+  try {
+    let body = req.body;
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
+    if (!body) body = {};
 
-    // Extract phone or query phone
-    const phone = parsed.phone || req.query.phone;
-    
-    // Dynamic OTP: Use passed OTP or generate random 6-digit number
-    const otp = parsed.otp || req.query.otp || Math.floor(100000 + Math.random() * 900000).toString();
+    const phone = body.phone || req.query.phone;
+    const otp = body.otp || req.query.otp || Math.floor(100000 + Math.random() * 900000).toString();
 
     if (!phone) {
       return res.status(400).json({ success: false, message: 'Phone number required' });
@@ -52,5 +48,8 @@ module.exports = (req, res) => {
     }).on('error', (err) => {
       return res.status(500).json({ success: false, error: err.message });
     });
-  });
+
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
 };
