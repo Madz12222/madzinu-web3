@@ -206,6 +206,23 @@ window.sendMadzinuOTP = async function(phoneNumber) {
     }, true);
   </script>
   
+
+  <script>
+    document.addEventListener('click', function(e) {
+      const loginBtn = e.target.closest('[class*="user"], [id*="user"], [class*="login"], [id*="login"], .fa-user');
+      if (loginBtn) {
+        console.log('Login trigger clicked!');
+        const modal = document.querySelector('[id*="modal"], [class*="modal"], [id*="auth"], [class*="auth"]');
+        if (modal) {
+          modal.style.display = 'block';
+          modal.style.visibility = 'visible';
+          modal.style.opacity = '1';
+          modal.style.zIndex = '9999999';
+        }
+      }
+    }, true);
+  </script>
+  
 </head>
 <body>
     <div class="top-ticker">
