@@ -40,7 +40,7 @@ app.post('/api/send-otp', async (req, res) => {
     const apiKey = process.env.FAST2SMS_API_KEY;
     const message = encodeURIComponent(`Madzinu Web3: Your secure login OTP is ${otp}. Valid for 10 minutes.`);
     const formattedPhone = phone.startsWith('91') ? phone : `91${phone}`;
-    const url = `https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=q&message=${message}&language=english&flash=0&numbers=${formattedPhone}`;
+    const url = `https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=otp&message=${message}&language=english&flash=0&numbers=${formattedPhone}`;
 
     https.get(url, (smsRes) => {
         let data = '';
