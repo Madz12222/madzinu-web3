@@ -111,7 +111,15 @@
         footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
         .footer-links a { color: #38bdf8; text-decoration: none; }
-    </style>
+    
+    .floating-ai-trigger {
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        margin-left: 6px !important;
+    }
+  
+</style>
 
   
 
@@ -1290,24 +1298,43 @@ function shareWhatsApp(index) {
   window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
 }
 </script>
-<script>
 
 <script>
-
-<script>
-async function sendOtp() {
-    const phoneInput = document.getElementById('phoneInput');
-    const phone = phoneInput ? phoneInput.value : '';
-    
-    if (!phone || phone.length < 10) {
-        alert('Please enter a valid 10-digit mobile number.');
-        return;
+    // Global Translation Switcher
+    function changeLanguage(lang) {
+        localStorage.setItem('madzinu_lang', lang);
+        const selectedDict = dictionary[lang] || dictionary['en'];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (selectedDict && selectedDict[key]) {
+                el.innerText = selectedDict[key];
+            }
+        });
     }
 
-    alert('Sending request to backend for ' + phone + '...');
-
-     connecting to SMS gateway.');
+    // Modal Handlers
+    function openUserLoginModal() { 
+        document.getElementById('user-login-modal').style.display = 'flex'; 
     }
-}
-</script></body>
+    function closeUserLoginModal() { 
+        document.getElementById('user-login-modal').style.display = 'none'; 
+    }
+    function openAdminModal() { 
+        document.getElementById('admin-modal').style.display = 'flex'; 
+    }
+    function closeAdminModal() { 
+        document.getElementById('admin-modal').style.display = 'none'; 
+    }
+
+    // Initialize on Load
+    window.addEventListener('DOMContentLoaded', () => {
+        const lang = localStorage.getItem('madzinu_lang') || 'en';
+        const langSelect = document.getElementById('lang-select');
+        if (langSelect) {
+            langSelect.value = lang;
+            changeLanguage(lang);
+        }
+    });
+</script>
+</body>
 </html>
