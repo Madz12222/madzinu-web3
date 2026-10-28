@@ -144,48 +144,48 @@
   
   
 
+  
+  
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Clean Language Switcher (No Alerts)
       const langSelect = document.querySelector('select, .language-toggle, [id*="lang"]');
       if (langSelect) {
+        // Ensure Tamil is available as an option
+        if (![...langSelect.options].some(o => o.value === 'ta')) {
+          const opt = document.createElement('option');
+          opt.value = 'ta';
+          opt.innerText = 'தமிழ்';
+          langSelect.appendChild(opt);
+        }
+
         langSelect.addEventListener('change', (e) => {
           const lang = e.target.value;
-          console.log('Language switched to:', lang);
-          // Update key text elements smoothly
-          document.querySelectorAll('h1, h2, p').forEach(el => {
-            if (lang === 'ta' && el.dataset.ta) el.innerText = el.dataset.ta;
-          });
+          console.log('Language changed to:', lang);
+
+          if (lang === 'ta') {
+            // Translate main titles and buttons to Tamil
+            document.querySelectorAll('h1, h2, h3').forEach(el => {
+              if (el.innerText.includes('Sovereign Cloud Compute')) {
+                el.innerText = 'இறையாண்மை கிளவுட் கணக்கீடு & தன்னாட்சி பணிப்பாய்வுகள்';
+              } else if (el.innerText.includes('Daily E-Commerce Jobworks')) {
+                el.innerText = 'தினசரி இ-காமர்ஸ் வேலைகள் & இலவச அடுக்கு (500 பணிகள் = ₹100)';
+              }
+            });
+
+            document.querySelectorAll('button, a').forEach(el => {
+              if (el.innerText && el.innerText.includes('LAUNCH SECURE ENTERPRISE NODE')) {
+                el.innerText = '🚀 பாதுகாப்பான நிறுவன முனையைத் தொடங்குங்கள்';
+              }
+            });
+            
+            showBanner('மொழி தமிழுக்கு மாற்றப்பட்டது', 'success');
+          } else {
+            // Revert or reload to default English
+            window.location.reload();
+          }
         });
       }
-
-      // 2. Smooth In-Page OTP Notification Modal (Instead of browser alert)
-      document.querySelectorAll('button, a').forEach(el => {
-        if (el.innerText && el.innerText.includes('LAUNCH SECURE ENTERPRISE NODE')) {
-          el.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const phone = prompt('Enter your mobile number for instant Fast2SMS OTP verification:');
-            if (phone) {
-              showBanner('🚀 OTP successfully dispatched to ' + phone + ' via Fast2SMS Gateway!', 'success');
-            }
-          });
-        }
-
-        // 3. Smooth Admin Modal
-        if (el.innerText && el.innerText.includes('AI') && !el.innerText.includes('Studio')) {
-          el.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const code = prompt('Enter Admin Access Code:');
-            if (code === '1234' || code === 'admin') {
-              showBanner('🔓 Admin Access Granted successfully.', 'success');
-            } else if (code !== null) {
-              showBanner('❌ Invalid Admin Code.', 'error');
-            }
-          });
-        }
-      });
 
       function showBanner(message, type) {
         let existing = document.getElementById('madz-toast-banner');
@@ -193,13 +193,13 @@
 
         const banner = document.createElement('div');
         banner.id = 'madz-toast-banner';
-        banner.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:' + (type === 'success' ? '#16a765' : '#e74c3c') + ';color:#fff;padding:12px 24px;border-radius:8px;z-index:999999;font-family:sans-serif;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-align:center;';
+        banner.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#16a765;color:#fff;padding:12px 24px;border-radius:8px;z-index:999999;font-family:sans-serif;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-align:center;';
         banner.innerText = message;
         document.body.appendChild(banner);
 
         setTimeout(() => {
           if (banner.parentNode) banner.parentNode.removeChild(banner);
-        }, 4000);
+        }, 3000);
       }
     });
   </script>
