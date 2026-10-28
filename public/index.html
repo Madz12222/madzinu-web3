@@ -147,11 +147,45 @@
   
   
 
+  
+  
+
   <script>
+    const translations = {
+      en: {
+        heroTitle: "Sovereign Cloud Compute & Autonomous Jobworks",
+        heroDesc: "Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.",
+        launchBtn: "🚀 LAUNCH SECURE ENTERPRISE NODE",
+        jobTitle: "Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)",
+        task1: "Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.",
+        task2: "Amazon: Fulfillment center node sync & SKU audit logs",
+        task3: "Flipkart: Logistics routing & pin-code serviceability checks",
+        task4: "Meesho: Catalog pricing verification & vendor order feeds",
+        task5: "MeitY Registered Startup Entity (Govt. of India)",
+        bonusTitle: "4. 10% - 12% Dynamic Referral Bonus & Gold Vault",
+        bonusDesc: "Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.",
+        whatsappTitle: "10 Unique WhatsApp Referral Scripts"
+      },
+      ta: {
+        heroTitle: "இறையாண்மை கிளவுட் கணக்கீடு & தன்னாட்சி பணிப்பாய்வுகள்",
+        heroDesc: "மட்ஜினு வெப்3 டெக்னாலஜிஸ் என்பது மீட்டி (MeitY) அமைச்சகத்தின் கீழ் இந்திய அரசால் அங்கீகரிக்கப்பட்ட தொடக்க நிறுவனமாகும். இது ரூ.2,000 முதல் ரூ.1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் கணினி தொகுப்புகளை வழங்குகிறது.",
+        launchBtn: "🚀 பாதுகாப்பான நிறுவன முனையைத் தொடங்குங்கள்",
+        jobTitle: "தினசரி இ-காமர்ஸ் வேலைகள் & இலவச அடுக்கு (500 பணிகள் = ₹100 தினமும், குறைந்தபட்ச விலக்கு ₹100)",
+        task1: "இலவச அடுக்கு: தினமும் ₹100 சம்பாதிக்க 500 நுண்ணிய பணிகளை முடிக்கவும் (₹0.20/பணி). குறைந்தபட்ச விலக்கு வரம்பு ₹100.",
+        task2: "அமேசான்: நிறைவேற்றுதல் மைய முணை ஒத்திசைவு & எஸ்கியூ தணிக்கை பதிவுகள்",
+        task3: "பளிப்கார்ட்: தளவாடங்கள் ரூட்டிங் & பின் கோடு சேவை சரிபார்ப்புகள்",
+        task4: "மீஷோ: பட்டியல் விலை சரிபார்ப்பு & விற்பனையாளர் ஆர்டர் ஊட்டங்கள்",
+        task5: "மீட்டி (MeitY) பதிவு செய்யப்பட்ட தொடக்க நிறுவனம் (இந்திய அரசு)",
+        bonusTitle: "4. 10% - 12% மாறும் பரிந்துரை போனஸ் & தங்கம் பெட்டகம்",
+        bonusDesc: "10%-12% பரிந்துரை போனஸைப் பெறுங்கள். மேலும், நிறுவன சர்வர் அடுக்குகள் (₹25,000+) பிரத்யேக 24K தங்க பெட்டக மாற்று பலன்களைத் திறக்கின்றன.",
+        whatsappTitle: "10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை ஸ்கிரிப்டுகள்"
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
       const langSelect = document.querySelector('select, .language-toggle, [id*="lang"]');
       if (langSelect) {
-        // Ensure Tamil is available as an option
+        // Ensure Tamil option exists
         if (![...langSelect.options].some(o => o.value === 'ta')) {
           const opt = document.createElement('option');
           opt.value = 'ta';
@@ -161,29 +195,26 @@
 
         langSelect.addEventListener('change', (e) => {
           const lang = e.target.value;
-          console.log('Language changed to:', lang);
+          const t = translations[lang] || translations['en'];
 
-          if (lang === 'ta') {
-            // Translate main titles and buttons to Tamil
-            document.querySelectorAll('h1, h2, h3').forEach(el => {
-              if (el.innerText.includes('Sovereign Cloud Compute')) {
-                el.innerText = 'இறையாண்மை கிளவுட் கணக்கீடு & தன்னாட்சி பணிப்பாய்வுகள்';
-              } else if (el.innerText.includes('Daily E-Commerce Jobworks')) {
-                el.innerText = 'தினசரி இ-காமர்ஸ் வேலைகள் & இலவச அடுக்கு (500 பணிகள் = ₹100)';
-              }
-            });
+          // Update elements safely by matching content
+          document.querySelectorAll('h1, h2, h3, p, button, a').forEach(el => {
+            const text = el.innerText.trim();
+            if (text.includes('Sovereign Cloud Compute')) el.innerText = t.heroTitle;
+            if (text.includes('Madzinu Web3 Technologies is a Govt.')) el.innerText = t.heroDesc;
+            if (text.includes('LAUNCH SECURE ENTERPRISE NODE')) el.innerText = t.launchBtn;
+            if (text.includes('Daily E-Commerce Jobworks')) el.innerText = t.jobTitle;
+            if (text.includes('Free Tier: Complete 500 daily')) el.innerText = t.task1;
+            if (text.includes('Amazon: Fulfillment center')) el.innerText = t.task2;
+            if (text.includes('Flipkart: Logistics routing')) el.innerText = t.task3;
+            if (text.includes('Meesho: Catalog pricing')) el.innerText = t.task4;
+            if (text.includes('MeitY Registered Startup')) el.innerText = t.task5;
+            if (text.includes('Dynamic Referral Bonus')) el.innerText = t.bonusTitle;
+            if (text.includes('Earn 10%-12% referral bonuses')) el.innerText = t.bonusDesc;
+            if (text.includes('Unique WhatsApp Referral')) el.innerText = t.whatsappTitle;
+          });
 
-            document.querySelectorAll('button, a').forEach(el => {
-              if (el.innerText && el.innerText.includes('LAUNCH SECURE ENTERPRISE NODE')) {
-                el.innerText = '🚀 பாதுகாப்பான நிறுவன முனையைத் தொடங்குங்கள்';
-              }
-            });
-            
-            showBanner('மொழி தமிழுக்கு மாற்றப்பட்டது', 'success');
-          } else {
-            // Revert or reload to default English
-            window.location.reload();
-          }
+          showBanner(lang === 'ta' ? 'மொழி தமிழுக்கு மாற்றப்பட்டது' : 'Language switched to English', 'success');
         });
       }
 
