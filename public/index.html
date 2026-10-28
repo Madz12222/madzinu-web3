@@ -261,6 +261,78 @@ window.sendMadzinuOTP = async function(phoneNumber) {
     }, true);
   </script>
   
+
+  <style>
+    /* Header layout adjustments */
+    header, .header-row, nav, .top-nav {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+    }
+    
+    /* Place AI button beside language toggle */
+    .ai-btn-header, [class*="ai-header"], button[class*="ai"] {
+      order: 2 !important;
+      margin-left: auto !important;
+      margin-right: 10px !important;
+    }
+    
+    .language-toggle, select, [class*="lang"] {
+      order: 1 !important;
+    }
+
+    .user-icon-header, [class*="user"], .fa-user {
+      order: 3 !important;
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('click', function(e) {
+      // User login / node launch -> triggers user mobile OTP modal
+      const userTrigger = e.target.closest('button, a, div')?.innerText?.includes('LAUNCH SECURE ENTERPRISE NODE') || 
+                          e.target.closest('[class*="user"], [id*="user"], .fa-user');
+      
+      // Admin access -> triggers admin login/code
+      const adminTrigger = e.target.closest('button, a, div')?.innerText?.includes('AI') || 
+                           e.target.closest('[class*="ai"], [id*="ai"]');
+
+      if (userTrigger && !adminTrigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Opening User OTP / Login Modal');
+        const userModal = document.querySelector('#userModal, .user-modal, [id*="login"], [class*="login-modal"]');
+        if (userModal) {
+          userModal.style.display = 'block';
+        } else {
+          // Fallback prompt for user phone verification
+          const phone = prompt('Enter your phone number for OTP verification:');
+          if (phone && window.sendMadzinuOTP) {
+            window.sendMadzinuOTP(phone).then(res => {
+              if (res.success) alert('OTP sent successfully!');
+            });
+          }
+        }
+      }
+
+      if (adminTrigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Opening Admin Access');
+        const adminPass = prompt('Enter Admin Access Code:');
+        if (adminPass) {
+          if (adminPass === '1234' || adminPass === 'admin') {
+            alert('Admin Access Granted');
+            // Show admin dashboard elements if available
+          } else {
+            alert('Invalid Admin Code');
+          }
+        }
+      }
+    }, true);
+  </script>
+  
 </head>
 <body>
     <div class="top-ticker">
