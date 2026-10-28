@@ -112,223 +112,58 @@
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
         .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
-<script>
-window.sendMadzinuOTP = async function(phoneNumber) {
-  if (!phoneNumber) return { success: false, message: 'Phone number missing' };
-  
-  const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-  const apiKey = '0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK';
-  const message = encodeURIComponent('Your Madzinu Web3 verification OTP is ' + generatedOTP);
-  
-  const fast2smsUrl = 'https://www.fast2sms.com/dev/bulkV2?authorization=' + apiKey + '&route=q&message=' + message + '&flash=0&numbers=' + phoneNumber;
-  const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(fast2smsUrl);
 
-  try {
-    const response = await fetch(proxyUrl);
-    const data = await response.json();
-    console.log('Fast2SMS Direct Response:', data);
-    return { success: true, otp: generatedOTP, apiResponse: data };
-  } catch (err) {
-    console.error('Direct Fast2SMS Fetch Error:', err);
-    return { success: false, error: err.message };
-  }
-};
-</script>
-
-  <style>
-    button, a, input, [role="button"], .btn, .login-btn {
-      pointer-events: auto !important;
-      cursor: pointer !important;
-      position: relative;
-      z-index: 99999;
-    }
-  </style>
-  
-
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      // Remove any accidental invisible overlay divs blocking clicks
-      document.querySelectorAll('div, section, span').forEach(el => {
-        const style = window.getComputedStyle(el);
-        if (style.position === 'fixed' && style.background === 'transparent' && parseInt(style.zIndex) > 100) {
-          el.remove();
-        }
-      });
-
-      // Force clickability on all buttons and login triggers
-      document.querySelectorAll('button, a, .login-btn, [class*="login"], [id*="login"]').forEach(el => {
-        el.style.pointerEvents = 'auto';
-        el.style.cursor = 'pointer';
-        el.style.zIndex = '999999';
-      });
-    });
-  </script>
-  <style>
-    body { pointer-events: auto !important; }
-    * { pointer-events: auto; }
-  </style>
   
 
   <style>
-    /* Fix top overlapping banner */
-    body {
-      padding-top: 50px !important;
-    }
-    marquee, .top-banner, [class*="marquee"], [class*="banner"] {
+    /* Position AI button nicely next to language toggle instead of hanging at the very top */
+    .ai-header-container, [class*="ai-btn"], button[class*="ai"] {
       position: relative !important;
-      margin-bottom: 10px !important;
-      z-index: 100 !important;
-    }
-
-    /* Move floating AI button up so it doesn't overlap script buttons */
-    button[class*="ai"], .ai-float, [id*="ai"], [aria-label*="AI"] {
-      bottom: 80px !important;
-      right: 20px !important;
-      z-index: 999999 !important;
-    }
-
-    /* Ensure all buttons and elements are fully clickable */
-    button, a, input, select, [role="button"] {
-      pointer-events: auto !important;
-      cursor: pointer !important;
+      display: inline-flex !important;
+      margin: 5px auto !important;
     }
   </style>
-  
-
-  <script>
-    // Bulletproof Event Delegation for Login & Interactive Buttons
-    document.addEventListener('click', function(event) {
-      const target = event.target.closest('button, a, .login-btn, [class*="login"], [id*="login"], [role="button"]');
-      if (target) {
-        console.log('Clicked interactive element:', target);
-        // Force pointer action if needed
-      }
-    }, true);
-  </script>
-  
-
   <script>
     document.addEventListener('click', function(e) {
-      const loginBtn = e.target.closest('[class*="user"], [id*="user"], [class*="login"], [id*="login"], .fa-user');
-      if (loginBtn) {
-        console.log('Login trigger clicked!');
-        const modal = document.querySelector('[id*="modal"], [class*="modal"], [id*="auth"], [class*="auth"]');
-        if (modal) {
-          modal.style.display = 'block';
-          modal.style.visibility = 'visible';
-          modal.style.opacity = '1';
-          modal.style.zIndex = '9999999';
-        }
-      }
-    }, true);
-  </script>
-  
-
-  <script>
-    document.addEventListener('click', function(e) {
-      // Check if user clicked "Launch Secure Enterprise Node" or user icon
-      const isUserLogin = e.target.closest('button, a, div')?.innerText?.includes('LAUNCH SECURE ENTERPRISE NODE') || 
-                          e.target.closest('[class*="user"], [id*="user"], .fa-user');
+      const targetText = e.target.closest('button, a, div')?.innerText || '';
       
-      // Check if user clicked the top AI blinking button
-      const isAdminLogin = e.target.closest('button, a, div')?.innerText?.includes('AI') || 
-                           e.target.closest('[class*="ai"], [id*="ai"]');
-
-      if (isUserLogin) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('User login triggered');
-        const modal = document.querySelector('[id*="modal"], [class*="modal"], [id*="auth"], [class*="auth"], [id*="login"]');
-        if (modal) {
-          modal.style.display = 'block';
-          modal.style.visibility = 'visible';
-          modal.style.opacity = '1';
-          modal.style.zIndex = '9999999';
-        }
-      }
-
-      if (isAdminLogin) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Admin login triggered');
-        // Look for admin modal or prompt password
-        const adminPass = prompt('Enter Admin Access Code:');
-        if (adminPass) {
-          // Trigger admin panel or verification here
-          console.log('Admin code entered');
-        }
-      }
-    }, true);
-  </script>
-  
-
-  <style>
-    /* Header layout adjustments */
-    header, .header-row, nav, .top-nav {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      flex-wrap: wrap !important;
-      gap: 10px !important;
-    }
-    
-    /* Place AI button beside language toggle */
-    .ai-btn-header, [class*="ai-header"], button[class*="ai"] {
-      order: 2 !important;
-      margin-left: auto !important;
-      margin-right: 10px !important;
-    }
-    
-    .language-toggle, select, [class*="lang"] {
-      order: 1 !important;
-    }
-
-    .user-icon-header, [class*="user"], .fa-user {
-      order: 3 !important;
-    }
-  </style>
-  
-  <script>
-    document.addEventListener('click', function(e) {
-      // User login / node launch -> triggers user mobile OTP modal
-      const userTrigger = e.target.closest('button, a, div')?.innerText?.includes('LAUNCH SECURE ENTERPRISE NODE') || 
-                          e.target.closest('[class*="user"], [id*="user"], .fa-user');
+      // Admin Access trigger (AI button)
+      const isAdminClick = targetText.includes('AI') || e.target.closest('[class*="ai"], [id*="ai"]');
       
-      // Admin access -> triggers admin login/code
-      const adminTrigger = e.target.closest('button, a, div')?.innerText?.includes('AI') || 
-                           e.target.closest('[class*="ai"], [id*="ai"]');
+      // User Login / Node Launch trigger
+      const isUserClick = targetText.includes('LAUNCH SECURE ENTERPRISE NODE') || 
+                          targetText.includes('User Login') || 
+                          e.target.closest('[class*="user"], [id*="user"], .fa-user');
 
-      if (userTrigger && !adminTrigger) {
+      if (isAdminClick && !isUserClick) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Opening User OTP / Login Modal');
-        const userModal = document.querySelector('#userModal, .user-modal, [id*="login"], [class*="login-modal"]');
-        if (userModal) {
-          userModal.style.display = 'block';
-        } else {
-          // Fallback prompt for user phone verification
-          const phone = prompt('Enter your phone number for OTP verification:');
-          if (phone && window.sendMadzinuOTP) {
-            window.sendMadzinuOTP(phone).then(res => {
-              if (res.success) alert('OTP sent successfully!');
-            });
-          }
-        }
-      }
-
-      if (adminTrigger) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('Opening Admin Access');
         const adminPass = prompt('Enter Admin Access Code:');
         if (adminPass) {
           if (adminPass === '1234' || adminPass === 'admin') {
             alert('Admin Access Granted');
-            // Show admin dashboard elements if available
           } else {
             alert('Invalid Admin Code');
           }
         }
+        return;
+      }
+
+      if (isUserClick) {
+        e.preventDefault();
+        e.stopPropagation();
+        const phone = prompt('Enter your phone number for OTP verification:');
+        if (phone && window.sendMadzinuOTP) {
+          window.sendMadzinuOTP(phone).then(res => {
+            if (res.success) {
+              alert('OTP sent successfully! Generated OTP: ' + res.otp);
+              window.currentOTP = res.otp;
+            } else {
+              alert('Failed to send OTP.');
+            }
+          });
+        }
+        return;
       }
     }, true);
   </script>
