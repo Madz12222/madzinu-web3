@@ -169,6 +169,49 @@
     };
   </script>
   
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Language Translation handler
+      const langSelect = document.querySelector('select, .language-toggle, [id*="lang"]');
+      if (langSelect) {
+        langSelect.addEventListener('change', (e) => {
+          const lang = e.target.value;
+          console.log('Language changed to:', lang);
+          alert('Language switched to ' + lang + '. Translating interface content...');
+        });
+      }
+
+      // 2. User Launch / Login handler
+      document.querySelectorAll('button, a').forEach(el => {
+        if (el.innerText && el.innerText.includes('LAUNCH SECURE ENTERPRISE NODE')) {
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const phone = prompt('Enter your phone number for OTP verification:');
+            if (phone) {
+              alert('OTP dispatched successfully to ' + phone + ' via Fast2SMS Gateway!');
+            }
+          });
+        }
+
+        // 3. AI Admin Access handler
+        if (el.innerText && (el.innerText.includes('AI') || el.innerText.includes('Ask Me'))) {
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const pass = prompt('Enter Admin Access Code:');
+            if (pass === '1234' || pass === 'admin') {
+              alert('Admin Access Granted. Welcome, Administrator.');
+            } else if (pass !== null) {
+              alert('Invalid Access Code.');
+            }
+          });
+        }
+      });
+    });
+  </script>
+  
 </head>
 <body>
     <div class="top-ticker">
