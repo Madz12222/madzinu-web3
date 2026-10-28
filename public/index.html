@@ -847,7 +847,16 @@
             let mobile = document.getElementById('login-mobile').value.trim();
             if(!mobile || mobile.length < 10) { alert('Enter valid mobile number.'); return; }
             generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-            alert('Backend Dispatched via API! [Code: ' + generatedOTP + ']');
+            
+        fetch('/api/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: document.querySelector('input').value })
+        })
+        .then(res => res.json())
+        .then(data => alert('SMS Gateway Response: ' + JSON.stringify(data)))
+        .catch(err => alert('Error: ' + err.message));
+    
         }
 
         function verifyUserLoginOTP() {
