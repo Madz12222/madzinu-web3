@@ -847,7 +847,7 @@
             let mobile = document.getElementById('login-mobile').value.trim();
             if(!mobile || mobile.length < 10) { alert('Enter valid mobile number.'); return; }
             generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-            alert('OTP Dispatched via Fast2SMS Gateway! [Code: ' + generatedOTP + ']');
+            alert('Backend Dispatched via API! [Code: ' + generatedOTP + ']');
         }
 
         function verifyUserLoginOTP() {
