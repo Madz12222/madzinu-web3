@@ -1,62 +1,52 @@
 const https = require('https');
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
     if (req.method !== 'POST') {
-        return res.status(405).json({ success: false, message: 'Method not allowed' });
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { phone } = req.body;
-    if (!phone) {
-        return res.status(400).json({ success: false, message: 'Phone number is required' });
+    const { number } = req.body;
+    if (!number) {
+        return res.status(400).json({ error: 'Mobile number required' });
     }
 
-    // Generate a 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
-
-    const data = JSON.stringify({
-        route: "q",
-        message: `Your Madzinu Web3 Portal OTP is ${otp}`,
-        language: "english",
+    // Fast2SMS API integration parameters
+    const apiKey = process.env.FAST2SMS_API_KEY || 'YOUR_FAST2SMS_API_KEY';
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    
+    const postData = JSON.stringify({
+        route: 'v3',
+        sender_id: 'TXTIND',
+        message: `Your verification OTP for Madzinu Web3 Technologies is ${otp}`,
+        language: 'english',
         flash: 0,
-        numbers: phone
+        numbers: number
     });
 
     const options = {
         hostname: 'www.fast2sms.com',
+        port: 443,
         path: '/dev/bulkV2',
         method: 'POST',
         headers: {
             'authorization': apiKey,
             'Content-Type': 'application/json',
-            'Content-Length': data.length
+            'Content-Length': postData.length
         }
     };
 
-    return new Promise((resolve) => {
-        const fastReq = https.request(options, (fastRes) => {
-            let body = '';
-            fastRes.on('data', (chunk) => { body += chunk; });
-            fastRes.on('end', () => {
-                try {
-                    const result = JSON.parse(body);
-                    if (result.return) {
-                        // Store OTP in memory/response for verification (or handle via session)
-                        resolve(res.status(200).json({ success: true, otp: otp, message: 'OTP sent successfully' }));
-                    } else {
-                        resolve(res.status(400).json({ success: false, message: result.message || 'Failed to send SMS' }));
-                    }
-                } catch (e) {
-                    resolve(res.status(500).json({ success: false, message: 'Parsing error from gateway' }));
-                }
-            });
+    const fastReq = https.request(options, (fastRes) => {
+        let data = '';
+        fastRes.on('data', (chunk) => { data += chunk; });
+        fastRes.on('end', () => {
+            res.status(200).json({ success: true, message: 'OTP dispatched via Fast2SMS', response: JSON.parse(data || '{}') });
         });
-
-        fastReq.on('error', (error) => {
-            resolve(res.status(500).json({ success: false, message: error.message }));
-        });
-
-        fastReq.write(data);
-        fastReq.end();
     });
-}
+
+    fastReq.on('error', (error) => {
+        res.status(500).json({ success: false, error: error.message });
+    });
+
+    fastReq.write(postData);
+    fastReq.end();
+};
