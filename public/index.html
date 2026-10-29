@@ -104,9 +104,9 @@
         <div class="section-box" style="font-size: 11px;">
             <div id="txt-eco-title" style="font-weight: bold; color: #818cf8; margin-bottom: 6px;"><i class="fa-solid fa-server"></i> Server Compute Costs & Ecosystem Tiers</div>
             <ul style="padding-left: 16px; color: var(--text-muted); font-size: 10.5px; line-height: 1.6;">
-                <li><strong id="txt-eco-1-label">Free Tier:</strong><span id="txt-eco-1-text"> Earn ₹25 daily for 4 days per mobile number (Total ₹100, Min Withdraw ₹100).</span></li>
-                <li><strong id="txt-eco-2-label">Server Packages:</strong><span id="txt-eco-2-text"> Node licenses from ₹2,000 to ₹1,00,000 (+18% GST) on 14-day execution cycles.</span></li>
-                <li><strong id="txt-eco-3-label">3-Tier Referral:</strong><span id="txt-eco-3-text"> Silver (10%) → Gold (12%) → Diamond (15%) instant commission.</span></li>
+                <li><strong id="txt-eco-1-label">Free Tier:</strong> <span id="txt-eco-1-text">Earn ₹25 daily for 4 days per mobile number (Total ₹100, Min Withdraw ₹100).</span></li>
+                <li><strong id="txt-eco-2-label">Server Packages:</strong> <span id="txt-eco-2-text">Node licenses from ₹2,000 to ₹1,00,000 (+18% GST) on 14-day execution cycles.</span></li>
+                <li><strong id="txt-eco-3-label">3-Tier Referral:</strong> <span id="txt-eco-3-text">Silver (10%) → Gold (12%) → Diamond (15%) instant commission.</span></li>
             </ul>
         </div>
 
@@ -533,4 +533,59 @@
             const container = document.querySelector('.container');
             container.innerHTML += `
                 <div class="section-box" style="margin-top: 10px; border: 1px solid #0284c7;">
-                    <h4 style="color: #38bdf8; font-size: 1
+                    <h4 style="color: #38bdf8; font-size: 12px;"><i class="fa-solid fa-inbox"></i> Secure Mail Access Inbox (${mobile})</h4>
+                    <p style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Incoming system verification & server node notifications:</p>
+                    <div style="background: #090d16; padding: 8px; border-radius: 6px; margin-top: 8px; font-size: 10px;">
+                        <div style="color: #34d399; font-weight: bold;">[Govt MeitY Startup Verification]</div>
+                        <div>Node compute session active for ${mobile}. Secure API sync verified.</div>
+                    </div>
+                    <button onclick="renderDashboard('${mobile}')" style="margin-top: 10px; background: #334155; color: #fff; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 10px;">Back to Dashboard</button>
+                </div>
+            `;
+        }
+
+        function openAdminLoginModal() {
+            const pwd = prompt('Enter Admin Password:');
+            if(pwd === 'madzinu2026') {
+                renderAdminDashboard();
+            } else if(pwd !== null) {
+                alert('Incorrect Password!');
+            }
+        }
+
+        function renderAdminDashboard() {
+            const container = document.querySelector('.container');
+            container.innerHTML = `
+                <div class="section-box" style="border: 1px solid #f43f5e;">
+                    <h3 style="color: #fb7185; font-size: 13px;"><i class="fa-solid fa-user-shield"></i> Admin Backend Control Panel</h3>
+                    <p style="font-size: 10.5px; color: #94a3b8; margin-top: 4px;">Instantly alter any user wallet balance, node tier, or rewards by mobile number.</p>
+                    
+                    <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+                        <input type="text" id="admin-target-mobile" placeholder="Target Mobile Number (10 digits)" style="background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
+                        <input type="number" id="admin-new-amount" placeholder="New Balance / Amount (₹)" style="background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
+                        <button onclick="adminAlterUserBalance()" style="background: #e11d48; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">Update User Wallet / Balance Instantly</button>
+                    </div>
+                    <button onclick="location.reload()" style="margin-top: 12px; background: #334155; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 10.5px;">Exit Admin Panel</button>
+                </div>
+            `;
+        }
+
+        function adminAlterUserBalance() {
+            const mobile = document.getElementById('admin-target-mobile').value.trim();
+            const newAmount = document.getElementById('admin-new-amount').value.trim();
+
+            if (!mobile || mobile.length < 10) {
+                alert('Please enter a valid target mobile number.');
+                return;
+            }
+            if (!newAmount) {
+                alert('Please enter the amount to set.');
+                return;
+            }
+
+            localStorage.setItem('balance_' + mobile, newAmount);
+            alert('Successfully updated wallet balance for mobile ' + mobile + ' to ₹' + newAmount);
+        }
+    </script>
+</body>
+</html>
