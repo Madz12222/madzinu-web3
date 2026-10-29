@@ -73,6 +73,17 @@
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
         .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
+
+<style>
+  header, .header, nav, select, button, .admin-btn-action, .btn-primary, #lang-select, [onclick] {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+  .modal-overlay {
+    pointer-events: auto;
+  }
+</style>
+
 </head>
 <body>
 
@@ -91,7 +102,7 @@
                 <option value="ml">മലയാളം</option>
                 <option value="kn">ಕನ್ನಡ</option>
             </select>
-            <button onclick="openUserLoginModal()" class="user-login-header-btn"><i class="fa-solid fa-user"></i></button>
+            <button onclick="openUserLoginModal()" class="user-login-header-btn"><i onclick="openUserLoginModal()" class="fa-solid fa-user"></i></button>
             <button onclick="openAdminLoginModal()" class="admin-header-btn"><i class="fa-solid fa-shield-halved"></i> Admin</button>
             <button onclick="toggleMadzinuAIChat()" class="ai-blink-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> AI</button>
         </div>
@@ -242,7 +253,7 @@
     </div>
 
                     <!-- USER LOGIN & OTP MODAL -->
-    <div id="user-login-modal" class="modal-overlay">
+    <div id="user-login-modal" class="modal-overlay" style="display: none;">
         <div class="modal-content">
             <h3 style="font-size: 14px; font-weight: bold; color: #38bdf8; margin-bottom: 10px;"><i class="fa-solid fa-lock"></i> Portal Sign-In & Fast2SMS OTP</h3>
             
