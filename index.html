@@ -117,7 +117,7 @@
     <header>
         <div class="brand-title" data-i18n="brand_title">MADZINU WEB3 TECH & AI</div>
         <div class="header-controls">
-            <select id="lang-select" onchange="changeLanguage(this.value)" class="header-btn">
+            <select id="lang-select" id="lang-select" onchange="changeLanguage(this.value)" class="header-btn">
                 <option value="en">EN</option>
                 <option value="ta">தமிழ்</option>
                 <option value="hi">हिन्दी</option>
@@ -139,13 +139,13 @@
 
         <div class="hero-card">
             <div class="badge-pill" data-i18n="badge_secure">SECURE CLOUD NODE</div>
-            <h1 data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</h1>
+            <h1 data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></h1>
             <p data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</p>
-            <button class="btn-primary" onclick="openUserLoginModal()" data-i18n="btn_dashboard">Access Portal Dashboard</button>
+            <button class="btn-primary" onclick="openUserLoginModal()" data-i18n="btn_dashboard"><span data-i18n="btn_dashboard">Access Portal Dashboard</span></button>
         </div>
 
         <div class="section-box">
-            <h3 style="font-size: 12px; font-weight: bold; color: #38bdf8; margin-bottom: 10px;"><i class="fa-solid fa-server"></i> Platform Core Architecture</h3>
+            <h3 style="font-size: 12px; font-weight: bold; color: #38bdf8; margin-bottom: 10px;"><i class="fa-solid fa-server"></i> <span data-i18n="arch_header">Platform Core Architecture</span></h3>
             
             <div class="feature-card-item">
                 <div class="feature-card-title"><i class="fa-solid fa-microchip"></i> <span data-i18n="arch_1_title">1. Cloud Compute Tiers</span></div>
@@ -763,9 +763,9 @@ function verifyOTPAndOpenDashboard() {
                 brand_title: "MADZINU WEB3 TECH & AI",
                 startup_title: "Govt. of India Recognized Startup",
                 badge_secure: "SECURE CLOUD NODE",
-                hero_title: "Autonomous Web3 Infrastructure & Cloud Node Operations",
+                hero_title: "<span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
                 hero_desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
-                btn_dashboard: "Access Portal Dashboard",
+                btn_dashboard: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
                 arch_1_title: "1. Cloud Compute Tiers",
                 arch_1_desc: "Choose high-throughput cloud compute tiers (₹2,000 to ₹50,000 + 18% GST) with strict 14-day node validity.",
                 arch_2_title: "2. Live Workspace Balance",
@@ -1057,10 +1057,10 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
     const translations = {
         EN: {
-            title: "Autonomous Web3 Infrastructure & Cloud Node Operations",
+            title: "<span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
             subtitle: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
-            access_btn: "Access Portal Dashboard",
-            arch_title: "Platform Core Architecture"
+            access_btn: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
+            arch_title: "<span data-i18n="arch_header">Platform Core Architecture</span>"
         },
         TA: {
             title: "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
@@ -1110,10 +1110,10 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
     const portalTranslations = {
         EN: {
-            heroTitle: "Autonomous Web3 Infrastructure & Cloud Node Operations",
+            heroTitle: "<span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
             heroDesc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
-            accessBtn: "Access Portal Dashboard",
-            archHeader: "Platform Core Architecture"
+            accessBtn: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
+            archHeader: "<span data-i18n="arch_header">Platform Core Architecture</span>"
         },
         TA: {
             heroTitle: "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
@@ -1174,6 +1174,53 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('otp-step-1').style.display = 'none';
         document.getElementById('otp-step-2').style.display = 'block';
         document.getElementById('otp-status-msg').innerText = "✅ Fast2SMS OTP Dispatched to " + verifiedPhone + ". Enter 6-digit code below (Demo Code: 123456):";
+    };
+</script>
+
+
+<script>
+    const portalTranslations = {
+        EN: {
+            "hero_title": "Autonomous Web3 Infrastructure & Cloud Node Operations",
+            "btn_dashboard": "Access Portal Dashboard",
+            "arch_header": "Platform Core Architecture"
+        },
+        TA: {
+            "hero_title": "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
+            "btn_dashboard": "போர்டல் டாஷ்போர்டை அணுகவும்",
+            "arch_header": "மேடை கோர் கட்டமைப்பு"
+        },
+        HI: {
+            "hero_title": "স্বায়ত্তশাসিত Web3 অবকাঠামো এবং ক্লাউড নোড অপারেশন",
+            "btn_dashboard": "पोर्टल डैशबोर्ड तक पहुंचें",
+            "arch_header": "प्लेटफ़ॉर्म कोर वास्तुकला"
+        },
+        TE: {
+            "hero_title": "అటానమస్ Web3 ఇన్‌ఫ్రాస్ట్రక్చర్ & క్లౌడ్ నోడ్ ఆపరేషన్స్",
+            "btn_dashboard": "పోర్టల్ డాష్‌బోర్డ్‌ని యాక్సెస్ చేయండి",
+            "arch_header": "ప్లాట్‌ఫారమ్ కోర్ ఆర్కిటెక్చర్"
+        },
+        ML: {
+            "hero_title": "ഓട്ടോണമസ് Web3 ഇൻഫ്രാസ്ട്രക്ചർ & ക്ലൗഡ് നോഡ് പ്രവർത്തനങ്ങൾ",
+            "btn_dashboard": "പോർട്ടൽ ഡാഷ്‌ബോർഡ് ആക്സസ് ചെയ്യുക",
+            "arch_header": "പ്ലാറ്റ്‌ഫോം കോർ ആർക്കിടെക്ചർ"
+        },
+        KN: {
+            "hero_title": "ಸ್ವಾಯತ್ತ Web3 ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಕ್ಲೌಡ್ ನೋಡ್ ಕಾರ್ಯಾಚರಣೆಗಳು",
+            "btn_dashboard": "ಪೋರ್ಟಲ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಅನ್ನು ಪ್ರವೇಶಿಸಿ",
+            "arch_header": "ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಕೋರ್ ಆರ್ಕಿടെക്ಚർ"
+        }
+    };
+
+    window.changeLanguage = function(lang) {
+        const dict = portalTranslations[lang] || portalTranslations["EN"];
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+            const key = el.getAttribute("data-i18n");
+            if (dict[key]) {
+                el.innerText = dict[key];
+            }
+        });
+        console.log("Language successfully switched to: " + lang);
     };
 </script>
 
