@@ -27,7 +27,7 @@
         .hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .badge-pill { display: inline-block; background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 10px; }
         h1 { font-size: 18px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; color: #fff; }
-        h1 span { background: linear-gradient(90deg, #818cf8, #38bdf8, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-text { background: linear-gradient(90deg, #818cf8, #38bdf8, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         p { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
         .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
         .section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
@@ -57,17 +57,53 @@
                 <option value="HI">हिन्दी</option>
                 <option value="MR">मराठी</option>
             </select>
-            <button onclick="openAdminLoginModal()" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-user-shield"></i> Admin</button>
+            <button id="adminBtn" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-user-shield"></i> Admin</button>
         </div>
     </header>
 
-    <div class="container">
+    <div class="container" id="mainContainer">
         <!-- Hero Section -->
         <div class="hero-card">
-            <div class="badge-pill" id="hero-badge">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1 id="hero-title">Sovereign Cloud Compute &<br><span>Autonomous Jobworks & Live Gold Vault</span></h1>
+            <div class="badge-pill" id="hero-badge">INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1 id="hero-title">Sovereign Cloud Compute &<br><span class="gradient-text">Autonomous Jobworks & Live Gold Vault</span></h1>
             <p id="hero-desc">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.</p>
-            <button class="btn-primary" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
+            <button class="btn-primary" id="launchBtn"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
+        </div>
+
+        <!-- Daily E-Commerce Jobworks Module -->
+        <div class="section-box" style="border: 1px solid rgba(16, 185, 129, 0.4);">
+            <div id="txt-eco-title" style="font-weight: bold; color: #34d399; margin-bottom: 6px; font-size: 12px;"><i class="fa-solid fa-boxes-packing"></i> Daily E-Commerce Jobworks</div>
+            <ul style="padding-left: 16px; color: var(--text-muted); font-size: 10.5px; line-height: 1.6;">
+                <li><strong style="color: #f8fafc;">Amazon:</strong> Fulfillment center node sync & SKU audit logs</li>
+                <li><strong style="color: #f8fafc;">Flipkart:</strong> Logistics routing & pin-code serviceability checks</li>
+                <li><strong style="color: #f8fafc;">Meesho:</strong> Catalog pricing verification & vendor order feeds</li>
+                <li><strong style="color: #f8fafc;">MeitY Registered Startup Entity</strong> (Govt. of India)</li>
+                <li><strong style="color: #f8fafc;">Task Allocation & Professional Remuneration</strong> (14-Day Cycle)</li>
+            </ul>
+        </div>
+
+        <!-- 1. 14-Day Server Node License -->
+        <div class="section-box">
+            <h3 style="color: #818cf8; font-size: 11.5px; margin-bottom: 4px;"><i class="fa-solid fa-server"></i> 1. 14-Day Server Node License</h3>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 0;">Choose high-throughput cloud compute tiers (₹2,000 to ₹1,00,000 + 18% GST) with strict 14-day node validity and batch task workloads.</p>
+        </div>
+
+        <!-- 2. Live Workspace Balance -->
+        <div class="section-box">
+            <h3 style="color: #34d399; font-size: 11.5px; margin-bottom: 4px;"><i class="fa-solid fa-wallet"></i> 2. Live Workspace Balance</h3>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 0;">Track real-time earned balance starting fresh at ₹0.00 directly inside your workspace terminal dashboard.</p>
+        </div>
+
+        <!-- 3. E-Commerce Jobwork Tasks -->
+        <div class="section-box">
+            <h3 style="color: #38bdf8; font-size: 11.5px; margin-bottom: 4px;"><i class="fa-solid fa-tasks"></i> 3. E-Commerce Jobwork Tasks</h3>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 0;">Execute daily automated verification pipelines for Amazon, Flipkart, and Meesho to secure professional remuneration.</p>
+        </div>
+
+        <!-- 4. 10% - 12% Dynamic Referral Bonus & Gold Vault -->
+        <div class="section-box">
+            <h3 style="color: #f59e0b; font-size: 11.5px; margin-bottom: 4px;"><i class="fa-solid fa-vault"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</h3>
+            <p style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 0;">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive vault showroom voucher redemptions!</p>
         </div>
 
         <!-- Live Metal Rates Module -->
@@ -97,17 +133,7 @@
                 <span style="background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 6px; border-radius: 4px; font-size: 8px; font-weight: bold;"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Cluster Online</span>
             </div>
             <p id="ai-studio-desc" style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;">Turn text prompts into cinematic 9:16 vertical shorts, voiceovers, and autonomous workflow renders instantly via GPU cluster nodes.</p>
-            <button onclick="alert('MadzinuAI Cluster Node Connected! Ready for automated video & reel generation pipeline.')" style="width: 100%; background: #1e1b4b; border: 1px solid #6366f1; color: #a5b4fc; padding: 8px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-wand-magic-sparkles"></i> Open MadzinuAI Engine Console</button>
-        </div>
-
-        <!-- Platform Ecosystem & Server Costs -->
-        <div class="section-box" style="font-size: 11px;">
-            <div id="txt-eco-title" style="font-weight: bold; color: #818cf8; margin-bottom: 6px;"><i class="fa-solid fa-server"></i> Server Compute Costs & Ecosystem Tiers</div>
-            <ul style="padding-left: 16px; color: var(--text-muted); font-size: 10.5px; line-height: 1.6;">
-                <li><strong id="txt-eco-1-label">Free Tier:</strong> <span id="txt-eco-1-text">Earn ₹25 daily for 4 days per mobile number (Total ₹100, Min Withdraw ₹100).</span></li>
-                <li><strong id="txt-eco-2-label">Server Packages:</strong> <span id="txt-eco-2-text">Node licenses from ₹2,000 to ₹1,00,000 (+18% GST) on 14-day execution cycles.</span></li>
-                <li><strong id="txt-eco-3-label">3-Tier Referral:</strong> <span id="txt-eco-3-text">Silver (10%) → Gold (12%) → Diamond (15%) instant commission.</span></li>
-            </ul>
+            <button id="aiConsoleBtn" style="width: 100%; background: #1e1b4b; border: 1px solid #6366f1; color: #a5b4fc; padding: 8px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-wand-magic-sparkles"></i> Open MadzinuAI Engine Console</button>
         </div>
 
         <!-- WhatsApp Referral Scripts -->
@@ -183,21 +209,21 @@
 
         <!-- Secure Login Section -->
         <div class="section-box" id="login-section">
-            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> Contractor Secure Node Login</h3>
+            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-halved"></i> Contractor Secure Node Login</h3>
             <div style="display: flex; gap: 8px;">
                 <input type="tel" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                <button onclick="requestOtpDirect()" style="background: #6366f1; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Login</button>
+                <button id="loginBtn" style="background: #6366f1; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Login</button>
             </div>
         </div>
     </div>
 
     <footer>
         <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 11px;">
-            <a href="#" onclick="alert('Terms & Conditions: Free tier provides ₹25 daily for 4 days. Restricted daily withdrawal and admin approval apply.'); return false;" style="color: #818cf8; text-decoration: underline;">Terms & Conditions</a>
+            <a href="javascript:void(0)" onclick="alert('Terms & Conditions: Free tier provides daily task remuneration. Restricted daily withdrawal and admin approval apply.');" style="color: #818cf8; text-decoration: underline;">Terms & Conditions</a>
             <span>•</span>
-            <a href="#" onclick="alert('Refund Policy: All server node activations are non-refundable SaaS cloud computing access fees.'); return false;" style="color: #38bdf8; text-decoration: underline;">Refund Policy</a>
+            <a href="javascript:void(0)" onclick="alert('Refund Policy: All server node activations are non-refundable SaaS cloud computing access fees.');" style="color: #38bdf8; text-decoration: underline;">Refund Policy</a>
             <span>•</span>
-            <a href="#" onclick="alert('Privacy Policy: User data and mobile verification logs are securely encrypted.'); return false;" style="color: #34d399; text-decoration: underline;">Privacy Policy</a>
+            <a href="javascript:void(0)" onclick="alert('Privacy Policy: User data and mobile verification logs are securely encrypted.');" style="color: #34d399; text-decoration: underline;">Privacy Policy</a>
         </div>
         <div><strong>Madzinu Web3 Technologies</strong></div>
         <div style="margin-top: 4px; color: #64748b;">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
@@ -206,18 +232,11 @@
     <script>
         const translations = {
             'EN': {
-                badge: "👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
-                title: 'Sovereign Cloud Compute &<br><span>Autonomous Jobworks & Live Gold Vault</span>',
+                badge: "INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK",
+                title: 'Sovereign Cloud Compute &<br><span class="gradient-text">Autonomous Jobworks & Live Gold Vault</span>',
                 desc: 'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.',
                 aiTitle: 'MadzinuAI Autonomous Studio Live',
                 aiDesc: 'Turn text prompts into cinematic 9:16 vertical shorts, voiceovers, and autonomous workflow renders instantly via GPU cluster nodes.',
-                ecoTitle: 'Server Compute Costs & Ecosystem Tiers',
-                eco1Lbl: 'Free Tier:',
-                eco1Txt: ' Earn ₹25 daily for 4 days per mobile number (Total ₹100, Min Withdraw ₹100).',
-                eco2Lbl: 'Server Packages:',
-                eco2Txt: ' Node licenses from ₹2,000 to ₹1,00,000 (+18% GST) on 14-day execution cycles.',
-                eco3Lbl: '3-Tier Referral:',
-                eco3Txt: ' Silver (10%) → Gold (12%) → Diamond (15%) instant commission.',
                 waTitle: '10 Unique WhatsApp Referral Scripts',
                 waDesc: 'Share your referral link with auto-embedded ID:',
                 partnerTitle: 'Supported Voucher & Reward Partners',
@@ -237,18 +256,11 @@
                 ]
             },
             'TA': {
-                badge: "👑 இந்தியாவின் முதல் சுயாதீன ஏஐ ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
-                title: 'சவரன் கிளவுட் கம்ப்யூட் &<br><span>தன்னாட்சி பணி மற்றும் லைவ் கோல்டு வால்ட்</span>',
+                badge: "இந்தியாவின் முதல் சுயாதீன ஏஐ ஸ்டுடியோ & கிளவுட் நெட்வொர்க்",
+                title: 'சவரன் கிளவுட் கம்ப்யூட் &<br><span class="gradient-text">தன்னாட்சி பணி மற்றும் லைவ் கோல்டு வால்ட்</span>',
                 desc: 'மாட்ஜினு வெப்3 டெக்னாலஜிஸ் என்பது மீட்டி (MeitY) கீழ் அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் நிறுவனமாகும். ₹2,000 முதல் ₹1,00,000 வரையிலான கிளவுட் கம்ப்யூட் பேக்கேஜ்கள் வழங்கப்படுகின்றன.',
                 aiTitle: 'மாட்ஜினு ஏஐ தன்னாட்சி ஸ்டுடியோ லைவ்',
                 aiDesc: 'ஜிபியு கிளஸ்டர் முனைகள் வழியாக உரை தூண்டுதல்களை சினிமா 9:16 செங்குத்து ஷார்ட்ஸ் மற்றும் வாய்ஸ்ஓவர்களாக மாற்றவும்.',
-                ecoTitle: 'சர்வர் கம்ப்யூட் செலவுகள் & சூழல் அமைப்புகள்',
-                eco1Lbl: 'இலவச அடுக்கு:',
-                eco1Txt: ' மொபைல் எண்ணுக்கு 4 நாட்களுக்கு தினமும் ₹25 சம்பாதிக்கவும் (மொத்தம் ₹100, குறைந்தபட்ச திரும்பப் பெறுதல் ₹100).',
-                eco2Lbl: 'சர்வர் தொகுப்புகள்:',
-                eco2Txt: ' ₹2,000 முதல் ₹1,00,000 வரையிலான அடுக்குகள் (+18% ஜிஎஸ்டி) 14 நாள் சுழற்சியுடன்.',
-                eco3Lbl: '3-அடுக்கு பரிந்துரை:',
-                eco3Txt: ' வெள்ளி (10%) → தங்கம் (12%) → வைரம் (15%) உடனடி கமிஷன்.',
                 waTitle: '10 தனித்துவமான வாட்ஸ்அப் பரிந்துரை ஸ்கிரிப்டுகள்',
                 waDesc: 'தானியங்கி ஐடியுடன் உங்கள் பரிந்துரை இணைப்பைப் பகிரவும்:',
                 partnerTitle: 'ஆதரிக்கப்படும் வவுச்சர் மற்றும் வெகுமதி கூட்டாளிகள்',
@@ -268,18 +280,11 @@
                 ]
             },
             'TE': {
-                badge: "👑 భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో",
-                title: 'సావరీన్ క్లౌడ్ కంప్యూట్ &<br><span>ఆటోనమస్ జాబ్‌వర్క్స్ & లైవ్ గోల్డ్ వాల్ట్</span>',
+                badge: "భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో",
+                title: 'సావరీన్ క్లౌడ్ కంప్యూట్ &<br><span class="gradient-text">ఆటోనమస్ జాబ్‌వర్క్స్ & లైవ్ గోల్డ్ వాల్ట్</span>',
                 desc: 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ ప్రభుత్వ గుర్తింపు పొందిన స్టార్టప్.',
                 aiTitle: 'మాడ్జినూ AI ఆటోనమస్ స్టూడియో లైవ్',
                 aiDesc: 'GPU క్లస్టర్ నోడ్స్ ద్వారా టెక్స్ట్ ప్రాంప్ట్‌లను సినిమాటిక్ 9:16 నిలువు షార్ట్‌లుగా మార్చండి.',
-                ecoTitle: 'సర్వర్ కంప్యూట్ ఖర్చులు & ఎకోసిస్టమ్స్',
-                eco1Lbl: 'ఉచిత టైర్:',
-                eco1Txt: ' మొబైల్ నంబర్‌కు 4 రోజులు రోజువారీ ₹25 సంపాదించండి (మొత్తం ₹100, కనిష్ట ఉపసంహరణ ₹100).',
-                eco2Lbl: 'సర్వర్ ప్యాకేజీలు:',
-                eco2Txt: ' ₹2,000 నుండి ₹1,00,000 వరకు టైర్లు (+18% GST) 14 రోజుల చక్రంతో.',
-                eco3Lbl: '3-టైర్ రెఫరల్:',
-                eco3Txt: ' సిల్వర్ (10%) → గోల్డ్ (12%) → డైమండ్ (15%) తక్షణ కమిషన్.',
                 waTitle: '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు',
                 waDesc: 'ఆటో-ఎంబెడెడ్ ఐడీతో మీ రెఫరల్ లింక్‌ను షేర్ చేయండి:',
                 partnerTitle: 'మద్దతు ఉన్న వోచర్ & రివార్డ్ భాగస్వాములు',
@@ -299,18 +304,11 @@
                 ]
             },
             'KN': {
-                badge: "👑 ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ",
-                title: 'ಸವರನ್ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ &<br><span>ಸ್ವಾಯತ್ತ ಉದ್ಯೋಗಗಳು & ಲೈವ್ ಗೋಲ್ಡ್ ವಾಲ್ಟ್</span>',
+                badge: "ಭಾರತದ ಮೊದಲ ಸ್ವಾಯತ್ತ AI ಸ್ಟುಡಿಯೋ",
+                title: 'ಸವರನ್ ಕ್ಲೌಡ್ ಕಂಪ್ಯೂಟ್ &<br><span class="gradient-text">ಸ್ವಾಯತ್ತ ಉದ್ಯೋಗಗಳು & ಲೈವ್ ಗೋಲ್ಡ್ ವಾಲ್ಟ್</span>',
                 desc: 'ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್ ಭಾರತ ಸರ್ಕಾರದ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟಪ್.',
                 aiTitle: 'ಮಾಡ್ಜಿನು AI ಸ್ವಾಯತ್ತ ಸ್ಟುಡಿಯೋ ಲೈವ್',
                 aiDesc: 'ಪಠ್ಯ ಪ್ರಾಂಪ್ಟ್‌ಗಳನ್ನು ಸಿನಿಮ್ಯಾಟಿಕ್ 9:16 ಲಂಬ ಶಾರ್ಟ್ಸ್‌ಗಳಾಗಿ ಪರಿವರ್ತಿಸಿ.',
-                ecoTitle: 'ಸರ್ವರ್ ಕಂಪ್ಯೂಟ್ ವೆಚ್ಚಗಳು ಮತ್ತು ಶ್ರೇಣಿಗಳು',
-                eco1Lbl: 'ಉಚಿತ ಶ್ರೇಣಿ:',
-                eco1Txt: ' ಪ್ರತಿ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗೆ 4 ದಿನಗಳವರೆಗೆ ಪ್ರತಿದಿನ ₹25 ಗಳಿಸಿ (ಒಟ್ಟು ₹100, ಕನಿಷ್ಠ ಹಿಂತೆಗೆದುಕೊಳ್ಳುವಿಕೆ ₹100).',
-                eco2Lbl: 'ಸರ್ವರ್ ಪ್ಯಾಕೇಜುಗಳು:',
-                eco2Txt: ' ₹2,000 ರಿಂದ ₹1,00,000 ವರೆಗಿನ ಶ್ರೇಣಿಗಳು (+18% ಜಿಎಸ್‌ಟಿ).',
-                eco3Lbl: '3-ಶ್ರೇಣಿಯ ರೆಫರಲ್:',
-                eco3Txt: ' ಬೆಳ್ಳಿ (10%) → ಚಿನ್ನ (12%) → ವಜ್ರ (15%) ತಕ್ಷಣದ ಕಮಿಷನ್.',
                 waTitle: '10 ಅನನ್ಯ ವಾಟ್ಸಾಪ್ ರೆಫರಲ್ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು',
                 waDesc: 'ನಿಮ್ಮ ರೆಫರಲ್ ಲಿಂಕ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ:',
                 partnerTitle: 'ಬೆಂಬಲಿತ ವೋಚರ್ ಮತ್ತು ರಿವಾರ್ಡ್ ಪಾಲುದಾರರು',
@@ -330,18 +328,11 @@
                 ]
             },
             'ML': {
-                badge: "👑 ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ",
-                title: 'സവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് &<br><span>ഓട്ടോണമസ് ജോബ്‌വർക്സ് & ലൈവ് ഗോൾഡ് വാൾട്ട്</span>',
+                badge: "ഇന്ത്യയിലെ ആദ്യത്തെ സ്വയംഭരണ AI സ്റ്റുഡിയോ",
+                title: 'സവറൻ ക്ലൗഡ് കമ്പ്യൂട്ട് &<br><span class="gradient-text">ഓട്ടോണമസ് ജോബ്‌വർക്സ് & ലൈവ് ഗോൾഡ് വാൾട്ട്</span>',
                 desc: 'മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ് MeitY അംഗീകൃത സ്റ്റാർട്ടപ്പാണ്.',
                 aiTitle: 'മാഡ്ജിനു AI ഓട്ടോണമസ് സ്റ്റുഡിയോ ലൈവ്',
                 aiDesc: 'ടെക്സ്റ്റ് പ്രോംപ്റ്റുകൾ സിനിമാറ്റിക് 9:16 ലംബ ഷോട്സുകളാക്കി മാറ്റുക.',
-                ecoTitle: 'സർവർ കമ്പ്യൂട്ട് ചെലവുകൾ & നിരക്കുകൾ',
-                eco1Lbl: 'സൗജന്യ ടയർ:',
-                eco1Txt: ' ഒരു മൊബൈൽ നമ്പറിന് 4 ദിവസത്തേക്ക് ദിവസേന ₹25 നേടുക (ആകെ ₹100, മിനിമം പിൻവലിക്കൽ ₹100).',
-                eco2Lbl: 'സർവർ പാക്കേജുകൾ:',
-                eco2Txt: ' ₹2,000 മുതൽ ₹1,00,000 വരെ (+18% ജിഎസ്ടി).',
-                eco3Lbl: '3-ടയർ റഫറൽ:',
-                eco3Txt: ' വെള്ളി (10%) → സ്വർണ്ണം (12%) → ഡയമണ്ട് (15%).',
                 waTitle: '10 അതുത്പന്ന വാട്ട്സാപ്പ് റഫറൽ സ്ക്രിപ്റ്റുകൾ',
                 waDesc: 'നിങ്ങളുടെ റഫറൽ ലിങ്ക് പങ്കിടുക:',
                 partnerTitle: 'പിന്തുണയ്ക്കുന്ന വൗച്ചറും റിവാർഡ് പങ്കാളികളും',
@@ -361,18 +352,11 @@
                 ]
             },
             'HI': {
-                badge: "👑 भारत का पहला स्वायत्त एआई स्टूडियो",
-                title: 'सोवरेइन क्लाउड कंप्यूट और<br><span>ऑटोनॉमस जॉबवर्क्स और लाइव गोल्ड वॉल्ट</span>',
+                badge: "भारत का पहला स्वायत्त एआई स्टूडियो",
+                title: 'सोवरेइन क्लाउड कंप्यूट और<br><span class="gradient-text">ऑटोनॉमस जॉबवर्क्स और लाइव गोल्ड वॉल्ट</span>',
                 desc: 'माड्जिनू वेब3 टेक्नोलॉजीज MeitY के तहत मान्यता प्राप्त स्टार्टअप है।',
                 aiTitle: 'माड्जिनू AI ऑटोनॉमस स्टूडियो लाइव',
                 aiDesc: 'GPU क्लस्टर नोड्स के माध्यम से टेक्स्ट संकेतों को सिनेमाई 9:16 वर्टिकल शॉर्ट्स में बदलें।',
-                ecoTitle: 'सर्वर कंप्यूट लागत और इकोसिस्टम टियर',
-                eco1Lbl: 'फ्री टियर:',
-                eco1Txt: ' प्रति मोबाइल नंबर 4 दिनों के लिए प्रतिदिन ₹25 कमाएं (कुल ₹100, न्यूनतम निकासी ₹100)।',
-                eco2Lbl: 'सर्वर पैकेज:',
-                eco2Txt: ' ₹2,000 से ₹1,00,000 तक के टियर (+18% जीएसटी)।',
-                eco3Lbl: '3-टियर रेफ़रल:',
-                eco3Txt: ' सिल्वर (10%) → गोल्ड (12%) → डायमंड (15%) तत्काल कमीशन।',
                 waTitle: '10 अद्वितीय व्हाट्सएप रेफ़रल स्क्रिप्ट',
                 waDesc: 'ऑटो-एम्बेडेड आईडी के साथ अपना रेफ़रल लिंक साझा करें:',
                 partnerTitle: 'समर्थित वाउचर और पुरस्कार भागीदार',
@@ -392,18 +376,11 @@
                 ]
             },
             'MR': {
-                badge: "👑 भारताचे पहिले स्वायत्त AI स्टुडिओ",
-                title: 'सोव्हरेईन क्लाउड कॉम्प्युट आणि<br><span>ऑटोनॉमस जॉबवर्क्स आणि लाइव्ह गोल्ड वॉल्ट</span>',
+                badge: "भारताचे पहिले स्वायत्त AI स्टुडिओ",
+                title: 'सोव्हरेईन क्लाउड कॉम्प्युट आणि<br><span class="gradient-text">ऑटोनॉमस जॉबवर्क्स आणि लाइव्ह गोल्ड वॉल्ट</span>',
                 desc: 'माड्झिनू वेब3 टेक्नॉलॉजीज ही मान्यताप्राप्त स्टार्टअप आहे.',
                 aiTitle: 'माड्झिनू AI ऑटोनॉमस स्टुडिओ लाइव्ह',
                 aiDesc: 'GPU क्लस्टर नोड्सद्वारे मजकूर प्रॉम्प्ट cinematic 9:16 shorts मध्ये रूपांतरित करा.',
-                ecoTitle: 'सर्व्हर कॉम्प्युट खर्च आणि इकोसिस्टम',
-                eco1Lbl: 'फ्री टियर:',
-                eco1Txt: ' प्रति मोबाईल नंबर 4 दिवस दररोज ₹25 कमवा (एकूण ₹100, किमान काढणे ₹100).',
-                eco2Lbl: 'सर्व्हर पॅकेजेस:',
-                eco2Txt: ' ₹2,000 ते ₹1,00,000 पर्यंतचे स्तर (+18% जीएसटी).',
-                eco3Lbl: '3-स्तरीय संदर्भ:',
-                eco3Txt: ' सिल्व्हर (10%) → गोल्ड (12%) → डायमंड (15%).',
                 waTitle: '10 अद्वितीय WhatsApp संदर्भ स्क्रिप्ट्स',
                 waDesc: 'तुमची संदर्भ लिंक शेअर करा:',
                 partnerTitle: 'समर्थित व्हाउचर आणि बक्षीस भागीदार',
@@ -425,49 +402,56 @@
         };
 
         function changeLanguage() {
-            const lang = document.getElementById('langSelector').value;
+            const langSelector = document.getElementById('langSelector');
+            if (!langSelector) return;
+            const lang = langSelector.value;
             const t = translations[lang] || translations['EN'];
             
-            document.getElementById('hero-badge').innerText = t.badge;
-            document.getElementById('hero-title').innerHTML = t.title;
-            document.getElementById('hero-desc').innerText = t.desc;
-            
-            document.getElementById('ai-studio-title').innerHTML = '<i class="fa-solid fa-brain"></i> ' + t.aiTitle;
-            document.getElementById('ai-studio-desc').innerText = t.aiDesc;
-            
-            document.getElementById('txt-eco-title').innerText = t.ecoTitle;
-            document.getElementById('txt-eco-1-label').innerText = t.eco1Lbl;
-            document.getElementById('txt-eco-1-text').innerText = t.eco1Txt;
-            document.getElementById('txt-eco-2-label').innerText = t.eco2Lbl;
-            document.getElementById('txt-eco-2-text').innerText = t.eco2Txt;
-            document.getElementById('txt-eco-3-label').innerText = t.eco3Lbl;
-            document.getElementById('txt-eco-3-text').innerText = t.eco3Txt;
+            const badge = document.getElementById('hero-badge');
+            const title = document.getElementById('hero-title');
+            const desc = document.getElementById('hero-desc');
+            const aiTitle = document.getElementById('ai-studio-title');
+            const aiDesc = document.getElementById('ai-studio-desc');
+            const waTitle = document.getElementById('txt-wa-title');
+            const waDesc = document.getElementById('txt-wa-desc');
+            const partnerTitle = document.getElementById('txt-partner-title');
+            const goldTitle = document.getElementById('txt-gold-title');
+            const foodTitle = document.getElementById('txt-food-title');
 
-            document.getElementById('txt-wa-title').innerText = t.waTitle;
-            document.getElementById('txt-wa-desc').innerText = t.waDesc;
-
-            document.getElementById('txt-partner-title').innerText = t.partnerTitle;
-            document.getElementById('txt-gold-title').innerText = t.goldTitle;
-            document.getElementById('txt-food-title').innerText = t.foodTitle;
+            if (badge) badge.innerText = t.badge;
+            if (title) title.innerHTML = t.title;
+            if (desc) desc.innerText = t.desc;
+            if (aiTitle) aiTitle.innerHTML = '<i class="fa-solid fa-brain"></i> ' + t.aiTitle;
+            if (aiDesc) aiDesc.innerText = t.aiDesc;
+            if (waTitle) waTitle.innerHTML = '<i class="fa-brands fa-whatsapp"></i> ' + t.waTitle;
+            if (waDesc) waDesc.innerText = t.waDesc;
+            if (partnerTitle) partnerTitle.innerHTML = '<i class="fa-solid fa-ticket"></i> ' + t.partnerTitle;
+            if (goldTitle) goldTitle.innerHTML = '<i class="fa-solid fa-crown"></i> ' + t.goldTitle;
+            if (foodTitle) foodTitle.innerHTML = '<i class="fa-solid fa-utensils"></i> ' + t.foodTitle;
         }
 
         function scrollToLogin() {
-            document.getElementById('login-section').scrollIntoView({ behavior: 'smooth' });
+            const loginBox = document.getElementById('login-section');
+            if (loginBox) loginBox.scrollIntoView({ behavior: 'smooth' });
         }
 
         function shareWhatsApp(id) {
-            const lang = document.getElementById('langSelector').value;
+            const langSelector = document.getElementById('langSelector');
+            const lang = langSelector ? langSelector.value : 'EN';
             const t = translations[lang] || translations['EN'];
             const msgList = t.wa;
             const selectedMsg = msgList[id - 1] || msgList[0];
             const refLink = window.location.origin + window.location.pathname + '?ref=MADZ_' + Math.floor(100000 + Math.random() * 900000);
             const text = encodeURIComponent(selectedMsg + refLink);
             window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
-            document.getElementById('waStatus').innerText = 'Successfully shared Script #' + id + ' in ' + lang + '!';
+            const waStatus = document.getElementById('waStatus');
+            if (waStatus) waStatus.innerText = 'Successfully shared Script #' + id + ' in ' + lang + '!';
         }
 
         async function requestOtpDirect() {
-            const mobile = document.getElementById('login-mobile').value.trim();
+            const input = document.getElementById('login-mobile');
+            if (!input) return;
+            const mobile = input.value.trim();
             if (!mobile || mobile.length < 10) {
                 alert('Please enter a valid 10-digit mobile number.');
                 return;
@@ -492,13 +476,13 @@
                     })
                 });
                 const data = await response.json();
-                if (data.return) {
+                if (data && data.return) {
                     const enteredOtp = prompt('OTP sent to ' + mobile + '. Enter 4-digit OTP:');
                     if (enteredOtp === otp) {
                         localStorage.setItem('userLoggedIn', 'true');
                         localStorage.setItem('userMobile', mobile);
                         if (!localStorage.getItem('balance_' + mobile)) {
-                            localStorage.setItem('balance_' + mobile, '100');
+                            localStorage.setItem('balance_' + mobile, '0.00');
                         }
                         alert('Login Verified Successfully!');
                         renderDashboard(mobile);
@@ -514,13 +498,14 @@
         }
 
         function renderDashboard(mobile) {
-            const currentBal = localStorage.getItem('balance_' + mobile) || '100';
-            const container = document.querySelector('.container');
+            const currentBal = localStorage.getItem('balance_' + mobile) || '0.00';
+            const container = document.getElementById('mainContainer');
+            if (!container) return;
             container.innerHTML = `
                 <div class="section-box" style="border: 1px solid #10b981;">
                     <h3 style="color: #34d399; font-size: 13px;"><i class="fa-solid fa-user-check"></i> User Dashboard</h3>
                     <p style="margin-top: 6px;">Connected Mobile: <strong>${mobile}</strong></p>
-                    <p>Wallet Balance: <strong style="color: #f59e0b; font-size: 14px;">₹${currentBal}</strong></p>
+                    <p>Workspace Balance: <strong style="color: #f59e0b; font-size: 14px;">₹${currentBal}</strong></p>
                     <div style="margin-top: 10px; display: flex; gap: 8px;">
                         <button onclick="openMailAccessInbox('${mobile}')" style="flex: 1; background: #0284c7; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-envelope"></i> Mail Inbox Access</button>
                         <button onclick="location.reload()" style="background: #ef4444; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Logout</button>
@@ -530,7 +515,8 @@
         }
 
         function openMailAccessInbox(mobile) {
-            const container = document.querySelector('.container');
+            const container = document.getElementById('mainContainer');
+            if (!container) return;
             container.innerHTML += `
                 <div class="section-box" style="margin-top: 10px; border: 1px solid #0284c7;">
                     <h4 style="color: #38bdf8; font-size: 12px;"><i class="fa-solid fa-inbox"></i> Secure Mail Access Inbox (${mobile})</h4>
@@ -546,24 +532,25 @@
 
         function openAdminLoginModal() {
             const pwd = prompt('Enter Admin Password:');
-            if(pwd === 'madzinu2026') {
+            if (pwd === 'madzinu2026') {
                 renderAdminDashboard();
-            } else if(pwd !== null) {
+            } else if (pwd !== null) {
                 alert('Incorrect Password!');
             }
         }
 
         function renderAdminDashboard() {
-            const container = document.querySelector('.container');
+            const container = document.getElementById('mainContainer');
+            if (!container) return;
             container.innerHTML = `
                 <div class="section-box" style="border: 1px solid #f43f5e;">
                     <h3 style="color: #fb7185; font-size: 13px;"><i class="fa-solid fa-user-shield"></i> Admin Backend Control Panel</h3>
-                    <p style="font-size: 10.5px; color: #94a3b8; margin-top: 4px;">Instantly alter any user wallet balance, node tier, or rewards by mobile number.</p>
+                    <p style="font-size: 10.5px; color: #94a3b8; margin-top: 4px;">Instantly alter any user workspace balance, node tier, or rewards by mobile number.</p>
                     
                     <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
                         <input type="text" id="admin-target-mobile" placeholder="Target Mobile Number (10 digits)" style="background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
                         <input type="number" id="admin-new-amount" placeholder="New Balance / Amount (₹)" style="background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
-                        <button onclick="adminAlterUserBalance()" style="background: #e11d48; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">Update User Wallet / Balance Instantly</button>
+                        <button onclick="adminAlterUserBalance()" style="background: #e11d48; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 11px;">Update Workspace Balance Instantly</button>
                     </div>
                     <button onclick="location.reload()" style="margin-top: 12px; background: #334155; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 10.5px;">Exit Admin Panel</button>
                 </div>
@@ -571,8 +558,11 @@
         }
 
         function adminAlterUserBalance() {
-            const mobile = document.getElementById('admin-target-mobile').value.trim();
-            const newAmount = document.getElementById('admin-new-amount').value.trim();
+            const targetInput = document.getElementById('admin-target-mobile');
+            const amountInput = document.getElementById('admin-new-amount');
+            if (!targetInput || !amountInput) return;
+            const mobile = targetInput.value.trim();
+            const newAmount = amountInput.value.trim();
 
             if (!mobile || mobile.length < 10) {
                 alert('Please enter a valid target mobile number.');
@@ -584,8 +574,24 @@
             }
 
             localStorage.setItem('balance_' + mobile, newAmount);
-            alert('Successfully updated wallet balance for mobile ' + mobile + ' to ₹' + newAmount);
+            alert('Successfully updated workspace balance for mobile ' + mobile + ' to ₹' + newAmount);
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const adminBtn = document.getElementById('adminBtn');
+            const launchBtn = document.getElementById('launchBtn');
+            const loginBtn = document.getElementById('loginBtn');
+            const aiConsoleBtn = document.getElementById('aiConsoleBtn');
+
+            if (adminBtn) adminBtn.addEventListener('click', openAdminLoginModal);
+            if (launchBtn) launchBtn.addEventListener('click', scrollToLogin);
+            if (loginBtn) loginBtn.addEventListener('click', requestOtpDirect);
+            if (aiConsoleBtn) {
+                aiConsoleBtn.addEventListener('click', function() {
+                    alert('MadzinuAI Cluster Node Connected! Ready for automated video & reel generation pipeline.');
+                });
+            }
+        });
     </script>
 </body>
 </html>
