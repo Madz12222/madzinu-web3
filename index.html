@@ -76,9 +76,6 @@
         .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; text-decoration: none; display: block; text-align: center; }
         .section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
         
-        .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
-        .wa-btn { background: #166534; color: white; border: none; padding: 6px 2px; border-radius: 6px; font-size: 8.5px; font-weight: bold; cursor: pointer; text-align: center; }
-        
         .grid-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .partner-card-box { background: #0f172a; border: 1px solid #1e293b; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: #fff; transition: 0.2s; }
         .partner-card-box:hover { border-color: #6366f1; background: #111827; }
@@ -86,29 +83,13 @@
         .partner-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
         .partner-sub { font-size: 9px; color: #38bdf8; }
 
-        #master-admin-dashboard { display: none; background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border: 2px solid #6366f1; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #312e81; padding-bottom: 10px; margin-bottom: 12px; }
-        .admin-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-        .stat-box { background: #090d16; border: 1px solid #334155; border-radius: 10px; padding: 10px; text-align: center; }
-        .stat-val { font-size: 13px; font-weight: 900; color: #34d399; margin-top: 4px; }
-        
-        #user-workspace-dashboard { display: none; background: linear-gradient(135deg, #0f172a 0%, #111827 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
-        .user-info-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 10px; margin-bottom: 12px; font-size: 11px; }
-        .user-balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .bal-card { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px; }
-        .bal-val { font-size: 14px; font-weight: 900; color: #34d399; margin-top: 4px; }
-
-        .server-catalog-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
-        .server-card-item { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; }
-
-        .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
-        .admin-input-box { background: #090d16; border: 1px solid #334155; padding: 6px 8px; border-radius: 6px; color: #fff; font-size: 10px; width: 100%; }
-        .admin-btn-action { background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
-
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
         .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 14px; width: 90%; max-width: 400px; text-align: left; }
         
-        footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; margin-bottom: 40px !important; }
+        .admin-input-box { background: #090d16; border: 1px solid #334155; padding: 6px 8px; border-radius: 6px; color: #fff; font-size: 10px; width: 100%; }
+        .admin-btn-action { background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
+
+        footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
         .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
@@ -120,7 +101,7 @@
     </div>
 
     <header>
-        <div class="brand-title">MADZINU WEB3 TECH & AI</div>
+        <div class="brand-title" data-i18n="brand_title">MADZINU WEB3 TECH & AI</div>
         <div class="header-controls">
             <select id="lang-select" onchange="changeLanguage(this.value)" class="header-btn">
                 <option value="en">English</option>
@@ -134,10 +115,36 @@
 
     <div class="container">
         <div class="hero-card">
-            <div class="badge-pill">SECURE CLOUD NODE</div>
-            <h1>Autonomous Web3 Infrastructure & Cloud Node Operations</h1>
-            <p>Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</p>
-            <button class="btn-primary" onclick="openUserLoginModal()">Access Portal Dashboard</button>
+            <div class="badge-pill" data-i18n="badge_secure">SECURE CLOUD NODE</div>
+            <h1 data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</h1>
+            <p data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</p>
+            <button class="btn-primary" onclick="openUserLoginModal()" data-i18n="btn_dashboard">Access Portal Dashboard</button>
+        </div>
+
+        <div class="section-box">
+            <h3 style="font-size: 12px; font-weight: bold; color: #38bdf8; margin-bottom: 10px;"><i class="fa-solid fa-store"></i> Instant Partner Portals</h3>
+            <div class="grid-partners">
+                <a href="#" class="partner-card-box">
+                    <i class="fa-solid fa-bolt partner-icon"></i>
+                    <div class="partner-title">Blinkit</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="#" class="partner-card-box">
+                    <i class="fa-solid fa-shopping-bag partner-icon" style="color: #38bdf8;"></i>
+                    <div class="partner-title">Amazon</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="#" class="partner-card-box">
+                    <i class="fa-solid fa-cart-shopping partner-icon" style="color: #10b981;"></i>
+                    <div class="partner-title">Flipkart</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+                <a href="#" class="partner-card-box">
+                    <i class="fa-solid fa-basket-shopping partner-icon" style="color: #f59e0b;"></i>
+                    <div class="partner-title">BigBasket</div>
+                    <div class="partner-sub">Portal</div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -147,7 +154,7 @@
             <a href="#">Privacy Policy</a> | 
             <a href="#">Support / Contact</a>
         </div>
-        <div>Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
+        <div data-i18n="footer_ctrl">Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
         <div>© 2026 All Rights Reserved. Secure Cloud Node.</div>
     </footer>
 
@@ -159,7 +166,7 @@
         </div>
         <div id="ai-chat-messages" style="padding: 12px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 11px; background: #0b101d;">
             <div style="background: #1e1b4b; padding: 10px; border-radius: 8px; color: #38bdf8; border: 1px solid #312e81;">
-                Greetings! I am your <b>Madzinu AI Assistant</b>. How can I assist you with Node Licenses, Jobworks, or Payouts today?
+                Greetings! I am your <b>Madzinu AI Assistant</b>. How can I assist you today?
             </div>
         </div>
         <div style="padding: 10px; background: #090d16; display: flex; gap: 6px; border-top: 1px solid #1f2937; flex-shrink: 0;">
@@ -179,17 +186,44 @@
         </div>
     </div>
 
-    <!-- PROPERLY ENCLOSED SCRIPT BLOCK -->
+    <!-- FULL SCRIPT BLOCK -->
     <script>
-        // Multi-language dictionary
         const dictionary = {
-            en: {},
-            ta: {},
-            hi: {}
+            en: {
+                brand_title: "MADZINU WEB3 TECH & AI",
+                badge_secure: "SECURE CLOUD NODE",
+                hero_title: "Autonomous Web3 Infrastructure & Cloud Node Operations",
+                hero_desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
+                btn_dashboard: "Access Portal Dashboard",
+                footer_ctrl: "Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI"
+            },
+            ta: {
+                brand_title: "மட்சினு வெப்3 டெக் & ஏஐ",
+                badge_secure: "பாதுகாப்பான கிளவுட் நோடு",
+                hero_title: "தன்னாட்சி வெப்3 உள்கட்டமைப்பு & கிளவுட் நோடு செயல்பாடுகள்",
+                hero_desc: "அதிக செயல்திறன் கொண்ட மைக்ரோசெவ்களை স্থাপন செய்யவும், சரிபார்ப்பு நோடு ஒதுக்கீடுகளை நிர்வகிக்கவும்.",
+                btn_dashboard: "போர்டல் டாஷ்போர்டை அணுகவும்",
+                footer_ctrl: "மட்சினு வெப்3 டெக்னாலஜிஸ் & ஏஐ | தளம் மட்சினு ஏஐ மூலம் கட்டுப்படுத்தப்படுகிறது"
+            },
+            hi: {
+                brand_title: "मड्ज़िनू वेब3 टेक एंड एआई",
+                badge_secure: "सुरक्षित क्लाउड नोड",
+                hero_title: "स्वायत्त वेब3 बुनियादी ढांचा और क्लाउड नोड संचालन",
+                hero_desc: "हाई-थ्रूपुट माइक्रो सर्विसेज तैनात करें और वैलिडेटर नोड आवंटन प्रबंधित करें।",
+                btn_dashboard: "पोर्टल डैशबोर्ड तक पहुंचें",
+                footer_ctrl: "मड्ज़िनू वेब3 टेक्नोलॉजीज एंड एआई | यह साइट मड्ज़िनू एआई द्वारा नियंत्रित है"
+            }
         };
 
         function changeLanguage(lang) {
             localStorage.setItem('madzinu_lang', lang);
+            const selectedDict = dictionary[lang] || dictionary['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (selectedDict && selectedDict[key]) {
+                    el.innerText = selectedDict[key];
+                }
+            });
         }
 
         function openUserLoginModal() {
