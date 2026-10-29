@@ -316,7 +316,7 @@
         function loginBypass() {
             const mob = document.getElementById('login-mobile').value;
             if(mob.length < 10) { alert('Enter valid mobile number'); return; }
-            alert('Secure Node Login successful for: ' + mob);
+            requestOtp(); // mob);
         }
 
         function shareWhatsApp(id) {
@@ -355,9 +355,10 @@ async function requestOtp() {
         const data = await response.json();
         alert('Fast2SMS OTP Triggered successfully for: ' + mobile);
     } catch (err) {
-        alert('Secure Node Login successful for: ' + mobile);
+        requestOtp(); // mobile);
     }
 }
 </script>
 </body>
 </html>
+<!-- Fast2SMS live active update -->
