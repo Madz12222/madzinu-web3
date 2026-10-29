@@ -1,0 +1,11 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_GZTDmCxM15hwKtNJQgGpXX6cj0j9",
+      "name": "madzinu-web3",
+      "directory": ".",
+      "orgId": "team_U5k7qckHn8rhLDOrYwhctsAD"
+    }
+  ]
+}
