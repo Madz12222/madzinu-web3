@@ -49,6 +49,17 @@
             cursor: pointer;
         }
 
+        .admin-header-btn {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         .ai-blink-btn {
             background: linear-gradient(135deg, #6366f1, #3b82f6);
             color: #fff;
@@ -68,6 +79,8 @@
 
         .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding-bottom: 50px; }
         
+        .startup-badge { background: #0f172a; border: 1px solid #1e3a8a; border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 9.5px; color: #38bdf8; margin-bottom: 4px; }
+        
         .hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .badge-pill { display: inline-block; background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 10px; }
         h1 { font-size: 18px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; color: #fff; }
@@ -83,13 +96,17 @@
         .partner-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
         .partner-sub { font-size: 9px; color: #38bdf8; }
 
+        .feature-card-item { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+        .feature-card-title { font-size: 12px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .feature-card-desc { font-size: 10.5px; color: #94a3b8; line-height: 1.4; }
+
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
         .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 14px; width: 90%; max-width: 400px; text-align: left; }
         
         .admin-input-box { background: #090d16; border: 1px solid #334155; padding: 6px 8px; border-radius: 6px; color: #fff; font-size: 10px; width: 100%; }
         .admin-btn-action { background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
 
-        footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
+        footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 9.5px; color: var(--text-muted); margin-top: auto; line-height: 1.5; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
         .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
@@ -101,24 +118,55 @@
     </div>
 
     <header>
-        <div class="brand-title" data-i18n="brand_title">MADZINU WEB3 TECH & AI</div>
+        <div class="brand-title">MADZINU WEB3 TECH & AI</div>
         <div class="header-controls">
             <select id="lang-select" onchange="changeLanguage(this.value)" class="header-btn">
-                <option value="en">English</option>
+                <option value="en">EN</option>
                 <option value="ta">தமிழ்</option>
                 <option value="hi">हिन्दी</option>
             </select>
             <button onclick="openUserLoginModal()" class="user-login-header-btn"><i class="fa-solid fa-user"></i></button>
+            <button onclick="openAdminLoginModal()" class="admin-header-btn"><i class="fa-solid fa-shield-halved"></i> Admin</button>
             <button onclick="toggleMadzinuAIChat()" class="ai-blink-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> AI</button>
         </div>
     </header>
 
     <div class="container">
+        
+        <div class="startup-badge">
+            <div><i class="fa-solid fa-landmark"></i> <b>Govt. of India Recognized Startup</b> (MeitY)</div>
+            <div style="color: #34d399;"><i class="fa-solid fa-shield-check"></i> IndiaAI ST20260926506</div>
+        </div>
+
         <div class="hero-card">
-            <div class="badge-pill" data-i18n="badge_secure">SECURE CLOUD NODE</div>
-            <h1 data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</h1>
-            <p data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</p>
-            <button class="btn-primary" onclick="openUserLoginModal()" data-i18n="btn_dashboard">Access Portal Dashboard</button>
+            <div class="badge-pill">SECURE CLOUD NODE</div>
+            <h1>Autonomous Web3 Infrastructure & Cloud Node Operations</h1>
+            <p>Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</p>
+            <button class="btn-primary" onclick="openUserLoginModal()">Access Portal Dashboard</button>
+        </div>
+
+        <div class="section-box">
+            <h3 style="font-size: 12px; font-weight: bold; color: #38bdf8; margin-bottom: 10px;"><i class="fa-solid fa-server"></i> Platform Core Architecture</h3>
+            
+            <div class="feature-card-item">
+                <div class="feature-card-title"><i class="fa-solid fa-microchip"></i> 1. Cloud Compute Tiers</div>
+                <div class="feature-card-desc">Choose high-throughput cloud compute tiers (₹2,000 to ₹50,000 + 18% GST) with strict 14-day node validity.</div>
+            </div>
+
+            <div class="feature-card-item">
+                <div class="feature-card-title"><i class="fa-solid fa-wallet"></i> 2. Live Workspace Balance</div>
+                <div class="feature-card-desc">Track real-time earned balance starting fresh at ₹0.00 directly inside your workspace terminal dashboard.</div>
+            </div>
+
+            <div class="feature-card-item">
+                <div class="feature-card-title"><i class="fa-solid fa-tasks"></i> 3. E-Commerce Jobwork Tasks</div>
+                <div class="feature-card-desc">Execute daily automated verification pipelines for Amazon, Flipkart, and Meesho to secure daily remuneration.</div>
+            </div>
+
+            <div class="feature-card-item">
+                <div class="feature-card-title"><i class="fa-solid fa-users"></i> 4. 10% Direct Referral Bonus</div>
+                <div class="feature-card-desc">Share your direct node activation link and earn a 10% single-level solo referral bonus credited instantly.</div>
+            </div>
         </div>
 
         <div class="section-box">
@@ -180,8 +228,9 @@
             <a href="#">Privacy Policy</a> | 
             <a href="#">Support / Contact</a>
         </div>
-        <div data-i18n="footer_ctrl">Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI</div>
-        <div>© 2026 All Rights Reserved. Secure Cloud Node.</div>
+        <div>Madzinu Web3 Technologies — Govt. of India Recognized Startup Entity (MeitY) | IndiaAI Portal Approved (Reg No: ST20260926506).</div>
+        <div style="margin-top: 4px; color: #64748b;">Non-refundable 14-Day SaaS Cloud Computing & E-Commerce Jobwork Access. Remuneration based on verified daily task work logs. No guaranteed financial returns. Subject to Section 194C TDS contractor guidelines & RazorpayX routing.</div>
+        <div style="margin-top: 6px;">© 2026 All Rights Reserved. Secure Cloud Node.</div>
     </footer>
 
     <!-- MADZINU AI ASSISTANT MODAL -->
@@ -212,54 +261,49 @@
         </div>
     </div>
 
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="admin-login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 style="font-size: 14px; font-weight: bold; color: #ef4444; margin-bottom: 10px;"><i class="fa-solid fa-shield-halved"></i> Master Admin Terminal</h3>
+            <p style="font-size: 10px; color: #94a3b8; margin-bottom: 12px;">Enter master admin credentials to access cloud node controls.</p>
+            <input type="password" id="admin-pass-input" placeholder="Enter Admin Passkey" class="admin-input-box" style="margin-bottom: 10px;">
+            <button onclick="verifyAdmin()" class="admin-btn-action" style="width: 100%; padding: 10px; margin-bottom: 6px; background: #ef4444;">Authenticate</button>
+            <button onclick="closeAdminLoginModal()" style="background: transparent; color: #94a3b8; border: none; font-size: 10px; width: 100%; cursor: pointer;">Cancel</button>
+        </div>
+    </div>
+
     <!-- FULL INTERACTIVE SCRIPT BLOCK -->
     <script>
-        const dictionary = {
-            en: {
-                brand_title: "MADZINU WEB3 TECH & AI",
-                badge_secure: "SECURE CLOUD NODE",
-                hero_title: "Autonomous Web3 Infrastructure & Cloud Node Operations",
-                hero_desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
-                btn_dashboard: "Access Portal Dashboard",
-                footer_ctrl: "Madzinu Web3 Technologies & AI | This site is fully controlled by Madzinu AI"
-            },
-            ta: {
-                brand_title: "மட்சினு வெப்3 டெக் & ஏஐ",
-                badge_secure: "பாதுகாப்பான கிளவுட் நோடு",
-                hero_title: "தன்னாட்சி வெப்3 உள்கட்டமைப்பு & கிளவுட் நோடு செயல்பாடுகள்",
-                hero_desc: "அதிக செயல்திறன் கொண்ட மைக்ரோசெவ்களை স্থাপন செய்யவும், சரிபார்ப்பு நோடு ஒதுக்கீடுகளை நிர்வகிக்கவும்.",
-                btn_dashboard: "போர்டல் டாஷ்போர்டை அணுகவும்",
-                footer_ctrl: "மட்சினு வெப்3 டெக்னாலஜிஸ் & ஏஐ | தளம் மட்சினு ஏஐ மூலம் கட்டுப்படுத்தப்படுகிறது"
-            },
-            hi: {
-                brand_title: "मड्ज़िनू वेब3 टेक एंड एआई",
-                badge_secure: "सुरक्षित क्लाउड नोड",
-                hero_title: "स्वायत्त वेब3 बुनियादी ढांचा और क्लाउड नोड संचालन",
-                hero_desc: "हाई-थ्रूपुट माइक्रो सर्विसेज तैनात करें और वैलिडेटर नोड आवंटन प्रबंधित करें।",
-                btn_dashboard: "पोर्टल डैशबोर्ड तक पहुंचें",
-                footer_ctrl: "मड्ज़िनू वेब3 टेक्नोलॉजीज एंड एआई | यह साइट मड्ज़िनू एआई द्वारा नियंत्रित है"
-            }
-        };
-
         function changeLanguage(lang) {
             localStorage.setItem('madzinu_lang', lang);
-            const selectedDict = dictionary[lang] || dictionary['en'];
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (selectedDict && selectedDict[key]) {
-                    el.innerText = selectedDict[key];
-                }
-            });
         }
 
         function openUserLoginModal() {
             const m = document.getElementById('user-login-modal');
             if (m) m.style.display = 'flex';
         }
-
         function closeUserLoginModal() {
             const m = document.getElementById('user-login-modal');
             if (m) m.style.display = 'none';
+        }
+
+        function openAdminLoginModal() {
+            const m = document.getElementById('admin-login-modal');
+            if (m) m.style.display = 'flex';
+        }
+        function closeAdminLoginModal() {
+            const m = document.getElementById('admin-login-modal');
+            if (m) m.style.display = 'none';
+        }
+
+        function verifyAdmin() {
+            const pass = document.getElementById('admin-pass-input').value;
+            if (pass === 'admin123' || pass === 'madzinu2026') {
+                alert('🔓 Admin Authorized Successfully!');
+                closeAdminLoginModal();
+            } else {
+                alert('❌ Invalid Admin Passkey');
+            }
         }
 
         function toggleMadzinuAIChat() {
@@ -268,7 +312,6 @@
                 d.style.display = (d.style.display === 'none' || d.style.display === '') ? 'flex' : 'none';
             }
         }
-
         function closeMadzinuAI() {
             const d = document.getElementById('madzinu-ai-drawer');
             if (d) d.style.display = 'none';
