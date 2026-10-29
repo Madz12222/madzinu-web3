@@ -107,6 +107,48 @@
   }
 </style>
 
+
+<script>
+window.changeLanguage = function(lang) {
+    const dict = {
+        EN: {
+            title: "Autonomous Web3 Infrastructure & Cloud Node Operations",
+            desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools."
+        },
+        TA: {
+            title: "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
+            desc: "அதிக செயல்திறன் கொண்ட மைக்ரோசெர்வீஸ்களைப் பயன்படுத்துங்கள், சரிபார்ப்பு முனை ஒதுக்கீடுகளை நிர்வகிக்கவும்."
+        },
+        HI: {
+            title: "স্বায়ত্তশাসিত Web3 অবকাঠামো এবং ক্লাউড নোড অপারেশন",
+            desc: "उच्च-थ्रूपुट माइक्रोसेर्विसेज तैनात करें, वैनिडेटर नोड आवंटन प्रबंधित करें।"
+        },
+        TE: {
+            title: "అటానమస్ Web3 ఇన్‌ఫ్రాస్ట్రక్చర్ & క్లౌడ్ నోಡ್ ఆపరేషన్స్",
+            desc: "అధిక-త్రూపుట్ మైక్రోసర్వీసెస్‌ని అమర్చండి, వ్యాలిడేటర్ నోడ్ కేటాయింపులను నిర్వహించండి."
+        },
+        ML: {
+            title: "ഓട്ടോണമസ് Web3 ഇൻഫ്രാസ്ട്രക്ചർ & ക്ലൗഡ് നോഡ് പ്രവർത്തനങ്ങൾ",
+            desc: "ഉയർന്ന ത്രൂപുട്ട് മൈക്രോസർവീസുകൾ വിന്യസിക്കുക, വാലിഡേറ്റർ നോഡ് അലോക്കേഷനുകൾ കൈകാര്യം ചെയ്യുക."
+        },
+        KN: {
+            title: "ಸ್ವಾಯತ್ತ Web3 ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಕ್ಲೌಡ್ ನೋಡ್ ಕಾರ್ಯಾಚರಣೆಗಳು",
+            desc: "ಅಧಿಕ ಥ್ರೂಪುಟ್ ಮೈಕ್ರೋಸೆರ್ವಿಸುಗಳನ್ನು ನಿಯೋಜಿಸಿ, ವ್ಯಾಲಿಡೇಟರ್ ನೋಡ್ ಹಂಚಿಕೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ."
+        }
+    };
+
+    const selected = dict[lang] || dict["EN"];
+    
+    const titleEl = document.getElementById('portal-hero-title');
+    if (titleEl) titleEl.innerText = selected.title;
+
+    const descEl = document.getElementById('portal-hero-desc');
+    if (descEl) descEl.innerText = selected.desc;
+
+    console.log("Language switched successfully to:", lang);
+};
+</script>
+
 </head>
 <body>
 
@@ -117,7 +159,7 @@
     <header>
         <div class="brand-title" data-i18n="brand_title">MADZINU WEB3 TECH & AI</div>
         <div class="header-controls">
-            <select id="lang-select" onchange="window.changeLanguage(this.value)" id="lang-select" onchange="changeLanguage(this.value)" class="header-btn">
+            <select id="lang-select" onchange="changeLanguage(this.value)" id="lang-select" data-old-oc="window.changeLanguage(this.value)" id="lang-select" data-old-oc="changeLanguage(this.value)" class="header-btn">
                 <option value="en" onclick="changeLanguage('EN')" style="cursor: pointer;">EN</option>
                 <option value="ta" onclick="changeLanguage('TA')" style="cursor: pointer;">தமிழ்</option>
                 <option value="hi" onclick="changeLanguage('HI')" style="cursor: pointer;">हिन्दी</option>
@@ -139,8 +181,8 @@
 
         <div class="hero-card">
             <div class="badge-pill" data-i18n="badge_secure">SECURE CLOUD NODE</div>
-            <h1 data-i18n="hero_title"><span data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span></h1>
-            <p data-i18n="hero_desc"><span data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span></p>
+            <h1 data-i18n="hero_title"><span data-i18n="hero_title"><span data-i18n="hero_title"><span id="portal-hero-title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span></span></h1>
+            <p data-i18n="hero_desc"><span data-i18n="hero_desc"><span id="portal-hero-desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span></span></p>
             <button class="btn-primary" onclick="openUserLoginModal()" data-i18n="btn_dashboard"><span data-i18n="btn_dashboard">Access Portal Dashboard</span></button>
         </div>
 
@@ -763,8 +805,8 @@ function verifyOTPAndOpenDashboard() {
                 brand_title: "MADZINU WEB3 TECH & AI",
                 startup_title: "Govt. of India Recognized Startup",
                 badge_secure: "SECURE CLOUD NODE",
-                hero_title: "<span data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span>",
-                hero_desc: "<span data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>",
+                hero_title: "<span data-i18n="hero_title"><span data-i18n="hero_title"><span id="portal-hero-title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span></span>",
+                hero_desc: "<span data-i18n="hero_desc"><span id="portal-hero-desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span></span>",
                 btn_dashboard: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
                 arch_1_title: "1. Cloud Compute Tiers",
                 arch_1_desc: "Choose high-throughput cloud compute tiers (₹2,000 to ₹50,000 + 18% GST) with strict 14-day node validity.",
@@ -1057,8 +1099,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
     const translations = {
         EN: {
-            title: "<span data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span>",
-            subtitle: "<span data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>",
+            title: "<span data-i18n="hero_title"><span data-i18n="hero_title"><span id="portal-hero-title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span></span>",
+            subtitle: "<span data-i18n="hero_desc"><span id="portal-hero-desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span></span>",
             access_btn: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
             arch_title: "<span data-i18n="arch_header">Platform Core Architecture</span>"
         },
@@ -1111,8 +1153,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
     const portalDict = {
         EN: {
-            "hero_title": "Autonomous Web3 Infrastructure & Cloud Node Operations",
-            "hero_desc": "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools."
+            "hero_title": "<span id="portal-hero-title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
+            "hero_desc": "<span id="portal-hero-desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>"
         },
         TA: {
             "hero_title": "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
@@ -1160,8 +1202,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
     const langMap = {
         EN: {
-            title: "Autonomous Web3 Infrastructure & Cloud Node Operations",
-            desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools."
+            title: "<span id="portal-hero-title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
+            desc: "<span id="portal-hero-desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>"
         },
         TA: {
             title: "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
@@ -1203,7 +1245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
 window.changeLanguage = function(lang) {
     const t = {
-        EN: { title: "Autonomous Web3 Infrastructure & Cloud Node Operations", desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools." },
+        EN: { title: "<span id="portal-hero-title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>", desc: "<span id="portal-hero-desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>" },
         TA: { title: "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்", desc: "அதிக செயல்திறன் கொண்ட மைக்ரோசெர்வீஸ்களைப் பயன்படுத்துங்கள், சரிபார்ப்பு முனை ஒதுக்கீடுகளை நிர்வகிக்கவும்." },
         HI: { title: "স্বায়ত্তশাসিত Web3 অবকাঠামো এবং ক্লাউড নোড অপারেশন", desc: "उच्च-थ्रूपुट माइक्रोसेर्विसेज तैनात करें, वैनिडेटर नोड आवंटन प्रबंधित करें।" },
         TE: { title: "అటానమస్ Web3 ఇన్‌ఫ్రాస్ట్రక్చర్ & క్లౌడ్ నోడ్ ఆపరేషన్స్", desc: "అధిక-త్రూపుట్ మైక్రోసర్వీసెస్‌ని అమర్చండి, వ్యాలిడేటర్ నోడ్ కేటాయింపులను నిర్వహించండి." },
@@ -1226,8 +1268,8 @@ window.changeLanguage = function(lang) {
 window.changeLanguage = function(lang) {
     const t = {
         EN: { 
-            title: "Autonomous Web3 Infrastructure & Cloud Node Operations", 
-            desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools." 
+            title: "<span id="portal-hero-title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>", 
+            desc: "<span id="portal-hero-desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>" 
         },
         TA: { 
             title: "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்", 
