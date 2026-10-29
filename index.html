@@ -70,8 +70,8 @@
             <button class="btn-primary" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
         </div>
 
-        <div class="section-box" style="font-size: 11px;">
-            <div style="font-weight: bold; color: #818cf8; margin-bottom: 6px;"><i class="fa-solid fa-list-check"></i> Platform Ecosystem Features</div>
+        <div class="section-box" id="feat-box" style="font-size: 11px;">
+            <div id="feat-title" style="font-weight: bold; color: #818cf8; margin-bottom: 6px;"><i class="fa-solid fa-list-check"></i> Platform Ecosystem Features</div>
             <ul style="padding-left: 16px; color: var(--text-muted); font-size: 10.5px; line-height: 1.6;">
                 <li><strong>Free Tier:</strong> Earn ₹25 daily for 4 days per mobile number (Total ₹100, Min Withdraw ₹100).</li>
                 <li><strong>Server Packages:</strong> Tiers ranging from ₹2,000 to ₹1,00,000 (+18% GST) with 14-day cycle.</li>
@@ -99,7 +99,7 @@
 
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
             <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-ticket"></i> Supported Voucher & Reward Partners
+                <i class="fa-solid fa-ticket"></i> <span id="partner-header">Supported Voucher & Reward Partners</span>
             </div>
             <div style="font-size: 9px; color: #34d399; font-weight: 600; margin-bottom: 12px;">
                 * ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)
@@ -149,7 +149,7 @@
         </div>
 
         <div class="section-box" id="login-section">
-            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> Contractor Secure Node Login</h3>
+            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> <span id="login-header">Contractor Secure Node Login</span></h3>
             <div style="display: flex; gap: 8px;">
                 <input type="tel" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
                 <button onclick="requestOtpDirect()" style="background: #6366f1; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Login</button>
