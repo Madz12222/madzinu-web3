@@ -245,16 +245,9 @@
     <div id="user-login-modal" class="modal-overlay">
         <div class="modal-content">
             <h3 style="font-size: 14px; font-weight: bold; color: #38bdf8; margin-bottom: 10px;"><i class="fa-solid fa-lock"></i> Portal Sign-In</h3>
-            <div id="otp-step-1">
-                <p style="font-size: 10px; color: #94a3b8; margin-bottom: 12px;">Enter your mobile number to receive a secure Fast2SMS OTP.</p>
-                <input type="text" id="login-phone-input" placeholder="Enter Mobile Number" class="admin-input-box" style="margin-bottom: 10px;">
-                <button onclick="sendOTPFromModal()" class="admin-btn-action" style="width: 100%; padding: 10px; margin-bottom: 6px;">Send OTP</button>
-            </div>
-            <div id="otp-step-2" style="display: none;">
-                <p style="font-size: 10px; color: #34d399; margin-bottom: 12px;">Enter the 6-digit OTP sent to your phone.</p>
-                <input type="text" id="verify-otp-input" placeholder="Enter 6-Digit OTP" class="admin-input-box" style="margin-bottom: 10px;">
-                <button onclick="verifyOTPAndOpenDashboard()" class="admin-btn-action" style="width: 100%; padding: 10px; margin-bottom: 6px; background: #10b981;">Verify & Open Dashboard</button>
-            </div>
+            <p style="font-size: 10px; color: #94a3b8; margin-bottom: 12px;">Enter your mobile number to instantly dispatch Fast2SMS OTP and access your workspace.</p>
+            <input type="text" id="login-phone-input" placeholder="Enter Mobile Number" class="admin-input-box" style="margin-bottom: 10px;">
+            <button onclick="sendOTPFromModal()" class="admin-btn-action" style="width: 100%; padding: 10px; margin-bottom: 6px; background: #10b981;">Send OTP & Open Dashboard</button>
             <button onclick="closeUserLoginModal()" style="background: transparent; color: #94a3b8; border: none; font-size: 10px; width: 100%; cursor: pointer; margin-top: 6px;">Cancel</button>
         </div>
     </div>
