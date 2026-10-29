@@ -102,7 +102,7 @@
                 <option value="ml">മലയാളം</option>
                 <option value="kn">ಕನ್ನಡ</option>
             </select>
-            <button onclick="openUserLoginModal()" class="user-login-header-btn"><i onclick="openUserLoginModal()" class="fa-solid fa-user"></i></button>
+            <button onclick="openUserLoginModal()" class="user-login-header-btn" style="cursor:pointer; z-index:99999;"><i class="fa-solid fa-user"></i></button>
             <button onclick="openAdminLoginModal()" class="admin-header-btn"><i class="fa-solid fa-shield-halved"></i> Admin</button>
             <button onclick="toggleMadzinuAIChat()" class="ai-blink-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> AI</button>
         </div>
@@ -975,5 +975,30 @@
             }
         });
     </script>
+
+<script>
+    // Ensure global modal functions are explicitly attached to window
+    window.openUserLoginModal = function() {
+        const m = document.getElementById('user-login-modal');
+        if (m) m.style.display = 'flex';
+    };
+    window.closeUserLoginModal = function() {
+        const m = document.getElementById('user-login-modal');
+        if (m) m.style.display = 'none';
+    };
+    window.openAdminLoginModal = function() {
+        const m = document.getElementById('admin-login-modal');
+        if (m) m.style.display = 'flex';
+    };
+    window.closeAdminLoginModal = function() {
+        const m = document.getElementById('admin-login-modal');
+        if (m) m.style.display = 'none';
+    };
+    window.changeLanguage = function(lang) {
+        console.log("Language changed to: " + lang);
+        // Translation handler fallback if needed
+    };
+</script>
+
 </body>
 </html>
