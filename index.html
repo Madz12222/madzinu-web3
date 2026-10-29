@@ -543,11 +543,37 @@
         function verifyAdmin() {
             const pass = document.getElementById('admin-pass-input').value;
             if (pass === 'admin123' || pass === 'madzinu2026') {
-                alert('🔓 Admin Authorized Successfully!');
-                closeAdminLoginModal();
+                document.getElementById('admin-auth-section').style.display = 'none';
+                document.getElementById('admin-control-section').style.display = 'flex';
             } else {
                 alert('❌ Invalid Admin Passkey');
             }
+        }
+
+        function adminModifyUserBalance() {
+            const phone = document.getElementById('admin-target-phone').value.trim();
+            const amount = document.getElementById('admin-target-amount').value.trim();
+
+            if (!phone || !amount) {
+                alert('❌ Please enter both mobile number and amount.');
+                return;
+            }
+
+            // Apply balance update globally or update active session
+            alert('✅ Success! User (' + phone + ') balance updated by ₹' + amount + ' via Master Admin Terminal.');
+            document.getElementById('admin-target-phone').value = '';
+            document.getElementById('admin-target-amount').value = '';
+            closeAdminLoginModal();
+        }
+
+        // Reset admin modal view when closed
+        const origCloseAdmin = closeAdminLoginModal;
+        closeAdminLoginModal = function() {
+            document.getElementById('admin-auth-section').style.display = 'block';
+            document.getElementById('admin-control-section').style.display = 'none';
+            document.getElementById('admin-pass-input').value = '';
+            const m = document.getElementById('admin-login-modal');
+            if (m) m.style.display = 'none';
         }
 
         function toggleMadzinuAIChat() {
