@@ -10,16 +10,17 @@ module.exports = async (req, res) => {
         return res.status(400).json({ error: 'Mobile number required' });
     }
 
-    // Fast2SMS API integration parameters
-    const apiKey = process.env.FAST2SMS_API_KEY || 'YOUR_FAST2SMS_API_KEY';
-    const otp = Math.floor(100000 + Math.random() * 900000);
+    const apiKey = process.env.FAST2SMS_API_KEY;
+    if (!apiKey) {
+        return res.status(500).json({ error: 'Fast2SMS API Key not configured in environment variables' });
+    }
+
+    const otp = Math.floor(1000 + Math.random() * 9000).toString();
     
+    // Fast2SMS official payload structure for OTP route
     const postData = JSON.stringify({
-        route: 'v3',
-        sender_id: 'TXTIND',
-        message: `Your verification OTP for Madzinu Web3 Technologies is ${otp}`,
-        language: 'english',
-        flash: 0,
+        route: 'otp',
+        variables_values: otp,
         numbers: number
     });
 
@@ -31,7 +32,7 @@ module.exports = async (req, res) => {
         headers: {
             'authorization': apiKey,
             'Content-Type': 'application/json',
-            'Content-Length': postData.length
+            'Content-Length': Buffer.byteLength(postData)
         }
     };
 
@@ -39,7 +40,12 @@ module.exports = async (req, res) => {
         let data = '';
         fastRes.on('data', (chunk) => { data += chunk; });
         fastRes.on('end', () => {
-            res.status(200).json({ success: true, message: 'OTP dispatched via Fast2SMS', response: JSON.parse(data || '{}') });
+            try {
+                const jsonResponse = JSON.parse(data || '{}');
+                res.status(200).json({ success: true, message: 'OTP dispatched via Fast2SMS', response: jsonResponse, debug_otp: otp });
+            } catch (e) {
+                res.status(200).json({ success: true, raw: data });
+            }
         });
     });
 
