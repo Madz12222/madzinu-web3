@@ -17,15 +17,15 @@
             --text-muted: #94a3b8;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: none; flex-direction: column; overflow-x: hidden; }
         
         .top-ticker { background: #1e1b4b; color: #38bdf8; font-size: 10px; font-weight: bold; padding: 6px 0; overflow: hidden; white-space: nowrap; border-bottom: 1px solid #312e81; }
         .top-ticker span { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: none; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
-        .header-controls { display: flex; align-items: center; gap: 4px; }
+        .header-controls { display: none; align-items: center; gap: 4px; }
         
         .header-btn { background: #111827; color: #38bdf8; border: 1px solid #334155; padding: 4px 6px; border-radius: 6px; font-size: 9.5px; font-weight: bold; cursor: pointer; }
         .user-login-header-btn { background: #10b981; color: #fff; border: none; padding: 5px 7px; border-radius: 6px; font-size: 9.5px; font-weight: bold; cursor: pointer; }
@@ -41,8 +41,8 @@
             100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
         }
 
-        .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding-bottom: 50px; }
-        .startup-badge { background: #0f172a; border: 1px solid #1e3a8a; border-radius: 10px; padding: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 9.5px; color: #38bdf8; margin-bottom: 4px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: none; flex-direction: column; gap: 14px; padding-bottom: 50px; }
+        .startup-badge { background: #0f172a; border: 1px solid #1e3a8a; border-radius: 10px; padding: 10px; display: none; justify-content: space-between; align-items: center; font-size: 9.5px; color: #38bdf8; margin-bottom: 4px; }
         
         .hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .badge-pill { display: inline-block; background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 10px; }
@@ -53,14 +53,14 @@
         .section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
         
         .grid-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .partner-card-box { background: #0f172a; border: 1px solid #1e293b; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: #fff; transition: 0.2s; }
+        .partner-card-box { background: #0f172a; border: 1px solid #1e293b; padding: 14px; border-radius: 12px; display: none; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: #fff; transition: 0.2s; }
         .partner-card-box:hover { border-color: #6366f1; background: #111827; }
         .partner-icon { font-size: 20px; color: #f59e0b; margin-bottom: 8px; }
         .partner-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
         .partner-sub { font-size: 9px; color: #38bdf8; }
 
         .feature-card-item { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
-        .feature-card-title { font-size: 12px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+        .feature-card-title { font-size: 12px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: none; align-items: center; gap: 6px; }
         .feature-card-desc { font-size: 10.5px; color: #94a3b8; line-height: 1.4; }
 
         .modal-overlay { pointer-events: auto; display: none; pointer-events: auto; display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
@@ -70,9 +70,21 @@
         .admin-btn-action { background: #10b981; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
 
         footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 9.5px; color: var(--text-muted); margin-top: auto; line-height: 1.5; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
+        .footer-links { display: none; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
         .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
+
+<style>
+  header, .header, nav, select, button, .admin-btn-action, .btn-primary {
+    position: relative;
+    z-index: 99999 !important;
+    pointer-events: auto !important;
+  }
+  .modal-overlay {
+    z-index: 100000 !important;
+  }
+</style>
+
 </head>
 <body>
 
@@ -191,11 +203,11 @@
     <!-- USER DASHBOARD VIEW MODAL / PANEL -->
     <div id="user-dashboard-modal" class="modal-overlay">
         <div class="modal-content" style="max-width: 450px; background: #0f172a; border: 1px solid #10b981;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="display: none; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <h3 style="font-size: 14px; font-weight: bold; color: #10b981;"><i class="fa-solid fa-chart-line"></i> User Terminal Dashboard</h3>
                 <button onclick="closeUserDashboard()" style="background: none; border: none; color: #f87171; font-size: 18px; font-weight: bold; cursor: pointer;">&times;</button>
             </div>
-            <div style="font-size: 11px; color: #cbd5e1; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-size: 11px; color: #cbd5e1; display: none; flex-direction: column; gap: 10px;">
                 <div style="background: #1e1b4b; padding: 10px; border-radius: 8px; border: 1px solid #312e81;">
                     <div style="color: #38bdf8; font-weight: bold;">👤 Authenticated Mobile:</div>
                     <div id="dash-phone-display" style="font-size: 12px; color: #fff;">+91 8122252222</div>
@@ -226,16 +238,16 @@
 
     <!-- MADZINU AI ASSISTANT MODAL -->
     <div id="madzinu-ai-drawer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 92%; max-width: 380px; height: 420px; background: #111827; border: 2px solid #ec4899; border-radius: 16px; z-index: 9999999; box-shadow: 0 10px 40px rgba(0,0,0,0.9); flex-direction: column; overflow: hidden; font-family: system-ui, sans-serif;">
-        <div style="background: #1e1b4b; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #312e81;">
+        <div style="background: #1e1b4b; padding: 12px 16px; display: none; justify-content: space-between; align-items: center; border-bottom: 1px solid #312e81;">
             <span style="font-weight: bold; color: #38bdf8; font-size: 13px;"><i class="fa-solid fa-robot"></i> Madzinu AI Sovereign Assistant</span>
             <button onclick="closeMadzinuAI()" style="background: none; border: none; color: #f87171; font-size: 20px; font-weight: bold; cursor: pointer; padding: 0 4px;">&times;</button>
         </div>
-        <div id="ai-chat-messages" style="padding: 12px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 11px; background: #0b101d;">
+        <div id="ai-chat-messages" style="padding: 12px; flex-grow: 1; overflow-y: auto; display: none; flex-direction: column; gap: 8px; font-size: 11px; background: #0b101d;">
             <div style="background: #1e1b4b; padding: 10px; border-radius: 8px; color: #38bdf8; border: 1px solid #312e81;">
                 Greetings! I am your <b>Madzinu AI Assistant</b>. How can I assist you with Node Licenses, Jobworks, or Payouts today?
             </div>
         </div>
-        <div style="padding: 10px; background: #090d16; display: flex; gap: 6px; border-top: 1px solid #1f2937; flex-shrink: 0;">
+        <div style="padding: 10px; background: #090d16; display: none; gap: 6px; border-top: 1px solid #1f2937; flex-shrink: 0;">
             <input type="text" id="ai-modal-user-input" placeholder="Type your question..." style="background: #111827; border: 1px solid #334155; padding: 8px 10px; border-radius: 6px; color: #fff; font-size: 11px; width: 100%; flex-grow: 1; outline: none;">
             <button onclick="sendMadzinuAIMessageModal()" style="background: #10b981; color: white; border: none; padding: 8px 14px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
@@ -266,7 +278,7 @@
     <div id="user-dashboard-view" style="display: none; max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; flex-direction: column; gap: 14px;">
         
         <!-- Connected Contractor Node Header -->
-        <div class="section-box" style="display: flex; justify-content: space-between; align-items: center; background: #111827; border: 1px solid #1f2937;">
+        <div class="section-box" style="display: none; justify-content: space-between; align-items: center; background: #111827; border: 1px solid #1f2937;">
             <div>
                 <div style="font-size: 9.5px; color: #94a3b8;">CONNECTED CONTRACTOR NODE</div>
                 <div id="dash-phone-display" style="font-size: 13px; font-weight: bold; color: #38bdf8;">+91 8122252222</div>
@@ -309,60 +321,60 @@
             <h3 style="font-size: 12px; font-weight: bold; color: #f59e0b; margin-bottom: 12px;"><i class="fa-solid fa-server"></i> 14-Day Server Node License Tiers</h3>
             
             <!-- Tier 1 -->
-            <div class="feature-card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="feature-card-item" style="display: none; justify-content: space-between; align-items: center;">
                 <div>
                     <div class="feature-card-title" style="color: #fff;">₹2,000 Server (Base)</div>
                     <div class="feature-card-desc">Daily Remuneration: ₹155.50 / day | 14-Day Total: ₹2,177</div>
                 </div>
-                <div style="display: flex; gap: 4px;">
+                <div style="display: none; gap: 4px;">
                     <button onclick="openPaymentModal('₹2,000 Server', '₹2,177', 'GPay')" class="admin-btn-action" style="background: #3b82f6; font-size: 9px; padding: 5px 8px;">GPay</button>
                     <button onclick="openPaymentModal('₹2,000 Server', '₹2,177', 'Slice')" class="admin-btn-action" style="background: #ec4899; font-size: 9px; padding: 5px 8px;">Slice</button>
                 </div>
             </div>
 
             <!-- Tier 2 -->
-            <div class="feature-card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="feature-card-item" style="display: none; justify-content: space-between; align-items: center;">
                 <div>
                     <div class="feature-card-title" style="color: #fff;">₹5,000 Server</div>
                     <div class="feature-card-desc">Daily Remuneration: ₹394.64 / day | 14-Day Total: ₹5,525</div>
                 </div>
-                <div style="display: flex; gap: 4px;">
+                <div style="display: none; gap: 4px;">
                     <button onclick="openPaymentModal('₹5,000 Server', '₹5,525', 'GPay')" class="admin-btn-action" style="background: #3b82f6; font-size: 9px; padding: 5px 8px;">GPay</button>
                     <button onclick="openPaymentModal('₹5,000 Server', '₹5,525', 'Slice')" class="admin-btn-action" style="background: #ec4899; font-size: 9px; padding: 5px 8px;">Slice</button>
                 </div>
             </div>
 
             <!-- Tier 3 -->
-            <div class="feature-card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="feature-card-item" style="display: none; justify-content: space-between; align-items: center;">
                 <div>
                     <div class="feature-card-title" style="color: #fff;">₹10,000 Server</div>
                     <div class="feature-card-desc">Daily Remuneration: ₹792.86 / day | 14-Day Total: ₹11,100</div>
                 </div>
-                <div style="display: flex; gap: 4px;">
+                <div style="display: none; gap: 4px;">
                     <button onclick="openPaymentModal('₹10,000 Server', '₹11,100', 'GPay')" class="admin-btn-action" style="background: #3b82f6; font-size: 9px; padding: 5px 8px;">GPay</button>
                     <button onclick="openPaymentModal('₹10,000 Server', '₹11,100', 'Slice')" class="admin-btn-action" style="background: #ec4899; font-size: 9px; padding: 5px 8px;">Slice</button>
                 </div>
             </div>
 
             <!-- Tier 4 -->
-            <div class="feature-card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="feature-card-item" style="display: none; justify-content: space-between; align-items: center;">
                 <div>
                     <div class="feature-card-title" style="color: #fff;">₹25,000 Server</div>
                     <div class="feature-card-desc">Daily Remuneration: ₹1,991.07 / day | 14-Day Total: ₹27,875</div>
                 </div>
-                <div style="display: flex; gap: 4px;">
+                <div style="display: none; gap: 4px;">
                     <button onclick="openPaymentModal('₹25,000 Server', '₹27,875', 'GPay')" class="admin-btn-action" style="background: #3b82f6; font-size: 9px; padding: 5px 8px;">GPay</button>
                     <button onclick="openPaymentModal('₹25,000 Server', '₹27,875', 'Slice')" class="admin-btn-action" style="background: #ec4899; font-size: 9px; padding: 5px 8px;">Slice</button>
                 </div>
             </div>
 
             <!-- Tier 5 -->
-            <div class="feature-card-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="feature-card-item" style="display: none; justify-content: space-between; align-items: center;">
                 <div>
                     <div class="feature-card-title" style="color: #fff;">₹50,000 Server</div>
                     <div class="feature-card-desc">Daily Remuneration: ₹4,000 / day | 14-Day Total: ₹56,000</div>
                 </div>
-                <div style="display: flex; gap: 4px;">
+                <div style="display: none; gap: 4px;">
                     <button onclick="openPaymentModal('₹50,000 Server', '₹56,000', 'GPay')" class="admin-btn-action" style="background: #3b82f6; font-size: 9px; padding: 5px 8px;">GPay</button>
                     <button onclick="openPaymentModal('₹50,000 Server', '₹56,000', 'Slice')" class="admin-btn-action" style="background: #ec4899; font-size: 9px; padding: 5px 8px;">Slice</button>
                 </div>
