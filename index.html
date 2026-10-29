@@ -139,8 +139,8 @@
 
         <div class="hero-card">
             <div class="badge-pill" data-i18n="badge_secure">SECURE CLOUD NODE</div>
-            <h1 data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></h1>
-            <p data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</p>
+            <h1 data-i18n="hero_title"><span data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span></h1>
+            <p data-i18n="hero_desc"><span data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span></p>
             <button class="btn-primary" onclick="openUserLoginModal()" data-i18n="btn_dashboard"><span data-i18n="btn_dashboard">Access Portal Dashboard</span></button>
         </div>
 
@@ -763,8 +763,8 @@ function verifyOTPAndOpenDashboard() {
                 brand_title: "MADZINU WEB3 TECH & AI",
                 startup_title: "Govt. of India Recognized Startup",
                 badge_secure: "SECURE CLOUD NODE",
-                hero_title: "<span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
-                hero_desc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
+                hero_title: "<span data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span>",
+                hero_desc: "<span data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>",
                 btn_dashboard: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
                 arch_1_title: "1. Cloud Compute Tiers",
                 arch_1_desc: "Choose high-throughput cloud compute tiers (₹2,000 to ₹50,000 + 18% GST) with strict 14-day node validity.",
@@ -1057,8 +1057,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <script>
     const translations = {
         EN: {
-            title: "<span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
-            subtitle: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
+            title: "<span data-i18n="hero_title"><span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span></span>",
+            subtitle: "<span data-i18n="hero_desc">Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.</span>",
             access_btn: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
             arch_title: "<span data-i18n="arch_header">Platform Core Architecture</span>"
         },
@@ -1107,123 +1107,53 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-<script>
-    const portalTranslations = {
-        EN: {
-            heroTitle: "<span data-i18n="hero_title">Autonomous Web3 Infrastructure & Cloud Node Operations</span>",
-            heroDesc: "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools.",
-            accessBtn: "<span data-i18n="btn_dashboard">Access Portal Dashboard</span>",
-            archHeader: "<span data-i18n="arch_header">Platform Core Architecture</span>"
-        },
-        TA: {
-            heroTitle: "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
-            heroDesc: "அதிக செயல்திறன் கொண்ட மைக்ரோசெர்வீஸ்களைப் பயன்படுத்துங்கள், சரிபார்ப்பு முனை ஒதுக்கீடுகளை நிர்வகிக்கவும்.",
-            accessBtn: "போர்டல் டாஷ்போர்டை அணுகவும்",
-            archHeader: "மேடை கோர் கட்டமைப்பு"
-        },
-        HI: {
-            heroTitle: "স্বায়ত্তশাসিত Web3 অবকাঠামো এবং ক্লাউড নোড অপারেশন",
-            heroDesc: "उच्च-थ्रूपुट माइक्रोसेर्विसेज तैनात करें, वैनिडेटर नोड आवंटन प्रबंधित करें।",
-            accessBtn: "पोर्टल डैशबोर्ड तक पहुंचें",
-            archHeader: "प्लेटफ़ॉर्म कोर वास्तुकला"
-        },
-        TE: {
-            heroTitle: "అటానమస్ Web3 ఇన్‌ఫ్రాస్ట్రక్చర్ & క్లౌడ్ నోడ్ ఆపరేషన్స్",
-            heroDesc: "అధిక-త్రూపుట్ మైక్రోసర్వీసెస్‌ని అమర్చండి, వ్యాలిడేటర్ నోడ్ కేటాయింపులను నిర్వహించండి.",
-            accessBtn: "పోర్టల్ డాష్‌బోర్డ్‌ని యాక్సెస్ చేయండి",
-            archHeader: "ప్లాట్‌ఫారమ్ కోರ್ ఆర్కిటెక్చర్"
-        },
-        ML: {
-            heroTitle: "ഓട്ടോണമസ് Web3 ഇൻഫ്രാസ്ട്രക്ചർ & ക്ലൗഡ് നോഡ് പ്രവർത്തനങ്ങൾ",
-            heroDesc: "ഉയർന്ന ത്രൂപുട്ട് മൈക്രോസർവീസുകൾ വിന്യസിക്കുക, വാലിഡേറ്റർ നോഡ് അലോക്കേഷനുകൾ കൈകാര്യം ചെയ്യുക.",
-            accessBtn: "പോർട്ടൽ ഡാഷ്‌ബോർഡ് ആക്സസ് ചെയ്യുക",
-            archHeader: "പ്ലാറ്റ്‌ഫോം കോർ ആർക്കിടെക്ചർ"
-        },
-        KN: {
-            heroTitle: "ಸ್ವಾಯತ್ತ Web3 ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಕ್ಲೌಡ್ ನೋಡ್ ಕಾರ್ಯಾಚರಣೆಗಳು",
-            heroDesc: "ಅಧಿಕ ಥ್ರೂಪುಟ್ ಮೈಕ್ರೋಸೆರ್ವಿಸುಗಳನ್ನು ನಿಯೋಜಿಸಿ, ವ್ಯಾಲಿಡೇಟರ್ ನೋಡ್ ಹಂಚಿಕೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ.",
-            accessBtn: "ಪೋರ್ಟಲ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಅನ್ನು ಪ್ರವೇಶಿಸಿ",
-            archHeader: "ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಕೋರ್ ಆರ್ಕಿടെക്ಚർ"
-        }
-    };
-
-    window.changeLanguage = function(lang) {
-        const t = portalTranslations[lang] || portalTranslations["EN"];
-        
-        // Update hero title and subtitle if matching elements exist
-        const hTitle = document.querySelector('h1, .hero-title, .section-box h3, h3');
-        if (hTitle && t.heroTitle) hTitle.innerText = t.heroTitle;
-        
-        const accessBtn = document.querySelector('.btn-primary, button[onclick*="UserLogin"]');
-        if (accessBtn && t.accessBtn) accessBtn.innerText = t.accessBtn;
-
-        console.log("Language successfully applied: " + lang);
-    };
-
-    window.requestFast2SMSOTP = async function() {
-        const phoneInput = document.getElementById('login-phone-input');
-        if (!phoneInput || !phoneInput.value.trim()) {
-            alert('❌ Please enter a valid mobile number.');
-            return;
-        }
-        verifiedPhone = phoneInput.value.trim();
-        
-        alert('⏳ Generating secure OTP for ' + verifiedPhone + '...');
-        
-        // Instant smooth transition to OTP verification step
-        document.getElementById('otp-step-1').style.display = 'none';
-        document.getElementById('otp-step-2').style.display = 'block';
-        document.getElementById('otp-status-msg').innerText = "✅ Fast2SMS OTP Dispatched to " + verifiedPhone + ". Enter 6-digit code below (Demo Code: 123456):";
-    };
-</script>
-
 
 <script>
-    const portalTranslations = {
+    const portalDict = {
         EN: {
             "hero_title": "Autonomous Web3 Infrastructure & Cloud Node Operations",
-            "btn_dashboard": "Access Portal Dashboard",
-            "arch_header": "Platform Core Architecture"
+            "hero_desc": "Deploy high-throughput microservices, manage validator node allocations, and access real-time decentralized automation tools."
         },
         TA: {
             "hero_title": "தன்னாட்சி Web3 உள்கட்டமைப்பு மற்றும் கிளவுட் முனை செயல்பாடுகள்",
-            "btn_dashboard": "போர்டல் டாஷ்போர்டை அணுகவும்",
-            "arch_header": "மேடை கோர் கட்டமைப்பு"
+            "hero_desc": "அதிக செயல்திறன் கொண்ட மைக்ரோசெர்வீஸ்களைப் பயன்படுத்துங்கள், சரிபார்ப்பு முனை ஒதுக்கீடுகளை நிர்வகிக்கவும்."
         },
         HI: {
             "hero_title": "স্বায়ত্তশাসিত Web3 অবকাঠামো এবং ক্লাউড নোড অপারেশন",
-            "btn_dashboard": "पोर्टल डैशबोर्ड तक पहुंचें",
-            "arch_header": "प्लेटफ़ॉर्म कोर वास्तुकला"
+            "hero_desc": "उच्च-थ्रूपुट माइक्रोसेर्विसेज तैनात करें, वैनिडेटर नोड आवंटन प्रबंधित करें।"
         },
         TE: {
-            "hero_title": "అటానమస్ Web3 ఇన్‌ఫ్రాస్ట్రక్చర్ & క్లౌడ్ నోడ్ ఆపరేషన్స్",
-            "btn_dashboard": "పోర్టల్ డాష్‌బోర్డ్‌ని యాక్సెస్ చేయండి",
-            "arch_header": "ప్లాట్‌ఫారమ్ కోర్ ఆర్కిటెక్చర్"
+            "hero_title": "అటానమస్ Web3 ఇన్‌ఫ్రాస్ట్రక్చర్ & క్లౌಡ್ నోడ్ ఆపరేషన్స్",
+            "hero_desc": "అధిక-త్రూపుట్ మైక్రోసర్వీసెస్‌ని అమర్చండి, వ్యాలిడేటర్ నోడ్ కేటాయింపులను నిర్వహించండి."
         },
         ML: {
             "hero_title": "ഓട്ടോണമസ് Web3 ഇൻഫ്രാസ്ട്രക്ചർ & ക്ലൗഡ് നോഡ് പ്രവർത്തനങ്ങൾ",
-            "btn_dashboard": "പോർട്ടൽ ഡാഷ്‌ബോർഡ് ആക്സസ് ചെയ്യുക",
-            "arch_header": "പ്ലാറ്റ്‌ഫോം കോർ ആർക്കിടെക്ചർ"
+            "hero_desc": "ഉയർന്ന ത്രൂപുട്ട് മൈക്രോസർവീസുകൾ വിന്യസിക്കുക, വാലിഡേറ്റർ നോഡ് അലോക്കേഷനുകൾ കൈകാര്യം ചെയ്യുക."
         },
         KN: {
             "hero_title": "ಸ್ವಾಯತ್ತ Web3 ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಕ್ಲೌಡ್ ನೋಡ್ ಕಾರ್ಯಾಚರಣೆಗಳು",
-            "btn_dashboard": "ಪೋರ್ಟಲ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಅನ್ನು ಪ್ರವೇಶಿಸಿ",
-            "arch_header": "ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಕೋರ್ ಆರ್ಕಿടെക്ಚർ"
+            "hero_desc": "ಅಧಿಕ ಥ್ರೂಪುಟ್ ಮೈಕ್ರೋಸೆರ್ವಿಸುಗಳನ್ನು ನಿಯೋಜಿಸಿ, ವ್ಯಾಲಿಡೇಟರ್ ನೋಡ್ ಹಂಚಿಕೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ."
         }
     };
 
     window.changeLanguage = function(lang) {
-        const dict = portalTranslations[lang] || portalTranslations["EN"];
+        const dict = portalDict[lang] || portalDict["EN"];
+        
         document.querySelectorAll("[data-i18n]").forEach(el => {
             const key = el.getAttribute("data-i18n");
             if (dict[key]) {
                 el.innerText = dict[key];
             }
         });
-        console.log("Language successfully switched to: " + lang);
+
+        // Fallback direct update for header title
+        const mainTitle = document.querySelector('h1');
+        if (mainTitle && dict["hero_title"]) {
+            mainTitle.innerHTML = dict["hero_title"];
+        }
+
+        console.log("Language switched to: " + lang);
     };
 </script>
 
 </body>
-
-</html>
