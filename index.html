@@ -159,23 +159,25 @@
 </footer>
 
 
-<!-- MadzinuAI Floating Toggle Widget & Chat Drawer (Bottom-Left) -->
-<div id="madzinu-ai-floating-container" style="position: fixed; bottom: 20px; left: 20px; z-index: 999999; font-family: system-ui, sans-serif;">
-  <!-- Floating Trigger Button -->
-  <button id="madzinu-ai-toggle-btn" onclick="toggleMadzinuDrawer()" style="background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; border: none; padding: 12px 20px; border-radius: 50px; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 230, 118, 0.5); display: flex; align-items: center; gap: 8px;">
+
+
+<!-- MadzinuAI Floating Executive Secretary Widget -->
+<div id="madzinu-ai-wrapper" style="position: fixed; bottom: 20px; left: 20px; z-index: 999999; font-family: system-ui, sans-serif;">
+  <!-- Floating Button -->
+  <button id="madzinu-launch-btn" onclick="toggleMadzinuPanel()" style="background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; border: none; padding: 12px 20px; border-radius: 50px; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 230, 118, 0.5); display: flex; align-items: center; gap: 8px;">
     <span>🤖</span> <span>MadzinuAI</span>
   </button>
 
-  <!-- Collapsible Chat Drawer (Hidden by default) -->
-  <div id="madzinu-ai-drawer" style="display: none; position: absolute; bottom: 60px; left: 0; width: 320px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); overflow: hidden;">
+  <!-- Popup Chat Panel (Hidden by default) -->
+  <div id="madzinu-chat-panel" style="display: none; position: absolute; bottom: 60px; left: 0; width: 320px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); overflow: hidden;">
     <div style="background: #1c2541; padding: 10px 15px; color: #6fffe9; font-weight: bold; font-size: 13px; display: flex; justify-content: space-between; align-items: center;">
-      <span id="ai-header-title">🤖 MadzinuAI Executive Secretary</span>
+      <span id="ai-header-title">🤖 MadzinuAI Secretary</span>
       <div style="display: flex; gap: 8px; align-items: center;">
         <select id="ai-lang-select" onchange="switchAiLang(this.value)" style="background: #0b132b; color: #fff; border: 1px solid #3a506b; border-radius: 4px; font-size: 11px; padding: 2px;">
           <option value="en">English</option>
           <option value="ta">தமிழ்</option>
         </select>
-        <span onclick="toggleMadzinuDrawer()" style="cursor: pointer; color: #fff; font-size: 18px; margin-left: 4px;">&times;</span>
+        <span onclick="toggleMadzinuPanel()" style="cursor: pointer; color: #fff; font-size: 18px; margin-left: 4px;">&times;</span>
       </div>
     </div>
     <div id="madzinu-messages" style="height: 200px; padding: 12px; overflow-y: auto; font-size: 13px; color: #e0e1dd; line-height: 1.4;">
@@ -193,14 +195,14 @@
 <script>
   const aiTranslations = {
     en: {
-      title: "🤖 MadzinuAI Executive Secretary",
+      title: "🤖 MadzinuAI Secretary",
       welcome: "Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?",
       placeholder: "Type your inquiry...",
       send: "Send",
       response: "Thank you for contacting Madzinu Web3 Technologies. Your request has been logged and our team will get in touch with you shortly."
     },
     ta: {
-      title: "🤖 மட்சினு AI நிர்வாக செயலாளர்",
+      title: "🤖 மட்சினு AI செயலாளர்",
       welcome: "மட்சினு வெப்3 டெக்னாலஜிஸ் நிறுவனத்திற்கு உங்களை வரவேற்கிறோம்! கணினி தொகுப்புகள் அல்லது முதலீட்டு விவரங்கள் குறித்து நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?",
       placeholder: "உங்கள் கேள்வியைத் தட்டச்சு செய்க...",
       send: "அனுப்பு",
@@ -210,9 +212,9 @@
 
   let currentLang = "en";
 
-  function toggleMadzinuDrawer() {
-    const drawer = document.getElementById("madzinu-ai-drawer");
-    drawer.style.display = (drawer.style.display === "none" || !drawer.style.display) ? "block" : "none";
+  function toggleMadzinuPanel() {
+    const panel = document.getElementById("madzinu-chat-panel");
+    panel.style.display = (panel.style.display === "none" || !panel.style.display) ? "block" : "none";
   }
 
   function switchAiLang(lang) {
