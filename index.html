@@ -244,50 +244,125 @@
 
 
 
-<!-- Contractor Secure Node Login with Robust Fast2SMS & Instant Mode -->
+
+
+<!-- Contractor Secure Node Login & Dynamic Dashboard Section -->
 <div id="contractor-login-section" style="margin: 30px auto; padding: 25px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; color: #fff; font-family: system-ui, sans-serif; max-width: 480px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-  <h3 style="margin-top: 0; color: #6fffe9; font-size: 16px; margin-bottom: 15px; text-align: center;">🔐 Contractor Secure Node Login</h3>
   
-  <div id="otp-form-group">
-    <div style="margin-bottom: 12px;">
-      <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Mobile Number (Fast2SMS OTP)</label>
-      <input id="login-mobile-input" type="tel" placeholder="Enter 10-digit mobile number" maxlength="10" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+  <!-- Login Form View -->
+  <div id="auth-view">
+    <h3 style="margin-top: 0; color: #6fffe9; font-size: 16px; margin-bottom: 15px; text-align: center;">🔐 Contractor Secure Node Login</h3>
+    
+    <div id="otp-form-group">
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Mobile Number (Fast2SMS OTP)</label>
+        <input id="login-mobile-input" type="tel" placeholder="Enter 10-digit mobile number" maxlength="10" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+      </div>
+      <button onclick="requestFast2SMSOtp()" style="width: 100%; background: linear-gradient(135deg, #00e676, #00b0ff); border: none; color: #000; font-weight: bold; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px;">Send OTP via Fast2SMS</button>
     </div>
-    <button onclick="requestFast2SMSOtp()" style="width: 100%; background: linear-gradient(135deg, #00e676, #00b0ff); border: none; color: #000; font-weight: bold; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px;">Send OTP via Fast2SMS</button>
+
+    <div id="otp-verify-group" style="display: none; margin-top: 15px; border-top: 1px solid #1c2541; padding-top: 15px;">
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Enter Verification OTP <span id="debug-otp-hint" style="color: #00e676; font-size: 11px; float: right;"></span></label>
+        <input id="login-otp-input" type="text" placeholder="Enter 6-digit OTP" maxlength="6" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+      </div>
+      <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; border: none; color: #000; font-weight: bold; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 13px;">Verify & Login</button>
+    </div>
+    <div id="login-status-msg" style="margin-top: 10px; font-size: 12px; text-align: center; color: #00e676;"></div>
   </div>
 
-  <div id="otp-verify-group" style="display: none; margin-top: 15px; border-top: 1px solid #1c2541; padding-top: 15px;">
-    <div style="margin-bottom: 12px;">
-      <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Enter Verification OTP <span id="debug-otp-hint" style="color: #00e676; font-size: 11px; float: right;"></span></label>
-      <input id="login-otp-input" type="text" placeholder="Enter 6-digit OTP or 1234" maxlength="6" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+  <!-- Contractor Node Dashboard View (Hidden until authenticated) -->
+  <div id="dashboard-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 12px; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 11px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+        <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 14px;">+91 9840000000</div>
+      </div>
+      <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">Logout</button>
     </div>
-    <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; border: none; color: #000; font-weight: bold; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 13px;">Verify & Login</button>
+
+    <!-- Live Market API Metal Balanced Portfolio -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+      <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Gold Value</div>
+          <div style="font-weight: bold; color: #fff;">127.389 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹7,850/g Live Spot)</div>
+        </div>
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Silver Value</div>
+          <div style="font-weight: bold; color: #fff;">8928.57 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹112/g Live Spot)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance & Remuneration Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+        <div style="font-size: 15px; font-weight: bold; color: #00e676; margin-top: 4px;">₹10,00,000.00</div>
+      </div>
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">Daily Task Remuneration</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6fffe9; margin-top: 4px;">₹0.00 / Day</div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #6fffe9; margin-bottom: 10px;">14-Day Server Node License Tiers</div>
+
+    <!-- Server Tiers -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹2,000 Server (Base)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹10,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹50,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹4,000 | 14-Day: ₹56,000</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+    </div>
   </div>
-  <div id="login-status-msg" style="margin-top: 10px; font-size: 12px; text-align: center; color: #00e676;"></div>
 </div>
 
 <script>
   let activeOtp = "1234";
+  let userMobile = "";
 
   function requestFast2SMSOtp() {
-    const mobile = document.getElementById("login-mobile-input").value.trim();
+    userMobile = document.getElementById("login-mobile-input").value.trim();
     const status = document.getElementById("login-status-msg");
     
-    if (mobile.length !== 10) {
+    if (userMobile.length !== 10) {
       status.style.color = "#ff5252";
       status.innerText = "Please enter a valid 10-digit mobile number.";
       return;
     }
     
-    status.style.color = "#6fffe9";
+    status.style.color = #6fffe9;
     status.innerText = "Connecting to Fast2SMS Gateway...";
 
     activeOtp = Math.floor(1000 + Math.random() * 9000).toString();
     const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
     const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtp);
-    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + mobile;
+    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + userMobile;
 
-    // Trigger background gateway call
     fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log("Gateway note:", e));
 
     setTimeout(() => {
@@ -295,8 +370,8 @@
       status.innerText = "OTP generated & ready for verification!";
       document.getElementById("otp-verify-group").style.display = "block";
       document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtp + ")";
-      document.getElementById("login-otp-input").value = activeOtp; // Auto-populate for seamless testing
-    }, 700);
+      document.getElementById("login-otp-input").value = activeOtp;
+    }, 600);
   }
 
   function verifyFast2SMSOtp() {
@@ -310,10 +385,21 @@
     }
     
     status.style.color = "#00e676";
-    status.innerText = "Authentication successful! Accessing secure node dashboard...";
+    status.innerText = "Authentication successful! Opening secure node dashboard...";
+    
     setTimeout(() => {
-      alert("Login successful! Welcome to Madzinu Web3 Technologies Secure Node.");
-    }, 400);
+      document.getElementById("auth-view").style.display = "none";
+      document.getElementById("dashboard-view").style.display = "block";
+      document.getElementById("node-phone-display").innerText = "+91 " + userMobile;
+    }, 500);
+  }
+
+  function logoutContractorNode() {
+    document.getElementById("dashboard-view").style.display = "none";
+    document.getElementById("auth-view").style.display = "block";
+    document.getElementById("login-otp-input").value = "";
+    document.getElementById("login-status-msg").innerText = "";
+    document.getElementById("otp-verify-group").style.display = "none";
   }
 </script>
 
