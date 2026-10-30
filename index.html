@@ -511,5 +511,52 @@
             alert('Successfully updated wallet balance for mobile ' + mobile + ' to ₹' + newAmount);
         }
     </script>
+
+<!-- MadzinuAI Floating Widget & Chat Interface -->
+<div id="madzinu-ai-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: Arial, sans-serif;">
+  <button id="madzinu-ai-trigger" onclick="toggleMadzinuChat()" style="background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; border: none; padding: 14px 22px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 20px rgba(0,230,118,0.5); display: flex; align-items: center; gap: 8px; font-size: 15px;">
+    🤖 <span>MadzinuAI</span>
+  </button>
+
+  <div id="madzinu-ai-box" style="display: none; position: absolute; bottom: 65px; right: 0; width: 340px; background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: #fff; overflow: hidden;">
+    <div style="background: #1e293b; padding: 12px 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155;">
+      <span>🤖 MadzinuAI Executive Secretary</span>
+      <span onclick="toggleMadzinuChat()" style="cursor: pointer; color: #94a3b8; font-size: 18px;">&times;</span>
+    </div>
+    <div id="madzinu-chat-messages" style="height: 250px; padding: 12px; overflow-y: auto; font-size: 13px; line-height: 1.5;">
+      <div style="background: #334155; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px;">
+        Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment opportunities today?
+      </div>
+    </div>
+    <div style="display: flex; padding: 10px; border-top: 1px solid #334155; background: #0f172a;">
+      <input id="madzinu-input" type="text" placeholder="Ask a question or share investment intent..." style="flex: 1; background: #1e293b; border: 1px solid #334155; color: #fff; padding: 8px; border-radius: 6px; font-size: 12px; outline: none;">
+      <button onclick="sendMadzinuMessage()" style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 8px 12px; margin-left: 6px; border-radius: 6px; cursor: pointer; font-size: 12px;">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleMadzinuChat() {
+    const box = document.getElementById("madzinu-ai-box");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+  }
+
+  function sendMadzinuMessage() {
+    const input = document.getElementById("madzinu-input");
+    const msgBox = document.getElementById("madzinu-chat-messages");
+    if (!input.value.trim()) return;
+
+    const userMsg = input.value;
+    msgBox.innerHTML += `<div style="background: #00e676; color: #000; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; text-align: right;">\${userMsg}</div>`;
+    input.value = "";
+    msgBox.scrollTop = msgBox.scrollHeight;
+
+    setTimeout(() => {
+      msgBox.innerHTML += `<div style="background: #334155; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px;">Thank you! Our AI Executive Secretary has recorded your inquiry. An representative will follow up with you shortly.</div>`;
+      msgBox.scrollTop = msgBox.scrollHeight;
+    }, 800);
+  }
+</script>
+
 </body>
 </html>
