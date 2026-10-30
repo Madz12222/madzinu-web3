@@ -149,7 +149,75 @@
         </div>
 
         <div class="section-box" id="login-section">
-            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> <span id="login-header">Contractor Secure Node Login</span></h3>
+            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> <span id="login-header">
+<!-- MadzinuAI Executive Secretary Section (Placed Above Login) -->
+<div id="madzinu-ai-section" style="margin: 20px auto 30px auto; padding: 20px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; color: #fff; font-family: system-ui, sans-serif; max-width: 600px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 10px; margin-bottom: 12px;">
+    <span id="ai-header-title" style="font-weight: bold; color: #6fffe9; font-size: 15px;">🤖 MadzinuAI Executive Secretary</span>
+    <select id="ai-lang-select" onchange="switchAiLang(this.value)" style="background: #0b132b; color: #fff; border: 1px solid #3a506b; border-radius: 4px; font-size: 12px; padding: 4px;">
+      <option value="en">English</option>
+      <option value="ta">தமிழ்</option>
+    </select>
+  </div>
+  <div id="madzinu-messages" style="height: 180px; padding: 10px; overflow-y: auto; font-size: 13px; color: #e0e1dd; line-height: 1.4; background: #060913; border-radius: 8px; margin-bottom: 10px;">
+    <div id="ai-welcome-msg" style="background: #1c2541; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px;">
+      Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?
+    </div>
+  </div>
+  <div style="display: flex; gap: 8px;">
+    <input id="madzinu-user-input" type="text" placeholder="Type your inquiry or investment intent..." style="flex: 1; background: #1c2541; border: 1px solid #3a506b; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none;">
+    <button onclick="handleMadzinuSubmit()" style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 13px;" id="ai-send-btn">Send</button>
+  </div>
+</div>
+
+<script>
+  const aiTranslations = {
+    en: {
+      title: "🤖 MadzinuAI Executive Secretary",
+      welcome: "Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?",
+      placeholder: "Type your inquiry or investment intent...",
+      send: "Send",
+      response: "Thank you for contacting Madzinu Web3 Technologies. Your request has been logged and our team will get in touch with you shortly."
+    },
+    ta: {
+      title: "🤖 மட்சினு AI நிர்வாக செயலாளர்",
+      welcome: "மட்சினு வெப்3 டெக்னாலஜிஸ் நிறுவனத்திற்கு உங்களை வரவேற்கிறோம்! கணினி தொகுப்புகள் அல்லது முதலீட்டு விவரங்கள் குறித்து நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?",
+      placeholder: "உங்கள் கேள்வியைத் தட்டச்சு செய்க...",
+      send: "அனுப்பு",
+      response: "மட்சினு வெப்3 டெக்னாலஜிஸ் தொடர்புகொண்டதற்கு நன்றி. உங்கள் கோரிக்கை பதிவு செய்யப்பட்டது, விரைவில் எங்கள் குழு உங்களைத் தொடர்பு கொள்ளும்."
+    }
+  };
+
+  let currentLang = "en";
+
+  function switchAiLang(lang) {
+    currentLang = lang;
+    const t = aiTranslations[lang];
+    document.getElementById("ai-header-title").innerText = t.title;
+    document.getElementById("ai-welcome-msg").innerText = t.welcome;
+    document.getElementById("madzinu-user-input").placeholder = t.placeholder;
+    document.getElementById("ai-send-btn").innerText = t.send;
+  }
+
+  function handleMadzinuSubmit() {
+    const input = document.getElementById("madzinu-user-input");
+    const container = document.getElementById("madzinu-messages");
+    const text = input.value.trim();
+    if (!text) return;
+
+    container.innerHTML += `<div style="background: #00e676; color: #000; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px; text-align: right; font-weight: 500;">\${text}</div>`;
+    input.value = "";
+    container.scrollTop = container.scrollHeight;
+
+    setTimeout(() => {
+      const t = aiTranslations[currentLang];
+      container.innerHTML += `<div style="background: #1c2541; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px;">\${t.response}</div>`;
+      container.scrollTop = container.scrollHeight;
+    }, 600);
+  }
+</script>
+
+Contractor Secure Node Login</span></h3>
             <div style="display: flex; gap: 8px;">
                 <input type="tel" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
                 <button onclick="requestOtpDirect()" style="background: #6366f1; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Login</button>
@@ -515,7 +583,7 @@
 
 
 <!-- MadzinuAI Static Assistant Section (Placed Below Login) -->
-<div id="madzinu-ai-section" style="margin: 30px auto; padding: 20px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; color: #fff; font-family: system-ui, sans-serif; max-width: 600px;">
+<div id="" style="margin: 30px auto; padding: 20px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; color: #fff; font-family: system-ui, sans-serif; max-width: 600px;">
   <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 10px; margin-bottom: 12px;">
     <span id="ai-header-title" style="font-weight: bold; color: #6fffe9; font-size: 15px;">🤖 MadzinuAI Executive Secretary</span>
     <select id="ai-lang-select" onchange="switchAiLang(this.value)" style="background: #0b132b; color: #fff; border: 1px solid #3a506b; border-radius: 4px; font-size: 12px; padding: 4px;">
