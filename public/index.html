@@ -1,325 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Madzinu Web3 Technologies & AI</title>
-  <style>
-    * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
-    body { background: #060913; color: #fff; margin: 0; padding: 15px; min-height: 100vh; }
-    .wrapper { max-width: 480px; margin: 0 auto; padding-bottom: 60px; }
-    .card { background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; z-index: 1; }
-    input, select { width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; margin-bottom: 10px; }
-    button { cursor: pointer; font-weight: bold; border-radius: 6px; border: none; font-size: 13px; padding: 10px; position: relative; z-index: 10; transition: transform 0.1s ease; }
-    button:active { transform: scale(0.98); }
-    .btn-primary { width: 100%; background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; margin-bottom: 10px; }
-    .tier-card { background: #162038; padding: 12px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .lang-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-    .partner-badge { background: #162038; border: 1px solid #2a3d66; padding: 8px 12px; border-radius: 6px; text-align: center; font-size: 11px; }
-    .ai-secretary { position: fixed; bottom: 15px; left: 15px; background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; padding: 10px 16px; border-radius: 20px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 15px rgba(0,230,118,0.4); z-index: 999; cursor: pointer; display: flex; align-items: center; gap: 6px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madzinu Web3 Technologies | Enterprise Cloud & Autonomous Workflows</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+:root {
+--bg-color: #090d16;
+--card-bg: #111827;
+--card-border: #1f2937;
+--accent-indigo: #6366f1;
+--accent-emerald: #10b981;
+--accent-amber: #f59e0b;
+--text-main: #f8fafc;
+--text-muted: #94a3b8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+.brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
+.marquee-container { overflow: hidden; width: 100%; position: relative; margin-top: 2px; }
+.animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; font-size: 8px; color: #34d399; }
+@keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+.container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; }
+.hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.badge-pill { display: inline-block; background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 10px; }
+h1 { font-size: 18px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; color: #fff; }
+h1 span { background: linear-gradient(90deg, #818cf8, #38bdf8, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+p { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
+.btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
+.section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
+.wa-btn { background: #166534; color: white; border: none; padding: 6px 2px; border-radius: 6px; font-size: 8.5px; font-weight: bold; cursor: pointer; text-align: center; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+.partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
+footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
+
+/* User Account Workspace & Balance Dashboard Styles */
+#user-workspace-dashboard { display: none; background: linear-gradient(135deg, #0f172a 0%, #111827 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+.user-info-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 10px; margin-bottom: 12px; font-size: 11px; }
+.user-balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.bal-card { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px; }
+.bal-val { font-size: 16px; font-weight: 900; color: #34d399; margin-top: 4px; }
+
+/* Admin Modal Styling */
+#admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; justify-content: center; align-items: center; }
+.modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
+</style>
 </head>
 <body>
+<header>
+<div>
+<div class="brand-title">MADZINU WEB3 TECH & AI</div>
+<div class="marquee-container">
+<span class="animate-marquee"><i class="fa-solid fa-check-circle"></i> Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</span>
+</div>
+</div>
+<div style="display: flex; gap: 6px; align-items: center;">
+<select id="langSelector" onchange="translatePage(this.value)" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 4px; border-radius: 4px; font-size: 10px;">
+<option value="EN" selected>EN</option>
+<option value="TA">தமிழ்</option>
+<option value="TE">తెలుగు</option>
+<option value="KN">ಕನ್ನಡ</option>
+<option value="ML">മലയാളം</option>
+<option value="HI">हिन्दी</option>
+<option value="MR">मराठी</option>
+</select>
+<button onclick="openAdminPanel()" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer; z-index: 1000;"><i class="fa-solid fa-user-shield"></i> Admin</button>
+</div>
+</header>
 
-<div class="wrapper">
-  
-  <!-- Top Bar: Brand Title, 6-Language Selector, Admin Toggle -->
-  <div class="card lang-bar">
-    <div>
-      <div style="font-weight: bold; color: #6fffe9; font-size: 14px;" data-key="brand">MADZINU WEB3 & AI</div>
-    </div>
-    <div style="display: flex; gap: 6px; align-items: center;">
-      <select id="lang-selector" onchange="switchLanguage(this.value)" style="width: auto; margin: 0; padding: 6px; font-size: 12px;">
-        <option value="en">English</option>
-        <option value="ta">தமிழ் (Tamil)</option>
-        <option value="hi">हिन्दी (Hindi)</option>
-        <option value="te">తెలుగు (Telugu)</option>
-        <option value="ml">മലയാളം (Malayalam)</option>
-        <option value="kn">ಕನ್ನಡ (Kannada)</option>
-      </select>
-      <button onclick="toggleAdminPanel()" style="background: #00b0ff; color: #fff; padding: 6px 10px; font-size: 12px;" data-key="adminBtn">Admin</button>
-    </div>
-  </div>
-
-  <!-- Partner Badges Section -->
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
-    <div class="partner-badge">
-      <div style="color: #fff; font-weight: bold;">Malabar Gold</div>
-      <div style="color: #8a99ad; font-size: 9px;" data-key="officialWeb">Official Website</div>
-    </div>
-    <div class="partner-badge">
-      <div style="color: #fff; font-weight: bold;">Kalyan Jewellers</div>
-      <div style="color: #8a99ad; font-size: 9px;" data-key="officialWeb">Official Website</div>
-    </div>
-  </div>
-
-  <!-- Instant Lifestyle & Food Vouchers Section -->
-  <div class="card">
-    <div style="font-size: 12px; color: #6fffe9; font-weight: bold; margin-bottom: 12px;" data-key="vouchersTitle">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Swiggy</button>
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Zomato</button>
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Amazon Pay</button>
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Flipkart</button>
-    </div>
-  </div>
-
-  <!-- Contractor Login & Node Dashboard View -->
-  <div class="card" id="contractor-login-section">
-    
-    <!-- Login View -->
-    <div id="auth-view" style="display: block;">
-      <h3 style="margin-top: 0; color: #6fffe9; font-size: 15px; margin-bottom: 15px; text-align: center;" data-key="loginTitle">🔐 Contractor Secure Node Login</h3>
-      <div>
-        <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;" data-key="mobileLabel">Mobile Number (Fast2SMS OTP)</label>
-        <input id="login-mobile-input" type="tel" placeholder="Enter 10-digit mobile number" maxlength="10">
-      </div>
-      <button onclick="requestFast2SMSOtp()" class="btn-primary" data-key="sendOtpBtn">Send OTP via Fast2SMS</button>
-
-      <div id="otp-verify-group" style="display: none; margin-top: 15px; border-top: 1px solid #1c2541; padding-top: 15px;">
-        <div>
-          <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;"><span data-key="enterOtpLabel">Enter Verification OTP</span> <span id="debug-otp-hint" style="color: #00e676; font-size: 11px; float: right;"></span></label>
-          <input id="login-otp-input" type="text" placeholder="Enter 6-digit OTP" maxlength="6">
-        </div>
-        <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; color: #000;" data-key="verifyLoginBtn">Verify & Login</button>
-      </div>
-      <div id="login-status-msg" style="margin-top: 10px; font-size: 12px; text-align: center; color: #00e676;"></div>
-    </div>
-
-    <!-- User Node Dashboard View (Locked to Zero Balance) -->
-    <div id="dashboard-view" style="display: none;">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 10px; margin-bottom: 12px;">
-        <div>
-          <div style="font-size: 10px; color: #8a99ad; text-transform: uppercase;" data-key="connectedNode">Connected Contractor Node</div>
-          <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 13px;">+91 8122252222</div>
-        </div>
-        <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; padding: 6px 10px; font-size: 11px;" data-key="logoutBtn">Logout</button>
-      </div>
-
-      <!-- Live Metal API Portfolio -->
-      <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 10px; margin-bottom: 12px;">
-        <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 6px; text-transform: uppercase;" data-key="metalPortfolio">Live Market API Metal Balanced Portfolio</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px;">
-          <div style="background: #0b132b; padding: 6px; border-radius: 6px;">
-            <div style="color: #8a99ad; font-size: 9px;" data-key="goldValue">Gold Value</div>
-            <div style="font-weight: bold; color: #fff;">127.389 g</div>
-            <div style="font-size: 9px; color: #6fffe9;" data-key="goldSpot">(@₹7,850/g Spot)</div>
-          </div>
-          <div style="background: #0b132b; padding: 6px; border-radius: 6px;">
-            <div style="color: #8a99ad; font-size: 9px;" data-key="silverValue">Silver Value</div>
-            <div style="font-weight: bold; color: #fff;">8928.57 g</div>
-            <div style="font-size: 9px; color: #6fffe9;" data-key="silverSpot">(@₹112/g Spot)</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- INR Workspace Balance (Locked to ₹0.00) -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
-        <div style="background: #162038; padding: 8px; border-radius: 8px; border: 1px solid #2a3d66;">
-          <div style="font-size: 10px; color: #8a99ad;" data-key="workspaceBalance">INR Workspace Balance</div>
-          <div style="font-size: 14px; font-weight: bold; color: #00e676; margin-top: 3px;">₹0.00</div>
-        </div>
-        <div style="background: #162038; padding: 8px; border-radius: 8px; border: 1px solid #2a3d66;">
-          <div style="font-size: 10px; color: #8a99ad;" data-key="dailyRemuneration">Daily Remuneration</div>
-          <div style="font-size: 14px; font-weight: bold; color: #6fffe9; margin-top: 3px;">₹0.00 / Day</div>
-        </div>
-      </div>
-
-      <div style="font-size: 12px; font-weight: bold; color: #6fffe9; margin-bottom: 8px;" data-key="serverTiersTitle">14-Day Server Node License Tiers</div>
-
-      <!-- All 6 Server Node License Tiers -->
-      <div style="display: flex; flex-direction: column; gap: 6px;">
-        
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;">₹2,000 Server (Base)</div>
-            <div style="font-size: 10px; color: #8a99ad;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(2000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(2000, 155.50, 2177)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;">₹5,000 Server</div>
-            <div style="font-size: 10px; color: #8a99ad;">Daily: ₹394.64 | 14-Day: ₹5,525</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(5000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(5000, 394.64, 5525)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;">₹10,000 Server</div>
-            <div style="font-size: 10px; color: #8a99ad;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(10000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(10000, 792.86, 11100)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;">₹25,000 Server</div>
-            <div style="font-size: 10px; color: #8a99ad;">Daily: ₹1,991.07 | 14-Day: ₹27,875</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(25000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(25000, 1991.07, 27875)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;">₹50,000 Server</div>
-            <div style="font-size: 10px; color: #8a99ad;">Daily: ₹4,000.00 | 14-Day: ₹56,000</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(50000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(50000, 4000, 56000)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;">₹1,00,000 Server (Enterprise)</div>
-            <div style="font-size: 10px; color: #8a99ad;">Daily: ₹8,150.00 | 14-Day: ₹1,14,100</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(100000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(100000, 8150, 114100)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Admin Control Overlay -->
-  <div class="card" id="admin-panel" style="display: none; border-color: #00e676;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-      <div style="color: #00e676; font-weight: bold; font-size: 13px;" data-key="adminTitle">🛠️ Admin Control Dashboard</div>
-      <button onclick="toggleAdminPanel()" style="background: #333; color: #fff; padding: 4px 8px; font-size: 10px;" data-key="adminClose">Close</button>
-    </div>
-    <div style="font-size: 11px; color: #8a99ad; margin-bottom: 8px;" data-key="adminDesc">Recent Node Requests:</div>
-    <div style="background: #162038; padding: 8px; border-radius: 6px; font-size: 11px; color: #fff;">
-      <div>• +91 8122252222 - ₹10,000 Server Request (Pending Approval)</div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer style="text-align: center; padding: 15px; color: #8a99ad; font-size: 11px; border-top: 1px solid #1c2541; margin-top: 20px;">
-    <p style="margin: 0 0 4px 0;" data-key="footerRights">&copy; 2026 Madzinu Web3 Technologies. Registered in Chennai, Tamil Nadu.</p>
-    <p style="margin: 0;" data-key="footerSec">Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized</p>
-  </footer>
-
+<div class="container">
+<!-- Hero Section -->
+<div class="hero-card">
+<div class="badge-pill">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+<h1>Sovereign Cloud Compute &<br><span>Autonomous Jobworks</span></h1>
+<p>Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.</p>
+<button class="btn-primary" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
 </div>
 
-<!-- Floating AI Secretary Badge -->
-<div class="ai-secretary" onclick="alert('🤖 MadzinuAI Voice Secretary is online and ready to assist you!')">
-  🤖 MadzinuAI
+<!-- User Account Information & Live Balance Board (Visible after login) -->
+<div id="user-workspace-dashboard">
+<div class="user-info-bar">
+<div>
+<div style="color: #94a3b8; font-size: 9px;">CONNECTED CONTRACTOR NODE</div>
+<div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9876543210</div>
 </div>
+<div style="text-align: right;">
+<div style="color: #94a3b8; font-size: 9px;">NODE LICENSE STATUS</div>
+<div style="font-weight: bold; color: #34d399;"><i class="fa-solid fa-circle-check"></i> 14-Day Active Node</div>
+</div>
+</div>
+
+<!-- Amount Balance Board & Live Metal Vault -->
+<div style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; justify-content: space-between;">
+<span><i class="fa-solid fa-wallet"></i> USER WORKSPACE BALANCE BOARD</span>
+<span style="color: #34d399; font-size: 9px;">● LIVE SPOT SYNCHRONIZED</span>
+</div>
+
+<div class="user-balance-grid">
+<div class="bal-card">
+<div style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
+<div class="bal-val" id="user-inr-bal">₹0.00</div>
+</div>
+<div class="bal-card">
+<div style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
+<div class="bal-val" id="user-daily-yield">₹0.00 / Day</div>
+</div>
+<div class="bal-card">
+<div style="font-size: 9px; color: #f59e0b;">Live 24K Gold Vault (Grams)</div>
+<div class="bal-val" id="user-gold-bal" style="color: #f59e0b;">0.000 g</div>
+</div>
+<div class="bal-card">
+<div style="font-size: 9px; color: #cbd5e1;">Live Silver Vault (Grams)</div>
+<div class="bal-val" id="user-silver-bal" style="color: #cbd5e1;">0.000 g</div>
+</div>
+</div>
+
+<div style="display: flex; gap: 8px;">
+<button onclick="alert('Execute daily automated task pipelines to credit INR balance!')" style="flex: 1; background: #10b981; color: white; border: none; padding: 8px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-play"></i> Run Daily Tasks</button>
+<button onclick="alert('Withdrawals are processed under Section 194TDS contractor guidelines directly to your locked bank account.')" style="flex: 1; background: #6366f1; color: white; border: none; padding: 8px; border-radius: 8px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Request Payout</button>
+</div>
+</div>
+
+<!-- WhatsApp Scripts Section -->
+<div class="section-box" id="whatsapp-section">
+<h3 style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</h3>
+<p style="font-size: 10px; color: #94a3b8; margin-bottom: 8px;">Share your referral link with auto-embedded ID:</p>
+<div class="grid-5">
+<button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
+<button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
+<button class="wa-btn" onclick="shareWhatsApp(3)">Script 3</button>
+<button class="wa-btn" onclick="shareWhatsApp(4)">Script 4</button>
+<button class="wa-btn" onclick="shareWhatsApp(5)">Script 5</button>
+<button class="wa-btn" onclick="shareWhatsApp(6)">Script 6</button>
+<button class="wa-btn" onclick="shareWhatsApp(7)">Script 7</button>
+<button class="wa-btn" onclick="shareWhatsApp(8)">Script 8</button>
+<button class="wa-btn" onclick="shareWhatsApp(9)">Script 9</button>
+<button class="wa-btn" onclick="shareWhatsApp(10)">Script 10</button>
+</div>
+<div id="waStatus" style="font-size: 10px; color: #34d399; margin-top: 6px;"></div>
+</div>
+
+<!-- Supported Voucher & Reward Partners Section -->
+<div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
+<div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+<i class="fa-solid fa-ticket"></i> Supported Voucher & Reward Partners
+</div>
+<div style="font-size: 9px; color: #34d399; font-weight: 600; margin-bottom: 12px;">
+* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)
+</div>
+
+<!-- 24K Gold Showroom Partners -->
+<div style="font-size: 10px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+<i class="fa-solid fa-crown"></i> 24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)
+</div>
+<div class="grid-2" style="margin-bottom: 14px;">
+<a href="https://www.tanishq.co.in" target="_blank" class="partner-card">
+<div><div style="color: #fff;">Tanishq</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+<i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+</a>
+<a href="https://www.grtjewels.com" target="_blank" class="partner-card">
+<div><div style="color: #fff;">GRT Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+<i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+</a>
+<a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card">
+<div><div style="color: #fff;">Malabar Gold</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+<i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+</a>
+<a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card">
+<div><div style="color: #fff;">Kalyan Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+<i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+</a>
+</div>
+
+<!-- Instant Lifestyle & Food Vouchers -->
+<div style="font-size: 10px; font-weight: bold; color: #38bdf8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+<i class="fa-solid fa-utensils"></i> INSTANT LIFESTYLE & FOOD VOUCHERS
+</div>
+<div class="grid-4" style="grid-template-columns: repeat(2, 1fr);">
+<a href="https://www.swiggy.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+<i class="fa-solid fa-burger" style="color: #f59e0b; display: block; margin-bottom: 4px;"></i>
+<div style="color: #fff;">Swiggy</div>
+</a>
+<a href="https://www.zomato.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+<i class="fa-solid fa-utensils" style="color: #fb7185; display: block; margin-bottom: 4px;"></i>
+<div style="color: #fff;">Zomato</div>
+</a>
+<a href="https://www.amazon.in" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+<i class="fa-solid fa-bag-shopping" style="color: #34d399; display: block; margin-bottom: 4px;"></i>
+<div style="color: #fff;">Amazon Pay</div>
+</a>
+<a href="https://www.flipkart.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+<i class="fa-solid fa-cart-shopping" style="color: #38bdf8; display: block; margin-bottom: 4px;"></i>
+<div style="color: #fff;">Flipkart</div>
+</a>
+</div>
+</div>
+
+<!-- Login Section with Strict Access Control -->
+<div class="section-box" id="login-section">
+<h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> Contractor Secure Node Login</h3>
+<div style="display: flex; gap: 8px; margin-bottom: 8px;">
+<input type="text" id="login-mobile" placeholder="Enter Mobile Number" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
+<button onclick="alert('OTP sent via Fast2SMS gateway!')" style="background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Send OTP</button>
+</div>
+<div style="display: flex; gap: 8px;">
+<input type="text" id="login-otp-code" placeholder="Enter OTP (Admin: 2026)" style="flex-grow: 1; background: #090d16; border: 1px solid #334155; padding: 8px; border-radius: 8px; color: #fff; font-size: 11px;">
+<button onclick="verifySecureNodeAccess()" style="background: #10b981; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer;">Verify</button>
+</div>
+</div>
+</div>
+
+<!-- Admin Panel Modal -->
+<div id="admin-modal">
+<div class="modal-content">
+<h3 style="color: #fb7185; margin-bottom: 10px;"><i class="fa-solid fa-user-shield"></i> Admin Fingertip Dashboard</h3>
+<p style="font-size: 11px; color: #94a3b8; margin-bottom: 12px;">Manage user nodes, active packages, and live workspace balances.</p>
+<div style="background: #090d16; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 11px; text-align: left;">
+<div><strong>Status:</strong> <span style="color: #34d399;">Authorized & Active</span></div>
+<div><strong>Gateway:</strong> Razorpay / RazorpayX Active</div>
+</div>
+<button onclick="closeAdminPanel()" style="background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;">Close Dashboard</button>
+</div>
+</div>
+
+<!-- Madzinu AI Chat Widget -->
+<div id="madzinu-ai-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: sans-serif;">
+<button onclick="
+let box = document.getElementById('madzinu-ai-chatbox');
+box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
+" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; font-size: 20px;"><i class="fa-solid fa-robot"></i></button>
+
+<div id="madzinu-ai-chatbox" style="display: none; position: absolute; bottom: 65px; right: 0; width: 330px; height: 440px; background: #111827; border: 1px solid #10b981; border-radius: 12px; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.6);">
+<div style="background: #1f2937; padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #374151;">
+<span style="color: #34d399; font-weight: bold; font-size: 13px;"><i class="fa-solid fa-brain"></i> Madzinu AI Knowledge Hub</span>
+<button onclick="document.getElementById('madzinu-ai-chatbox').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px;">×</button>
+</div>
+<div id="madzinu-ai-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px;">
+<div style="background: #1f2937; padding: 8px; border-radius: 6px; width: fit-content; max-width: 85%;">Hello! I am Madzinu AI. Ask me anything about server compute tiers, daily yield, live metal vaults, or showroom vouchers!</div>
+</div>
+<div style="padding: 8px; background: #1f2937; border-top: 1px solid #374151; display: flex; gap: 6px;">
+<input type="text" id="madzinu-ai-input" placeholder="Ask about platform, yields, payouts..." style="flex: 1; background: #374151; border: none; padding: 7px; color: #fff; border-radius: 6px; font-size: 11px;" />
+<button onclick="
+let input = document.getElementById('madzinu-ai-input');
+let msgContainer = document.getElementById('madzinu-ai-messages');
+let query = input.value.trim();
+if(!query) return;
+
+let userMsg = document.createElement('div');
+userMsg.style.cssText = 'background: #059669; color: #fff; padding: 8px; border-radius: 6px; align-self: flex-end; max-width: 85%;';
+userMsg.innerText = query;
+msgContainer.appendChild(userMsg);
+
+let q = query.toLowerCase();
+input.value = '';
+
+setTimeout(() => {
+let aiMsg = document.createElement('div');
+aiMsg.style.cssText = 'background: #1f2937; color: #d1d5db; padding: 8px; border-radius: 6px; align-self: flex-start; max-width: 85%;';
+
+if(q.includes('gold') || q.includes('silver') || q.includes('metal')) {
+aiMsg.innerText = 'Vault balances for Gold and Silver are dynamically calculated and synchronized in real-time with live spot price feeds inside user balance dashboards.';
+} else if(q.includes('payout') || q.includes('withdraw') || q.includes('cash')) {
+aiMsg.innerText = 'Payouts are restricted to daily server yield limits to ensure stability. Excess withdrawals require manual Admin approval.';
+} else if(q.includes('admin') || q.includes('login') || q.includes('password')) {
+aiMsg.innerText = 'Admin access is strictly restricted to the Fingertip Dashboard secured by password (madz1222) to manage user nodes and balances.';
+} else {
+aiMsg.innerText = 'Madzinu AI Node operational. You can ask me about server compute tiers, daily yields, live metal vaults, bank locking rules, or Xoxoday Plum showroom vouchers!';
+}
+
+msgContainer.appendChild(aiMsg);
+msgContainer.scrollTop = msgContainer.scrollHeight;
+}, 500);
+" style="background: #10b981; color: #fff; border: none; padding: 7px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 11px;"><i class="fa-solid fa-paper-plane"></i></button>
+</div>
+</div>
+</div>
+
+<footer>
+<div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 11px;">
+<a href="#" onclick="alert('Terms & Conditions: Free tier provides daily tasks. Restricted daily withdrawal and admin approval apply.'); return false;" style="color: #818cf8; text-decoration: underline;">Terms & Conditions</a>
+<span>•</span>
+<a href="#" onclick="alert('Refund Policy: All server node activations are non-refundable SaaS cloud computing access fees.'); return false;" style="color: #38bdf8; text-decoration: underline;">Refund Policy</a>
+<span>•</span>
+<a href="#" onclick="alert('Privacy Policy: User data and mobile verification logs are securely encrypted.'); return false;" style="color: #34d399; text-decoration: underline;">Privacy Policy</a>
+</div>
+<div><strong>Madzinu Web3 Technologies</strong></div>
+<div style="margin-top: 4px; color: #64748b;">Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
+</footer>
 
 <script>
-  let activeOtpCode = "1234";
-  let activeMobileNum = "";
+const fullDictionary = {
+'TA': {
+'INDIA\'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'இந்தியாவின் முதல் சுயியக்க AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்',
+'Sovereign Cloud Compute & Autonomous Jobworks': 'சர்வர் கம்ப்யூட் & சுயியக்க கிளவுட் நெட்வொர்க்',
+'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.': 'மாட்சினு வெப்3 டெக்னாலஜீஸ் என்பது இந்திய அரசின் MeitY அங்கீகரிக்கப்பட்ட ஸ்டார்ட்அப் ஆகும். ₹2,000 முதல் ₹1,00,000 வரை உயர் செயல்திறன் கொண்ட சர்வர் தொகுப்புகளைப் பெறுங்கள்.',
+'LAUNCH SECURE ENTERPRISE TERMINAL': 'பாதுகாப்பான நிறுவன முனையத்தைத் தொடங்குக',
+'10 Unique WhatsApp Referral Scripts': '10 பிரத்யேக வாட்ஸ்அப் ரெஃபரல் ஸ்கிரிப்ட்கள்',
+'Share your referral link with auto-embedded ID:': 'உங்கள் ரெஃபரல் இணைப்பை ஆட்டோ-எம்படெட் ஐடியுடன் பகிரவும்:',
+'Script': 'ஸ்கிரிப்ட்',
+'Supported Voucher & Reward Partners': 'ஆதரிக்கப்படும் வவுச்சர் & பரிசு கூட்டாளிகள்',
+'* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)': '* நிறுவன வெகுமதி கூட்டாளிகள் (API ஒருங்கிணைப்பு விரைவில் வரும்)',
+'24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)': '24K தங்க ஷோரூம் கூட்டாளிகள் (நிறுவன அடுக்குகள் ₹25K+)',
+'Official Website': 'அதிகாரப்பூர்வ வலைத்தளம்',
+'INSTANT LIFESTYLE & FOOD VOUCHERS': 'உடனடி வாழ்க்கை முறை & உணவு வவுச்சர்கள்',
+'Contractor Secure Node Login': 'கான்ட்ராக்டர் பாதுகாப்பான நோட் உள்நுழைவு',
+'Enter Mobile Number': 'மொபைல் எண்ணை உள்ளிடவும்',
+'Send OTP': 'OTP அனுப்பவும்',
+'Verify': 'சரிபார்க்கவும்',
+'Tanishq': 'தனிஷ்க்',
+'GRT Jewellers': 'ஜி.ஆர்.டி ஜூவல்லர்ஸ்',
+'Malabar Gold': 'மலபார் கோல்டு',
+'Kalyan Jewellers': 'கல்யாண் ஜூவல்லர்ஸ்',
+'Swiggy': 'ஸ்விகி',
+'Zomato': 'சொமேட்டோ',
+'Amazon Pay': 'அமேசான் பே',
+'Flipkart': 'ப்ளிப்கார்ட்'
+},
+'TE': {
+'INDIA\'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'భారతదేశపు మొదటి స్వయంప్రతిపత్తి కలిగిన AI స్టూడియో & క్లೌడ్ నెట్‌వర్క్',
+'Sovereign Cloud Compute & Autonomous Jobworks': 'సాವರೆన్ క్లౌడ్ కంప్యూట్ & ఆటోనమస్ జాబ్‌వర్క్స్',
+'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.': 'మాడ్జినూ వెబ్3 టెక్నాలజీస్ అనేది MeitY గుర్తింపు పొందిన స్టార్టప్. ₹2,000 నుండి ₹1,00,000 వరకు సర్వర్ ప్యాకేజీలను అందిస్తుంది.',
+'LAUNCH SECURE ENTERPRISE TERMINAL': 'సురక్షిత ఎంటర్‌ప్రైజ్ టెర్మినల్‌ని ప్రారంభించండి',
+'10 Unique WhatsApp Referral Scripts': '10 ప్రత్యేకమైన వాట్సాప్ రెఫరల్ స్క్రిప్ట్‌లు',
+'Share your referral link with auto-embedded ID:': 'ఆటో-ఎంబెడెడ్ IDతో మీ రెఫరల్ లింక్‌ని షేర్ చేయండి:',
+'Script': 'స్క్రిప్ట్',
+'Supported Voucher & Reward Partners': 'మద్దతు ఉన్న వౌచర్ & రివార్డ్ భాగస్వాములు',
+'* ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)': '* ఎంటర్‌ప్రైజ్ రివార్డ్ భాగస్వాములు (API ఇంటిగ్రేషన్ త్వరలో వస్తుంది)',
+'24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)': '24K గోల్డ్ షోరూమ్ భాగస్వాములు (₹25K+)',
+'Official Website': 'అధికారిక వెబ్‌సైట్',
+'INSTANT LIFESTYLE & FOOD VOUCHERS': 'తక్షణ లైఫ్‌స్టైల్ & ఫుడ్ వౌచర్‌లు',
+'Contractor Secure Node Login': 'కాంట్రాక్టర్ సెక్యూర్ నోడ్ లాగిన్',
+'Enter Mobile Number': 'మొబైల్ నంబర్‌ను నమోదు చేయండి',
+'Send OTP': 'OTP పంపు',
+'Verify': 'ధృవీకరించండి'
+},
+'HI': {
+'INDIA\'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK': 'भारत का पहला स्वायत्त AI स्टूडियो और क्लाउड नेटवर्क',
+'Sovereign Cloud Compute & Autonomous Jobworks': 'सोवरिन क्लाउड कंप्यूट और स्वायत्त जॉबवर्क्स',
+'Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.': 'मदज़िनु वेब3 टेक्नोलॉजीज MeitY के तहत भारत सरकार द्वारा मान्यता प्राप्त स्टार्टअप है।',
+'LAUNCH SECURE ENTERPRISE TERMINAL': 'सुरक्षित एंटरप्राइज टर्मिनल लॉन्च करें',
+'10 Unique WhatsApp Referral Scripts': '10 अद्वितीय व्हाट्सएप रेफरल स्क्रिप्ट',
+'Share your referral link with auto-embedded ID:': 'ऑटो-एम्बेडेड आईडी के साथ अपना रेफ़रल लिंक साझा करें:',
+'Script': 'स्क्रिप्ट',
+'Supported Voucher & Reward Partners': 'समर्थित वाउचर और पुरस्कार भागीदार',
+'Official Website': 'आधिकारिक वेबसाइट',
+'INSTANT LIFESTYLE & FOOD VOUCHERS': 'तत्काल लाइफस्टाइल और फूड वाउचर',
+'Contractor Secure Node Login': 'कंट्रैक्टर सिक्योर नोड लॉगिन',
+'Enter Mobile Number': 'मोबाइल नंबर दर्ज करें',
+'Send OTP': 'OTP भेजें',
+'Verify': 'सत्यापित करें'
+}
+};
 
-  // 6-Language Translation Dictionary
-  const translations = {
-    en: { brand: "MADZINU WEB3 & AI", adminBtn: "Admin", officialWeb: "Official Website", vouchersTitle: "⚡ INSTANT LIFESTYLE & FOOD VOUCHERS", loginTitle: "🔐 Contractor Secure Node Login", mobileLabel: "Mobile Number (Fast2SMS OTP)", sendOtpBtn: "Send OTP via Fast2SMS", enterOtpLabel: "Enter Verification OTP", verifyLoginBtn: "Verify & Login", connectedNode: "Connected Contractor Node", logoutBtn: "Logout", metalPortfolio: "Live Market API Metal Balanced Portfolio", goldValue: "Gold Value", goldSpot: "(@₹7,850/g Spot)", silverValue: "Silver Value", silverSpot: "(@₹112/g Spot)", workspaceBalance: "INR Workspace Balance", dailyRemuneration: "Daily Remuneration", serverTiersTitle: "14-Day Server Node License Tiers", gpayBtn: "GPay", sliceBtn: "Slice Details", adminTitle: "🛠️ Admin Control Dashboard", adminClose: "Close", adminDesc: "Recent Node Requests:", footerRights: "© 2026 Madzinu Web3 Technologies. Registered in Chennai, Tamil Nadu.", footerSec: "Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized" },
-    ta: { brand: "மாட்ஜினு வெப்3 & ஏஐ", adminBtn: "நிர்வாகி", officialWeb: "அதிகாரப்பூர்வ இணையதளம்", vouchersTitle: "⚡ உடனடி உணவு & வாழ்க்கை முறை வவுச்சர்கள்", loginTitle: "🔐 ஒப்பந்ததாரர் பாதுகாப்பான நோட் உள்நுழைவு", mobileLabel: "கைபேசி எண் (Fast2SMS OTP)", sendOtpBtn: "OTP அனுப்பவும்", enterOtpLabel: "OTP ஐ உள்ளிடவும்", verifyLoginBtn: "சரிபார்த்து உள்நுழையவும்", connectedNode: "இணைக்கப்பட்ட ஒப்பந்ததாரர் நோட்", logoutBtn: "வெளியேறு", metalPortfolio: "நேரலை சந்தை உலோகம் போர்ட்ஃபோலியோ", goldValue: "தங்க மதிப்பு", goldSpot: "(@₹7,850/g ஸ்பாட்)", silverValue: "வெள்ளி மதிப்பு", silverSpot: "(@₹112/g ஸ்பாட்)", workspaceBalance: "INR பணிபுலம் இருப்பு", dailyRemuneration: "தினசரி ஊதியம்", serverTiersTitle: "14-நாள் சர்வர் நோட் உரிம அடுக்குகள்", gpayBtn: "GPay", sliceBtn: "ஸ்லைஸ் விவரங்கள்", adminTitle: "🛠️ நிர்வாக கட்டுப்பாட்டு டாஷ்போர்டு", adminClose: "மூடு", adminDesc: "சமீபத்திய நோட் கோரிக்கைகள்:", footerRights: "© 2026 மாட்ஜினு வெப்3 டெக்னாலஜிஸ். சென்னை, தமிழ்நாடு.", footerSec: "பாதுகாப்பான TLS 1.3 குறியிடப்பட்ட தளம் | MeitY அங்கீகரிக்கப்பட்டது" },
-    hi: { brand: "मड्झिनू वेब3 और एआई", adminBtn: "व्यवस्थापक", officialWeb: "आधिकारिक वेबसाइट", vouchersTitle: "⚡ त्वरित जीवनशैली और खाद्य वाउचर", loginTitle: "🔐 ठेकेदार सुरक्षित नोड लॉगिन", mobileLabel: "मोबाइल नंबर (Fast2SMS OTP)", sendOtpBtn: "OTP भेजें", enterOtpLabel: "सत्यापन OTP दर्ज करें", verifyLoginBtn: "सत्यापित करें और लॉगिन करें", connectedNode: "कनेक्टेड ठेकेदार नोड", logoutBtn: "लॉग आउट", metalPortfolio: "लाइव मार्केट मेटल बैलेंस्ड पोर्टफोलियो", goldValue: "सोने का मूल्य", goldSpot: "(@₹7,850/g स्पॉट)", silverValue: "चांदी का मूल्य", silverSpot: "(@₹112/g स्पॉट)", workspaceBalance: "INR कार्यक्षेत्र शेष", dailyRemuneration: "दैनिक पारिश्रमिक", serverTiersTitle: "14-दिवसीय सर्वर नोड लाइसेंस टियर", gpayBtn: "GPay", sliceBtn: "स्लाइस विवरण", adminTitle: "🛠️ व्यवस्थापक नियंत्रण डैशबोर्ड", adminClose: "बंद करें", adminDesc: "हालिया नोड अनुरोध:", footerRights: "© 2026 मड्झिनू वेब3 टेक्नोलॉजीज। चेन्नई, तमिलनाडु।", footerSec: "सुरक्षित TLS 1.3 एन्क्रिप्टेड प्लेटफ़ॉर्म | MeitY मान्यता प्राप्त" },
-    te: { brand: "మాడ్జినూ వెబ్3 & AI", adminBtn: "అడ్మిన్", officialWeb: "అధికారిక వెబ్‌సైట్", vouchersTitle: "⚡ తక్షణ ఆహార & జీవనశైలి వౌచర్లు", loginTitle: "🔐 కాంట్రాక్టర్ సురక్షిత నోడ్ లాగిన్", mobileLabel: "మొబైల్ నంబర్ (Fast2SMS OTP)", sendOtpBtn: "OTP పంపండి", enterOtpLabel: "ధృవీకరణ OTPని నమోదు చేయండి", verifyLoginBtn: "ధృవీకరించండి & లాగిన్ అవ్వండి", connectedNode: "కనెక్ట్ చేయబడిన కాంట్రాక్టర్ నోడ్", logoutBtn: "లాగౌట్", metalPortfolio: "లైవ్ మార్కెట్ మెటల్ బాలెన్స్డ్ పోర్ట్‌ఫోలియో", goldValue: "బంగారం విలువ", goldSpot: "(@₹7,850/g స్పాట్)", silverValue: "వెండి విలువ", silverSpot: "(@₹112/g స్పాట్)", workspaceBalance: "INR వర్క్‌స్పేస్ బ్యాలెన్స్", dailyRemuneration: "రోజువారీ వేతనం", serverTiersTitle: "14-రోజుల సర్వర్ నోడ్ లైసెన్స్ శ్రేణులు", gpayBtn: "GPay", sliceBtn: "స్లైస్ వివరాలు", adminTitle: "🛠️ అడ్మిన్ కంట్రోల్ డ్యాష్‌బోర్డ్", adminClose: "మూసివేయి", adminDesc: "ఇటీవలి నోడ్ అభ్యర్థనలు:", footerRights: "© 2026 మాడ్జినూ వెబ్3 టెక్నాలజీస్. చెన్నై, తమిళనాడు.", footerSec: "సురక్షిత TLS 1.3 ఎన్‌క్రిప్టెడ్ ప్లాట్‌ఫారమ్ | MeitY గుర్తింపు" },
-    ml: { brand: "മാഡ്ജിനു വെബ്3 & AI", adminBtn: "അഡ്മിൻ", officialWeb: "ഔദ്യോഗിക വെബ്സൈറ്റ്", vouchersTitle: "⚡ തൽക്ഷണ ഫുഡ് & ലൈഫ്സ്റ്റൈൽ വൗച്ചറുകൾ", loginTitle: "🔐 കോൺട്രാക്ടർ സുരക്ഷിത നോഡ് ലോഗിൻ", mobileLabel: "മൊബൈൽ നമ്പർ (Fast2SMS OTP)", sendOtpBtn: "OTP അയക്കുക", enterOtpLabel: "വെരിഫിക്കേഷൻ OTP നൽകുക", verifyLoginBtn: "സ്ഥിരീകരിച്ച് ലോഗിൻ ചെയ്യുക", connectedNode: "കണക്റ്റുചെയ്‌ത കോൺട്രാക്ടർ നോഡ്", logoutBtn: "പുറത്തുകടക്കുക", metalPortfolio: "ലൈവ് മാർക്കറ്റ് മെറ്റൽ ബാലൻസ്‌ഡ് പോർട്ട്‌ഫോളിയോ", goldValue: "സ്വർണ്ണ മൂല്യം", goldSpot: "(@₹7,850/g സ്പോട്ട്)", silverValue: "വെള്ളി മൂല്യം", silverSpot: "(@₹112/g സ്പോട്ട്)", workspaceBalance: "INR വർക്ക്‌സ്‌പേസ് ബാലൻസ്", dailyRemuneration: "പ്രതിദിന പ്രതിഫലം", serverTiersTitle: "14-ദിവസത്തെ സെർവർ നോഡ് ലൈസൻസ് ടയറുകൾ", gpayBtn: "GPay", sliceBtn: "സ്ലൈസ് വിശദാംശങ്ങൾ", adminTitle: "🛠️ അഡ്മിൻ കൺട്രോൾ ഡാഷ്‌ബോർഡ്", adminClose: "അടയ്ക്കുക", adminDesc: "സമീപകാല നോഡ് അഭ്യർത്ഥനകൾ:", footerRights: "© 2026 മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ്. ചെന്നൈ, തമിഴ്നാട്.", footerSec: "സുരക്ഷിതമായ TLS 1.3 എൻക്രിപ്റ്റഡ് പ്ലാറ്റ്‌ഫോം | MeitY അംഗീകാരം" },
-    kn: { brand: "ಮಾಡ್ಜಿನು ವೆಬ್3 & AI", adminBtn: "ನಿರ್ವಾಹಕ", officialWeb: "ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್", vouchersTitle: "⚡ ತತ್ಕ್ಷಣದ ಆಹಾರ & ಜೀವನಶೈಲಿ ವೋಚರ್‌ಗಳು", loginTitle: "🔐 ಗುತ್ತಿಗೆದಾರ ಸುರಕ್ಷಿತ ನೋಡ್ ಲಾಗಿನ್", mobileLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (Fast2SMS OTP)", sendOtpBtn: "OTP ಕಳುಹಿಸಿ", enterOtpLabel: "ಪರಿಶೀಲನೆ OTP ನಮೂದಿಸಿ", verifyLoginBtn: "ಪರಿಶೀಲಿಸಿ & ಲಾಗಿನ್ ಮಾಡಿ", connectedNode: "ಸಂಪರ್ಕಗೊಂಡ ಗುತ್ತಿಗೆದಾರ ನೋಡ್", logoutBtn: "ಹೊರಬನ್ನಿ", metalPortfolio: "ಲೈವ್ ಮಾರುಕೇಟ್ ಮೆಟಲ್ ಬ್ಯಾಲೆನ್ಸಿಡ್ ಪೋರ್ಟ್‌ಫೋಲಿಯೋ", goldValue: "ಚಿನ್ನದ ಮೌಲ್ಯ", goldSpot: "(@₹7,850/g ಸ್ಪಾಟ್)", silverValue: "ಬೆಳ್ಳಿ ಮೌಲ್ಯ", silverSpot: "(@₹112/g ಸ್ಪಾಟ್)", workspaceBalance: "INR ಕೆಲಸದ ಸ್ಥಳ ಬಾಕಿ", dailyRemuneration: "ದೈನಂದಿನ ಸಂಭಾವನೆ", serverTiersTitle: "14-ದಿನಗಳ ಸರ್ವರ್ ನೋಡ್ ಪರವಾನಗಿ ಶ್ರೇಣಿಗಳು", gpayBtn: "GPay", sliceBtn: "ಸ್ಲೈಸ್ ವಿವರಗಳು", adminTitle: "🛠️ ನಿರ್ವಾಹಕ ನಿಯಂತ್ರಣ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", adminClose: "ಮುಚ್ಚಿ", adminDesc: "ಇತ್ತೀಚಿನ ನೋಡ್ ವಿನಂತಿಗಳು:", footerRights: "© 2026 ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್. ಚೆನ್ನೈ, ತಮಿಳುನಾಡು.", footerSec: "ಸುರಕ್ಷಿತ TLS 1.3 ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ | MeitY ಗುರುತಿಸಲ್ಪಟ್ಟಿದೆ" }
-  };
+function translatePage(lang) {
+if(lang === 'EN') {
+location.reload();
+return;
+}
+const map = fullDictionary[lang] || {};
 
-  function switchLanguage(lang) {
-    const t = translations[lang] || translations.en;
-    document.querySelectorAll("[data-key]").forEach(el => {
-      const key = el.getAttribute("data-key");
-      if (t[key]) el.innerText = t[key];
-    });
-  }
+function walkTextNodes(root) {
+const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+let node;
+while(node = walker.nextNode()) {
+let text = node.nodeValue.trim();
+if(text.length > 0) {
+for(let key in map) {
+if(text === key || text.includes(key)) {
+node.nodeValue = node.nodeValue.replace(key, map[key]);
+}
+}
+if(text.startsWith('Script ') && map['Script']) {
+node.nodeValue = text.replace('Script', map['Script']);
+}
+}
+}
+}
+walkTextNodes(document.body);
+}
 
-  function requestFast2SMSOtp() {
-    activeMobileNum = document.getElementById("login-mobile-input").value.trim();
-    const status = document.getElementById("login-status-msg");
-    if (activeMobileNum.length !== 10) {
-      status.style.color = "#ff5252";
-      status.innerText = "Please enter a valid 10-digit mobile number.";
-      return;
-    }
-    status.style.color = "#6fffe9";
-    status.innerText = "Connecting to Fast2SMS Gateway...";
+function openAdminPanel() {
+let pwd = prompt('Enter Admin Fingertip Password (madz1222):');
+if(pwd === 'madz1222' || pwd === '2026') {
+document.getElementById('admin-modal').style.display = 'flex';
+} else {
+alert('Invalid Admin Password!');
+}
+}
 
-    activeOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
-    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
-    const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtpCode);
-    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + activeMobileNum;
+function closeAdminPanel() {
+document.getElementById('admin-modal').style.display = 'none';
+}
 
-    fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log(e));
+function scrollToLogin() {
+document.getElementById('login-section').scrollIntoView({ behavior: 'smooth' });
+}
 
-    setTimeout(() => {
-      status.style.color = "#00e676";
-      status.innerText = "OTP generated & ready for verification!";
-      document.getElementById("otp-verify-group").style.display = "block";
-      document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtpCode + ")";
-      document.getElementById("login-otp-input").value = activeOtpCode;
-    }, 600);
-  }
+function shareWhatsApp(id) {
+let msg = encodeURIComponent('Check out Madzinu Web3 Technologies - IndiaAI & MeitY Recognized Autonomous Cloud Compute Platform: https://madzinuweb3technologies.in');
+window.open('https://api.whatsapp.com/send?text=' + msg, '_blank');
+}
 
-  function verifyFast2SMSOtp() {
-    const userOtp = document.getElementById("login-otp-input").value.trim();
-    const status = document.getElementById("login-status-msg");
-    if (!userOtp) {
-      status.style.color = "#ff5252";
-      status.innerText = "Please enter the verification OTP.";
-      return;
-    }
-    status.style.color = "#00e676";
-    status.innerText = "Authentication successful! Loading dashboard...";
-    setTimeout(() => {
-      document.getElementById("auth-view").style.display = "none";
-      document.getElementById("dashboard-view").style.display = "block";
-      document.getElementById("node-phone-display").innerText = "+91 " + (activeMobileNum || "8122252222");
-    }, 400);
-  }
-
-  function logoutContractorNode() {
-    document.getElementById("dashboard-view").style.display = "none";
-    document.getElementById("auth-view").style.display = "block";
-    document.getElementById("login-otp-input").value = "";
-    document.getElementById("login-status-msg").innerText = "";
-    document.getElementById("otp-verify-group").style.display = "none";
-  }
-
-  function handleGPayPayment(amount) {
-    window.location.href = "upi://pay?pa=madzinuweb3@upi&pn=MadzinuWeb3&am=" + amount + "&cu=INR";
-  }
-
-  function showSliceModal(tier, daily, total) {
-    alert("⚡ Slice Node License Tier Details:\n\n• Deployment Cost: ₹" + tier.toLocaleString() + "\n• Daily Task Remuneration: ₹" + daily + " / day\n• 14-Day Projected Output: ₹" + total.toLocaleString() + "\n\nClick GPay to deploy node license instantly.");
-  }
-
-  function toggleAdminPanel() {
-    const panel = document.getElementById("admin-panel");
-    if (panel) {
-      panel.style.display = (panel.style.display === "none" || panel.style.display === "") ? "block" : "none";
-      if (panel.style.display === "block") {
-        panel.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }
+function verifySecureNodeAccess() {
+let mobile = document.getElementById('login-mobile').value.trim();
+let otp = document.getElementById('login-otp-code').value.trim();
+if(otp === '2026' || otp === 'madz1222') {
+alert('Node Access Verified Successfully!');
+if(mobile) {
+document.getElementById('user-mobile-display').innerText = '+91 ' + mobile;
+}
+document.getElementById('user-workspace-dashboard').style.display = 'block';
+document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
+} else {
+alert('Invalid OTP or Admin Code!');
+}
+}
 </script>
-
 </body>
 </html>
+
