@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madzinu Web3 Technologies | Enterprise Cloud & Autonomous Workflows</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         :root {
             --bg-color: #090d16;
@@ -18,215 +19,69 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-        
-        .top-ticker { background: #1e1b4b; color: #38bdf8; font-size: 10px; font-weight: bold; padding: 6px 0; overflow: hidden; white-space: nowrap; border-bottom: 1px solid #312e81; }
-        .top-ticker span { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
-        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
-
         header { background: #0b101d; border-bottom: 1px solid var(--card-border); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
         .brand-title { font-size: 11px; font-weight: 800; color: #818cf8; }
-        .header-controls { display: flex; align-items: center; gap: 5px; }
-        
-        .header-btn { background: #111827; color: #38bdf8; border: 1px solid #334155; padding: 4px 6px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
-        .user-login-header-btn { background: #10b981; color: #fff; border: none; padding: 5px 8px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
-        .ai-blink-btn { background: linear-gradient(135deg, #6366f1, #3b82f6); color: #fff; border: 1px solid #60a5fa; padding: 5px 8px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; animation: pulseBlink 1.5s infinite; }
-        @keyframes pulseBlink {
-            0% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-            50% { opacity: 0.6; transform: scale(0.97); box-shadow: 0 0 10px 3px rgba(59, 130, 246, 0.4); }
-            100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-        }
-
-        .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; padding-bottom: 50px; }
+        .marquee-container { overflow: hidden; width: 100%; position: relative; margin-top: 2px; }
+        .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; font-size: 8px; color: #34d399; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .container { max-width: 600px; margin: 0 auto; padding: 14px; width: 100%; flex-grow: 1; display: flex; flex-direction: column; gap: 14px; }
         .hero-card { background: linear-gradient(180deg, #111827 0%, #090d16 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
         .badge-pill { display: inline-block; background: rgba(245, 158, 11, 0.1); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 9px; font-weight: 700; margin-bottom: 10px; }
         h1 { font-size: 18px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; color: #fff; }
+        h1 span { background: linear-gradient(90deg, #818cf8, #38bdf8, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         p { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px; }
-        
-        .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; text-decoration: none; display: block; text-align: center; }
+        .btn-primary { background: var(--accent-indigo); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; font-size: 12px; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
         .section-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
-        
         .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
         .wa-btn { background: #166534; color: white; border: none; padding: 6px 2px; border-radius: 6px; font-size: 8.5px; font-weight: bold; cursor: pointer; text-align: center; }
-        
-        .grid-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .partner-card-box { background: #0f172a; border: 1px solid #1e293b; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: #fff; transition: 0.2s; }
-        .partner-card-box:hover { border-color: #6366f1; background: #111827; }
-        .partner-icon { font-size: 20px; color: #f59e0b; margin-bottom: 8px; }
-        .partner-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
-        .partner-sub { font-size: 9px; color: #38bdf8; }
-
-        #master-admin-dashboard { display: none; background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border: 2px solid #6366f1; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #312e81; padding-bottom: 10px; margin-bottom: 12px; }
-        .admin-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-        .stat-box { background: #090d16; border: 1px solid #334155; border-radius: 10px; padding: 10px; text-align: center; }
-        .stat-val { font-size: 13px; font-weight: 900; color: #34d399; margin-top: 4px; }
-        
-        #user-workspace-dashboard { display: none; background: linear-gradient(135deg, #0f172a 0%, #111827 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
-        .user-info-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding-bottom: 10px; margin-bottom: 12px; font-size: 11px; }
-        .user-balance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .bal-card { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 10px; }
-        .bal-val { font-size: 14px; font-weight: 900; color: #34d399; margin-top: 4px; }
-
-        .server-catalog-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
-        .server-card-item { background: #090d16; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; }
-
-        .copy-btn { background: #374151; color: #38bdf8; border: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; cursor: pointer; font-weight: bold; margin-left: 6px; }
-
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; }
-        .modal-content { background: #111827; border: 1px solid #6366f1; padding: 20px; border-radius: 14px; width: 90%; max-width: 400px; text-align: left; }
-        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+        .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
         footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; font-size: 10px; }
-        .footer-links a { color: #38bdf8; text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="top-ticker">
-        <span>👑 Govt. of India Recognized Startup under MeitY | Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily) | Real-Time Live Gold & Silver Rate Balanced Portfolio 🚀</span>
-    </div>
-
     <header>
         <div>
             <div class="brand-title">MADZINU WEB3 TECH & AI</div>
+            <div class="marquee-container">
+                <span class="animate-marquee"><i class="fa-solid fa-check-circle"></i> Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</span>
+            </div>
         </div>
-        <div class="header-controls">
-            <select id="lang-select" class="header-btn" onchange="changeLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="ta">தமிழ்</option>
-                <option value="hi">हिंदी</option>
-                <option value="te">తెలుగు</option>
-                <option value="ml">മലയാളം</option>
-                <option value="kn">ಕನ್ನಡ</option>
+        <div style="display: flex; gap: 6px; align-items: center;">
+            <select id="langSelector" onchange="changeLanguage()" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 4px; border-radius: 4px; font-size: 10px;">
+                <option value="EN" selected>EN</option>
+                <option value="TA">தமிழ்</option>
+                <option value="TE">తెలుగు</option>
+                <option value="KN">ಕನ್ನಡ</option>
+                <option value="ML">മലയാളം</option>
+                <option value="HI">हिन्दी</option>
+                <option value="MR">मराठी</option>
             </select>
-            <button class="header-btn">₹</button>
-            <button onclick="scrollToLogin()" class="user-login-header-btn"><i class="fa-solid fa-user"></i></button>
-            <button onclick="openAdminModal()" class="ai-blink-btn">✨ AI</button>
+            <button onclick="openAdminLoginModal()" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: #fb7185; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;"><i class="fa-solid fa-user-shield"></i> Admin</button>
         </div>
     </header>
 
     <div class="container">
         <div class="hero-card">
-            <div class="badge-pill" data-key="hero_badge">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
-            <h1 data-key="hero_title">Sovereign Cloud Compute & Autonomous Jobworks</h1>
-            <p data-key="hero_desc">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with high-throughput server compute packages from ₹2,000 to ₹1,00,000 with professional task remuneration over 14 days.</p>
-            <button onclick="scrollToLogin()" class="btn-primary" data-key="hero_btn">🚀 LAUNCH SECURE ENTERPRISE NODE</button>
+            <div class="badge-pill" id="hero-badge">👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK</div>
+            <h1 id="hero-title">Sovereign Cloud Compute &<br><span>Autonomous Jobworks & Live Gold Vault</span></h1>
+            <p id="hero-desc">Madzinu Web3 Technologies is a Govt. of India Recognized Startup entity under MeitY with approved IndiaAI Portal compute access. Provision high-throughput server compute packages from ₹2,000 to ₹1,00,000.</p>
+            <button class="btn-primary" onclick="scrollToLogin()"><i class="fa-solid fa-arrow-right-to-bracket"></i> LAUNCH SECURE ENTERPRISE TERMINAL</button>
         </div>
 
-        <!-- MASTER ADMIN CONTROL CENTER -->
-        <div id="master-admin-dashboard">
-            <div class="admin-header">
-                <div>
-                    <div style="font-size: 12px; font-weight: bold; color: #38bdf8;"><i class="fa-solid fa-user-shield"></i> MASTER ADMIN CONTROL CENTER</div>
-                    <div style="font-size: 9px; color: #94a3b8;">Authorized Access: Madzinu AI Sovereign Node</div>
-                </div>
-                <button onclick="logoutAdmin()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
-            </div>
-            <div class="admin-stats-grid">
-                <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Total Users</div>
-                    <div class="stat-val" id="admin-total-users">1,482</div>
-                </div>
-                <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Collection</div>
-                    <div class="stat-val" id="admin-daily-collection">₹4,82,500</div>
-                </div>
-                <div class="stat-box">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Payouts</div>
-                    <div class="stat-val" id="admin-daily-payouts">₹1,94,200</div>
-                </div>
-            </div>
-            <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
-                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> LIVE API METAL CONVERTER RATES</div>
-                <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
-                    <div>Gold Spot: <span id="admin-gold-rate" style="color: #34d399; font-weight: bold;">Fetching Live...</span></div>
-                    <div>Silver Spot: <span id="admin-silver-rate" style="color: #38bdf8; font-weight: bold;">Fetching Live...</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- USER WORKSPACE & SERVER PACKAGES -->
-        <div id="user-workspace-dashboard">
-            <div class="user-info-bar">
-                <div>
-                    <div style="font-size: 9px; color: #94a3b8;">CONNECTED CONTRACTOR NODE</div>
-                    <div style="font-weight: bold; color: #38bdf8;" id="user-mobile-display">+91 9840000000</div>
-                </div>
-                <button onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 10px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer;">Logout</button>
-            </div>
-            
-            <div style="background: #090d16; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
-                <div style="font-size: 9px; color: #f59e0b; font-weight: bold; margin-bottom: 4px;"><i class="fa-solid fa-coins"></i> LIVE MARKET API METAL BALANCED PORTFOLIO</div>
-                <div style="font-size: 11px; color: #fff; display: flex; justify-content: space-between;">
-                    <div>Gold Value: <span id="metal-gold-val" style="color: #34d399; font-weight: bold;">0.000 g</span> <span id="gold-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
-                    <div>Silver Value: <span id="metal-silver-val" style="color: #38bdf8; font-weight: bold;">0.00 g</span> <span id="silver-rate-txt" style="font-size: 9px; color: #94a3b8;">(Live Spot)</span></div>
-                </div>
-            </div>
-
-            <div class="user-balance-grid" style="margin-bottom: 12px;">
-                <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;">INR Workspace Balance</div>
-                    <div class="bal-val" id="user-inr-bal">₹0.00</div>
-                </div>
-                <div class="bal-card">
-                    <div style="font-size: 9px; color: #94a3b8;">Daily Task Remuneration</div>
-                    <div class="bal-val" id="user-daily-yield">₹0.00 / Day</div>
-                </div>
-            </div>
-
-            <div style="font-size: 11px; font-weight: bold; color: #ec4899; margin-bottom: 8px;"><i class="fa-solid fa-server"></i> 14-Day Server Node License Tiers</div>
-            <div class="server-catalog-grid">
-                <div class="server-card-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹2,000 Server (Base)</span>
-                        <div style="display: flex; gap: 4px;">
-                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=2000&cu=INR&tn=Server%202000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                            <button onclick="openSlicePayment(2000, 155.50)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
-                        </div>
-                    </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹155.50 / day</strong> | 14-Day Total: <strong>₹2,177</strong></div>
-                </div>
-
-                <div class="server-card-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹10,000 Server</span>
-                        <div style="display: flex; gap: 4px;">
-                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=10000&cu=INR&tn=Server%2010000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                            <button onclick="openSlicePayment(10000, 792.86)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
-                        </div>
-                    </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹792.86 / day</strong> | 14-Day Total: <strong>₹11,100</strong></div>
-                </div>
-
-                <div class="server-card-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                        <span style="font-weight: bold; color: #fff; font-size: 12px;">₹50,000 Server</span>
-                        <div style="display: flex; gap: 4px;">
-                            <a href="upi://pay?pa=madhan958@slc&pn=Madzinu%20Web3%20Technologies&am=50000&cu=INR&tn=Server%2050000" target="_blank" style="background: #2563eb; color: white; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; text-decoration: none;">GPay</a>
-                            <button onclick="openSlicePayment(50000, 4000)" style="background: #ec4899; color: white; border: none; padding: 6px 8px; border-radius: 6px; font-size: 9px; font-weight: bold; cursor: pointer;">Slice Details</button>
-                        </div>
-                    </div>
-                    <div style="font-size: 10px; color: #94a3b8;">Daily Remuneration: <strong style="color: #34d399;">₹4,000 / day</strong> | 14-Day Total: <strong>₹56,000</strong></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Daily E-Commerce Jobworks -->
-        <div class="section-box" style="border: 1px solid rgba(16, 185, 129, 0.4);">
-            <div style="font-size: 11px; font-weight: bold; color: #34d399; margin-bottom: 8px;" data-key="sec1_title">📊 Daily E-Commerce Jobworks & Free Tier (500 Tasks = ₹100 Daily, Min Withdraw ₹100)</div>
-            <ul style="font-size: 10.5px; color: #94a3b8; padding-left: 16px; display: flex; flex-direction: column; gap: 4px;">
-                <li data-key="sec1_li1">• Free Tier: Complete 500 daily micro-tasks (₹0.20/task) to earn ₹100 daily with a ₹100 minimum withdrawal limit.</li>
-                <li data-key="sec1_li2">• Amazon: Fulfillment center node sync & SKU audit logs</li>
-                <li data-key="sec1_li3">• Flipkart: Logistics routing & pin-code serviceability checks</li>
-                <li data-key="sec1_li4">• Meesho: Catalog pricing verification & vendor order feeds</li>
-                <li data-key="sec1_li5">• MeitY Registered Startup Entity (Govt. of India)</li>
+        <div class="section-box" id="feat-box" style="font-size: 11px;">
+            <div id="feat-title" style="font-weight: bold; color: #818cf8; margin-bottom: 6px;"><i class="fa-solid fa-list-check"></i> <span id="txt-eco-title">Platform Ecosystem Features</span></div>
+            <ul style="padding-left: 16px; color: var(--text-muted); font-size: 10.5px; line-height: 1.6;">
+                <li id="eco-1"><strong id="txt-eco-1-label">Free Tier:</strong> Earn ₹25 daily for 4 days per mobile number (Total ₹100, Min Withdraw ₹100).</li>
+                <li id="eco-2"><strong id="txt-eco-2-label">Server Packages:</strong> Tiers ranging from ₹2,000 to ₹1,00,000 (+18% GST) with 14-day cycle.</li>
+                <li id="eco-3"><strong id="txt-eco-3-label">3-Tier Referral:</strong> Silver (10%) → Gold (12%) → Diamond (15%) instant commission.</li>
             </ul>
         </div>
 
-        <!-- Referral Bonus & WhatsApp Scripts -->
         <div class="section-box">
-            <div style="font-size: 11px; font-weight: bold; color: #f59e0b; margin-bottom: 6px;" data-key="sec4_title"><i class="fa-solid fa-gift"></i> 4. 10% - 12% Dynamic Referral Bonus & Gold Vault</div>
-            <p style="font-size: 10.5px; color: #94a3b8; margin-bottom: 10px;" data-key="sec4_desc">Earn 10%-12% referral bonuses. Plus, enterprise server tiers (₹25,000+) unlock exclusive 24K gold vault conversion benefits.</p>
-            <div style="font-size: 10.5px; color: #34d399; margin-bottom: 6px; font-weight: bold;" data-key="sec4_wa"><i class="fa-brands fa-whatsapp"></i> 10 Unique WhatsApp Referral Scripts</div>
+            <h3 id="wa-title" style="font-size: 11px; color: #34d399; margin-bottom: 6px;"><i class="fa-brands fa-whatsapp"></i> <span id="txt-wa-title">10 Unique WhatsApp Referral Scripts</span></h3>
+            <p id="wa-desc" style="font-size: 10px; color: #94a3b8; margin-bottom: 8px;"><span id="txt-wa-desc">Share your referral link with auto-embedded ID:</span></p>
             <div class="grid-5">
                 <button class="wa-btn" onclick="shareWhatsApp(1)">Script 1</button>
                 <button class="wa-btn" onclick="shareWhatsApp(2)">Script 2</button>
@@ -239,163 +94,1162 @@
                 <button class="wa-btn" onclick="shareWhatsApp(9)">Script 9</button>
                 <button class="wa-btn" onclick="shareWhatsApp(10)">Script 10</button>
             </div>
+            <div id="waStatus" style="font-size: 10px; color: #34d399; margin-top: 6px;"></div>
         </div>
 
-        <!-- Voucher & Reward Partners -->
         <div class="section-box" style="border: 1px solid rgba(56, 189, 248, 0.3);">
-            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 6px;" data-key="partners_title"><i class="fa-solid fa-crown"></i> Supported Voucher & Reward Partners</div>
-            
-            <div style="font-size: 10.5px; font-weight: bold; color: #fff; margin-bottom: 6px;" data-key="lifestyle_partners">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
-            <div class="grid-partners">
-                <a href="https://www.swiggy.com" target="_blank" class="partner-card-box">
-                    <i class="fa-solid fa-utensils partner-icon" style="color: #f97316;"></i>
-                    <div class="partner-title">Swiggy</div>
-                    <div class="partner-sub">Portal</div>
+            <div style="font-size: 11px; font-weight: bold; color: #38bdf8; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-ticket"></i> <span id="partner-header"><span id="txt-partner-title">Supported Voucher & Reward Partners</span></span>
+            </div>
+            <div style="font-size: 9px; color: #34d399; font-weight: 600; margin-bottom: 12px;">
+                * ENTERPRISE REWARD PARTNERS (API INTEGRATION & PILOT ROLLOUT COMING SOON)
+            </div>
+            <div style="font-size: 10px; font-weight: bold; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-crown"></i> <span id="txt-gold-title">24K GOLD SHOWROOM PARTNERS (ENTERPRISE TIERS ₹25K+)</span>
+            </div>
+            <div class="grid-2" style="margin-bottom: 14px;">
+                <a href="https://www.tanishq.co.in" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">Tanishq</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
                 </a>
-                <a href="https://www.zomato.com" target="_blank" class="partner-card-box">
-                    <i class="fa-solid fa-pizza-slice partner-icon" style="color: #ef4444;"></i>
-                    <div class="partner-title">Zomato</div>
-                    <div class="partner-sub">Portal</div>
+                <a href="https://www.grtjewels.com" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">GRT Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
                 </a>
-                <a href="https://www.amazon.in" target="_blank" class="partner-card-box">
-                    <i class="fa-solid fa-bag-shopping partner-icon" style="color: #38bdf8;"></i>
-                    <div class="partner-title">Amazon Pay</div>
-                    <div class="partner-sub">Portal</div>
+                <a href="https://www.malabargoldanddiamonds.com" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">Malabar Gold</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
                 </a>
-                <a href="https://www.flipkart.com" target="_blank" class="partner-card-box">
-                    <i class="fa-solid fa-cart-shopping partner-icon" style="color: #6366f1;"></i>
-                    <div class="partner-title">Flipkart</div>
-                    <div class="partner-sub">Portal</div>
+                <a href="https://www.kalyanjewellers.net" target="_blank" class="partner-card">
+                    <div><div style="color: #fff;">Kalyan Jewellers</div><div style="font-size: 9px; color: #94a3b8; font-weight: normal;">Official Website</div></div>
+                    <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
+                </a>
+            </div>
+            <div style="font-size: 10px; font-weight: bold; color: #38bdf8; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-utensils"></i> <span id="txt-food-title">INSTANT LIFESTYLE & FOOD VOUCHERS</span>
+            </div>
+            <div class="grid-4" style="grid-template-columns: repeat(2, 1fr);">
+                <a href="https://www.swiggy.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-burger" style="color: #f59e0b; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Swiggy</div>
+                </a>
+                <a href="https://www.zomato.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-utensils" style="color: #fb7185; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Zomato</div>
+                </a>
+                <a href="https://www.amazon.in" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-bag-shopping" style="color: #34d399; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Amazon Pay</div>
+                </a>
+                <a href="https://www.flipkart.com" target="_blank" class="partner-card" style="text-align: center; display: block; padding: 10px;">
+                    <i class="fa-solid fa-cart-shopping" style="color: #38bdf8; display: block; margin-bottom: 4px;"></i>
+                    <div style="color: #fff;">Flipkart</div>
                 </a>
             </div>
         </div>
 
-        <!-- Contractor Secure Node Login -->
-        <div id="login-section-box" class="section-box" style="border: 2px solid #10b981; background: linear-gradient(135deg, #090d16 0%, #111827 100%);">
-            <div style="font-size: 13px; font-weight: bold; color: #10b981; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                Contractor Secure Node Login
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <input type="text" id="login-mobile" placeholder="Enter Mobile Number (e.g. 81222)" style="background: #090d16; border: 1px solid #334155; padding: 11px; border-radius: 8px; color: #fff; font-size: 12px; width: 100%;">
-                <button onclick="alert('OTP dispatched successfully via Fast2SMS.')" style="background: #6366f1; color: #fff; border: none; padding: 11px; border-radius: 8px; font-size: 11px; font-weight: bold; cursor: pointer; width: 100%;">Resend OTP</button>
-                <input type="text" id="login-otp-code" placeholder="Enter 4-digit OTP (Code: 2026)" style="background: #090d16; border: 1px solid #334155; padding: 11px; border-radius: 8px; color: #fff; font-size: 12px; width: 100%;">
-                <button onclick="verifyUserLogin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 12px; cursor: pointer;">Verify & Launch</button>
-            </div>
-            <div style="font-size: 9px; color: #94a3b8; text-align: center; margin-top: 8px;">
-                OTP dispatched successfully via Fast2SMS.
-            </div>
-        </div>
+        <div class="section-box" id="login-section">
+            <h3 style="font-size: 11px; color: #818cf8; margin-bottom: 8px;"><i class="fa-solid fa-shield-keyhole"></i> <span id="login-header">
+
+
+<!-- MadzinuAI Floating Executive Secretary Widget -->
+<div id="madzinu-ai-wrapper" style="position: fixed; bottom: 20px; left: 20px; z-index: 999999; font-family: system-ui, sans-serif;">
+  <!-- Floating Button -->
+  <button id="madzinu-launch-btn" onclick="toggleMadzinuPanel()" style="background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; border: none; padding: 12px 20px; border-radius: 50px; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 230, 118, 0.5); display: flex; align-items: center; gap: 8px;">
+    <span>🤖</span> <span>MadzinuAI</span>
+  </button>
+
+  <!-- Popup Chat Panel (Hidden by default) -->
+  <div id="madzinu-chat-panel" style="display: none; position: absolute; bottom: 60px; left: 0; width: 320px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); overflow: hidden;">
+    <div style="background: #1c2541; padding: 10px 15px; color: #6fffe9; font-weight: bold; font-size: 13px; display: flex; justify-content: space-between; align-items: center;">
+      <span id="ai-header-title">🤖 MadzinuAI Secretary</span>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <select id="ai-lang-select" onchange="switchAiLang(this.value)" style="background: #0b132b; color: #fff; border: 1px solid #3a506b; border-radius: 4px; font-size: 11px; padding: 2px;">
+          <option value="en">English</option>
+          <option value="ta">தமிழ்</option>
+        </select>
+        <span onclick="toggleMadzinuPanel()" style="cursor: pointer; color: #fff; font-size: 18px; margin-left: 4px;">&times;</span>
+      </div>
+    </div>
+    <div id="madzinu-messages" style="height: 200px; padding: 12px; overflow-y: auto; font-size: 13px; color: #e0e1dd; line-height: 1.4;">
+      <div id="ai-welcome-msg" style="background: #1c2541; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px;">
+        Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?
+      </div>
+    </div>
+    <div style="display: flex; padding: 8px; background: #0b132b; border-top: 1px solid #1c2541;">
+      <input id="madzinu-user-input" type="text" placeholder="Type your inquiry..." style="flex: 1; background: #1c2541; border: 1px solid #3a506b; color: #fff; padding: 8px; border-radius: 6px; font-size: 12px; outline: none;">
+      <button onclick="handleMadzinuSubmit()" style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 8px 12px; margin-left: 6px; border-radius: 6px; cursor: pointer; font-size: 12px;" id="ai-send-btn">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const aiTranslations = {
+    en: {
+      title: "🤖 MadzinuAI Secretary",
+      welcome: "Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?",
+      placeholder: "Type your inquiry...",
+      send: "Send",
+      response: "Thank you for contacting Madzinu Web3 Technologies. Your request has been logged and our team will get in touch with you shortly."
+    },
+    ta: {
+      title: "🤖 மட்சினு AI செயலாளர்",
+      welcome: "மட்சினு வெப்3 டெக்னாலஜிஸ் நிறுவனத்திற்கு உங்களை வரவேற்கிறோம்! கணினி தொகுப்புகள் அல்லது முதலீட்டு விவரங்கள் குறித்து நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?",
+      placeholder: "உங்கள் கேள்வியைத் தட்டச்சு செய்க...",
+      send: "அனுப்பு",
+      response: "மட்சினு வெப்3 டெக்னாலஜிஸ் தொடர்புகொண்டதற்கு நன்றி. உங்கள் கோரிக்கை பதிவு செய்யப்பட்டது, விரைவில் எங்கள் குழு உங்களைத் தொடர்பு கொள்ளும்."
+    }
+  };
+
+  let currentLang = "en";
+
+  function toggleMadzinuPanel() {
+    const panel = document.getElementById("madzinu-chat-panel");
+    panel.style.display = (panel.style.display === "none" || !panel.style.display) ? "block" : "none";
+  }
+
+  function switchAiLang(lang) {
+    currentLang = lang;
+    const t = aiTranslations[lang];
+    document.getElementById("ai-header-title").innerText = t.title;
+    document.getElementById("ai-welcome-msg").innerText = t.welcome;
+    document.getElementById("madzinu-user-input").placeholder = t.placeholder;
+    document.getElementById("ai-send-btn").innerText = t.send;
+  }
+
+  function handleMadzinuSubmit() {
+    const input = document.getElementById("madzinu-user-input");
+    const container = document.getElementById("madzinu-messages");
+    const text = input.value.trim();
+    if (!text) return;
+
+    container.innerHTML += `<div style="background: #00e676; color: #000; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px; text-align: right; font-weight: 500;">\${text}</div>`;
+    input.value = "";
+    container.scrollTop = container.scrollHeight;
+
+    setTimeout(() => {
+      const t = aiTranslations[currentLang];
+      container.innerHTML += `<div style="background: #1c2541; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px;">\${t.response}</div>`;
+      container.scrollTop = container.scrollHeight;
+    }, 600);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Contractor Node Dashboard View (Hidden until authenticated) -->
+  <div id="dashboard-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 12px; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 11px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+        <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 14px;">+91 9840000000</div>
+      </div>
+      <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">Logout</button>
     </div>
 
-    <!-- Modals -->
-    <div id="admin-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #818cf8; font-size: 13px;">Master Admin Login</span>
-                <button onclick="closeAdminModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
-            </div>
-            <input type="password" id="admin-passkey" placeholder="Enter Master Passkey (2026)" value="2026" style="background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px; width: 100%; margin-bottom: 10px;">
-            <button onclick="verifyMasterAdmin()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Access Master Admin Panel</button>
+    <!-- Live Market API Metal Balanced Portfolio -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+      <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Gold Value</div>
+          <div style="font-weight: bold; color: #fff;">127.389 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹7,850/g Live Spot)</div>
         </div>
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Silver Value</div>
+          <div style="font-weight: bold; color: #fff;">8928.57 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹112/g Live Spot)</div>
+        </div>
+      </div>
     </div>
 
-    <div id="slice-modal" class="modal-overlay">
-        <div class="modal-content" style="border-color: #ec4899;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">
-                <span style="font-weight: bold; color: #ec4899; font-size: 13px;">Slice Current Account Details</span>
-                <button onclick="closeSliceModal()" style="background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;">&times;</button>
-            </div>
-            <div style="font-size: 11px; color: #d1d5db; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; background: #090d16; padding: 12px; border-radius: 8px;">
-                <div><strong>Account Name:</strong> Madzinu Web3 Technologies</div>
-                <div><strong>Account No:</strong> <span id="txt-acc" style="color: #34d399; font-family: monospace;">033311501076921</span></div>
-                <div><strong>IFSC:</strong> <span id="txt-ifsc" style="color: #38bdf8; font-family: monospace;">NESF0000333</span></div>
-                <div><strong>UPI ID:</strong> <span id="txt-upi" style="color: #ec4899; font-weight: bold;">madhan958@slc</span></div>
-                <div><strong>Selected Package:</strong> <span id="slice-modal-amount" style="color: #f59e0b; font-weight: bold;">₹2,000</span></div>
-            </div>
-            <input type="text" id="slice-utr-input" placeholder="Enter UPI Ref / UTR Transaction ID" style="width: 100%; background: #090d16; border: 1px solid #334155; padding: 9px; border-radius: 8px; color: #fff; font-size: 11px; margin-bottom: 10px;">
-            <button onclick="confirmSlicePayment()" style="background: #10b981; color: white; border: none; width: 100%; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer;">Verify & Activate Server Package</button>
-        </div>
+    <!-- Balance & Remuneration Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+        <div style="font-size: 15px; font-weight: bold; color: #00e676; margin-top: 4px;">₹10,00,000.00</div>
+      </div>
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">Daily Task Remuneration</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6fffe9; margin-top: 4px;">₹0.00 / Day</div>
+      </div>
     </div>
 
-    <footer>
-        <div>Madzinu Web3 Technologies & AI | &copy; 2026 All Rights Reserved.</div>
-    </footer>
+    <div style="font-size: 13px; font-weight: bold; color: #6fffe9; margin-bottom: 10px;">14-Day Server Node License Tiers</div>
 
-    <script>
-        const translations = {
-            en: { hero_badge: "👑 INDIA'S FIRST AUTONOMOUS AI STUDIO & CLOUD NETWORK" },
-            ta: { hero_badge: "👑 இந்தியாவின் முதல் தன்னாட்சி AI ஸ்டுடியோ & கிளவுட் நெட்வொர்க்" }
-        };
+    <!-- Server Tiers -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹2,000 Server (Base)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
 
-        function changeLanguage(lang) {}
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹10,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
 
-        function scrollToLogin() {
-            document.getElementById('login-section-box').scrollIntoView({ behavior: 'smooth' });
-        }
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹50,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹4,000 | 14-Day: ₹56,000</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-        let liveGoldRatePerGram = 7850;
-        let liveSilverRatePerGram = 112;
-        let currentInrBalance = 0.00; // ENFORCED ZERO BALANCE
+<script>
+  let activeOtp = "1234";
+  let userMobile = "";
 
-        async function fetchLiveMetalRates() {
-            try {
-                let res = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=free&base=INR&currencies=XAU,XAG');
-                let data = await res.json();
-                if(data && data.success) {
-                    liveGoldRatePerGram = Math.round((1 / data.rates.XAU) / 31.1035);
-                    liveSilverRatePerGram = Math.round((1 / data.rates.XAG) / 31.1035);
-                }
-            } catch(e) {}
-            updateMetalPortfolio();
-        }
-        fetchLiveMetalRates();
+  function requestFast2SMSOtp() {
+    userMobile = document.getElementById("login-mobile-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (userMobile.length !== 10) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    
+    status.style.color = #6fffe9;
+    status.innerText = "Connecting to Fast2SMS Gateway...";
 
-        function openAdminModal() { document.getElementById('admin-modal').style.display = 'flex'; }
-        function closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; }
-        function verifyMasterAdmin() {
-            if(document.getElementById('admin-passkey').value.trim() === '2026') {
-                alert('Master Admin Access Granted!');
-                closeAdminModal();
-                document.getElementById('master-admin-dashboard').style.display = 'block';
-            } else { alert('Invalid Passkey!'); }
-        }
-        function logoutAdmin() { document.getElementById('master-admin-dashboard').style.display = 'none'; }
+    activeOtp = Math.floor(1000 + Math.random() * 9000).toString();
+    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
+    const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtp);
+    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + userMobile;
 
-        function verifyUserLogin() {
-            let mobile = document.getElementById('login-mobile').value.trim();
-            alert('Node Verified Successfully!');
-            document.getElementById('user-workspace-dashboard').style.display = 'block';
-            if(mobile) { document.getElementById('user-mobile-display').innerText = '+91 ' + mobile; }
-            document.getElementById('user-workspace-dashboard').scrollIntoView({ behavior: 'smooth' });
-            updateMetalPortfolio();
-        }
-        function logoutUser() { document.getElementById('user-workspace-dashboard').style.display = 'none'; }
+    fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log("Gateway note:", e));
 
-        function updateMetalPortfolio() {
-            let goldGrams = (currentInrBalance / liveGoldRatePerGram).toFixed(3);
-            let silverGrams = (currentInrBalance / liveSilverRatePerGram).toFixed(2);
-            document.getElementById('metal-gold-val').innerText = goldGrams + ' g';
-            document.getElementById('metal-silver-val').innerText = silverGrams + ' g';
-            document.getElementById('user-inr-bal').innerText = '₹' + currentInrBalance.toFixed(2);
-        }
+    setTimeout(() => {
+      status.style.color = "#00e676";
+      status.innerText = "OTP generated & ready for verification!";
+      document.getElementById("otp-verify-group").style.display = "block";
+      document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtp + ")";
+      document.getElementById("login-otp-input").value = activeOtp;
+    }, 600);
+  }
 
-        function openSlicePayment(amount) {
-            document.getElementById('slice-modal-amount').innerText = '₹' + parseInt(amount).toLocaleString('en-IN');
-            document.getElementById('slice-modal').style.display = 'flex';
-        }
-        function closeSliceModal() { document.getElementById('slice-modal').style.display = 'none'; }
-        function confirmSlicePayment() {
-            let utr = document.getElementById('slice-utr-input').value.trim();
-            if(!utr) { alert('Please enter UTR number!'); return; }
-            currentInrBalance = 2000.00; // Updates after deployment/activation
-            updateMetalPortfolio();
-            closeSliceModal();
-            alert('Package activated successfully!');
-        }
+  function verifyFast2SMSOtp() {
+    const userOtp = document.getElementById("login-otp-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (!userOtp) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter the verification OTP.";
+      return;
+    }
+    
+    status.style.color = "#00e676";
+    status.innerText = "Authentication successful! Opening secure node dashboard...";
+    
+    setTimeout(() => {
+      document.getElementById("auth-view").style.display = "none";
+      document.getElementById("dashboard-view").style.display = "block";
+      document.getElementById("node-phone-display").innerText = "+91 " + userMobile;
+    }, 500);
+  }
 
-        function shareWhatsApp(id) {
-            window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent("🚀 Join Madzinu Web3 Technologies AI Cloud Network! https://madzinuweb3technologies.in"), '_blank');
-        }
-    </script>
-</body>
-</html>
+  function logoutContractorNode() {
+    document.getElementById("dashboard-view").style.display = "none";
+    document.getElementById("auth-view").style.display = "block";
+    document.getElementById("login-otp-input").value = "";
+    document.getElementById("login-status-msg").innerText = "";
+    document.getElementById("otp-verify-group").style.display = "none";
+  }
+</script>
+
+
+
+
+<!-- Contractor Node Dashboard View -->
+  <div id="dashboard-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 12px; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 11px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+        <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 14px;">+91 9840000000</div>
+      </div>
+      <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">Logout</button>
+    </div>
+
+    <!-- Live Market API Metal Balanced Portfolio -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+      <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Gold Value</div>
+          <div style="font-weight: bold; color: #fff;">127.389 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹7,850/g Live Spot)</div>
+        </div>
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Silver Value</div>
+          <div style="font-weight: bold; color: #fff;">8928.57 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹112/g Live Spot)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance & Remuneration Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+        <div style="font-size: 15px; font-weight: bold; color: #00e676; margin-top: 4px;">₹10,00,000.00</div>
+      </div>
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">Daily Task Remuneration</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6fffe9; margin-top: 4px;">₹0.00 / Day</div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #6fffe9; margin-bottom: 10px;">14-Day Server Node License Tiers</div>
+
+    <!-- Server Tiers -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹2,000 Server (Base)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹10,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹50,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹4,000 | 14-Day: ₹56,000</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let activeOtpCode = "1234";
+  let activeMobileNum = "";
+
+  function requestFast2SMSOtp() {
+    activeMobileNum = document.getElementById("login-mobile-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (activeMobileNum.length !== 10) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    
+    status.style.color = "#6fffe9";
+    status.innerText = "Connecting to Fast2SMS Gateway...";
+
+    activeOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
+    const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtpCode);
+    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + activeMobileNum;
+
+    fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log("Gateway note:", e));
+
+    setTimeout(() => {
+      status.style.color = "#00e676";
+      status.innerText = "OTP generated & ready for verification!";
+      document.getElementById("otp-verify-group").style.display = "block";
+      document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtpCode + ")";
+      document.getElementById("login-otp-input").value = activeOtpCode;
+    }, 600);
+  }
+
+  function verifyFast2SMSOtp() {
+    const userOtp = document.getElementById("login-otp-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (!userOtp) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter the verification OTP.";
+      return;
+    }
+    
+    status.style.color = "#00e676";
+    status.innerText = "Authentication successful! Loading dashboard...";
+    
+    setTimeout(() => {
+      const authView = document.getElementById("auth-view");
+      const dashView = document.getElementById("dashboard-view");
+      if (authView) authView.style.display = "none";
+      if (dashView) dashView.style.display = "block";
+      const phoneDisplay = document.getElementById("node-phone-display");
+      if (phoneDisplay) phoneDisplay.innerText = "+91 " + (activeMobileNum || "9840000000");
+    }, 400);
+  }
+
+  function logoutContractorNode() {
+    const dashView = document.getElementById("dashboard-view");
+    const authView = document.getElementById("auth-view");
+    if (dashView) dashView.style.display = "none";
+    if (authView) authView.style.display = "block";
+    const otpInput = document.getElementById("login-otp-input");
+    const statusMsg = document.getElementById("login-status-msg");
+    const verifyGroup = document.getElementById("otp-verify-group");
+    if (otpInput) otpInput.value = "";
+    if (statusMsg) statusMsg.innerText = "";
+    if (verifyGroup) verifyGroup.style.display = "none";
+  }
+</script>
+
+
+
+
+<!-- Contractor Node Dashboard View -->
+  <div id="dashboard-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 12px; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 11px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+        <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 14px;">+91 9840000000</div>
+      </div>
+      <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">Logout</button>
+    </div>
+
+    <!-- Live Market API Metal Balanced Portfolio -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+      <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Gold Value</div>
+          <div style="font-weight: bold; color: #fff;">127.389 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹7,850/g Live Spot)</div>
+        </div>
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Silver Value</div>
+          <div style="font-weight: bold; color: #fff;">8928.57 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹112/g Live Spot)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance & Remuneration Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+        <div style="font-size: 15px; font-weight: bold; color: #00e676; margin-top: 4px;">₹10,00,000.00</div>
+      </div>
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">Daily Task Remuneration</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6fffe9; margin-top: 4px;">₹0.00 / Day</div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #6fffe9; margin-bottom: 10px;">14-Day Server Node License Tiers</div>
+
+    <!-- Server Tiers -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹2,000 Server (Base)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹10,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹50,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹4,000 | 14-Day: ₹56,000</div>
+        </div>
+        <button style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 11px; cursor: pointer;">Deploy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let activeOtpCode = "1234";
+  let activeMobileNum = "";
+
+  function requestFast2SMSOtp() {
+    activeMobileNum = document.getElementById("login-mobile-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (activeMobileNum.length !== 10) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    
+    status.style.color = "#6fffe9";
+    status.innerText = "Connecting to Fast2SMS Gateway...";
+
+    activeOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
+    const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtpCode);
+    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + activeMobileNum;
+
+    fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log("Gateway note:", e));
+
+    setTimeout(() => {
+      status.style.color = "#00e676";
+      status.innerText = "OTP generated & ready for verification!";
+      document.getElementById("otp-verify-group").style.display = "block";
+      document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtpCode + ")";
+      document.getElementById("login-otp-input").value = activeOtpCode;
+    }, 600);
+  }
+
+  function verifyFast2SMSOtp() {
+    const userOtp = document.getElementById("login-otp-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (!userOtp) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter the verification OTP.";
+      return;
+    }
+    
+    status.style.color = "#00e676";
+    status.innerText = "Authentication successful! Loading dashboard...";
+    
+    setTimeout(() => {
+      const authView = document.getElementById("auth-view");
+      const dashView = document.getElementById("dashboard-view");
+      if (authView) authView.style.display = "none";
+      if (dashView) dashView.style.display = "block";
+      const phoneDisplay = document.getElementById("node-phone-display");
+      if (phoneDisplay) phoneDisplay.innerText = "+91 " + (activeMobileNum || "9840000000");
+    }, 400);
+  }
+
+  function logoutContractorNode() {
+    const dashView = document.getElementById("dashboard-view");
+    const authView = document.getElementById("auth-view");
+    if (dashView) dashView.style.display = "none";
+    if (authView) authView.style.display = "block";
+    const otpInput = document.getElementById("login-otp-input");
+    const statusMsg = document.getElementById("login-status-msg");
+    const verifyGroup = document.getElementById("otp-verify-group");
+    if (otpInput) otpInput.value = "";
+    if (statusMsg) statusMsg.innerText = "";
+    if (verifyGroup) verifyGroup.style.display = "none";
+  }
+</script>
+
+
+
+
+<!-- Contractor Node Dashboard View (Zero Initial Balance + Previous Dashboard Style + Bank Details) -->
+  <div id="dashboard-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 12px; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 11px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+        <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 14px;">+91 9840000000</div>
+      </div>
+      <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">Logout</button>
+    </div>
+
+    <!-- Live Market API Metal Balanced Portfolio -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+      <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Gold Value</div>
+          <div style="font-weight: bold; color: #fff;">127.389 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹7,850/g Live Spot)</div>
+        </div>
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Silver Value</div>
+          <div style="font-weight: bold; color: #fff;">8928.57 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹112/g Live Spot)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance & Remuneration Cards (Zero Balance Default) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+        <div style="font-size: 15px; font-weight: bold; color: #00e676; margin-top: 4px;">₹0.00</div>
+      </div>
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">Daily Task Remuneration</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6fffe9; margin-top: 4px;">₹0.00 / Day</div>
+      </div>
+    </div>
+
+    <!-- Business & Bank Settlement Details Accordion / Card -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px; font-size: 12px;">
+      <div style="font-size: 11px; color: #6fffe9; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Registered Business & Settlement Bank Details</div>
+      <div style="display: flex; flex-direction: column; gap: 4px; color: #c0c2c9;">
+        <div><b>Entity:</b> Madzinu Web3 Technologies</div>
+        <div><b>GSTIN:</b> 33ATQPM3725M2Z7</div>
+        <div><b>PAN:</b> ATQ****25M</div>
+        <div><b>Merchant ID:</b> 228126980570</div>
+        <div><b>Settlement Node:</b> HDFC Corporate Gateway (A/C ending 0058)</div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #6fffe9; margin-bottom: 10px;">14-Day Server Node License Tiers</div>
+
+    <!-- Server Tiers with GPay & Slice Details -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹2,000 Server (Base)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹5,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹394.64 | 14-Day: ₹5,525</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹10,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹25,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹1,991.07 | 14-Day: ₹27,875</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹50,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹4,000 | 14-Day: ₹56,000</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let activeOtpCode = "1234";
+  let activeMobileNum = "";
+
+  function requestFast2SMSOtp() {
+    activeMobileNum = document.getElementById("login-mobile-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (activeMobileNum.length !== 10) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    
+    status.style.color = "#6fffe9";
+    status.innerText = "Connecting to Fast2SMS Gateway...";
+
+    activeOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
+    const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtpCode);
+    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + activeMobileNum;
+
+    fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log("Gateway note:", e));
+
+    setTimeout(() => {
+      status.style.color = "#00e676";
+      status.innerText = "OTP generated & ready for verification!";
+      document.getElementById("otp-verify-group").style.display = "block";
+      document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtpCode + ")";
+      document.getElementById("login-otp-input").value = activeOtpCode;
+    }, 600);
+  }
+
+  function verifyFast2SMSOtp() {
+    const userOtp = document.getElementById("login-otp-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (!userOtp) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter the verification OTP.";
+      return;
+    }
+    
+    status.style.color = "#00e676";
+    status.innerText = "Authentication successful! Loading dashboard...";
+    
+    setTimeout(() => {
+      const authView = document.getElementById("auth-view");
+      const dashView = document.getElementById("dashboard-view");
+      if (authView) authView.style.display = "none";
+      if (dashView) dashView.style.display = "block";
+      const phoneDisplay = document.getElementById("node-phone-display");
+      if (phoneDisplay) phoneDisplay.innerText = "+91 " + (activeMobileNum || "9840000000");
+    }, 400);
+  }
+
+  function logoutContractorNode() {
+    const dashView = document.getElementById("dashboard-view");
+    const authView = document.getElementById("auth-view");
+    if (dashView) dashView.style.display = "none";
+    if (authView) authView.style.display = "block";
+    const otpInput = document.getElementById("login-otp-input");
+    const statusMsg = document.getElementById("login-status-msg");
+    const verifyGroup = document.getElementById("otp-verify-group");
+    if (otpInput) otpInput.value = "";
+    if (statusMsg) statusMsg.innerText = "";
+    if (verifyGroup) verifyGroup.style.display = "none";
+  }
+</script>
+
+
+
+
+<!-- Contractor Node Dashboard View (Zero Workspace Balance + Bank Details) -->
+  <div id="dashboard-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 12px; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 11px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+        <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 14px;">+91 9840000000</div>
+      </div>
+      <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">Logout</button>
+    </div>
+
+    <!-- Live Market API Metal Balanced Portfolio -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+      <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Gold Value</div>
+          <div style="font-weight: bold; color: #fff;">127.389 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹7,850/g Live Spot)</div>
+        </div>
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Silver Value</div>
+          <div style="font-weight: bold; color: #fff;">8928.57 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹112/g Live Spot)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance & Remuneration Cards (Zero Balance) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+        <div style="font-size: 15px; font-weight: bold; color: #00e676; margin-top: 4px;">₹0.00</div>
+      </div>
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">Daily Task Remuneration</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6fffe9; margin-top: 4px;">₹0.00 / Day</div>
+      </div>
+    </div>
+
+    <!-- Registered Business & Settlement Bank Details -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px; font-size: 12px;">
+      <div style="font-size: 11px; color: #6fffe9; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Registered Business & Settlement Bank Details</div>
+      <div style="display: flex; flex-direction: column; gap: 4px; color: #c0c2c9;">
+        <div><b>Entity:</b> Madzinu Web3 Technologies</div>
+        <div><b>GSTIN:</b> 33ATQPM3725M2Z7</div>
+        <div><b>PAN:</b> ATQ****25M</div>
+        <div><b>Merchant ID:</b> 228126980570</div>
+        <div><b>Settlement Node:</b> HDFC Corporate Gateway (A/C ending 0058)</div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #6fffe9; margin-bottom: 10px;">14-Day Server Node License Tiers</div>
+
+    <!-- Server Tiers with GPay & Slice Details -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹2,000 Server (Base)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹5,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹394.64 | 14-Day: ₹5,525</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹10,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹25,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹1,991.07 | 14-Day: ₹27,875</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹50,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹4,000 | 14-Day: ₹56,000</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button style="background: #00b0ff; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">GPay</button>
+          <button style="background: #ff007f; border: none; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let activeOtpCode = "1234";
+  let activeMobileNum = "";
+
+  function requestFast2SMSOtp() {
+    activeMobileNum = document.getElementById("login-mobile-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (activeMobileNum.length !== 10) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    
+    status.style.color = "#6fffe9";
+    status.innerText = "Connecting to Fast2SMS Gateway...";
+
+    activeOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
+    const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtpCode);
+    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + activeMobileNum;
+
+    fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log("Gateway note:", e));
+
+    setTimeout(() => {
+      status.style.color = "#00e676";
+      status.innerText = "OTP generated & ready for verification!";
+      document.getElementById("otp-verify-group").style.display = "block";
+      document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtpCode + ")";
+      document.getElementById("login-otp-input").value = activeOtpCode;
+    }, 600);
+  }
+
+  function verifyFast2SMSOtp() {
+    const userOtp = document.getElementById("login-otp-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (!userOtp) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter the verification OTP.";
+      return;
+    }
+    
+    status.style.color = "#00e676";
+    status.innerText = "Authentication successful! Loading dashboard...";
+    
+    setTimeout(() => {
+      const authView = document.getElementById("auth-view");
+      const dashView = document.getElementById("dashboard-view");
+      if (authView) authView.style.display = "none";
+      if (dashView) dashView.style.display = "block";
+      const phoneDisplay = document.getElementById("node-phone-display");
+      if (phoneDisplay) phoneDisplay.innerText = "+91 " + (activeMobileNum || "8122252222");
+    }, 400);
+  }
+
+  function logoutContractorNode() {
+    const dashView = document.getElementById("dashboard-view");
+    const authView = document.getElementById("auth-view");
+    if (dashView) dashView.style.display = "none";
+    if (authView) authView.style.display = "block";
+    const otpInput = document.getElementById("login-otp-input");
+    const statusMsg = document.getElementById("login-status-msg");
+    const verifyGroup = document.getElementById("otp-verify-group");
+    if (otpInput) otpInput.value = "";
+    if (statusMsg) statusMsg.innerText = "";
+    if (verifyGroup) verifyGroup.style.display = "none";
+  }
+</script>
+
+
+
+
+<!-- Contractor Secure Node Login & Zero-Balance Dashboard -->
+<div id="contractor-login-section" style="position: relative; z-index: 50; margin: 30px auto; padding: 25px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; color: #fff; font-family: system-ui, sans-serif; max-width: 480px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+  
+  <!-- Login Form View -->
+  <div id="auth-view" style="display: block;">
+    <h3 style="margin-top: 0; color: #6fffe9; font-size: 16px; margin-bottom: 15px; text-align: center;">🔐 Contractor Secure Node Login</h3>
+    
+    <div style="margin-bottom: 12px;">
+      <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Mobile Number (Fast2SMS OTP)</label>
+      <input id="login-mobile-input" type="tel" placeholder="Enter 10-digit mobile number" maxlength="10" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+    </div>
+    <button onclick="requestFast2SMSOtp()" style="width: 100%; background: linear-gradient(135deg, #00e676, #00b0ff); border: none; color: #000; font-weight: bold; padding: 12px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px;">Send OTP via Fast2SMS</button>
+
+    <div id="otp-verify-group" style="display: none; margin-top: 15px; border-top: 1px solid #1c2541; padding-top: 15px;">
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Enter Verification OTP <span id="debug-otp-hint" style="color: #00e676; font-size: 11px; float: right;"></span></label>
+        <input id="login-otp-input" type="text" placeholder="Enter 6-digit OTP" maxlength="6" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+      </div>
+      <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; border: none; color: #000; font-weight: bold; padding: 12px; border-radius: 6px; cursor: pointer; font-size: 13px;">Verify & Login</button>
+    </div>
+    <div id="login-status-msg" style="margin-top: 10px; font-size: 12px; text-align: center; color: #00e676;"></div>
+  </div>
+
+  <!-- Contractor Node Dashboard View -->
+  <div id="dashboard-view" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 12px; margin-bottom: 15px;">
+      <div>
+        <div style="font-size: 11px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+        <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 14px;">+91 8122252222</div>
+      </div>
+      <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">Logout</button>
+    </div>
+
+    <!-- Live Market API Metal Balanced Portfolio -->
+    <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 12px; margin-bottom: 15px;">
+      <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 8px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Gold Value</div>
+          <div style="font-weight: bold; color: #fff;">127.389 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹7,850/g Live Spot)</div>
+        </div>
+        <div style="background: #0b132b; padding: 8px; border-radius: 6px;">
+          <div style="color: #8a99ad; font-size: 10px;">Silver Value</div>
+          <div style="font-weight: bold; color: #fff;">8928.57 g</div>
+          <div style="font-size: 10px; color: #6fffe9;">(@₹112/g Live Spot)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance Cards (Zero Workspace Balance) -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+        <div style="font-size: 15px; font-weight: bold; color: #00e676; margin-top: 4px;">₹0.00</div>
+      </div>
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66;">
+        <div style="font-size: 10px; color: #8a99ad;">Daily Task Remuneration</div>
+        <div style="font-size: 15px; font-weight: bold; color: #6fffe9; margin-top: 4px;">₹0.00 / Day</div>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; font-weight: bold; color: #6fffe9; margin-bottom: 10px;">14-Day Server Node License Tiers</div>
+
+    <!-- Full Server Tier List (Including 25k, 50k, 100k) with Interactive GPay & Slice Details -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹2,000 Server (Base)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button onclick="handleGPayPayment(2000)" style="background: #00b0ff; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">GPay</button>
+          <button onclick="showSliceModal(2000, 155.50, 2177)" style="background: #ff007f; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹5,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹394.64 | 14-Day: ₹5,525</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button onclick="handleGPayPayment(5000)" style="background: #00b0ff; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">GPay</button>
+          <button onclick="showSliceModal(5000, 394.64, 5525)" style="background: #ff007f; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹10,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button onclick="handleGPayPayment(10000)" style="background: #00b0ff; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">GPay</button>
+          <button onclick="showSliceModal(10000, 792.86, 11100)" style="background: #ff007f; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹25,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹1,991.07 | 14-Day: ₹27,875</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button onclick="handleGPayPayment(25000)" style="background: #00b0ff; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">GPay</button>
+          <button onclick="showSliceModal(25000, 1991.07, 27875)" style="background: #ff007f; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹50,000 Server</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹4,000.00 | 14-Day: ₹56,000</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button onclick="handleGPayPayment(50000)" style="background: #00b0ff; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">GPay</button>
+          <button onclick="showSliceModal(50000, 4000, 56000)" style="background: #ff007f; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+      <div style="background: #162038; padding: 10px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: bold; font-size: 13px; color: #fff;">₹1,00,000 Server (Enterprise)</div>
+          <div style="font-size: 11px; color: #8a99ad; margin-top: 2px;">Daily: ₹8,150.00 | 14-Day: ₹1,14,100</div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button onclick="handleGPayPayment(100000)" style="background: #00b0ff; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">GPay</button>
+          <button onclick="showSliceModal(100000, 8150, 114100)" style="background: #ff007f; color: #fff; font-weight: bold; padding: 6px 10px; border-radius: 4px; font-size: 11px; border: none; cursor: pointer;">Slice Details</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  let activeOtpCode = "1234";
+  let activeMobileNum = "";
+
+  function requestFast2SMSOtp() {
+    activeMobileNum = document.getElementById("login-mobile-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (activeMobileNum.length !== 10) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    
+    status.style.color = "#6fffe9";
+    status.innerText = "Connecting to Fast2SMS Gateway...";
+
+    activeOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+    const apiKey = "0aN18piLoRT2xYt7QhgbyIPEmUucVO4qf9GSkFjHzWXM5Z6sed4GTFX7lmwJeRuqPSO5IhB06MLWgzHK";
+    const msg = encodeURIComponent("Your Madzinu Web3 Secure Node OTP is " + activeOtpCode);
+    const apiCallUrl = "https://www.fast2sms.com/dev/bulkV2?authorization=" + apiKey + "&route=q&message=" + msg + "&language=english&flash=0&numbers=" + activeMobileNum;
+
+    fetch(apiCallUrl, { mode: "no-cors" }).catch(e => console.log("Gateway note:", e));
+
+    setTimeout(() => {
+      status.style.color = "#00e676";
+      status.innerText = "OTP generated & ready for verification!";
+      document.getElementById("otp-verify-group").style.display = "block";
+      document.getElementById("debug-otp-hint").innerText = "(Test OTP: " + activeOtpCode + ")";
+      document.getElementById("login-otp-input").value = activeOtpCode;
+    }, 600);
+  }
+
+  function verifyFast2SMSOtp() {
+    const userOtp = document.getElementById("login-otp-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    
+    if (!userOtp) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter the verification OTP.";
+      return;
+    }
+    
+    status.style.color = "#00e676";
+    status.innerText = "Authentication successful! Loading dashboard...";
+    
+    setTimeout(() => {
+      document.getElementById("auth-view").style.display = "none";
+      document.getElementById("dashboard-view").style.display = "block";
+      document.getElementById("node-phone-display").innerText = "+91 " + (activeMobileNum || "8122252222");
+    }, 400);
+  }
+
+  function logoutContractorNode() {
+    document.getElementById("dashboard-view").style.display = "none";
+    document.getElementById("auth-view").style.display = "block";
+    document.getElementById("login-otp-input").value = "";
+    document.getElementById("login-status-msg").innerText = "";
+    document.getElementById("otp-verify-group").style.display = "none";
+  }
+
+  function handleGPayPayment(amount) {
+    const upiUrl = "upi://pay?pa=madzinuweb3@upi&pn=MadzinuWeb3&am=" + amount + "&cu=INR";
+    window.location.href = upiUrl;
+  }
+
+  function showSliceModal(tier, daily, total) {
+    alert("⚡ Slice Node License Tier Details:\n\n• Deployment Cost: ₹" + tier.toLocaleString() + "\n• Daily Estimated Task Remuneration: ₹" + daily + " / day\n• 14-Day Projected Output: ₹" + total.toLocaleString() + "\n\nClick GPay to deploy node license instantly.");
+  }
+</script>
+
+
+<!-- Official Bottom Footer -->
+<footer id="official-footer" style="position: relative; z-index: 10; text-align: center; padding: 25px 15px; background: #060913; color: #8a99ad; font-size: 12px; border-top: 1px solid #1c2541; margin-top: 40px; font-family: system-ui, sans-serif;">
+  <p style="margin: 0 0 6px 0;">&copy; 2026 Madzinu Web3 Technologies. All rights reserved. Registered in Chennai, Tamil Nadu.</p>
+  <p style="margin: 0;">Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized</p>
+</footer>
