@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <title>Madzinu Web3 Technologies & AI</title>
+  <title id="page-title">Madzinu Web3 Technologies & AI</title>
   <style>
     body { background: #060913; color: #fff; font-family: system-ui, sans-serif; margin: 0; padding: 15px; }
     .wrapper { max-width: 480px; margin: 0 auto; }
@@ -23,7 +23,7 @@
   <!-- Top Navigation & Language Selector -->
   <div class="card lang-bar">
     <div>
-      <div style="font-weight: bold; color: #6fffe9; font-size: 14px;" id="txt-brand">MADZINU WEB3 & AI</div>
+      <div style="font-weight: bold; color: #6fffe9; font-size: 14px;" data-key="brand">MADZINU WEB3 & AI</div>
     </div>
     <div style="display: flex; gap: 6px;">
       <select id="lang-selector" onchange="switchLanguage(this.value)" style="width: auto; margin: 0; padding: 6px; font-size: 12px;">
@@ -34,13 +34,13 @@
         <option value="ml">മലയാളം (Malayalam)</option>
         <option value="kn">ಕನ್ನಡ (Kannada)</option>
       </select>
-      <button onclick="toggleAdminPanel()" style="background: #00b0ff; color: #fff; padding: 6px 10px; font-size: 12px;">Admin</button>
+      <button onclick="toggleAdminPanel()" style="background: #00b0ff; color: #fff; padding: 6px 10px; font-size: 12px;" data-key="adminBtn">Admin</button>
     </div>
   </div>
 
   <!-- Instant Lifestyle & Food Vouchers Section -->
   <div class="card">
-    <div style="font-size: 12px; color: #6fffe9; font-weight: bold; margin-bottom: 12px;" id="txt-vouchers">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
+    <div style="font-size: 12px; color: #6fffe9; font-weight: bold; margin-bottom: 12px;" data-key="vouchersTitle">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
       <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Swiggy</button>
       <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Zomato</button>
@@ -54,64 +54,64 @@
     
     <!-- Login Form View -->
     <div id="auth-view" style="display: block;">
-      <h3 style="margin-top: 0; color: #6fffe9; font-size: 15px; margin-bottom: 15px; text-align: center;" id="txt-login-title">🔐 Contractor Secure Node Login</h3>
+      <h3 style="margin-top: 0; color: #6fffe9; font-size: 15px; margin-bottom: 15px; text-align: center;" data-key="loginTitle">🔐 Contractor Secure Node Login</h3>
       
       <div>
-        <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;" id="txt-mobile-label">Mobile Number (Fast2SMS OTP)</label>
+        <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;" data-key="mobileLabel">Mobile Number (Fast2SMS OTP)</label>
         <input id="login-mobile-input" type="tel" placeholder="Enter 10-digit mobile number" maxlength="10">
       </div>
-      <button onclick="requestFast2SMSOtp()" class="btn-primary" id="txt-send-otp">Send OTP via Fast2SMS</button>
+      <button onclick="requestFast2SMSOtp()" class="btn-primary" data-key="sendOtpBtn">Send OTP via Fast2SMS</button>
 
       <div id="otp-verify-group" style="display: none; margin-top: 15px; border-top: 1px solid #1c2541; padding-top: 15px;">
         <div>
-          <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;" id="txt-enter-otp">Enter Verification OTP <span id="debug-otp-hint" style="color: #00e676; font-size: 11px; float: right;"></span></label>
+          <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;"><span data-key="enterOtpLabel">Enter Verification OTP</span> <span id="debug-otp-hint" style="color: #00e676; font-size: 11px; float: right;"></span></label>
           <input id="login-otp-input" type="text" placeholder="Enter 6-digit OTP" maxlength="6">
         </div>
-        <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; color: #000;" id="txt-verify-login">Verify & Login</button>
+        <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; color: #000;" data-key="verifyLoginBtn">Verify & Login</button>
       </div>
       <div id="login-status-msg" style="margin-top: 10px; font-size: 12px; text-align: center; color: #00e676;"></div>
     </div>
 
-    <!-- Contractor Node Dashboard View -->
+    <!-- Contractor Node Dashboard View (Zero Balance) -->
     <div id="dashboard-view" style="display: none;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 10px; margin-bottom: 12px;">
         <div>
-          <div style="font-size: 10px; color: #8a99ad; text-transform: uppercase;">Connected Contractor Node</div>
+          <div style="font-size: 10px; color: #8a99ad; text-transform: uppercase;" data-key="connectedNode">Connected Contractor Node</div>
           <div id="node-phone-display" style="font-weight: bold; color: #6fffe9; font-size: 13px;">+91 8122252222</div>
         </div>
-        <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; padding: 6px 10px; font-size: 11px;">Logout</button>
+        <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; padding: 6px 10px; font-size: 11px;" data-key="logoutBtn">Logout</button>
       </div>
 
       <!-- Live Market API Metal Balanced Portfolio -->
       <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 10px; margin-bottom: 12px;">
-        <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 6px; text-transform: uppercase;">Live Market API Metal Balanced Portfolio</div>
+        <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 6px; text-transform: uppercase;" data-key="metalPortfolio">Live Market API Metal Balanced Portfolio</div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px;">
           <div style="background: #0b132b; padding: 6px; border-radius: 6px;">
-            <div style="color: #8a99ad; font-size: 9px;">Gold Value</div>
+            <div style="color: #8a99ad; font-size: 9px;" data-key="goldValue">Gold Value</div>
             <div style="font-weight: bold; color: #fff;">127.389 g</div>
-            <div style="font-size: 9px; color: #6fffe9;">(@₹7,850/g Spot)</div>
+            <div style="font-size: 9px; color: #6fffe9;" data-key="goldSpot">(@₹7,850/g Spot)</div>
           </div>
           <div style="background: #0b132b; padding: 6px; border-radius: 6px;">
-            <div style="color: #8a99ad; font-size: 9px;">Silver Value</div>
+            <div style="color: #8a99ad; font-size: 9px;" data-key="silverValue">Silver Value</div>
             <div style="font-weight: bold; color: #fff;">8928.57 g</div>
-            <div style="font-size: 9px; color: #6fffe9;">(@₹112/g Spot)</div>
+            <div style="font-size: 9px; color: #6fffe9;" data-key="silverSpot">(@₹112/g Spot)</div>
           </div>
         </div>
       </div>
 
-      <!-- Balance Cards (Zero Workspace Balance) -->
+      <!-- Balance Cards (Workspace Balance Locked to ₹0.00) -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
         <div style="background: #162038; padding: 8px; border-radius: 8px; border: 1px solid #2a3d66;">
-          <div style="font-size: 10px; color: #8a99ad;">INR Workspace Balance</div>
+          <div style="font-size: 10px; color: #8a99ad;" data-key="workspaceBalance">INR Workspace Balance</div>
           <div style="font-size: 14px; font-weight: bold; color: #00e676; margin-top: 3px;">₹0.00</div>
         </div>
         <div style="background: #162038; padding: 8px; border-radius: 8px; border: 1px solid #2a3d66;">
-          <div style="font-size: 10px; color: #8a99ad;">Daily Remuneration</div>
+          <div style="font-size: 10px; color: #8a99ad;" data-key="dailyRemuneration">Daily Remuneration</div>
           <div style="font-size: 14px; font-weight: bold; color: #6fffe9; margin-top: 3px;">₹0.00 / Day</div>
         </div>
       </div>
 
-      <div style="font-size: 12px; font-weight: bold; color: #6fffe9; margin-bottom: 8px;">14-Day Server Node License Tiers</div>
+      <div style="font-size: 12px; font-weight: bold; color: #6fffe9; margin-bottom: 8px;" data-key="serverTiersTitle">14-Day Server Node License Tiers</div>
 
       <!-- Server Tiers List with GPay & Slice Details -->
       <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -122,8 +122,8 @@
             <div style="font-size: 10px; color: #8a99ad;">Daily: ₹155.50 | 14-Day: ₹2,177</div>
           </div>
           <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(2000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;">GPay</button>
-            <button onclick="showSliceModal(2000, 155.50, 2177)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;">Slice Details</button>
+            <button onclick="handleGPayPayment(2000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
+            <button onclick="showSliceModal(2000, 155.50, 2177)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
           </div>
         </div>
 
@@ -133,8 +133,8 @@
             <div style="font-size: 10px; color: #8a99ad;">Daily: ₹394.64 | 14-Day: ₹5,525</div>
           </div>
           <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(5000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;">GPay</button>
-            <button onclick="showSliceModal(5000, 394.64, 5525)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;">Slice Details</button>
+            <button onclick="handleGPayPayment(5000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
+            <button onclick="showSliceModal(5000, 394.64, 5525)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
           </div>
         </div>
 
@@ -144,8 +144,8 @@
             <div style="font-size: 10px; color: #8a99ad;">Daily: ₹792.86 | 14-Day: ₹11,100</div>
           </div>
           <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(10000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;">GPay</button>
-            <button onclick="showSliceModal(10000, 792.86, 11100)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;">Slice Details</button>
+            <button onclick="handleGPayPayment(10000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
+            <button onclick="showSliceModal(10000, 792.86, 11100)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
           </div>
         </div>
 
@@ -155,8 +155,8 @@
             <div style="font-size: 10px; color: #8a99ad;">Daily: ₹1,991.07 | 14-Day: ₹27,875</div>
           </div>
           <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(25000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;">GPay</button>
-            <button onclick="showSliceModal(25000, 1991.07, 27875)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;">Slice Details</button>
+            <button onclick="handleGPayPayment(25000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
+            <button onclick="showSliceModal(25000, 1991.07, 27875)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
           </div>
         </div>
 
@@ -166,8 +166,8 @@
             <div style="font-size: 10px; color: #8a99ad;">Daily: ₹4,000.00 | 14-Day: ₹56,000</div>
           </div>
           <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(50000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;">GPay</button>
-            <button onclick="showSliceModal(50000, 4000, 56000)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;">Slice Details</button>
+            <button onclick="handleGPayPayment(50000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
+            <button onclick="showSliceModal(50000, 4000, 56000)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
           </div>
         </div>
 
@@ -177,8 +177,8 @@
             <div style="font-size: 10px; color: #8a99ad;">Daily: ₹8,150.00 | 14-Day: ₹1,14,100</div>
           </div>
           <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(100000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;">GPay</button>
-            <button onclick="showSliceModal(100000, 8150, 114100)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;">Slice Details</button>
+            <button onclick="handleGPayPayment(100000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
+            <button onclick="showSliceModal(100000, 8150, 114100)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
           </div>
         </div>
 
@@ -186,13 +186,13 @@
     </div>
   </div>
 
-  <!-- Admin Panel Overlay (Hidden by Default) -->
+  <!-- Admin Panel Overlay -->
   <div class="card" id="admin-panel" style="display: none; border-color: #00e676;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-      <div style="color: #00e676; font-weight: bold; font-size: 13px;">🛠️ Admin Control Dashboard</div>
-      <button onclick="toggleAdminPanel()" style="background: #333; color: #fff; padding: 4px 8px; font-size: 10px;">Close</button>
+      <div style="color: #00e676; font-weight: bold; font-size: 13px;" data-key="adminTitle">🛠️ Admin Control Dashboard</div>
+      <button onclick="toggleAdminPanel()" style="background: #333; color: #fff; padding: 4px 8px; font-size: 10px;" data-key="adminClose">Close</button>
     </div>
-    <div style="font-size: 11px; color: #8a99ad; margin-bottom: 8px;">Recent Node Deployment & Settlement Requests:</div>
+    <div style="font-size: 11px; color: #8a99ad; margin-bottom: 8px;" data-key="adminDesc">Recent Node Deployment & Settlement Requests:</div>
     <div id="admin-requests-list" style="background: #162038; padding: 8px; border-radius: 6px; font-size: 11px; color: #fff;">
       <div>• +91 8122252222 - ₹10,000 Server Request (Pending Approval)</div>
     </div>
@@ -200,8 +200,8 @@
 
   <!-- Footer -->
   <footer style="text-align: center; padding: 15px; color: #8a99ad; font-size: 11px; border-top: 1px solid #1c2541;">
-    <p style="margin: 0 0 4px 0;">&copy; 2026 Madzinu Web3 Technologies. Registered in Chennai, Tamil Nadu.</p>
-    <p style="margin: 0;">Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized</p>
+    <p style="margin: 0 0 4px 0;" data-key="footerRights">&copy; 2026 Madzinu Web3 Technologies. Registered in Chennai, Tamil Nadu.</p>
+    <p style="margin: 0;" data-key="footerSec">Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized</p>
   </footer>
 
 </div>
@@ -210,25 +210,180 @@
   let activeOtpCode = "1234";
   let activeMobileNum = "";
 
-  // Translations dictionary for 6 languages
+  // Complete Translation Dictionary for 6 languages
   const translations = {
-    en: { brand: "MADZINU WEB3 & AI", vouchers: "⚡ INSTANT LIFESTYLE & FOOD VOUCHERS", loginTitle: "🔐 Contractor Secure Node Login", mobileLabel: "Mobile Number (Fast2SMS OTP)", sendOtp: "Send OTP via Fast2SMS", enterOtp: "Enter Verification OTP", verifyLogin: "Verify & Login" },
-    ta: { brand: "மாட்ஜினு வெப்3 & ஏஐ", vouchers: "⚡ உடனடி உணவு & வாழ்க்கை முறை வவுச்சர்கள்", loginTitle: "🔐 ஒப்பந்ததாரர் பாதுகாப்பான நோட் உள்நுழைவு", mobileLabel: "கைபேசி எண் (Fast2SMS OTP)", sendOtp: "OTP அனுப்பவும்", enterOtp: "OTP ஐ உள்ளிடவும்", verifyLogin: "சரிபார்த்து உள்நுழையவும்" },
-    hi: { brand: "मड्झिनू वेब3 और एआई", vouchers: "⚡ त्वरित जीवनशैली और खाद्य वाउचर", loginTitle: "🔐 ठेकेदार सुरक्षित नोड लॉगिन", mobileLabel: "मोबाइल नंबर (Fast2SMS OTP)", sendOtp: "OTP भेजें", enterOtp: "सत्यापन OTP दर्ज करें", verifyLogin: "सत्यापित करें और लॉगिन करें" },
-    te: { brand: "మాడ్జినూ వెబ్3 & AI", vouchers: "⚡ తక్షణ ఆహార & జీవనశైలి వౌచర్లు", loginTitle: "🔐 కాంట్రాక్టర్ సురక్షిత నోడ్ లాగిన్", mobileLabel: "మొబైల్ నంబర్ (Fast2SMS OTP)", sendOtp: "OTP పంపండి", enterOtp: "ధృవీకరణ OTPని నమోదు చేయండి", verifyLogin: "ధృవీకరించండి & లాగిన్ అవ్వండి" },
-    ml: { brand: "മാഡ്ജിനു വെബ്3 & AI", vouchers: "⚡ തൽക്ഷണ ഫുഡ് & ലൈഫ്സ്റ്റൈൽ വൗച്ചറുകൾ", loginTitle: "🔐 കോൺട്രാക്ടർ സുരക്ഷിത നോഡ് ലോഗിൻ", mobileLabel: "മൊബൈൽ നമ്പർ (Fast2SMS OTP)", sendOtp: "OTP അയക്കുക", enterOtp: "വെരിഫിക്കേഷൻ OTP നൽകുക", verifyLogin: " സ്ഥിരീകരിച്ച് ലോഗിൻ ചെയ്യുക" },
-    kn: { brand: "ಮಾಡ್ಜಿನು ವೆಬ್3 & AI", vouchers: "⚡ ತತ್ಕ್ಷಣದ ಆಹಾರ & ಜೀವನಶೈಲಿ ವೋಚರ್‌ಗಳು", loginTitle: "🔐 ಗುತ್ತಿಗೆದಾರ ಸುರಕ್ಷಿತ ನೋಡ್ ಲಾಗಿನ್", mobileLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (Fast2SMS OTP)", sendOtp: "OTP ಕಳುಹಿಸಿ", enterOtp: "ಪರಿಶೀಲನೆ OTP ನಮೂದಿಸಿ", verifyLogin: "ಪರಿಶೀಲಿಸಿ & ಲಾಗಿನ್ ಮಾಡಿ" }
+    en: {
+      brand: "MADZINU WEB3 & AI",
+      adminBtn: "Admin",
+      vouchersTitle: "⚡ INSTANT LIFESTYLE & FOOD VOUCHERS",
+      loginTitle: "🔐 Contractor Secure Node Login",
+      mobileLabel: "Mobile Number (Fast2SMS OTP)",
+      sendOtpBtn: "Send OTP via Fast2SMS",
+      enterOtpLabel: "Enter Verification OTP",
+      verifyLoginBtn: "Verify & Login",
+      connectedNode: "Connected Contractor Node",
+      logoutBtn: "Logout",
+      metalPortfolio: "Live Market API Metal Balanced Portfolio",
+      goldValue: "Gold Value",
+      goldSpot: "(@₹7,850/g Spot)",
+      silverValue: "Silver Value",
+      silverSpot: "(@₹112/g Spot)",
+      workspaceBalance: "INR Workspace Balance",
+      dailyRemuneration: "Daily Remuneration",
+      serverTiersTitle: "14-Day Server Node License Tiers",
+      gpayBtn: "GPay",
+      sliceBtn: "Slice Details",
+      adminTitle: "🛠️ Admin Control Dashboard",
+      adminClose: "Close",
+      adminDesc: "Recent Node Deployment & Settlement Requests:",
+      footerRights: "© 2026 Madzinu Web3 Technologies. Registered in Chennai, Tamil Nadu.",
+      footerSec: "Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized"
+    },
+    ta: {
+      brand: "மாட்ஜினு வெப்3 & ஏஐ",
+      adminBtn: "நிர்வாகி",
+      vouchersTitle: "⚡ உடனடி உணவு & வாழ்க்கை முறை வவுச்சர்கள்",
+      loginTitle: "🔐 ஒப்பந்ததாரர் பாதுகாப்பான நோட் உள்நுழைவு",
+      mobileLabel: "கைபேசி எண் (Fast2SMS OTP)",
+      sendOtpBtn: "OTP அனுப்பவும்",
+      enterOtpLabel: "OTP ஐ உள்ளிடவும்",
+      verifyLoginBtn: "சரிபார்த்தು உள்நுழையவும்",
+      connectedNode: "இணைக்கப்பட்ட ஒப்பந்ததாரர் நோட்",
+      logoutBtn: "வெளியேறு",
+      metalPortfolio: "நேரலை சந்தை உலோகம் சமச்சீர் போர்ட்ஃபோலியோ",
+      goldValue: "தங்க மதிப்பு",
+      goldSpot: "(@₹7,850/g ஸ்பாட்)",
+      silverValue: "வெள்ளி மதிப்பு",
+      silverSpot: "(@₹112/g ஸ்பாட்)",
+      workspaceBalance: "INR பணிபுலம் இருப்பு",
+      dailyRemuneration: "தினசரி ஊதியம்",
+      serverTiersTitle: "14-நாள் சர்வர் நோட் உரிம அடுக்குகள்",
+      gpayBtn: "GPay",
+      sliceBtn: "ஸ்லைஸ் விவரங்கள்",
+      adminTitle: "🛠️ நிர்வாக கட்டுப்பாட்டு டாஷ்போர்டு",
+      adminClose: "மூடு",
+      adminDesc: "சமீபத்திய நோட் வரிசை மற்றும் தீர்வு கோரிக்கைகள்:",
+      footerRights: "© 2026 மாட்ஜினு வெப்3 டெக்னாலஜிஸ். சென்னை, தமிழ்நாடு.",
+      footerSec: "பாதுகாப்பான TLS 1.3 குறியிடப்பட்ட தளம் | MeitY ஸ்டார்ட்அப் அங்கீகரிக்கப்பட்டது"
+    },
+    hi: {
+      brand: "मड्झिनू वेब3 और एआई",
+      adminBtn: "व्यवस्थापक",
+      vouchersTitle: "⚡ त्वरित जीवनशैली और खाद्य वाउचर",
+      loginTitle: "🔐 ठेकेदार सुरक्षित नोड लॉगिन",
+      mobileLabel: "मोबाइल नंबर (Fast2SMS OTP)",
+      sendOtpBtn: "OTP भेजें",
+      enterOtpLabel: "सत्यापन OTP दर्ज करें",
+      verifyLoginBtn: "सत्यापित करें और लॉगिन करें",
+      connectedNode: "कनेक्टेड ठेकेदार नोड",
+      logoutBtn: "लॉग आउट",
+      metalPortfolio: "लाइव मार्केट एपीआई मेटल बैलेंस्ड पोर्टफोलियो",
+      goldValue: "सोने का मूल्य",
+      goldSpot: "(@₹7,850/g स्पॉट)",
+      silverValue: "चांदी का मूल्य",
+      silverSpot: "(@₹112/g स्पॉट)",
+      workspaceBalance: "INR कार्यक्षेत्र शेष",
+      dailyRemuneration: "दैनिक पारिश्रमिक",
+      serverTiersTitle: "14-दिवसीय सर्वर नोड लाइसेंस टियर",
+      gpayBtn: "GPay",
+      sliceBtn: "स्लाइस विवरण",
+      adminTitle: "🛠️ व्यवस्थापक नियंत्रण डैशबोर्ड",
+      adminClose: "बंद करें",
+      adminDesc: "हालिया नोड परिनियोजन और निपटान अनुरोध:",
+      footerRights: "© 2026 मड्झिनू वेब3 टेक्नोलॉजीज। चेन्नई, तमिलनाडु में पंजीकृत।",
+      footerSec: "सुरक्षित TLS 1.3 एन्क्रिप्टेड प्लेटफ़ॉर्म | MeitY स्टार्टअप मान्यता प्राप्त"
+    },
+    te: {
+      brand: "మాడ్జినూ వెబ్3 & AI",
+      adminBtn: "అడ్మిన్",
+      vouchersTitle: "⚡ తక్షణ ఆహార & జీవనశైలి వౌచర్లు",
+      loginTitle: "🔐 కాంట్రాక్టర్ సురక్షిత నోడ్ లాగిన్",
+      mobileLabel: "మొబైల్ నంబర్ (Fast2SMS OTP)",
+      sendOtpBtn: "OTP పంపండి",
+      enterOtpLabel: "ధృవీకరణ OTPని నమోదు చేయండి",
+      verifyLoginBtn: "ధృవీకరించండి & లాగిన్ అవ్వండి",
+      connectedNode: "కనెక్ట్ చేయబడిన కాంట్రాక్టర్ నోడ్",
+      logoutBtn: "లాగౌట్",
+      metalPortfolio: "లైవ్ మార్కెట్ API మెటల్ బాలెన్స్డ్ పోర్ట్‌ఫోలియో",
+      goldValue: "బంగారం విలువ",
+      goldSpot: "(@₹7,850/g స్పాట్)",
+      silverValue: "వెండి విలువ",
+      silverSpot: "(@₹112/g స్పాట్)",
+      workspaceBalance: "INR వర్క్‌స్పేస్ బ్యాలెన్స్",
+      dailyRemuneration: "రోజువారీ వేతనం",
+      serverTiersTitle: "14-రోజుల సర్వర్ నోడ్ లైసెన్స్ శ్రేణులు",
+      gpayBtn: "GPay",
+      sliceBtn: "స్లైస్ వివరాలు",
+      adminTitle: "🛠️ అడ్మిన్ కంట్రోల్ డ్యాష్‌బోర్డ్",
+      adminClose: "మూసివేయి",
+      adminDesc: "ఇటీగ్రి నోడ్ విస్తరణ & సెటిల్‌మెంట్ అభ్యర్థనలు:",
+      footerRights: "© 2026 మాడ్జినూ వెబ్3 టెక్నాలజీస్. చెన్నై, తమిళనాడు.",
+      footerSec: "సురక్షిత TLS 1.3 ఎన్‌క్రిప్టెడ్ ప్లాట్‌ఫారమ్ | MeitY స్టార్టప్ గుర్తింపు"
+    },
+    ml: {
+      brand: "മാഡ്ജിനു വെബ്3 & AI",
+      adminBtn: "അഡ്മിൻ",
+      vouchersTitle: "⚡ തൽക്ഷണ ഫുഡ് & ലൈഫ്സ്റ്റൈൽ വൗച്ചറുകൾ",
+      loginTitle: "🔐 കോൺട്രാക്ടർ സുരക്ഷിത നോഡ് ലോഗിൻ",
+      mobileLabel: "മൊബൈൽ നമ്പർ (Fast2SMS OTP)",
+      sendOtpBtn: "OTP അയക്കുക",
+      enterOtpLabel: "വെരിഫിക്കേഷൻ OTP നൽകുക",
+      verifyLoginBtn: "സ്ഥിരീകരിച്ച് ലോഗിൻ ചെയ്യുക",
+      connectedNode: "കണക്റ്റുചെയ്‌ത കോൺട്രാക്ടർ നോഡ്",
+      logoutBtn: "പുറത്തുകടക്കുക",
+      metalPortfolio: "ലൈവ് മാർക്കറ്റ് API മെറ്റൽ ബാലൻസ്‌ഡ് പോർട്ട്‌ഫോളിയോ",
+      goldValue: "സ്വർണ്ണ മൂല്യം",
+      goldSpot: "(@₹7,850/g സ്പോട്ട്)",
+      silverValue: "വെള്ളി മൂല്യം",
+      silverSpot: "(@₹112/g സ്പോട്ട്)",
+      workspaceBalance: "INR വർക്ക്‌സ്‌പേസ് ബാലൻസ്",
+      dailyRemuneration: "പ്രതിദിന പ്രതിഫലം",
+      serverTiersTitle: "14-ദിവസത്തെ സെർവർ നോഡ് ലൈസൻസ് ടയറുകൾ",
+      gpayBtn: "ജിപേ (GPay)",
+      sliceBtn: "സ്ലൈസ് വിശദാംശങ്ങൾ",
+      adminTitle: "🛠️ അഡ്മിൻ കൺട്രോൾ ഡാഷ്‌ബോർഡ്",
+      adminClose: "അടയ്ക്കുക",
+      adminDesc: "സമീപകാല നോഡ് ഡെപ്ലോയ്മെന്റ് & സെറ്റിൽമെന്റ് അഭ്യർത്ഥനകൾ:",
+      footerRights: "© 2026 മാഡ്ജിനു വെബ്3 ടെക്നോളജീസ്. ചെന്നൈ, തമിഴ്നാട്.",
+      footerSec: "സുരക്ഷിതമായ TLS 1.3 എൻക്രിപ്റ്റഡ് പ്ലാറ്റ്‌ഫോം | MeitY സ്റ്റാർട്ടപ്പ് അംഗീകാരം"
+    },
+    kn: {
+      brand: "ಮಾಡ್ಜಿನು ವೆಬ್3 & AI",
+      adminBtn: "ನಿರ್ವಾಹಕ",
+      vouchersTitle: "⚡ ತತ್ಕ್ಷಣದ ಆಹಾರ & ಜೀವನಶೈಲಿ ವೋಚರ್‌ಗಳು",
+      loginTitle: "🔐 ಗುತ್ತಿಗೆದಾರ ಸುರಕ್ಷಿತ ನೋಡ್ ಲಾಗಿನ್",
+      mobileLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (Fast2SMS OTP)",
+      sendOtpBtn: "OTP ಕಳುಹಿಸಿ",
+      enterOtpLabel: "ಪರಿಶೀಲನೆ OTP ನಮೂದಿಸಿ",
+      verifyLoginBtn: "ಪರಿಶೀಲಿಸಿ & ಲಾಗಿನ್ ಮಾಡಿ",
+      connectedNode: "ಸಂಪರ್ಕಗೊಂಡ ಗುತ್ತಿಗೆದಾರ ನೋಡ್",
+      logoutBtn: "ಹೊರಬನ್ನಿ",
+      metalPortfolio: "ಲೈವ್ ಮಾರುಕೇಟ್ API ಮೆಟಲ್ ಬ್ಯಾಲೆನ್ಸಿಡ್ ಪೋರ್ಟ್‌ಫೋಲಿಯೋ",
+      goldValue: "ಚಿನ್ನದ ಮೌಲ್ಯ",
+      goldSpot: "(@₹7,850/g ಸ್ಪಾಟ್)",
+      silverValue: "ಬೆಳ್ಳಿ ಮೌಲ್ಯ",
+      silverSpot: "(@₹112/g ಸ್ಪಾಟ್)",
+      workspaceBalance: "INR ಕೆಲಸದ ಸ್ಥಳ ಬಾಕಿ",
+      dailyRemuneration: "ದೈನಂದಿನ ಸಂಭಾವನೆ",
+      serverTiersTitle: "14-ದಿನಗಳ ಸರ್ವರ್ ನೋಡ್ ಪರವಾನಗಿ ಶ್ರೇಣಿಗಳು",
+      gpayBtn: "GPay",
+      sliceBtn: "ಸ್ಲೈಸ್ ವಿವರಗಳು",
+      adminTitle: "🛠️ ನಿರ್ವಾಹಕ ನಿಯಂತ್ರಣ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+      adminClose: "ಮುಚ್ಚಿ",
+      adminDesc: "ಇತ್ತೀಚಿನ ನೋಡ್ ನಿಯೋಜನೆ & ಇತ್ಯರ್ಥ ವಿನಂತಿಗಳು:",
+      footerRights: "© 2026 ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್. ಚೆನ್ನೈ, ತಮಿಳುನಾಡು.",
+      footerSec: "ಸುರಕ್ಷಿತ TLS 1.3 ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ პლಾಟ್‌ಫಾರ್ಮ್ | MeitY ಸ್ಟಾರ್ಟಪ್ ಗುರುತಿಸಲ್ಪಟ್ಟಿದೆ"
+    }
   };
 
   function switchLanguage(lang) {
     const t = translations[lang] || translations.en;
-    document.getElementById("txt-brand").innerText = t.brand;
-    document.getElementById("txt-vouchers").innerText = t.vouchers;
-    document.getElementById("txt-login-title").innerText = t.loginTitle;
-    document.getElementById("txt-mobile-label").innerText = t.mobileLabel;
-    document.getElementById("txt-send-otp").innerText = t.sendOtp;
-    document.getElementById("txt-enter-otp").childNodes[0].nodeValue = t.enterOtp + " ";
-    document.getElementById("txt-verify-login").innerText = t.verifyLogin;
+    document.querySelectorAll("[data-key]").forEach(el => {
+      const key = el.getAttribute("data-key");
+      if (t[key]) {
+        el.innerText = t[key];
+      }
+    });
   }
 
   function requestFast2SMSOtp() {
