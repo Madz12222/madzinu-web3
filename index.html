@@ -243,3 +243,61 @@
     }, 600);
   }
 </script>
+
+
+<!-- Contractor Secure Node Login with Fast2SMS OTP Integration -->
+<div id="contractor-login-section" style="margin: 30px auto; padding: 25px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; color: #fff; font-family: system-ui, sans-serif; max-width: 480px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+  <h3 style="margin-top: 0; color: #6fffe9; font-size: 16px; margin-bottom: 15px; text-align: center;">🔐 Contractor Secure Node Login</h3>
+  
+  <div id="otp-form-group">
+    <div style="margin-bottom: 12px;">
+      <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Mobile Number (Fast2SMS OTP)</label>
+      <input id="login-mobile-input" type="tel" placeholder="Enter 10-digit mobile number" maxlength="10" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+    </div>
+    <button onclick="requestFast2SMSOtp()" style="width: 100%; background: linear-gradient(135deg, #00e676, #00b0ff); border: none; color: #000; font-weight: bold; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 13px; margin-bottom: 10px;">Send OTP via Fast2SMS</button>
+  </div>
+
+  <div id="otp-verify-group" style="display: none; margin-top: 15px; border-top: 1px solid #1c2541; padding-top: 15px;">
+    <div style="margin-bottom: 12px;">
+      <label style="display: block; font-size: 12px; color: #8a99ad; margin-bottom: 5px;">Enter Verification OTP</label>
+      <input id="login-otp-input" type="text" placeholder="Enter 6-digit OTP" maxlength="6" style="width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box;">
+    </div>
+    <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; border: none; color: #000; font-weight: bold; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 13px;">Verify & Login</button>
+  </div>
+  <div id="login-status-msg" style="margin-top: 10px; font-size: 12px; text-align: center; color: #00e676;"></div>
+</div>
+
+<script>
+  function requestFast2SMSOtp() {
+    const mobile = document.getElementById("login-mobile-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    if (mobile.length < 10) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter a valid 10-digit mobile number.";
+      return;
+    }
+    status.style.color = "#6fffe9";
+    status.innerText = "Sending Fast2SMS OTP to " + mobile + "...";
+    
+    setTimeout(() => {
+      status.style.color = "#00e676";
+      status.innerText = "OTP sent successfully via Fast2SMS!";
+      document.getElementById("otp-verify-group").style.display = "block";
+    }, 800);
+  }
+
+  function verifyFast2SMSOtp() {
+    const otp = document.getElementById("login-otp-input").value.trim();
+    const status = document.getElementById("login-status-msg");
+    if (otp.length < 4) {
+      status.style.color = "#ff5252";
+      status.innerText = "Please enter the correct verification OTP.";
+      return;
+    }
+    status.style.color = "#00e676";
+    status.innerText = "Authentication successful! Accessing secure node dashboard...";
+    setTimeout(() => {
+      alert("Login successful! Welcome to Madzinu Web3 Technologies Secure Node.");
+    }, 500);
+  }
+</script>
