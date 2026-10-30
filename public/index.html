@@ -8,9 +8,9 @@
   <style>
     body { background: #060913; color: #fff; font-family: system-ui, sans-serif; margin: 0; padding: 15px; }
     .wrapper { max-width: 480px; margin: 0 auto; }
-    .card { background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .card { background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; z-index: 1; }
     input, select { width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; box-sizing: border-box; margin-bottom: 10px; }
-    button { cursor: pointer; font-weight: bold; border-radius: 6px; border: none; font-size: 13px; padding: 10px; }
+    button { cursor: pointer; font-weight: bold; border-radius: 6px; border: none; font-size: 13px; padding: 10px; position: relative; z-index: 10; }
     .btn-primary { width: 100%; background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; margin-bottom: 10px; }
     .tier-card { background: #162038; padding: 12px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .lang-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -25,7 +25,7 @@
     <div>
       <div style="font-weight: bold; color: #6fffe9; font-size: 14px;" data-key="brand">MADZINU WEB3 & AI</div>
     </div>
-    <div style="display: flex; gap: 6px;">
+    <div style="display: flex; gap: 6px; align-items: center;">
       <select id="lang-selector" onchange="switchLanguage(this.value)" style="width: auto; margin: 0; padding: 6px; font-size: 12px;">
         <option value="en">English</option>
         <option value="ta">தமிழ் (Tamil)</option>
@@ -34,7 +34,7 @@
         <option value="ml">മലയാളം (Malayalam)</option>
         <option value="kn">ಕನ್ನಡ (Kannada)</option>
       </select>
-      <button onclick="toggleAdminPanel()" style="background: #00b0ff; color: #fff; padding: 6px 10px; font-size: 12px;" data-key="adminBtn">Admin</button>
+      <button id="admin-access-btn" onclick="toggleAdminPanel()" style="background: #00b0ff; color: #fff; padding: 6px 10px; font-size: 12px; z-index: 100; cursor: pointer;" data-key="adminBtn">Admin</button>
     </div>
   </div>
 
@@ -186,8 +186,8 @@
     </div>
   </div>
 
-  <!-- Admin Panel Overlay -->
-  <div class="card" id="admin-panel" style="display: none; border-color: #00e676;">
+  <!-- Admin Control Overlay Card -->
+  <div class="card" id="admin-panel" style="display: none; border-color: #00e676; position: relative; z-index: 100;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
       <div style="color: #00e676; font-weight: bold; font-size: 13px;" data-key="adminTitle">🛠️ Admin Control Dashboard</div>
       <button onclick="toggleAdminPanel()" style="background: #333; color: #fff; padding: 4px 8px; font-size: 10px;" data-key="adminClose">Close</button>
@@ -247,7 +247,7 @@
       mobileLabel: "கைபேசி எண் (Fast2SMS OTP)",
       sendOtpBtn: "OTP அனுப்பவும்",
       enterOtpLabel: "OTP ஐ உள்ளிடவும்",
-      verifyLoginBtn: "சரிபார்த்தು உள்நுழையவும்",
+      verifyLoginBtn: "சரிபார்த்து உள்நுழையவும்",
       connectedNode: "இணைக்கப்பட்ட ஒப்பந்ததாரர் நோட்",
       logoutBtn: "வெளியேறு",
       metalPortfolio: "நேரலை சந்தை உலோகம் சமச்சீர் போர்ட்ஃபோலியோ",
@@ -372,7 +372,7 @@
       adminClose: "ಮುಚ್ಚಿ",
       adminDesc: "ಇತ್ತೀಚಿನ ನೋಡ್ ನಿಯೋಜನೆ & ಇತ್ಯರ್ಥ ವಿನಂತಿಗಳು:",
       footerRights: "© 2026 ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್. ಚೆನ್ನೈ, ತಮಿಳುನಾಡು.",
-      footerSec: "ಸುರಕ್ಷಿತ TLS 1.3 ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ პლಾಟ್‌ಫಾರ್ಮ್ | MeitY ಸ್ಟಾರ್ಟಪ್ ಗುರುತಿಸಲ್ಪಟ್ಟಿದೆ"
+      footerSec: "ಸುರಕ್ಷಿತ TLS 1.3 ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ | MeitY ಸ್ಟಾರ್ಟಪ್ ಗುರುತಿಸಲ್ಪಟ್ಟಿದೆ"
     }
   };
 
@@ -454,7 +454,14 @@
 
   function toggleAdminPanel() {
     const panel = document.getElementById("admin-panel");
-    panel.style.display = panel.style.display === "none" ? "block" : "none";
+    if (panel) {
+      if (panel.style.display === "none" || panel.style.display === "") {
+        panel.style.display = "block";
+        panel.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        panel.style.display = "none";
+      }
+    }
   }
 </script>
 
