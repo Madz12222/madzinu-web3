@@ -512,93 +512,39 @@
         }
     </script>
 
-<!-- MadzinuAI Floating Widget & Chat Interface -->
-<div id="madzinu-ai-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: Arial, sans-serif;">
-  <button id="madzinu-ai-trigger" onclick="toggleMadzinuChat()" style="background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; border: none; padding: 14px 22px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 20px rgba(0,230,118,0.5); display: flex; align-items: center; gap: 8px; font-size: 15px;">
-    🤖 <span>MadzinuAI</span>
-  </button>
 
-  <div id="madzinu-ai-box" style="display: none; position: absolute; bottom: 65px; right: 0; width: 340px; background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); color: #fff; overflow: hidden;">
-    <div style="background: #1e293b; padding: 12px 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155;">
-      <span>🤖 MadzinuAI Executive Secretary</span>
-      <span onclick="toggleMadzinuChat()" style="cursor: pointer; color: #94a3b8; font-size: 18px;">&times;</span>
-    </div>
-    <div id="madzinu-chat-messages" style="height: 250px; padding: 12px; overflow-y: auto; font-size: 13px; line-height: 1.5;">
-      <div style="background: #334155; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px;">
-        Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment opportunities today?
-      </div>
-    </div>
-    <div style="display: flex; padding: 10px; border-top: 1px solid #334155; background: #0f172a;">
-      <input id="madzinu-input" type="text" placeholder="Ask a question or share investment intent..." style="flex: 1; background: #1e293b; border: 1px solid #334155; color: #fff; padding: 8px; border-radius: 6px; font-size: 12px; outline: none;">
-      <button onclick="sendMadzinuMessage()" style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 8px 12px; margin-left: 6px; border-radius: 6px; cursor: pointer; font-size: 12px;">Send</button>
+
+<!-- MadzinuAI Static Assistant Section (Placed Below Login) -->
+<div id="madzinu-ai-section" style="margin: 30px auto; padding: 20px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; color: #fff; font-family: system-ui, sans-serif; max-width: 600px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1c2541; padding-bottom: 10px; margin-bottom: 12px;">
+    <span id="ai-header-title" style="font-weight: bold; color: #6fffe9; font-size: 15px;">🤖 MadzinuAI Executive Secretary</span>
+    <select id="ai-lang-select" onchange="switchAiLang(this.value)" style="background: #0b132b; color: #fff; border: 1px solid #3a506b; border-radius: 4px; font-size: 12px; padding: 4px;">
+      <option value="en">English</option>
+      <option value="ta">தமிழ்</option>
+    </select>
+  </div>
+  <div id="madzinu-messages" style="height: 180px; padding: 10px; overflow-y: auto; font-size: 13px; color: #e0e1dd; line-height: 1.4; background: #060913; border-radius: 8px; margin-bottom: 10px;">
+    <div id="ai-welcome-msg" style="background: #1c2541; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px;">
+      Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?
     </div>
   </div>
-</div>
-
-<script>
-  function toggleMadzinuChat() {
-    const box = document.getElementById("madzinu-ai-box");
-    box.style.display = box.style.display === "none" ? "block" : "none";
-  }
-
-  function sendMadzinuMessage() {
-    const input = document.getElementById("madzinu-input");
-    const msgBox = document.getElementById("madzinu-chat-messages");
-    if (!input.value.trim()) return;
-
-    const userMsg = input.value;
-    msgBox.innerHTML += `<div style="background: #00e676; color: #000; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; text-align: right;">\${userMsg}</div>`;
-    input.value = "";
-    msgBox.scrollTop = msgBox.scrollHeight;
-
-    setTimeout(() => {
-      msgBox.innerHTML += `<div style="background: #334155; padding: 8px 12px; border-radius: 8px; margin-bottom: 8px;">Thank you! Our AI Executive Secretary has recorded your inquiry. An representative will follow up with you shortly.</div>`;
-      msgBox.scrollTop = msgBox.scrollHeight;
-    }, 800);
-  }
-</script>
-
-
-<!-- MadzinuAI Floating Executive Secretary Widget (Bottom-Left & Bilingual) -->
-<div id="madzinu-ai-floating-widget" style="position: fixed; bottom: 20px; left: 20px; z-index: 999999; font-family: system-ui, sans-serif;">
-  <button id="madzinu-ai-toggle" onclick="toggleMadzinuAIBox()" style="background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; border: none; padding: 12px 18px; border-radius: 50px; font-weight: 700; font-size: 14px; cursor: pointer; box-shadow: 0 4px 20px rgba(0, 230, 118, 0.5); display: flex; align-items: center; gap: 8px;">
-    <span>🤖</span> <span id="ai-btn-text">MadzinuAI</span>
-  </button>
-
-  <div id="madzinu-ai-chatbox" style="display: none; position: absolute; bottom: 60px; left: 0; width: 320px; background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); overflow: hidden;">
-    <div style="background: #1c2541; padding: 10px 15px; color: #6fffe9; font-weight: bold; font-size: 13px; display: flex; justify-content: space-between; align-items: center;">
-      <span id="ai-header-title">🤖 MadzinuAI Secretary</span>
-      <div style="display: flex; gap: 8px; align-items: center;">
-        <select id="ai-lang-select" onchange="switchAiLang(this.value)" style="background: #0b132b; color: #fff; border: 1px solid #3a506b; border-radius: 4px; font-size: 11px; padding: 2px;">
-          <option value="en">English</option>
-          <option value="ta">தமிழ்</option>
-        </select>
-        <span onclick="toggleMadzinuAIBox()" style="cursor: pointer; color: #fff; font-size: 18px; margin-left: 4px;">&times;</span>
-      </div>
-    </div>
-    <div id="madzinu-messages" style="height: 200px; padding: 12px; overflow-y: auto; font-size: 13px; color: #e0e1dd; line-height: 1.4;">
-      <div id="ai-welcome-msg" style="background: #1c2541; padding: 8px 10px; border-radius: 8px; margin-bottom: 8px;">
-        Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?
-      </div>
-    </div>
-    <div style="display: flex; padding: 8px; background: #0b132b; border-top: 1px solid #1c2541;">
-      <input id="madzinu-user-input" type="text" placeholder="Type your inquiry..." style="flex: 1; background: #1c2541; border: 1px solid #3a506b; color: #fff; padding: 8px; border-radius: 6px; font-size: 12px; outline: none;">
-      <button onclick="handleMadzinuSubmit()" style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 8px 12px; margin-left: 6px; border-radius: 6px; cursor: pointer; font-size: 12px;" id="ai-send-btn">Send</button>
-    </div>
+  <div style="display: flex; gap: 8px;">
+    <input id="madzinu-user-input" type="text" placeholder="Type your inquiry or investment intent..." style="flex: 1; background: #1c2541; border: 1px solid #3a506b; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none;">
+    <button onclick="handleMadzinuSubmit()" style="background: #00e676; border: none; color: #000; font-weight: bold; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 13px;" id="ai-send-btn">Send</button>
   </div>
 </div>
 
 <script>
   const aiTranslations = {
     en: {
-      title: "🤖 MadzinuAI Secretary",
+      title: "🤖 MadzinuAI Executive Secretary",
       welcome: "Welcome to Madzinu Web3 Technologies! How can I assist you with compute packages or investment inquiries today?",
-      placeholder: "Type your inquiry...",
+      placeholder: "Type your inquiry or investment intent...",
       send: "Send",
       response: "Thank you for contacting Madzinu Web3 Technologies. Your request has been logged and our team will get in touch with you shortly."
     },
     ta: {
-      title: "🤖 மட்சினு AI செயலாளர்",
+      title: "🤖 மட்சினு AI நிர்வாக செயலாளர்",
       welcome: "மட்சினு வெப்3 டெக்னாலஜிஸ் நிறுவனத்திற்கு உங்களை வரவேற்கிறோம்! கணினி தொகுப்புகள் அல்லது முதலீட்டு விவரங்கள் குறித்து நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?",
       placeholder: "உங்கள் கேள்வியைத் தட்டச்சு செய்க...",
       send: "அனுப்பு",
@@ -608,15 +554,10 @@
 
   let currentLang = "en";
 
-  function toggleMadzinuAIBox() {
-    const box = document.getElementById("madzinu-ai-chatbox");
-    box.style.display = (box.style.display === "none" || !box.style.display) ? "block" : "none";
-  }
-
   function switchAiLang(lang) {
     currentLang = lang;
     const t = aiTranslations[lang];
-    document.getElementById("ai-header-title").innerText = t.title;
+    document.getElementById("ai-header-titleinnerText" in document.getElementById("ai-header-title") ? "innerText" : "textContent") = t.title;
     document.getElementById("ai-welcome-msg").innerText = t.welcome;
     document.getElementById("madzinu-user-input").placeholder = t.placeholder;
     document.getElementById("ai-send-btn").innerText = t.send;
@@ -640,5 +581,8 @@
   }
 </script>
 
-</body>
-</html>
+<!-- Official Website Footer -->
+<footer style="text-align: center; padding: 25px 15px; background: #060913; color: #8a99ad; font-size: 12px; border-top: 1px solid #1c2541; margin-top: 40px; font-family: system-ui, sans-serif;">
+  <p>&copy; 2026 Madzinu Web3 Technologies. All rights reserved. Registered in Chennai, Tamil Nadu.</p>
+  <p style="margin-top: 6px;">Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized</p>
+</footer>
