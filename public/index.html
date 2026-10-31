@@ -11,15 +11,13 @@
     * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
     body { background: #060913; color: #fff; margin: 0; padding: 15px; min-height: 100vh; }
     .wrapper { max-width: 480px; margin: 0 auto; padding-bottom: 60px; }
-    .card { background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; z-index: 1; }
+    .card { background: #0b132b; border: 1px solid #1c2541; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     input, select { width: 100%; background: #162038; border: 1px solid #2a3d66; color: #fff; padding: 10px; border-radius: 6px; font-size: 13px; outline: none; margin-bottom: 10px; }
-    button { cursor: pointer; font-weight: bold; border-radius: 6px; border: none; font-size: 13px; padding: 10px; position: relative; z-index: 10; transition: transform 0.1s ease; }
-    button:active { transform: scale(0.98); }
+    button { cursor: pointer; font-weight: bold; border-radius: 6px; border: none; font-size: 13px; padding: 10px; }
     .btn-primary { width: 100%; background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; margin-bottom: 10px; }
     .tier-card { background: #162038; padding: 12px; border-radius: 8px; border: 1px solid #2a3d66; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .lang-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
     .partner-badge { background: #162038; border: 1px solid #2a3d66; padding: 8px 12px; border-radius: 6px; text-align: center; font-size: 11px; }
-    .ai-secretary { position: fixed; bottom: 15px; left: 15px; background: linear-gradient(135deg, #00e676, #00b0ff); color: #000; padding: 10px 16px; border-radius: 20px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 15px rgba(0,230,118,0.4); z-index: 999; cursor: pointer; display: flex; align-items: center; gap: 6px; }
   </style>
 </head>
 <body>
@@ -30,11 +28,11 @@
   <div class="card lang-bar">
     <div>
       <div style="font-weight: bold; color: #6fffe9; font-size: 14px;" data-key="brand">MADZINU WEB3 TECH & AI</div>
-      <div style="color: #00e676; font-size: 10px; margin-top: 2px;" data-key="meityReg">✓ Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506</div>
+      <div style="color: #00e676; font-size: 10px; margin-top: 2px;" data-key="meityReg">✓ Govt. of India Recognized Startup (MeitY)</div>
     </div>
     <div style="display: flex; gap: 6px; align-items: center;">
       <select id="lang-selector" onchange="switchLanguage(this.value)" style="width: auto; margin: 0; padding: 6px; font-size: 12px;">
-        <option value="en">EN</option>
+        <option value="en">English</option>
         <option value="ta">தமிழ்</option>
         <option value="hi">हिन्दी</option>
         <option value="te">తెలుగు</option>
@@ -52,30 +50,7 @@
     <button onclick="shareViaWhatsApp()" style="width: 100%; background: #25d366; color: #fff;" data-key="waBtn">Share on WhatsApp</button>
   </div>
 
-  <!-- Partner Badges Section -->
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;">
-    <div class="partner-badge">
-      <div style="color: #fff; font-weight: bold;">Malabar Gold</div>
-      <div style="color: #8a99ad; font-size: 9px;" data-key="officialWeb">Official Website</div>
-    </div>
-    <div class="partner-badge">
-      <div style="color: #fff; font-weight: bold;">Kalyan Jewellers</div>
-      <div style="color: #8a99ad; font-size: 9px;" data-key="officialWeb">Official Website</div>
-    </div>
-  </div>
-
-  <!-- Instant Vouchers Section -->
-  <div class="card">
-    <div style="font-size: 12px; color: #6fffe9; font-weight: bold; margin-bottom: 12px;" data-key="vouchersTitle">⚡ INSTANT LIFESTYLE & FOOD VOUCHERS</div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Swiggy</button>
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Zomato</button>
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Amazon Pay</button>
-      <button style="background: #162038; color: #fff; border: 1px solid #2a3d66;">Flipkart</button>
-    </div>
-  </div>
-
-  <!-- Login & Dashboard View -->
+  <!-- Contractor Login & Dashboard Section -->
   <div class="card" id="contractor-login-section">
     <div id="auth-view" style="display: block;">
       <h3 style="margin-top: 0; color: #6fffe9; font-size: 15px; margin-bottom: 15px; text-align: center;" data-key="loginTitle">🔐 Contractor Secure Node Login</h3>
@@ -87,7 +62,7 @@
 
       <div id="otp-verify-group" style="display: block; margin-top: 15px; border-top: 1px solid #1c2541; padding-top: 15px;">
         <div>
-          <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;"><span data-key="enterOtpLabel">Enter Verification OTP</span> <span id="debug-otp-hint" style="color: #00e676; font-size: 11px; float: right;" data-key="testOtpHint">(Test OTP: 1234)</span></label>
+          <label style="display: block; font-size: 11px; color: #8a99ad; margin-bottom: 4px;"><span data-key="enterOtpLabel">Enter Verification OTP</span></label>
           <input id="login-otp-input" type="text" value="1234" placeholder="Enter 6-digit OTP" maxlength="6">
         </div>
         <button onclick="verifyFast2SMSOtp()" style="width: 100%; background: #00e676; color: #000;" data-key="verifyLoginBtn">Verify & Login</button>
@@ -105,22 +80,6 @@
         <button onclick="logoutContractorNode()" style="background: #ff5252; color: #fff; padding: 6px 10px; font-size: 11px;" data-key="logoutBtn">Logout</button>
       </div>
 
-      <div style="background: #162038; border: 1px solid #2a3d66; border-radius: 8px; padding: 10px; margin-bottom: 12px;">
-        <div style="font-size: 10px; color: #00e676; font-weight: bold; margin-bottom: 6px; text-transform: uppercase;" data-key="metalPortfolio">Live Market API Metal Balanced Portfolio</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px;">
-          <div style="background: #0b132b; padding: 6px; border-radius: 6px;">
-            <div style="color: #8a99ad; font-size: 9px;" data-key="goldValue">Gold Value</div>
-            <div style="font-weight: bold; color: #fff;">127.389 g</div>
-            <div style="font-size: 9px; color: #6fffe9;" data-key="goldSpot">(@₹7,850/g Spot)</div>
-          </div>
-          <div style="background: #0b132b; padding: 6px; border-radius: 6px;">
-            <div style="color: #8a99ad; font-size: 9px;" data-key="silverValue">Silver Value</div>
-            <div style="font-weight: bold; color: #fff;">8928.57 g</div>
-            <div style="font-size: 9px; color: #6fffe9;" data-key="silverSpot">(@₹112/g Spot)</div>
-          </div>
-        </div>
-      </div>
-
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
         <div style="background: #162038; padding: 8px; border-radius: 8px; border: 1px solid #2a3d66;">
           <div style="font-size: 10px; color: #8a99ad;" data-key="workspaceBalance">INR Workspace Balance</div>
@@ -129,43 +88,6 @@
         <div style="background: #162038; padding: 8px; border-radius: 8px; border: 1px solid #2a3d66;">
           <div style="font-size: 10px; color: #8a99ad;" data-key="dailyRemuneration">Daily Remuneration</div>
           <div style="font-size: 14px; font-weight: bold; color: #6fffe9; margin-top: 3px;">₹0.00 / Day</div>
-        </div>
-      </div>
-
-      <div style="font-size: 12px; font-weight: bold; color: #6fffe9; margin-bottom: 8px;" data-key="serverTiersTitle">14-Day Server Node License Tiers</div>
-
-      <div style="display: flex; flex-direction: column; gap: 6px;">
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;" data-key="tier1Title">₹2,000 Server (Base)</div>
-            <div style="font-size: 10px; color: #8a99ad;" data-key="tier1Sub">Daily: ₹155.50 | 14-Day: ₹2,177</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(2000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(2000, 155.50, 2177)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;" data-key="tier2Title">₹10,000 Server</div>
-            <div style="font-size: 10px; color: #8a99ad;" data-key="tier2Sub">Daily: ₹792.86 | 14-Day: ₹11,100</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(10000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(10000, 792.86, 11100)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
-        </div>
-
-        <div class="tier-card">
-          <div>
-            <div style="font-weight: bold; font-size: 12px; color: #fff;" data-key="tier3Title">₹50,000 Server</div>
-            <div style="font-size: 10px; color: #8a99ad;" data-key="tier3Sub">Daily: ₹4,000.00 | 14-Day: ₹56,000</div>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button onclick="handleGPayPayment(50000)" style="background: #00b0ff; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="gpayBtn">GPay</button>
-            <button onclick="showSliceModal(50000, 4000, 56000)" style="background: #ff007f; color: #fff; padding: 5px 8px; font-size: 10px;" data-key="sliceBtn">Slice Details</button>
-          </div>
         </div>
       </div>
     </div>
@@ -177,298 +99,157 @@
       <div style="color: #00e676; font-weight: bold; font-size: 13px;" data-key="adminTitle">🛠️ Admin Control Dashboard</div>
       <button onclick="toggleAdminPanel()" style="background: #333; color: #fff; padding: 4px 8px; font-size: 10px;" data-key="adminClose">Close</button>
     </div>
-    
     <div style="font-size: 11px; color: #8a99ad; margin-bottom: 6px;" data-key="adminModTitle">Modify User Balance:</div>
-    <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;">
-      <input id="admin-target-phone" type="tel" placeholder="Enter Mobile (e.g. 8122252222)" value="8122252222" style="margin: 0;">
-      <input id="admin-target-amount" type="number" placeholder="Enter Amount in INR (e.g. 50000)" value="1000000" style="margin: 0;">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-        <button onclick="adminModifyBalance('increase')" style="background: #00e676; color: #000; padding: 8px; font-size: 11px;" data-key="adminIncBtn">➕ Increase Balance</button>
-        <button onclick="adminModifyBalance('decrease')" style="background: #ff5252; color: #fff; padding: 8px; font-size: 11px;" data-key="adminDecBtn">➖ Decrease Balance</button>
-      </div>
-    </div>
-
-    <div style="font-size: 11px; color: #8a99ad; margin-bottom: 6px;" data-key="adminDesc">Recent Node Requests:</div>
-    <div style="background: #162038; padding: 8px; border-radius: 6px; font-size: 11px; color: #fff;">
-      <div>• +91 8122252222 - ₹10,000 Server Request (Approved)</div>
+    <input id="admin-target-amount" type="number" placeholder="Enter Amount in INR" value="1000000">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+      <button onclick="adminModifyBalance('increase')" style="background: #00e676; color: #000;" data-key="adminIncBtn">➕ Increase</button>
+      <button onclick="adminModifyBalance('decrease')" style="background: #ff5252; color: #fff;" data-key="adminDecBtn">➖ Decrease</button>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer style="text-align: center; padding: 15px; color: #8a99ad; font-size: 11px; border-top: 1px solid #1c2541; margin-top: 20px;">
-    <p style="margin: 0 0 4px 0;" data-key="footerRights">&copy; 2026 Madzinu Web3 Technologies. Registered in Chennai, Tamil Nadu.</p>
-    <p style="margin: 0;" data-key="footerSec">Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized</p>
-  </footer>
-
-</div>
-
-<div class="ai-secretary" onclick="alert('🤖 MadzinuAI Voice Secretary is online and ready to assist you!')">
-  🤖 MadzinuAI
 </div>
 
 <script>
-  let activeOtpCode = "1234";
-  let activeMobileNum = "8122252222";
   let userBalance = 1000000;
 
   const translations = {
     en: {
       brand: "MADZINU WEB3 TECH & AI",
-      meityReg: "✓ Govt. of India Recognized Startup (MeitY) | Reg No: ST20260926506",
+      meityReg: "✓ Govt. of India Recognized Startup (MeitY)",
       adminBtn: "Admin",
       waTitle: "💬 WhatsApp Secure Node Referral",
       waDesc: "Share your contractor referral link via WhatsApp to invite network nodes and earn rewards.",
       waBtn: "Share on WhatsApp",
-      officialWeb: "Official Website",
-      vouchersTitle: "⚡ INSTANT LIFESTYLE & FOOD VOUCHERS",
       loginTitle: "🔐 Contractor Secure Node Login",
       mobileLabel: "Mobile Number (Fast2SMS OTP)",
       sendOtpBtn: "Send OTP via Fast2SMS",
       enterOtpLabel: "Enter Verification OTP",
-      testOtpHint: "(Test OTP: 1234)",
       verifyLoginBtn: "Verify & Login",
       otpReadyMsg: "OTP generated & ready for verification!",
       connectedNode: "Connected Contractor Node",
       logoutBtn: "Logout",
-      metalPortfolio: "Live Market API Metal Balanced Portfolio",
-      goldValue: "Gold Value",
-      goldSpot: "(@₹7,850/g Spot)",
-      silverValue: "Silver Value",
-      silverSpot: "(@₹112/g Spot)",
       workspaceBalance: "INR Workspace Balance",
       dailyRemuneration: "Daily Remuneration",
-      serverTiersTitle: "14-Day Server Node License Tiers",
-      tier1Title: "₹2,000 Server (Base)",
-      tier1Sub: "Daily: ₹155.50 | 14-Day: ₹2,177",
-      tier2Title: "₹10,000 Server",
-      tier2Sub: "Daily: ₹792.86 | 14-Day: ₹11,100",
-      tier3Title: "₹50,000 Server",
-      tier3Sub: "Daily: ₹4,000.00 | 14-Day: ₹56,000",
-      gpayBtn: "GPay",
-      sliceBtn: "Slice Details",
       adminTitle: "🛠️ Admin Control Dashboard",
       adminClose: "Close",
       adminModTitle: "Modify User Balance:",
-      adminIncBtn: "➕ Increase Balance",
-      adminDecBtn: "➖ Decrease Balance",
-      adminDesc: "Recent Node Requests:",
-      footerRights: "© 2026 Madzinu Web3 Technologies. Registered in Chennai, Tamil Nadu.",
-      footerSec: "Secure TLS 1.3 Encrypted Platform | MeitY Startup Recognized"
+      adminIncBtn: "➕ Increase",
+      adminDecBtn: "➖ Decrease"
     },
     ta: {
       brand: "மாட்ஜினு வெப்3 & ஏஐ",
-      meityReg: "✓ இந்திய அரசு அங்கீகரிக்கப்பட்ட தொடக்கம் (MeitY)",
+      meityReg: "✓ இந்திய அரசு அங்கீகரிக்கப்பட்ட தொடக்கம்",
       adminBtn: "நிர்வாகி",
       waTitle: "💬 வாட்ஸ்அப் பாதுகாப்பான நோட் ரெஃபரல்",
       waDesc: "உங்கள் ஒப்பந்ததாரர் ரெஃபரல் இணைப்பை வாட்ஸ்அப்பில் பகிர்ந்து நெட்வொர்க் நோட்களை அழைக்கவும்.",
       waBtn: "வாட்ஸ்அப்பில் பகிரவும்",
-      officialWeb: "அதிகாரப்பூர்வ இணையதளம்",
-      vouchersTitle: "⚡ உடனடி உணவு & வாழ்க்கை முறை வவுச்சர்கள்",
       loginTitle: "🔐 ஒப்பந்ததாரர் பாதுகாப்பான நோட் உள்நுழைவு",
       mobileLabel: "கைபேசி எண் (Fast2SMS OTP)",
       sendOtpBtn: "OTP அனுப்பவும்",
       enterOtpLabel: "OTP ஐ உள்ளிடவும்",
-      testOtpHint: "(சோதனை OTP: 1234)",
       verifyLoginBtn: "சரிபார்த்து உள்நுழையவும்",
       otpReadyMsg: "OTP உருவாக்கப்பட்டது & சரிபார்க்க தயார்!",
       connectedNode: "இணைக்கப்பட்ட ஒப்பந்ததாரர் நோட்",
       logoutBtn: "வெளியேறு",
-      metalPortfolio: "நேரலை சந்தை உலோகம் போர்ட்ஃபோலியோ",
-      goldValue: "தங்க மதிப்பு",
-      goldSpot: "(@₹7,850/g ஸ்பாட்)",
-      silverValue: "வெள்ளி மதிப்பு",
-      silverSpot: "(@₹112/g ஸ்பாட்)",
       workspaceBalance: "INR பணிபுலம் இருப்பு",
       dailyRemuneration: "தினசரி ஊதியம்",
-      serverTiersTitle: "14-நாள் சர்வர் நோட் உரிம அடுக்குகள்",
-      tier1Title: "₹2,000 சர்வர் (அடிப்படை)",
-      tier1Sub: "தினசரி: ₹155.50 | 14-நாள்: ₹2,177",
-      tier2Title: "₹10,000 சர்வர்",
-      tier2Sub: "தினசரி: ₹792.86 | 14-நாள்: ₹11,100",
-      tier3Title: "₹50,000 சர்வர்",
-      tier3Sub: "தினசரி: ₹4,000.00 | 14-நாள்: ₹56,000",
-      gpayBtn: "GPay",
-      sliceBtn: "ஸ்லைஸ் விவரங்கள்",
       adminTitle: "🛠️ நிர்வாக கட்டுப்பாட்டு டாஷ்போர்டு",
       adminClose: "மூடு",
       adminModTitle: "பயனர் இருப்பை மாற்றுக:",
-      adminIncBtn: "➕ இருப்பை அதிகரிக்க",
-      adminDecBtn: "➖ இருப்பை குறைக்க",
-      adminDesc: "சமீபத்திய நோட் கோரிக்கைகள்:",
-      footerRights: "© 2026 மாட்ஜினு டெக்னாலஜிஸ். சென்னை, தமிழ்நாடு.",
-      footerSec: "பாதுகாப்பான TLS 1.3 குறியிடப்பட்ட தளம் | MeitY அங்கீகரிக்கப்பட்டது"
+      adminIncBtn: "➕ அதிகரிக்க",
+      adminDecBtn: "➖ குறைக்க"
     },
     hi: {
       brand: "मड्झिनू वेब3 और एआई",
-      meityReg: "✓ भारत सरकार मान्यता प्राप्त स्टार्टअप (MeitY)",
+      meityReg: "✓ भारत सरकार मान्यता प्राप्त स्टार्टअप",
       adminBtn: "व्यवस्थापक",
       waTitle: "💬 व्हाट्सएप सुरक्षित नोड रेफ़रल",
       waDesc: "नेटवर्क नोड्स को आमंत्रित करने और पुरस्कार अर्जित करने के लिए व्हाट्सएप पर अपना रेफ़रल लिंक साझा करें।",
       waBtn: "व्हाट्सएप पर साझा करें",
-      officialWeb: "आधिकारिक वेबसाइट",
-      vouchersTitle: "⚡ त्वरित जीवनशैली और खाद्य वाउचर",
       loginTitle: "🔐 ठेकेदार सुरक्षित नोड लॉगिन",
       mobileLabel: "मोबाइल नंबर (Fast2SMS OTP)",
       sendOtpBtn: "OTP भेजें",
       enterOtpLabel: "सत्यापन OTP दर्ज करें",
-      testOtpHint: "(परीक्षण OTP: 1234)",
       verifyLoginBtn: "सत्यापित करें और लॉगिन करें",
       otpReadyMsg: "OTP उत्पन्न हो गया और सत्यापन के लिए तैयार है!",
       connectedNode: "कनेक्टेड ठेकेदार नोड",
       logoutBtn: "लॉग आउट",
-      metalPortfolio: "लाइव मार्केट मेटल बैलेंस्ड पोर्टफोलियो",
-      goldValue: "सोने का मूल्य",
-      goldSpot: "(@₹7,850/g स्पॉट)",
-      silverValue: "चांदी का मूल्य",
-      silverSpot: "(@₹112/g स्पॉट)",
       workspaceBalance: "INR कार्यक्षेत्र शेष",
       dailyRemuneration: "दैनिक पारिश्रमिक",
-      serverTiersTitle: "14-दिवसीय सर्वर नोड लाइसेंस टियर",
-      tier1Title: "₹2,000 सर्वर (बेस)",
-      tier1Sub: "दैनिक: ₹155.50 | 14-दिन: ₹2,177",
-      tier2Title: "₹10,000 सर्वर",
-      tier2Sub: "दैनिक: ₹792.86 | 14-दिन: ₹11,100",
-      tier3Title: "₹50,000 सर्वर",
-      tier3Sub: "दैनिक: ₹4,000.00 | 14-दिन: ₹56,000",
-      gpayBtn: "GPay",
-      sliceBtn: "स्लाइस विवरण",
       adminTitle: "🛠️ व्यवस्थापक नियंत्रण डैशबोर्ड",
       adminClose: "बंद करें",
       adminModTitle: "उपयोगकर्ता शेष संशोधित करें:",
-      adminIncBtn: "➕ शेष बढ़ाएँ",
-      adminDecBtn: "➖ शेष घटाएँ",
-      adminDesc: "हालिया नोड अनुरोध:",
-      footerRights: "© 2026 मड्झिनू वेब3 टेक्नोलॉजीज। चेन्नई, तमिलनाडु।",
-      footerSec: "सुरक्षित TLS 1.3 एन्क्रिप्टेड प्लेटफ़ॉर्म | MeitY मान्यता प्राप्त"
+      adminIncBtn: "➕ बढ़ाएँ",
+      adminDecBtn: "➖ घटाएँ"
     },
     te: {
       brand: "మాడ్జినూ వెబ్3 & AI",
-      meityReg: "✓ భారత ప్రభుత్వ గుర్తింపు పొందిన స్టార్టప్ (MeitY)",
+      meityReg: "✓ భారత ప్రభుత్వ గుర్తింపు పొందిన స్టార్టప్",
       adminBtn: "అడ్మిన్",
       waTitle: "💬 వాట్సాప్ సురక్షిత నోడ్ రెఫరల్",
       waDesc: "నెట్‌వర్క్ నోడ్‌లను ఆహ్వానించడానికి మరియు రివార్డ్‌లను సంపాదించడానికి మీ రెఫరల్ లింక్‌ని వాట్సాప్‌లో షేర్ చేయండి.",
       waBtn: "వాట్సాప్‌లో షేర్ చేయండి",
-      officialWeb: "అధికారిక వెబ్‌సైట్",
-      vouchersTitle: "⚡ తక్షణ ఆహార & జీవనశైలి వౌచర్లు",
       loginTitle: "🔐 కాంట్రాక్టర్ సురక్షిత నోడ్ లాగిన్",
       mobileLabel: "మొబైల్ నంబర్ (Fast2SMS OTP)",
       sendOtpBtn: "OTP పంపండి",
       enterOtpLabel: "ధృవీకరణ OTPని నమోదు చేయండి",
-      testOtpHint: "(టెస్ట్ OTP: 1234)",
       verifyLoginBtn: "ధృవీకరించండి & లాగిన్ అవ్వండి",
       otpReadyMsg: "OTP రూపొందించబడింది & ధృవీకరణకు సిద్ధంగా ఉంది!",
       connectedNode: "కనెక్ట్ చేయబడిన కాంట్రాక్టర్ నోడ్",
       logoutBtn: "లాగౌట్",
-      metalPortfolio: "లైవ్ మార్కెట్ మెటల్ బాలెన్స్డ్ పోర్ట్‌ఫోలియో",
-      goldValue: "బంగారం విలువ",
-      goldSpot: "(@₹7,850/g స్పాట్)",
-      silverValue: "వెండి విలువ",
-      silverSpot: "(@₹112/g స్పాట్)",
       workspaceBalance: "INR వర్క్‌స్పేస్ బ్యాలెన్స్",
       dailyRemuneration: "రోజువారీ వేతనం",
-      serverTiersTitle: "14-రోజుల సర్వర్ నోడ్ లైసెన్స్ శ్రేణులు",
-      tier1Title: "₹2,000 సర్వర్ (బేస్)",
-      tier1Sub: "రోజువారీ: ₹155.50 | 14-రోజులు: ₹2,177",
-      tier2Title: "₹10,000 సర్వర్",
-      tier2Sub: "రోజువారీ: ₹792.86 | 14-రోజులు: ₹11,100",
-      tier3Title: "₹50,000 సర్వర్",
-      tier3Sub: "రోజువారీ: ₹4,000.00 | 14-రోజులు: ₹56,000",
-      gpayBtn: "GPay",
-      sliceBtn: "స్లైస్ వివరాలు",
       adminTitle: "🛠️ అడ్మిన్ కంట్రోల్ డ్యాష్‌బోర్డ్",
       adminClose: "మూసివేయి",
       adminModTitle: "యూజర్ బ్యాలెన్స్ సవరించండి:",
-      adminIncBtn: "➕ బ్యాలెన్స్ పెంచండి",
-      adminDecBtn: "➖ బ్యాలెన్స్ తగ్గించండి",
-      adminDesc: "ఇటీవలి నోడ్ అభ్యర్థనలు:",
-      footerRights: "© 2026 మాడ్జినూ వెబ్3 టెక్నాలజీస్. చెన్నై, తమిళనాడు.",
-      footerSec: "సురక్షిత TLS 1.3 ఎన్‌క్రిప్టెడ్ ప్లాట్‌ఫారమ్ | MeitY గుర్తింపు"
+      adminIncBtn: "➕ పెంచండి",
+      adminDecBtn: "➖ తగ్గించండి"
     },
     ml: {
       brand: "മാഡ്ജിനു വെബ്3 & AI",
-      meityReg: "✓ ഇന്ത്യ ഗവൺമെന്റ് അംഗീകൃത സ്റ്റാർട്ടപ്പ് (MeitY)",
+      meityReg: "✓ ഇന്ത്യ ഗവൺമെന്റ് അംഗീകൃത സ്റ്റാർട്ടപ്പ്",
       adminBtn: "അഡ്മിൻ",
       waTitle: "💬 വാട്ട്‌സ്ആപ്പ് സുരക്ഷിത നോഡ് റെഫറൽ",
       waDesc: "നെറ്റ്‌വർക്ക് നോഡുകളെ ക്ഷണിക്കുന്നതിനും റിവാർഡുകൾ നേടുന്നതിനും നിങ്ങളുടെ റെഫറൽ ലിങ്ക് വാട്ട്‌സ്ആപ്പിൽ പങ്കിടുക.",
       waBtn: "വാട്ട്‌സ്ആപ്പിൽ പങ്കിടുക",
-      officialWeb: "ഔദ്യോഗിക വെബ്സൈറ്റ്",
-      vouchersTitle: "⚡ തൽക്ഷണ ഫുഡ് & ലൈഫ്സ്റ്റൈൽ വൗച്ചറുകൾ",
       loginTitle: "🔐 കോൺട്രാക്ടർ സുരക്ഷിത നോഡ് ലോഗിൻ",
       mobileLabel: "മൊബൈൽ നമ്പർ (Fast2SMS OTP)",
       sendOtpBtn: "OTP അയക്കുക",
       enterOtpLabel: "വെരിഫിക്കേഷൻ OTP നൽകുക",
-      testOtpHint: "(ടെസ്റ്റ് OTP: 1234)",
       verifyLoginBtn: "സ്ഥിരീകരിച്ച് ലോഗിൻ ചെയ്യുക",
       otpReadyMsg: "OTP ജനറേറ്റ് ചെയ്തു & വെരിഫിക്കേഷന് തയ്യാറാണ്!",
       connectedNode: "കണക്റ്റുചെയ്‌ത കോൺട്രാക്ടർ നോഡ്",
       logoutBtn: "പുറത്തുകടക്കുക",
-      metalPortfolio: "ലൈവ് മാർക്കറ്റ് മെറ്റൽ ബാലൻസ്‌ഡ് പോർട്ട്‌ഫോളിയോ",
-      goldValue: "സ്വർണ്ണ മൂല്യം",
-      goldSpot: "(@₹7,850/g സ്പോട്ട്)",
-      silverValue: "വെള്ളി മൂല്യം",
-      silverSpot: "(@₹112/g സ്പോട്ട്)",
       workspaceBalance: "INR വർക്ക്‌സ്‌പേസ് ബാലൻസ്",
       dailyRemuneration: "പ്രതിദിന പ്രതിഫലം",
-      serverTiersTitle: "14-ദിവസത്തെ സെർവർ നോഡ് ലൈസൻസ് ടയറുകൾ",
-      tier1Title: "₹2,000 സെർവർ (ബേസ്)",
-      tier1Sub: "പ്രതിദിനം: ₹155.50 | 14-ദിവസം: ₹2,177",
-      tier2Title: "₹10,000 സെർവർ",
-      tier2Sub: "പ്രതിദിനം: ₹792.86 | 14-ദിവസം: ₹11,100",
-      tier3Title: "₹50,000 സെർവർ",
-      tier3Sub: "പ്രതിദിനം: ₹4,000.00 | 14-ദിവസം: ₹56,000",
-      gpayBtn: "GPay",
-      sliceBtn: "സ്ലൈസ് വിശദാംശങ്ങൾ",
       adminTitle: "🛠️ അഡ്മിൻ കൺട്രോൾ ഡാഷ്‌ബോർഡ്",
       adminClose: "അടയ്ക്കുക",
       adminModTitle: "ഉപയോക്തൃ ബാലൻസ് മാറ്റുക:",
-      adminIncBtn: "➕ ബാലൻസ് കൂട്ടുക",
-      adminDecBtn: "➖ ബാലൻസ് കുറയ്ക്കുക",
-      adminDesc: "സമീപകാല നോഡ് അഭ്യർത്ഥనകൾ:",
-      footerRights: "© 2026 മാഡ്ജിനു ടെക്നോളജീസ്. ചെന്നൈ, തമിഴ്നാട്.",
-      footerSec: "സുരക്ഷിതമായ TLS 1.3 എൻക്രിപ്റ്റഡ് പ്ലാറ്റ്‌ഫോം | MeitY അംഗീകാരം"
+      adminIncBtn: "➕ കൂട്ടുക",
+      adminDecBtn: "➖ കുറയ്ക്കുക"
     },
     kn: {
       brand: "ಮಾಡ್ಜಿನು ವೆಬ್3 & AI",
-      meityReg: "✓ ಭಾರತ ಸರ್ಕಾರದ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟಪ್ (MeitY)",
+      meityReg: "✓ ಭಾರತ ಸರ್ಕಾರದ ಗುರುತಿಸಲ್ಪಟ್ಟ ಸ್ಟಾರ್ಟಪ್",
       adminBtn: "ನಿರ್ವಾಹಕ",
       waTitle: "💬 ವಾಟ್ಸಾಪ್ ಸುರಕ್ಷಿತ ನೋಡ್ ರೆಫರಲ್",
       waDesc: "ನೆಟ್‌ವರ್ಕ್ ನೋಡ್‌ಗಳನ್ನು ಆಹ್ವಾನಿಸಲು ಮತ್ತು ಬಹುಮಾನಗಳನ್ನು ಗಳಿಸಲು ನಿಮ್ಮ ರೆಫರಲ್ ಲಿಂಕ್ ಅನ್ನು ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ.",
       waBtn: "ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ",
-      officialWeb: "ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್",
-      vouchersTitle: "⚡ ತತ್ಕ್ಷಣದ ಆಹಾರ & ಜೀವನಶೈಲಿ ವೋಚರ್‌ಗಳು",
       loginTitle: "🔐 ಗುತ್ತಿಗೆದಾರ ಸುರಕ್ಷಿತ ನೋಡ್ ಲಾಗಿನ್",
       mobileLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (Fast2SMS OTP)",
       sendOtpBtn: "OTP ಕಳುಹಿಸಿ",
       enterOtpLabel: "ಪರಿಶೀಲನೆ OTP ನಮೂದಿಸಿ",
-      testOtpHint: "(ಟೆಸ್ಟ್ OTP: 1234)",
       verifyLoginBtn: "ಪರಿಶೀಲಿಸಿ & ಲಾಗಿನ್ ಮಾಡಿ",
       otpReadyMsg: "OTP ಉತ್ಪತ್ತಿಯಾಗಿದೆ & ಪರಿಶೀಲನೆಗೆ ಸಿದ್ಧವಾಗಿದೆ!",
       connectedNode: "ಸಂಪರ್ಕಗೊಂಡ ಗುತ್ತಿಗೆದಾರ ನೋಡ್",
       logoutBtn: "ಹೊರಬನ್ನಿ",
-      metalPortfolio: "ಲೈವ್ ಮಾರುಕೇಟ್ ಮೆಟಲ್ ಬ್ಯಾಲೆನ್ಸಿಡ್ ಪೋರ್ಟ್‌ಫೋಲಿಯೋ",
-      goldValue: "ಚಿನ್ನದ ಮೌಲ್ಯ",
-      goldSpot: "(@₹7,850/g ಸ್ಪಾಟ್)",
-      silverValue: "ಬೆಳ್ಳಿ ಮೌಲ್ಯ",
-      silverSpot: "(@₹112/g ಸ್ಪಾಟ್)",
       workspaceBalance: "INR ಕೆಲಸದ ಸ್ಥಳ ಬಾಕಿ",
       dailyRemuneration: "ದೈನಂದಿನ ಸಂಭಾವನೆ",
-      serverTiersTitle: "14-ದಿನಗಳ ಸರ್ವರ್ ನೋಡ್ ಪರವಾನಗಿ ಶ್ರೇಣಿಗಳು",
-      tier1Title: "₹2,000 ಸರ್ವರ್ (ಬೇಸ್)",
-      tier1Sub: "ದೈನಂದಿನ: ₹155.50 | 14-ದಿನಗಳು: ₹2,177",
-      tier2Title: "₹10,000 ಸರ್ವರ್",
-      tier2Sub: "ದೈನಂದಿನ: ₹792.86 | 14-ದಿನಗಳು: ₹11,100",
-      tier3Title: "₹50,000 ಸರ್ವರ್",
-      tier3Sub: "ದೈನಂದಿನ: ₹4,000.00 | 14-ದಿನಗಳು: ₹56,000",
-      gpayBtn: "GPay",
-      sliceBtn: "ಸ್ಲೈಸ್ ವಿವರಗಳು",
       adminTitle: "🛠️ ನಿರ್ವಾಹಕ ನಿಯಂತ್ರಣ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
       adminClose: "ಮುಚ್ಚಿ",
       adminModTitle: "ಬಳಕೆದಾರರ ಬ್ಯಾಲೆನ್ಸ್ ಬದಲಾಯಿಸಿ:",
-      adminIncBtn: "➕ ಬ್ಯಾಲೆನ್ಸ್ ಹೆಚ್ಚಿಸಿ",
-      adminDecBtn: "➖ ಬ್ಯಾಲೆನ್ಸ್ ಕಡಿಮೆ ಮಾಡಿ",
-      adminDesc: "ಇತ್ತೀಚಿನ ನೋಡ್ ವಿನಂತಿಗಳು:",
-      footerRights: "© 2026 ಮಾಡ್ಜಿನು ವೆಬ್3 ಟೆಕ್ನಾಲಜೀಸ್. ಚೆన్నೈ, ತಮಿಳುನಾಡು.",
-      footerSec: "ಸುರಕ್ಷಿತ TLS 1.3 ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ | MeitY ಗುರುತಿಸಲ್ಪಟ್ಟಿದೆ"
+      adminIncBtn: "➕ ಹೆಚ್ಚಿಸಿ",
+      adminDecBtn: "➖ ಕಡಿಮೆ ಮಾಡಿ"
     }
   };
 
@@ -481,92 +262,42 @@
   }
 
   function shareViaWhatsApp() {
-    const text = encodeURIComponent("🚀 Join Madzinu Web3 Secure Node Infrastructure & Earn Daily Remuneration! Deploy your server node here: " + window.location.href);
+    const text = encodeURIComponent("🚀 Join Madzinu Web3 Secure Node Infrastructure: " + window.location.href);
     window.open("https://api.whatsapp.com/send?text=" + text, "_blank");
   }
 
   function requestFast2SMSOtp() {
-    activeMobileNum = document.getElementById("login-mobile-input").value.trim();
-    const status = document.getElementById("login-status-msg");
-    if (activeMobileNum.length !== 10) {
-      status.style.color = "#ff5252";
-      status.innerText = "Please enter a valid 10-digit mobile number.";
-      return;
-    }
-    status.style.color = "#6fffe9";
-    status.innerText = "Connecting to Fast2SMS Gateway...";
-    setTimeout(() => {
-      status.style.color = "#00e676";
-      status.innerText = "OTP generated & ready for verification!";
-      document.getElementById("otp-verify-group").style.display = "block";
-      document.getElementById("login-otp-input").value = "1234";
-    }, 400);
+    document.getElementById("login-status-msg").innerText = "OTP generated & ready for verification!";
+    document.getElementById("otp-verify-group").style.display = "block";
   }
 
   function verifyFast2SMSOtp() {
-    const userOtp = document.getElementById("login-otp-input").value.trim();
-    const status = document.getElementById("login-status-msg");
-    if (!userOtp) {
-      status.style.color = "#ff5252";
-      status.innerText = "Please enter the verification OTP.";
-      return;
-    }
-    status.style.color = "#00e676";
-    status.innerText = "Authentication successful! Loading dashboard...";
-    setTimeout(() => {
-      document.getElementById("auth-view").style.display = "none";
-      document.getElementById("dashboard-view").style.display = "block";
-      document.getElementById("node-phone-display").innerText = "+91 " + (activeMobileNum || "8122252222");
-      updateBalanceDisplay();
-    }, 300);
+    document.getElementById("auth-view").style.display = "none";
+    document.getElementById("dashboard-view").style.display = "block";
+    updateBalanceDisplay();
   }
 
   function logoutContractorNode() {
     document.getElementById("dashboard-view").style.display = "none";
     document.getElementById("auth-view").style.display = "block";
-    document.getElementById("login-otp-input").value = "1234";
-    document.getElementById("login-status-msg").innerText = "";
-  }
-
-  function handleGPayPayment(amount) {
-    window.location.href = "upi://pay?pa=madzinuweb3@upi&pn=MadzinuWeb3&am=" + amount + "&cu=INR";
-  }
-
-  function showSliceModal(tier, daily, total) {
-    alert("⚡ Slice Node License Tier Details:\n\n• Deployment Cost: ₹" + tier.toLocaleString() + "\n• Daily Task Remuneration: ₹" + daily + " / day\n• 14-Day Projected Output: ₹" + total.toLocaleString() + "\n\nClick GPay to deploy node license instantly.");
   }
 
   function toggleAdminPanel() {
     const panel = document.getElementById("admin-panel");
-    if (panel) {
-      panel.style.display = (panel.style.display === "none" || panel.style.display === "") ? "block" : "none";
-      if (panel.style.display === "block") {
-        panel.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    panel.style.display = (panel.style.display === "none" || panel.style.display === "") ? "block" : "none";
   }
 
   function adminModifyBalance(action) {
-    const amtInput = parseFloat(document.getElementById("admin-target-amount").value);
-    if (isNaN(amtInput) || amtInput <= 0) {
-      alert("Please enter a valid amount to update.");
-      return;
-    }
-    if (action === 'increase') {
-      userBalance += amtInput;
-      alert("Successfully increased user workspace balance by ₹" + amtInput.toLocaleString());
-    } else if (action === 'decrease') {
-      userBalance = Math.max(0, userBalance - amtInput);
-      alert("Successfully decreased user workspace balance by ₹" + amtInput.toLocaleString());
-    }
+    const amt = parseFloat(document.getElementById("admin-target-amount").value);
+    if (isNaN(amt)) return;
+    if (action === 'increase') userBalance += amt;
+    else userBalance = Math.max(0, userBalance - amt);
     updateBalanceDisplay();
+    alert("Balance updated successfully!");
   }
 
   function updateBalanceDisplay() {
-    const balEl = document.getElementById("workspace-balance-amount");
-    if (balEl) {
-      balEl.innerText = "₹" + userBalance.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
+    document.getElementById("workspace-balance-amount").innerText = "₹" + userBalance.toLocaleString('en-IN', { minimumFractionDigits: 2 });
   }
 </script>
 
