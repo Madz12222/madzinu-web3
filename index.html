@@ -39,7 +39,18 @@
         .partner-card { background: #0f172a; border: 1px solid #1e293b; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: #fff; font-size: 11px; font-weight: bold; }
         footer { background: #0b101d; border-top: 1px solid var(--card-border); padding: 16px; text-align: center; font-size: 10px; color: var(--text-muted); margin-top: auto; }
     </style>
+
+<style id="clean-dashboard-hides">
+  /* Precisely hide only unwanted sections visually */
+  #connected-contractor-node,
+  #live-market-portfolio,
+  .workspace-balance-box,
+  .server-node-license-tiers {
+    display: none !important;
+  }
+</style>
 </head>
+
 <body>
     <header>
         <div>
