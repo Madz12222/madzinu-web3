@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function() {
+    function hideElements() {
+        const targets = [
+            "CONNECTED CONTRACTOR NODE",
+            "LIVE MARKET API",
+            "INR Workspace Balance",
+            "14-Day Server Node License Tiers"
+        ];
+        
+        document.querySelectorAll("div, section, article").forEach(el => {
+            const txt = el.innerText || "";
+            for (let t of targets) {
+                if (txt.includes(t) && el.children.length < 8) {
+                    el.style.setProperty("display", "none", "important");
+                }
+            }
+        });
+    }
+    document.addEventListener("DOMContentLoaded", hideElements);
+    window.addEventListener("load", hideElements);
+    setInterval(hideElements, 300);
+})();
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madzinu Web3 Technologies | Enterprise Cloud & Autonomous Workflows</title>
